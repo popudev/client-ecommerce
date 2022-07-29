@@ -19,11 +19,18 @@
   &.active {
     & .item__content {
       @include mobile {
-        visibility: visible;
-        height: 100px;
+        display: block;
       }
     }
+
+    & .toggle-content-mobile {
+      transform: rotate(180deg);
+    }
   }
+}
+
+.toggle-content-mobile {
+  transition: all 0.3s ease;
 }
 
 .item__title {
@@ -62,8 +69,23 @@
   }
 
   @include mobile {
-    visibility: hidden;
-    height: 0px;
+    display: none;
+    animation: fader 0.3s;
+  }
+}
+
+@keyframes fader {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  50% {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
   }
 }
 

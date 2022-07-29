@@ -1,0 +1,19 @@
+@import '/src/sass';
+
+.wrapper {
+  background-color: $second-color;
+  color: #fff;
+  padding: 200px 50px 50px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.body {
+  justify-content: center;
+  align-items: center;
+}

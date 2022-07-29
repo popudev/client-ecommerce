@@ -50,13 +50,13 @@ function Slider({ data, auto, timeOut }) {
       <div className={cx('items')}>
         {data.map((e, i) => {
           return (
-            <Link to="/shop" key={i}>
-              <div className={cx('item', { active: i === activeSlide })}>
+            <div key={i} className={cx('item', { active: i === activeSlide })}>
+              <Link to="/shop">
                 <div className={cx('item-image')}>
                   <img src={e.image} alt="slide" />
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           );
         })}
       </div>

@@ -74,7 +74,6 @@ a {
 .container {
   width: 100%;
   max-width: 1620px;
-  padding: 0 50px;
   margin: auto;
 
   @include tablet {
@@ -102,4 +101,5 @@ a {
 
 .grid {
   display: grid;
+  justify-items: center;
 }
