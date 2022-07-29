@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import GlobalStyles from './components/GlobalStyles';
-import ProductProvider from './context/ProductProvider';
+// import ProductProvider from './context/ProductProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <GlobalStyles>
-      <ProductProvider>
-        <App />
-      </ProductProvider>
+      {/* <ProductProvider> */}
+      <App />
+      {/* </ProductProvider> */}
     </GlobalStyles>
   </React.StrictMode>,
 );

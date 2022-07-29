@@ -1,25 +1,26 @@
 @import 'normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-:root {
-  --primary: #999;
-}
+@import '/src/sass';
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 16px;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.6rem;
   line-height: 1.5;
   text-rendering: optimizeSpeed;
+  background-color: $main-color;
+  color: $third-color;
 }
 
 input,
@@ -29,6 +30,76 @@ button,
   border: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 a {
   text-decoration: none;
+  color: unset;
+}
+
+@each $color, $val in $colors {
+  .color-#{$color} {
+    color: $val;
+  }
+
+  .bg-#{$color} {
+    background-color: $val;
+  }
+}
+
+@each $val in $number {
+  .grid-col-#{$val} {
+    grid-template-columns: repeat($val, 1fr);
+  }
+}
+
+@each $val in $number {
+  .grid-col-md-#{$val} {
+    @include tablet {
+      grid-template-columns: repeat($val, 1fr);
+    }
+  }
+}
+
+@each $val in $number {
+  .grid-col-sm-#{$val} {
+    @include mobile {
+      grid-template-columns: repeat($val, 1fr);
+    }
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1620px;
+  padding: 0 50px;
+  margin: auto;
+
+  @include tablet {
+    padding: 0 20px;
+  }
+
+  @include mobile {
+    padding: 0 10px;
+  }
+}
+
+.main {
+  margin-top: $header-height;
+  margin-bottom: 2rem;
+  min-height: 100vh;
+
+  @include tablet {
+    margin-top: calc(#{$header-tablet-height} + 20px);
+  }
+
+  @include mobile {
+    margin-top: calc(#{$header-mobile-height} + 10px);
+  }
+}
+
+.grid {
+  display: grid;
 }

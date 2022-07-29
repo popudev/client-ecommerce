@@ -1,0 +1,40 @@
+@mixin flex($align-item, $justify-content) {
+  display: flex;
+  align-items: $align-item;
+  justify-content: $justify-content;
+}
+
+@mixin mobile {
+  @media only screen and (max-width: $mobile-width) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (max-width: $tablet-width) {
+    @content;
+  }
+}
+
+@mixin container {
+  width: 100%;
+  max-width: 1620px;
+  padding: 0 50px;
+  margin: auto;
+
+  @include tablet {
+    padding: 0 20px;
+  }
+
+  @include mobile {
+    padding: 0 10px;
+  }
+}
+
+@mixin button {
+  background-color: $btn-main-color;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: $btn-hover-color;
+  }
+}
