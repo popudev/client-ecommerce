@@ -29,6 +29,9 @@
 .item__title {
   @include flex(center, space-between);
   font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  text-transform: uppercase;
 
   & .toggle-content-mobile {
     cursor: pointer;

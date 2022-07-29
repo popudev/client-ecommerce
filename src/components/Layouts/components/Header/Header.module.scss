@@ -70,11 +70,15 @@
   }
 
   input {
-    width: 70%;
+    flex: 1;
     height: 100%;
     padding: 0 10px;
     font-size: 14px;
     color: $text-main-color;
+
+    @include mobile {
+      width: 70%;
+    }
   }
 
   &:focus-within {
@@ -83,8 +87,12 @@
 
   button {
     @include button;
-    width: 30%;
+    width: 100px;
     height: 100%;
+
+    @include mobile {
+      width: 30%;
+    }
 
     i {
       font-size: 14px;
