@@ -32,7 +32,7 @@ function Slider({ data, auto, timeOut }) {
   }, [nextSlide, timeOut, auto]);
 
   return (
-    <div className={cx('wrapper')}>
+    <div className={cx('wrapper', 'container')}>
       <div className={cx('indicators')}>
         {data.map((e, i) => {
           return (

@@ -10,12 +10,12 @@
   box-shadow: $main-color 0 0 80px 120px;
 
   @include tablet {
-    height: calc(70vh - $header-tablet-height);
+    height: calc(50vh - $header-tablet-height);
     width: calc(100% - 40px);
   }
 
   @include mobile {
-    height: calc(50vh - $header-mobile-height);
+    height: calc(40vh - $header-mobile-height);
     width: calc(100% - 20px);
   }
 }
@@ -105,5 +105,9 @@
   &.active {
     opacity: 1;
     background-color: $third-color;
+  }
+
+  @include mobile {
+    width: 10px;
   }
 }

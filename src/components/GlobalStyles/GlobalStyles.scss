@@ -7,8 +7,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
+  // -webkit-tap-highlight-color: transparent;
+  // user-select: none;
 }
 
 html {
@@ -28,6 +28,13 @@ button,
 [tabindex] {
   outline: none;
   border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 
 button {
@@ -75,14 +82,6 @@ a {
   width: 100%;
   max-width: 1620px;
   margin: auto;
-
-  @include tablet {
-    padding: 0 20px;
-  }
-
-  @include mobile {
-    padding: 0 10px;
-  }
 }
 
 .main {
@@ -101,5 +100,4 @@ a {
 
 .grid {
   display: grid;
-  justify-items: center;
 }
