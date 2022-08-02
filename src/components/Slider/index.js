@@ -8,6 +8,7 @@ const cx = classNames.bind(styles);
 
 function Slider({ data, auto, timeOut }) {
   const [activeSlide, setActiveSlide] = useState(0);
+  console.log('re-render');
 
   const nextSlide = useCallback(() => {
     const index = activeSlide + 1 === data.length ? 0 : activeSlide + 1;

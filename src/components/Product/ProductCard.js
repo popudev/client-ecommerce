@@ -6,7 +6,7 @@ import styles from './ProductCard.module.scss';
 
 const cx = classNames.bind(styles);
 
-function ProductCard({ data }) {
+function ProductCard({ data, isHome }) {
   const [quantity, setQuantity] = useState(1);
 
   const hanldePlusQuantity = () => {
@@ -24,7 +24,24 @@ function ProductCard({ data }) {
         <Link to="/products/">
           <img src={data.image} alt="" />
         </Link>
+
+        <div className={cx('control', 'control-under-image', { active: !isHome })}>
+          <div className={cx('control-quatity')}>
+            <button className={cx('minus-quantity')} onClick={hanldeMinusQuantity}>
+              <i class="fa-solid fa-minus"></i>
+            </button>
+            <input type="text" value={quantity} disabled="true" className={cx('inp-quantity')}></input>
+            <button className={cx('plus-quantity')} onClick={hanldePlusQuantity}>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+
+          <button className={cx('btn-add-to-cart')}>
+            <i class="fa-solid fa-cart-plus"></i>
+          </button>
+        </div>
       </div>
+
       <div className={cx('context')}>
         <p className={cx('title')}>{data.title}</p>
         <div className={cx('info')}>
@@ -32,7 +49,8 @@ function ProductCard({ data }) {
           <span className={cx('sale')}>{formatMoney(data.sale)}</span>
         </div>
       </div>
-      <div className={cx('control')}>
+
+      <div className={cx('control', { active: isHome })}>
         <div className={cx('control-quatity')}>
           <button className={cx('minus-quantity')} onClick={hanldeMinusQuantity}>
             <i class="fa-solid fa-minus"></i>
