@@ -82,11 +82,20 @@ a {
   width: 100%;
   max-width: 1620px;
   margin: auto;
+  padding: 0 50px;
+
+  @include tablet {
+    padding: 0 20px;
+  }
+
+  @include mobile {
+    padding: 0 10px;
+  }
 }
 
 .main {
   margin-top: $header-height;
-  margin-bottom: 2rem;
+
   min-height: 100vh;
 
   @include tablet {

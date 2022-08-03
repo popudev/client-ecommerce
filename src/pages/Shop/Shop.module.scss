@@ -13,17 +13,33 @@
 
 .container {
   @include flex(flex-start, flex-start);
+  width: 100%;
+}
+
+.products {
+  padding-left: 20px;
 }
 
 .filter {
-  width: 25%;
+  width: 20%;
   height: 100vh;
-  margin: 40px 0 0 40px;
-  background-color: #fff;
+  background-color: $fourth-color;
+  padding: 20px;
+  .wedget {
+    &__title {
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+
+    &__content {
+      @include flex(flex-start, center);
+      flex-direction: column;
+    }
+  }
 }
 
 .content {
-  flex-grow: 1;
+  flex: 1;
 }
 
 .pagination {

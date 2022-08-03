@@ -1,0 +1,14 @@
+@import '/src/sass';
+
+.wrapper {
+  @include flex(center, center);
+  margin: 5px 0px;
+  cursor: pointer;
+}
+
+.title {
+  color: $third-color;
+  font-style: 18px;
+  text-transform: uppercase;
+  margin-left: 10px;
+}

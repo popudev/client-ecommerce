@@ -70,7 +70,7 @@ function Footer() {
   };
 
   return (
-    <footer className={cx('wrapper')}>
+    <footer className={cx('wrapper', 'container')}>
       <Grid col={4} mdCol={2} smCol={1} gap={10}>
         <div className={cx('item')}>
           <Link to="/">

@@ -154,3 +154,18 @@ export const fakeProducts = [
     image: product7,
   },
 ];
+
+export const fakeCategories = [
+  {
+    title: 'iphone',
+  },
+  {
+    title: 'samsung',
+  },
+  {
+    title: 'xiaomi',
+  },
+  {
+    title: 'oppo',
+  },
+];

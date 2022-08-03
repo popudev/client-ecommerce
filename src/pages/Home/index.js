@@ -32,9 +32,9 @@ function Home() {
         <Section>
           <SectionTitle>Products</SectionTitle>
           <SectionBody>
-            <ProductList>
+            <ProductList col={5} mdCol={3} smCol={2} gap={10}>
               {fakeProducts.map((e, i) => {
-                return <ProductCard key={i} data={e} />;
+                return <ProductCard key={i} isHome={true} data={e} />;
               })}
             </ProductList>
           </SectionBody>

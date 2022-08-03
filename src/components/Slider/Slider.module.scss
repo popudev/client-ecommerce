@@ -1,22 +1,17 @@
 @import '/src/sass';
 
 .wrapper {
-  width: calc(100% - 100px);
   height: calc(100vh - $header-height);
   overflow: hidden;
   position: relative;
-  margin: auto;
-  margin-bottom: 20px;
   box-shadow: $main-color 0 0 80px 120px;
 
   @include tablet {
     height: calc(50vh - $header-tablet-height);
-    width: calc(100% - 40px);
   }
 
   @include mobile {
     height: calc(40vh - $header-mobile-height);
-    width: calc(100% - 20px);
   }
 }
 
@@ -75,6 +70,7 @@
 .control-prev {
   position: absolute;
   top: 50%;
+  left: 0;
   transform: translateY(-50%);
 }
 
