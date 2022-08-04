@@ -2,30 +2,54 @@
 
 .wrapper {
   width: 100%;
-  height: 5px;
-  background-color: #ddd;
-  position: relative;
+}
+
+.price_range {
+  @include flex(center, space-between);
+  margin-bottom: 15px;
 
   input {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    background: none;
-    -webkit-appearance: none;
-    pointer-events: none;
+    width: 30%;
+    font-size: 16px;
+    padding: 8px;
   }
 }
-input[type='range']::-webkit-slider-thumb {
-  height: 17px;
-  width: 17px;
-  background: red;
-  pointer-events: auto;
+
+.input_range {
+  width: 100%;
+  height: 5px;
+  padding: 0;
+  position: relative;
+  background-color: #d0d0d0;
+  border-radius: 5px;
 }
 
 .slider {
-  background-color: $third-color;
-  height: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 100%;
+  background: none;
+  -webkit-appearance: none;
+  pointer-events: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: auto;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: $third-color;
+  cursor: pointer;
+}
+
+.slider-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: $third-color;
+  opacity: 0.8;
+  height: 100%;
+  width: 50%;
 }

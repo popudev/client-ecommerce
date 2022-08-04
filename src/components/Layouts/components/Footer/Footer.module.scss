@@ -58,13 +58,13 @@
   font-size: 14px;
   transition: height 0.3s ease;
 
-  p {
+  .item-contact {
     margin-top: 5px;
     @include flex(center, flex-start);
     cursor: pointer;
   }
 
-  p:hover {
+  .item-contact:hover {
     text-shadow: 0 0 10px $third-color;
   }
 

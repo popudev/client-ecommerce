@@ -10,19 +10,19 @@ const cx = classNames.bind(styles);
 const footerContactLinks = [
   {
     display: '0999 999 999',
-    icon: <i class="fa-solid fa-mobile-screen-button"></i>,
+    icon: <i className="fa-solid fa-mobile-screen-button"></i>,
   },
   {
     display: 'popushop@gmail.com',
-    icon: <i class="fa-solid fa-envelope"></i>,
+    icon: <i className="fa-solid fa-envelope"></i>,
   },
   {
     display: 'popushop.5322',
-    icon: <i class="fa-brands fa-square-facebook"></i>,
+    icon: <i className="fa-brands fa-square-facebook"></i>,
   },
   {
     display: 'popudev',
-    icon: <i class="fa-brands fa-square-github"></i>,
+    icon: <i className="fa-brands fa-square-github"></i>,
   },
 ];
 
@@ -84,16 +84,16 @@ function Footer() {
           <div className={cx('item__title')}>
             <div>CONTACT</div>
             <div className={cx('toggle-content-mobile')} onClick={contentToggle}>
-              <i class="fa-solid fa-angle-down"></i>
+              <i className="fa-solid fa-angle-down"></i>
             </div>
           </div>
           <div className={cx('item__content')}>
             {footerContactLinks.map((e, i) => {
               return (
-                <p key={i}>
+                <div className={cx('item-contact')} key={i}>
                   <div className={cx('item-icon')}>{e.icon}</div>
                   <strong>{e.display}</strong>
-                </p>
+                </div>
               );
             })}
           </div>
@@ -102,7 +102,7 @@ function Footer() {
           <div className={cx('item__title')}>
             <div>ABOUT</div>
             <div className={cx('toggle-content-mobile')} onClick={contentToggle}>
-              <i class="fa-solid fa-angle-down"></i>
+              <i className="fa-solid fa-angle-down"></i>
             </div>
           </div>
           <div className={cx('item__content')}>
@@ -119,7 +119,7 @@ function Footer() {
           <div className={cx('item__title')}>
             <div>POLICY</div>
             <div className={cx('toggle-content-mobile')} onClick={contentToggle}>
-              <i class="fa-solid fa-angle-down"></i>
+              <i className="fa-solid fa-angle-down"></i>
             </div>
           </div>
           <div className={cx('item__content')}>

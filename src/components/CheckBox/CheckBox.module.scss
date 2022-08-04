@@ -2,8 +2,8 @@
 
 .wrapper {
   @include flex(center, center);
-  margin: 5px 0px;
   cursor: pointer;
+  margin-bottom: 5px;
 }
 
 .title {

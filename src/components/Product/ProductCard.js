@@ -28,16 +28,16 @@ function ProductCard({ data, isHome }) {
         <div className={cx('control', 'control-under-image', { active: !isHome })}>
           <div className={cx('control-quatity')}>
             <button className={cx('minus-quantity')} onClick={hanldeMinusQuantity}>
-              <i class="fa-solid fa-minus"></i>
+              <i className="fa-solid fa-minus"></i>
             </button>
-            <input type="text" value={quantity} disabled="true" className={cx('inp-quantity')}></input>
+            <input type="text" value={quantity} disabled={true} className={cx('inp-quantity')}></input>
             <button className={cx('plus-quantity')} onClick={hanldePlusQuantity}>
-              <i class="fa-solid fa-plus"></i>
+              <i className="fa-solid fa-plus"></i>
             </button>
           </div>
 
           <button className={cx('btn-add-to-cart')}>
-            <i class="fa-solid fa-cart-plus"></i>
+            <i className="fa-solid fa-cart-plus"></i>
           </button>
         </div>
       </div>
@@ -53,16 +53,16 @@ function ProductCard({ data, isHome }) {
       <div className={cx('control', { active: isHome })}>
         <div className={cx('control-quatity')}>
           <button className={cx('minus-quantity')} onClick={hanldeMinusQuantity}>
-            <i class="fa-solid fa-minus"></i>
+            <i className="fa-solid fa-minus"></i>
           </button>
-          <input type="text" value={quantity} disabled="true" className={cx('inp-quantity')}></input>
+          <input type="text" value={quantity} disabled={true} className={cx('inp-quantity')}></input>
           <button className={cx('plus-quantity')} onClick={hanldePlusQuantity}>
-            <i class="fa-solid fa-plus"></i>
+            <i className="fa-solid fa-plus"></i>
           </button>
         </div>
 
         <button className={cx('btn-add-to-cart')}>
-          <i class="fa-solid fa-cart-plus"></i>
+          <i className="fa-solid fa-cart-plus"></i>
         </button>
       </div>
     </div>

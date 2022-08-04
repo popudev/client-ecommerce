@@ -10,22 +10,22 @@ const cx = classNames.bind(styles);
 const menuNav = [
   {
     title: 'Home',
-    icon: <i class="fa-solid fa-house-chimney"></i>,
+    icon: <i className="fa-solid fa-house-chimney"></i>,
     path: '/',
   },
   {
     title: 'Shop',
-    icon: <i class="fa-solid fa-shop"></i>,
+    icon: <i className="fa-solid fa-shop"></i>,
     path: '/shop',
   },
   {
     title: 'Cart',
-    icon: <i class="fa-solid fa-cart-shopping"></i>,
+    icon: <i className="fa-solid fa-cart-shopping"></i>,
     path: '/cart',
   },
   {
     title: 'Login',
-    icon: <i class="fa-solid fa-user"></i>,
+    icon: <i className="fa-solid fa-user"></i>,
     path: '/login',
   },
 ];
@@ -63,7 +63,7 @@ function Header() {
       <div className={cx('search')}>
         <input className={cx('search__input')} placeholder="Search..."></input>
         <button className={cx('search__btn')}>
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
       <div className={cx('menu')} ref={menuRef}>
@@ -78,11 +78,11 @@ function Header() {
           );
         })}
         <div className={cx('close-menu-mobile')} onClick={menuToggle}>
-          <i class="fa-solid fa-circle-xmark"></i>
+          <i className="fa-solid fa-circle-xmark"></i>
         </div>
       </div>
       <div className={cx('open-menu-mobile')} onClick={menuToggle}>
-        <i class="fa-solid fa-bars-staggered"></i>
+        <i className="fa-solid fa-bars-staggered"></i>
       </div>
     </div>
   );

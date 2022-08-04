@@ -11,7 +11,7 @@
   margin-bottom: 30px;
 }
 
-.container {
+.content {
   @include flex(flex-start, flex-start);
   width: 100%;
 }
@@ -29,16 +29,18 @@
     &__title {
       font-size: 20px;
       text-transform: uppercase;
+      margin: 20px 0;
     }
 
     &__content {
       @include flex(flex-start, center);
       flex-direction: column;
+      margin-bottom: 30px;
     }
   }
 }
 
-.content {
+.context {
   flex: 1;
 }
 
@@ -46,4 +48,15 @@
   width: 100%;
   background-color: #fff;
   height: 50px;
+}
+
+.price_range {
+  @include flex(center, space-between);
+  margin-bottom: 15px;
+
+  input {
+    width: 30%;
+    font-size: 16px;
+    padding: 8px;
+  }
 }
