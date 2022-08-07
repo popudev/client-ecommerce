@@ -71,68 +71,97 @@ function Footer() {
 
   return (
     <footer className={cx('wrapper', 'container')}>
-      <Grid col={4} mdCol={2} smCol={1} gap={10}>
-        <div className={cx('item')}>
-          <Link to="/">
-            <div className={cx('logo')}>
-              <img src={logoImg} alt="logo" />
-            </div>
-          </Link>
-        </div>
+      <div className={cx('top')}>
+        <Grid col={4} mdCol={2} smCol={1} gap={10}>
+          <div className={cx('item')}>
+            <Link to="/">
+              <div className={cx('logo')}>
+                <img src={logoImg} alt="logo" />
+              </div>
+            </Link>
+          </div>
 
-        <div className={cx('item')}>
-          <div className={cx('item__title')}>
-            <div>CONTACT</div>
-            <div className={cx('toggle-content-mobile')} onClick={contentToggle}>
-              <i className="fa-solid fa-angle-down"></i>
+          <div className={cx('item')}>
+            <div className={cx('item__title')}>
+              <div>CONTACT</div>
+              <div className={cx('toggle-content-mobile')} onClick={contentToggle}>
+                <i className="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <div className={cx('item__content')}>
+              {footerContactLinks.map((e, i) => {
+                return (
+                  <div className={cx('item-contact')} key={i}>
+                    <div className={cx('item-icon')}>{e.icon}</div>
+                    <strong>{e.display}</strong>
+                  </div>
+                );
+              })}
             </div>
           </div>
-          <div className={cx('item__content')}>
-            {footerContactLinks.map((e, i) => {
-              return (
-                <div className={cx('item-contact')} key={i}>
-                  <div className={cx('item-icon')}>{e.icon}</div>
-                  <strong>{e.display}</strong>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className={cx('item')}>
-          <div className={cx('item__title')}>
-            <div>ABOUT</div>
-            <div className={cx('toggle-content-mobile')} onClick={contentToggle}>
-              <i className="fa-solid fa-angle-down"></i>
+          <div className={cx('item')}>
+            <div className={cx('item__title')}>
+              <div>ABOUT</div>
+              <div className={cx('toggle-content-mobile')} onClick={contentToggle}>
+                <i className="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <div className={cx('item__content')}>
+              {footerAboutLinks.map((e, i) => {
+                return (
+                  <Link to={e.path} key={i}>
+                    <p>{e.display}</p>
+                  </Link>
+                );
+              })}
             </div>
           </div>
-          <div className={cx('item__content')}>
-            {footerAboutLinks.map((e, i) => {
-              return (
-                <Link to={e.path} key={i}>
-                  <p>{e.display}</p>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-        <div className={cx('item')}>
-          <div className={cx('item__title')}>
-            <div>POLICY</div>
-            <div className={cx('toggle-content-mobile')} onClick={contentToggle}>
-              <i className="fa-solid fa-angle-down"></i>
+          <div className={cx('item')}>
+            <div className={cx('item__title')}>
+              <div>POLICY</div>
+              <div className={cx('toggle-content-mobile')} onClick={contentToggle}>
+                <i className="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <div className={cx('item__content')}>
+              {footerCustomerLinks.map((e, i) => {
+                return (
+                  <Link to={e.path} key={i}>
+                    <p>{e.display}</p>
+                  </Link>
+                );
+              })}
             </div>
           </div>
-          <div className={cx('item__content')}>
-            {footerCustomerLinks.map((e, i) => {
-              return (
-                <Link to={e.path} key={i}>
-                  <p>{e.display}</p>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </Grid>
+        </Grid>
+      </div>
+
+      <div className={cx('bottom')}>
+        <ul className={cx('footer-payments')}>
+          <li>
+            <i className="fa-brands fa-cc-visa"></i>
+          </li>
+          <li>
+            <i className="fa fa-credit-card"></i>
+          </li>
+          <li>
+            <i className="fa-brands fa-cc-paypal"></i>
+          </li>
+          <li>
+            <i className="fa-brands fa-cc-mastercard"></i>
+          </li>
+          <li>
+            <i className="fa-brands fa-cc-discover"></i>
+          </li>
+          <li>
+            <i className="fa-brands fa-cc-amex"></i>
+          </li>
+        </ul>
+        <span className={cx('copyright')}>
+          Copyright ©<script>document.write(new Date().getFullYear());</script>2022 All rights reserved | This template
+          is made with <i className="fa-brands fa-heart-o" aria-hidden="true"></i>
+        </span>
+      </div>
     </footer>
   );
 }

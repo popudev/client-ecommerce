@@ -2,6 +2,7 @@
 
 .wrapper {
   width: 100%;
+  margin: 10px 0;
 }
 
 .price_range {
@@ -11,7 +12,8 @@
   input {
     width: 30%;
     font-size: 16px;
-    padding: 8px;
+    padding: 8px 2px;
+    text-align: center;
   }
 }
 

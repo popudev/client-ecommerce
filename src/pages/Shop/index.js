@@ -8,7 +8,6 @@ import { useCallback, useReducer } from 'react';
 import PriceRangeSlider from '~/components/PriceRangeSlider';
 
 const cx = classNames.bind(styles);
-console.log('tao file');
 
 const initState = {
   filter: [],
@@ -40,7 +39,7 @@ const reducer = (state, action) => {
 };
 
 function Shop() {
-  console.log('re - render');
+  console.log('re - render shop');
 
   const [state, dispatch] = useReducer(reducer, initState);
   const { filter } = state;
@@ -69,7 +68,7 @@ function Shop() {
   return (
     <Helmet title={'Shop'}>
       <div className={cx('wrapper', 'main', 'container')}>
-        {/* <div className={cx('banner')}></div> */}
+        <div className={cx('banner')}></div>
         <div className={cx('content')}>
           <div className={cx('filter')}>
             <div className={cx('wedget')}>
@@ -93,7 +92,7 @@ function Shop() {
             </div>
             <div className={cx('wedget')}>
               <div className={cx('wedget__title')}>
-                <h3>Price</h3>
+                <h3>Price Range</h3>
               </div>
               <div className={cx('wedget__content')}>
                 <PriceRangeSlider min={0} max={999} onChange={handleFilterPrice} />
@@ -101,7 +100,7 @@ function Shop() {
             </div>
             <div className={cx('wedget')}>
               <div className={cx('wedget__title')}>
-                <h3>Category</h3>
+                <h3>RAM</h3>
               </div>
               <div className={cx('wedget__content')}>
                 {fakeCategories.map((item) => {
@@ -118,8 +117,77 @@ function Shop() {
                 })}
               </div>
             </div>
+            <div className={cx('wedget')}>
+              <div className={cx('wedget__title')}>
+                <h3>ROM</h3>
+              </div>
+              <div className={cx('wedget__content')}>
+                {fakeCategories.map((item) => {
+                  return (
+                    <CheckBox
+                      key={item.title}
+                      title={item.title}
+                      onChange={(input) => {
+                        handleFilter(input);
+                      }}
+                      checked={filter.includes(item.title)}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <div className={cx('wedget')}>
+              <div className={cx('wedget__title')}>
+                <h3>Service and Promotion</h3>
+              </div>
+              <div className={cx('wedget__content')}>
+                {fakeCategories.map((item) => {
+                  return (
+                    <CheckBox
+                      key={item.title}
+                      title={item.title}
+                      onChange={(input) => {
+                        handleFilter(input);
+                      }}
+                      checked={filter.includes(item.title)}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+
+            <button className={cx('btn-clear-filter')}>Clear Filter</button>
           </div>
           <div className={cx('context')}>
+            <div className={cx('filter__sort')}>
+              <div className={cx('sort-content')}>
+                <span>Sort by:</span>
+                <button className={cx('', 'sort_latest')}>latest</button>
+                <button className={cx('', 'sort_sales')}>top sales</button>
+                <select defaultValue="">
+                  <option disabled value="">
+                    Price
+                  </option>
+                  <option>Price: Low to Hight</option>
+                  <option>Price: Hight to Low</option>
+                </select>
+                <select defaultValue="">
+                  <option disabled value="">
+                    Name
+                  </option>
+                  <option>Price: Low to Hight</option>
+                  <option>Price: Hight to Low</option>
+                </select>
+              </div>
+
+              <div className={cx('pagination-mini')}>
+                <span>1/23</span>
+                <div className={cx('control-mini')}>
+                  <button>{'<'}</button>
+                  <button>{'>'}</button>
+                </div>
+              </div>
+            </div>
             <div className={cx('products')}>
               <ProductList col={4} mdCol={3} smCol={2} gap={20}>
                 {fakeProducts.map((e, i) => {

@@ -46,6 +46,11 @@ a {
   color: unset;
 }
 
+ul,
+li {
+  list-style: none;
+}
+
 @each $color, $val in $colors {
   .color-#{$color} {
     color: $val;

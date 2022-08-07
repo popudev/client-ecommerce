@@ -1,8 +1,16 @@
 @import '/src/sass';
 
 .wrapper {
-  padding: 40px 70px !important;
+  padding: 0 !important;
   background-color: rgb(17, 1, 1);
+}
+
+.top {
+  padding: 40px 60px;
+
+  & > * {
+    justify-items: center;
+  }
 }
 
 .logo {
@@ -95,4 +103,21 @@
   line-height: 14px;
   text-align: center;
   margin-right: 5px;
+}
+
+.bottom {
+  @include flex(center, center);
+  flex-direction: column;
+  padding: 20px 0;
+  background-color: rgba($color: $main-color, $alpha: 0.5);
+  color: rgba($color: $third-color, $alpha: 0.3);
+
+  .footer-payments {
+    @include flex(center, center);
+
+    li i {
+      font-size: 24px;
+      margin: 0 10px;
+    }
+  }
 }

@@ -8,7 +8,7 @@
   width: 100%;
   height: 200px;
   background-color: #fff;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .content {
@@ -16,16 +16,14 @@
   width: 100%;
 }
 
-.products {
-  padding-left: 20px;
-}
-
 .filter {
   width: 20%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: $fourth-color;
   padding: 20px;
   .wedget {
+    border-bottom: 1px solid $third-color;
+
     &__title {
       font-size: 20px;
       text-transform: uppercase;
@@ -40,23 +38,64 @@
   }
 }
 
+.btn-clear-filter {
+  width: 100%;
+  height: 50px;
+  background-color: $third-color;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.filter__sort {
+  background-color: $fourth-color;
+  height: 60px;
+  width: 100%;
+  padding: 0 20px;
+  @include flex(center, space-between);
+}
+
+.sort-content {
+  @include flex(center, flex-start);
+
+  & > * {
+    padding: 10px;
+    margin: 0 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+}
+
+.pagination-mini {
+  @include flex(center, center);
+
+  & > * {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .control-mini {
+    margin-left: 5px;
+    button {
+      padding: 5px 10px;
+      font-size: 18px;
+      margin: 0 2px;
+    }
+  }
+}
+
 .context {
   flex: 1;
+  padding-left: 20px;
+
+  .products {
+    padding: 20px 0;
+  }
 }
 
 .pagination {
   width: 100%;
   background-color: #fff;
   height: 50px;
-}
-
-.price_range {
-  @include flex(center, space-between);
-  margin-bottom: 15px;
-
-  input {
-    width: 30%;
-    font-size: 16px;
-    padding: 8px;
-  }
 }

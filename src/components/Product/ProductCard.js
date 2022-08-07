@@ -9,13 +9,26 @@ const cx = classNames.bind(styles);
 function ProductCard({ data, isHome }) {
   const [quantity, setQuantity] = useState(1);
 
-  const hanldePlusQuantity = () => {
+  const handlePlusQuantity = () => {
     setQuantity((prev) => prev + 1);
   };
 
-  const hanldeMinusQuantity = () => {
+  const handleMinusQuantity = () => {
     if (quantity === 1) return;
     setQuantity((prev) => prev - 1);
+  };
+
+  const handleChangeQuantity = (e) => {
+    const number = Number.parseInt(e.target.value);
+    if (!number) setQuantity('');
+    else {
+      setQuantity(number);
+    }
+  };
+
+  const handleBlurQuantity = (e) => {
+    const number = Number.parseInt(e.target.value);
+    if (!number) setQuantity(1);
   };
 
   return (
@@ -27,11 +40,17 @@ function ProductCard({ data, isHome }) {
 
         <div className={cx('control', 'control-under-image', { active: !isHome })}>
           <div className={cx('control-quatity')}>
-            <button className={cx('minus-quantity')} onClick={hanldeMinusQuantity}>
+            <button className={cx('minus-quantity')} onClick={handleMinusQuantity}>
               <i className="fa-solid fa-minus"></i>
             </button>
-            <input type="text" value={quantity} disabled={true} className={cx('inp-quantity')}></input>
-            <button className={cx('plus-quantity')} onClick={hanldePlusQuantity}>
+            <input
+              type="text"
+              value={quantity}
+              onChange={handleChangeQuantity}
+              onBlur={handleBlurQuantity}
+              className={cx('inp-quantity')}
+            ></input>
+            <button className={cx('plus-quantity')} onClick={handlePlusQuantity}>
               <i className="fa-solid fa-plus"></i>
             </button>
           </div>
@@ -52,11 +71,17 @@ function ProductCard({ data, isHome }) {
 
       <div className={cx('control', { active: isHome })}>
         <div className={cx('control-quatity')}>
-          <button className={cx('minus-quantity')} onClick={hanldeMinusQuantity}>
+          <button className={cx('minus-quantity')} onClick={handleMinusQuantity}>
             <i className="fa-solid fa-minus"></i>
           </button>
-          <input type="text" value={quantity} disabled={true} className={cx('inp-quantity')}></input>
-          <button className={cx('plus-quantity')} onClick={hanldePlusQuantity}>
+          <input
+            type="text"
+            value={quantity}
+            onChange={handleChangeQuantity}
+            onBlur={handleBlurQuantity}
+            className={cx('inp-quantity')}
+          ></input>
+          <button className={cx('plus-quantity')} onClick={handlePlusQuantity}>
             <i className="fa-solid fa-plus"></i>
           </button>
         </div>

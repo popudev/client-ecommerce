@@ -8,6 +8,7 @@ const cx = classNames.bind(styles);
 
 const calcPercent = (min, max, value, rev = false) => {
   const deviant = max - min;
+
   if (!rev) {
     return Math.round(((value - min) * 100) / deviant);
   }
@@ -39,7 +40,8 @@ function PriceRangeSlider({ min, max, onChange }) {
   };
 
   useEffect(() => {
-    onChange([debouncedValueMin, debouncedValueMax]);
+    // value = 0, '', number others
+    if (debouncedValueMin !== '' && debouncedValueMin !== '') onChange([debouncedValueMin, debouncedValueMax]);
   }, [debouncedValueMin, debouncedValueMax, onChange]);
 
   return (
@@ -50,12 +52,18 @@ function PriceRangeSlider({ min, max, onChange }) {
           type="number"
           value={minPrice}
           onChange={(e) => {
-            if (!e.target.value) setMinPrice(e.target.value);
-            if (e.target.value >= min && e.target.value <= maxPrice) {
-              setMinPrice(e.target.value);
+            let number = Number.parseInt(e.target.value);
+            if (!number && number !== 0) {
+              setMinPrice('');
+            } else if (number >= min && number <= maxPrice) {
+              setMinPrice(number);
             } else {
               setMinPrice(min);
             }
+          }}
+          onBlur={(e) => {
+            let number = Number.parseInt(e.target.value);
+            if (!number) setMinPrice(min);
           }}
         />
         <span>-</span>
@@ -64,13 +72,18 @@ function PriceRangeSlider({ min, max, onChange }) {
           type="number"
           value={maxPrice}
           onChange={(e) => {
-            console.log(e.target.value);
-            if (!e.target.value) setMinPrice(e.target.value);
-            if (e.target.value <= max && e.target.value >= minPrice) {
-              setMaxPrice(e.target.value);
+            let number = Number.parseInt(e.target.value);
+            if (!number) {
+              setMaxPrice('');
+            } else if (number <= max && number >= minPrice) {
+              setMaxPrice(number);
             } else {
               setMaxPrice(max);
             }
+          }}
+          onBlur={(e) => {
+            let number = Number.parseInt(e.target.value);
+            if (!number) setMaxPrice(max);
           }}
         />
       </div>

@@ -30,7 +30,7 @@ function Home() {
         </Section>
 
         <Section>
-          <SectionTitle>Products</SectionTitle>
+          <SectionTitle>NEW PRODUCTS</SectionTitle>
           <SectionBody>
             <ProductList col={5} mdCol={3} smCol={2} gap={10}>
               {fakeProducts.map((e, i) => {
