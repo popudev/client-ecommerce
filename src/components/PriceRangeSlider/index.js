@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './PriceRangeSlider.module.scss';
@@ -15,12 +15,19 @@ const calcPercent = (min, max, value, rev = false) => {
   return Math.round(min + (deviant * value) / 100);
 };
 
-function PriceRangeSlider({ min, max, onChange }) {
+function PriceRangeSlider({ min, max, onChange, reset }) {
+  console.log('re-render price');
   const [minPrice, setMinPrice] = useState(min);
   const [maxPrice, setMaxPrice] = useState(max);
 
   const debouncedValueMin = useDebounce(minPrice, 500);
   const debouncedValueMax = useDebounce(maxPrice, 500);
+
+  useEffect(() => {
+    console.log('effect 1');
+    setMinPrice(min);
+    setMaxPrice(max);
+  }, [min, max, reset]);
 
   const style = {
     left: calcPercent(min, max, minPrice) + '%',
@@ -40,6 +47,7 @@ function PriceRangeSlider({ min, max, onChange }) {
   };
 
   useEffect(() => {
+    console.log('effect 2');
     // value = 0, '', number others
     if (debouncedValueMin !== '' && debouncedValueMin !== '') onChange([debouncedValueMin, debouncedValueMax]);
   }, [debouncedValueMin, debouncedValueMax, onChange]);
@@ -110,4 +118,4 @@ function PriceRangeSlider({ min, max, onChange }) {
   );
 }
 
-export default PriceRangeSlider;
+export default memo(PriceRangeSlider);

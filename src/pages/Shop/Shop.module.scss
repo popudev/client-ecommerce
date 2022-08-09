@@ -16,6 +16,15 @@
   width: 100%;
 }
 
+.context {
+  flex: 1;
+  padding-left: 20px;
+
+  .products {
+    padding: 20px 0;
+  }
+}
+
 .filter {
   width: 20%;
   min-height: 100vh;
@@ -83,19 +92,4 @@
       margin: 0 2px;
     }
   }
-}
-
-.context {
-  flex: 1;
-  padding-left: 20px;
-
-  .products {
-    padding: 20px 0;
-  }
-}
-
-.pagination {
-  width: 100%;
-  background-color: #fff;
-  height: 50px;
 }

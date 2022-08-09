@@ -1,8 +1,10 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { formatMoney } from '~/config';
 import styles from './ProductCard.module.scss';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const cx = classNames.bind(styles);
 
@@ -35,7 +37,12 @@ function ProductCard({ data, isHome }) {
     <div className={cx('wrapper')}>
       <div className={cx('image')}>
         <Link to="/products/">
-          <img src={data.image} alt="" />
+          <LazyLoadImage
+            alt={''}
+            width={'100%'}
+            src={data.image} // use normal <img> attributes as props
+            effect="blur"
+          />
         </Link>
 
         <div className={cx('control', 'control-under-image', { active: !isHome })}>

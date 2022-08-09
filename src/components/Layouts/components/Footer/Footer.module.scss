@@ -109,8 +109,8 @@
   @include flex(center, center);
   flex-direction: column;
   padding: 20px 0;
-  background-color: rgba($color: $main-color, $alpha: 0.5);
   color: rgba($color: $third-color, $alpha: 0.3);
+  border-top: 0.5px solid $fourth-color;
 
   .footer-payments {
     @include flex(center, center);

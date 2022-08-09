@@ -8,7 +8,6 @@ function CheckBox(props) {
   const inputRef = useRef(null);
 
   const onChange = () => {
-    console.log('check');
     props.onChange(inputRef.current);
   };
 

@@ -1,61 +1,49 @@
+import { useCallback, useState, useReducer, useEffect } from 'react';
 import classNames from 'classnames/bind';
+
+import { fakeRams, fakeRoms, fakeServices } from '~/assets/data';
 import Helmet from '~/components/Helmet';
 import { ProductList, ProductCard } from '~/components/Product';
-import styles from './Shop.module.scss';
-import { fakeProducts, fakeCategories } from '~/assets/data';
 import CheckBox from '~/components/CheckBox';
-import { useCallback, useReducer } from 'react';
 import PriceRangeSlider from '~/components/PriceRangeSlider';
+import Pagination from '~/components/Pagination';
+import shopReducer, { initState } from '~/reducer/shopReducer';
+import { add, del } from '~/reducer/actions';
+import { getProductList } from '~/services/productService';
+import { getCategoryList } from '~/services/categoryService';
+
+import styles from './Shop.module.scss';
 
 const cx = classNames.bind(styles);
 
-const initState = {
-  filter: [],
-  categories: [],
-  price: [0, 9999],
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'add_filter':
-      return {
-        ...state,
-        filter: [...state.filter, action.payload],
-      };
-    case 'delete_filter':
-      return {
-        ...state,
-        filter: state.filter.filter((e) => e !== action.payload),
-      };
-
-    case 'change_price':
-      return {
-        ...state,
-        price: action.payload,
-      };
-    default:
-      return state;
-  }
-};
-
 function Shop() {
-  console.log('re - render shop');
+  console.log('re-render shop');
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filter, dispatch] = useReducer(shopReducer, initState);
+  const { categoryId, rams, roms, services, resetPrice } = filter;
 
-  const [state, dispatch] = useReducer(reducer, initState);
-  const { filter } = state;
+  useEffect(() => {
+    console.log('api product');
+    const fetchApiGetProductList = async () => {
+      const products = await getProductList(filter);
+      setProducts(products);
+    };
+    fetchApiGetProductList();
+  }, [filter]);
 
-  const handleFilter = (input) => {
-    if (input.checked) {
-      dispatch({
-        type: 'add_filter',
-        payload: input.value,
-      });
-    } else {
-      dispatch({
-        type: 'delete_filter',
-        payload: input.value,
-      });
-    }
+  useEffect(() => {
+    console.log('api category');
+    const fetchApiGetCategoryList = async () => {
+      const categories = await getCategoryList();
+      setCategories(categories);
+    };
+    fetchApiGetCategoryList();
+  }, []);
+
+  const handleFilter = (type, input, id) => {
+    if (input.checked) dispatch(add(type, id));
+    else dispatch(del(type, id));
   };
 
   const handleFilterPrice = useCallback((rangePrice) => {
@@ -64,6 +52,12 @@ function Shop() {
       payload: rangePrice,
     });
   }, []);
+
+  const handlePagination = (currentPage) => {};
+
+  const handleClearFilter = () => {
+    dispatch({ type: 'clear_filter' });
+  };
 
   return (
     <Helmet title={'Shop'}>
@@ -76,15 +70,15 @@ function Shop() {
                 <h3>Category</h3>
               </div>
               <div className={cx('wedget__content')}>
-                {fakeCategories.map((item) => {
+                {categories.map((item) => {
                   return (
                     <CheckBox
-                      key={item.title}
+                      key={item.id}
                       title={item.title}
                       onChange={(input) => {
-                        handleFilter(input);
+                        handleFilter('category', input, item.id);
                       }}
-                      checked={filter.includes(item.title)}
+                      checked={categoryId.includes(item.id)}
                     />
                   );
                 })}
@@ -95,7 +89,7 @@ function Shop() {
                 <h3>Price Range</h3>
               </div>
               <div className={cx('wedget__content')}>
-                <PriceRangeSlider min={0} max={999} onChange={handleFilterPrice} />
+                <PriceRangeSlider min={0} max={999} onChange={handleFilterPrice} reset={resetPrice} />
               </div>
             </div>
             <div className={cx('wedget')}>
@@ -103,15 +97,15 @@ function Shop() {
                 <h3>RAM</h3>
               </div>
               <div className={cx('wedget__content')}>
-                {fakeCategories.map((item) => {
+                {fakeRams.map((item) => {
                   return (
                     <CheckBox
                       key={item.title}
                       title={item.title}
                       onChange={(input) => {
-                        handleFilter(input);
+                        handleFilter('ram', input, input.value);
                       }}
-                      checked={filter.includes(item.title)}
+                      checked={rams.includes(item.id)}
                     />
                   );
                 })}
@@ -122,15 +116,15 @@ function Shop() {
                 <h3>ROM</h3>
               </div>
               <div className={cx('wedget__content')}>
-                {fakeCategories.map((item) => {
+                {fakeRoms.map((item) => {
                   return (
                     <CheckBox
                       key={item.title}
                       title={item.title}
                       onChange={(input) => {
-                        handleFilter(input);
+                        handleFilter('rom', input, input.value);
                       }}
-                      checked={filter.includes(item.title)}
+                      checked={roms.includes(item.id)}
                     />
                   );
                 })}
@@ -141,22 +135,23 @@ function Shop() {
                 <h3>Service and Promotion</h3>
               </div>
               <div className={cx('wedget__content')}>
-                {fakeCategories.map((item) => {
+                {fakeServices.map((item) => {
                   return (
                     <CheckBox
                       key={item.title}
                       title={item.title}
                       onChange={(input) => {
-                        handleFilter(input);
+                        handleFilter('service', input, input.value);
                       }}
-                      checked={filter.includes(item.title)}
+                      checked={services.includes(item.id)}
                     />
                   );
                 })}
               </div>
             </div>
-
-            <button className={cx('btn-clear-filter')}>Clear Filter</button>
+            <button className={cx('btn-clear-filter')} onClick={handleClearFilter}>
+              Clear Filter
+            </button>
           </div>
           <div className={cx('context')}>
             <div className={cx('filter__sort')}>
@@ -190,12 +185,12 @@ function Shop() {
             </div>
             <div className={cx('products')}>
               <ProductList col={4} mdCol={3} smCol={2} gap={20}>
-                {fakeProducts.map((e, i) => {
-                  return <ProductCard key={i} data={e} />;
+                {products?.payload?.map((e) => {
+                  return <ProductCard key={e?.id} data={e} />;
                 })}
               </ProductList>
             </div>
-            <div className={cx('pagination')}></div>
+            <Pagination onChange={handlePagination} totalPages={10} />
           </div>
         </div>
       </div>
