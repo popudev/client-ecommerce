@@ -1,56 +1,59 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useCallback } from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './PriceRangeSlider.module.scss';
-import { useDebounce } from '~/hooks';
+import { useDebounce, useDidMountEffect } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
-const calcPercent = (min, max, value, rev = false) => {
-  const deviant = max - min;
-
-  if (!rev) {
-    return Math.round(((value - min) * 100) / deviant);
-  }
-  return Math.round(min + (deviant * value) / 100);
-};
-
-function PriceRangeSlider({ min, max, onChange, reset }) {
-  console.log('re-render price');
+function PriceRangeSlider({ min, max, reset, onPriceChange }) {
   const [minPrice, setMinPrice] = useState(min);
   const [maxPrice, setMaxPrice] = useState(max);
 
   const debouncedValueMin = useDebounce(minPrice, 500);
   const debouncedValueMax = useDebounce(maxPrice, 500);
 
-  useEffect(() => {
-    console.log('effect 1');
-    setMinPrice(min);
-    setMaxPrice(max);
-  }, [min, max, reset]);
+  const calcPercent = useCallback(
+    (value, rev = false) => {
+      const deviant = max - min;
+      if (!rev) {
+        return Math.round(((value - min) * 100) / deviant);
+      }
+      return Math.round(min + (deviant * value) / 100);
+    },
+    [min, max],
+  );
+
+  const scrollTop = () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  };
 
   const style = {
-    left: calcPercent(min, max, minPrice) + '%',
-    width: calcPercent(min, max, maxPrice) - calcPercent(min, max, minPrice) + '%',
+    left: calcPercent(minPrice) + '%',
+    width: calcPercent(maxPrice) - calcPercent(minPrice) + '%',
   };
 
   const handleInputMin = (e) => {
-    const value = calcPercent(min, max, e.target.value, true);
-    if (calcPercent(min, max, maxPrice) - e.target.value < 10) return;
+    const value = calcPercent(e.target.value, true);
+    if (calcPercent(maxPrice) - e.target.value < 10) return;
     setMinPrice(value);
   };
 
   const handleInputMax = (e) => {
-    const value = calcPercent(min, max, e.target.value, true);
-    if (e.target.value - calcPercent(min, max, minPrice) < 10) return;
+    const value = calcPercent(e.target.value, true);
+    if (e.target.value - calcPercent(minPrice) < 10) return;
     setMaxPrice(value);
   };
 
-  useEffect(() => {
-    console.log('effect 2');
-    // value = 0, '', number others
-    if (debouncedValueMin !== '' && debouncedValueMin !== '') onChange([debouncedValueMin, debouncedValueMax]);
-  }, [debouncedValueMin, debouncedValueMax, onChange]);
+  useDidMountEffect(() => {
+    onPriceChange([debouncedValueMin, debouncedValueMax]);
+  }, [debouncedValueMax, debouncedValueMin, onPriceChange]);
+
+  useDidMountEffect(() => {
+    setMinPrice(min);
+    setMaxPrice(max);
+  }, [reset]);
 
   return (
     <div className={cx('wrapper')}>
@@ -97,25 +100,11 @@ function PriceRangeSlider({ min, max, onChange, reset }) {
       </div>
       <div className={cx('input_range')}>
         <div className={cx('slider-thumb')} style={style}></div>
-        <input
-          value={calcPercent(min, max, minPrice)}
-          onChange={(e) => {
-            handleInputMin(e);
-          }}
-          className={cx('slider')}
-          type="range"
-        />
-        <input
-          value={calcPercent(min, max, maxPrice)}
-          onChange={(e) => {
-            handleInputMax(e);
-          }}
-          className={cx('slider')}
-          type="range"
-        />
+        <input value={calcPercent(minPrice)} type="range" className={cx('slider')} onChange={handleInputMin} />
+        <input value={calcPercent(maxPrice)} type="range" className={cx('slider')} onChange={handleInputMax} />
       </div>
     </div>
   );
 }
 
-export default memo(PriceRangeSlider);
+export default PriceRangeSlider;

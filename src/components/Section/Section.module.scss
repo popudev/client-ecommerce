@@ -3,7 +3,6 @@
 .wrapper {
   background-color: $second-color;
   color: #fff;
-  padding-top: 100px !important;
 
   @include mobile {
     padding: 100px 10px 50px;
@@ -14,6 +13,7 @@
   font-size: 30px;
   font-weight: 900;
   text-align: center;
+  text-transform: uppercase;
   margin-bottom: 20px;
   position: relative;
   z-index: 10;

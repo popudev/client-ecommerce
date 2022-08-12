@@ -18,7 +18,7 @@ function Home() {
         <Slider data={fakeSlider} />
         {/* end slider */}
 
-        <Section>
+        <Section wrapperClassName={cx('section-big-sale')}>
           <SectionTitle>Big Sale Collection</SectionTitle>
           <SectionBody>
             <Grid col={3} mdCol={1} smCol={1} gap={20}>
@@ -29,7 +29,7 @@ function Home() {
           </SectionBody>
         </Section>
 
-        <Section>
+        <Section wrapperClassName={cx('section-new-product')}>
           <SectionTitle>NEW PRODUCTS</SectionTitle>
           <SectionBody>
             <ProductList col={5} mdCol={3} smCol={2} gap={10}>

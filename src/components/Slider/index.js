@@ -8,7 +8,6 @@ const cx = classNames.bind(styles);
 
 function Slider({ data, auto, timeOut }) {
   const [activeSlide, setActiveSlide] = useState(0);
-  console.log('re-render');
 
   const nextSlide = useCallback(() => {
     const index = activeSlide + 1 === data.length ? 0 : activeSlide + 1;
@@ -62,10 +61,10 @@ function Slider({ data, auto, timeOut }) {
         })}
       </div>
       <button className={cx('control-prev')} onClick={prevSlide}>
-        <i class="fa-solid fa-angle-left"></i>
+        <i className="fa-solid fa-angle-left"></i>
       </button>
       <button className={cx('control-next')} onClick={nextSlide}>
-        <i class="fa-solid fa-angle-right"></i>
+        <i className="fa-solid fa-angle-right"></i>
       </button>
     </div>
   );

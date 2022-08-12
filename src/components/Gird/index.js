@@ -10,7 +10,7 @@ function Grid(props) {
   const smCol = props.smCol ? `grid-col-sm-${props.smCol}` : '';
 
   return (
-    <div className={`grid ${col} ${mdCol} ${smCol}`} style={style}>
+    <div className={`${props.wrapperClassName} grid ${col} ${mdCol} ${smCol}`} style={style}>
       {props.children}
     </div>
   );

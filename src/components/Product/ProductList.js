@@ -10,7 +10,7 @@ function ProductList(props) {
   };
   return (
     <div className={cx('wrapper')} style={style}>
-      <Grid col={props.col} mdCol={props.mdCol} smCol={props.smCol} gap={props.gap}>
+      <Grid col={props.col} mdCol={props.mdCol} smCol={props.smCol} gap={props.gap} wrapperClassName={cx('content')}>
         {props.children}
       </Grid>
     </div>

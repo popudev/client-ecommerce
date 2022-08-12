@@ -3,16 +3,16 @@ import styles from './Section.module.scss';
 
 const cx = classNames.bind(styles);
 
-const Section = ({ children }) => {
-  return <div className={cx('wrapper', 'container')}>{children}</div>;
+const Section = ({ children, wrapperClassName }) => {
+  return <div className={cx('wrapper', 'container', wrapperClassName)}>{children}</div>;
 };
 
-export const SectionTitle = ({ children }) => {
-  return <div className={cx('title')}>{children}</div>;
+export const SectionTitle = ({ children, wrapperClassName }) => {
+  return <div className={cx('title', wrapperClassName)}>{children}</div>;
 };
 
-export const SectionBody = ({ children }) => {
-  return <div className={cx('body')}>{children}</div>;
+export const SectionBody = ({ children, wrapperClassName }) => {
+  return <div className={cx('body', wrapperClassName)}>{children}</div>;
 };
 
 export default Section;

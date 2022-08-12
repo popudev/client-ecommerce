@@ -51,7 +51,10 @@ function Header() {
   }, []);
 
   const menuRef = useRef(null);
-  const menuToggle = () => menuRef.current.classList.toggle(cx('active'));
+  const menuToggle = () => {
+    document.documentElement.scrollTop = 0;
+    menuRef.current.classList.toggle(cx('active'));
+  };
 
   return (
     <div className={cx('wrapper', 'container')} ref={headerRef}>

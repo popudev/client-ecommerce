@@ -1,62 +1,41 @@
-import { useCallback, useState, useReducer, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 
-import { fakeRams, fakeRoms, fakeServices } from '~/assets/data';
 import Helmet from '~/components/Helmet';
 import { ProductList, ProductCard } from '~/components/Product';
-import CheckBox from '~/components/CheckBox';
-import PriceRangeSlider from '~/components/PriceRangeSlider';
-import Pagination from '~/components/Pagination';
-import shopReducer, { initState } from '~/reducer/shopReducer';
-import { add, del } from '~/reducer/actions';
+import { Filter, FilterSort } from '~/components/FilterShop';
+import { Pagination, PaginationMini } from '~/components/Pagination';
+
 import { getProductList } from '~/services/productService';
-import { getCategoryList } from '~/services/categoryService';
 
 import styles from './Shop.module.scss';
+import { useFilterState } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
 function Shop() {
   console.log('re-render shop');
+  const [state, dispatch] = useFilterState();
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [filter, dispatch] = useReducer(shopReducer, initState);
-  const { categoryId, rams, roms, services, resetPrice } = filter;
+  const { pagination, payload } = products;
+
+  const nextPage = useRef(null);
+  const prevPage = useRef(null);
 
   useEffect(() => {
     console.log('api product');
     const fetchApiGetProductList = async () => {
-      const products = await getProductList(filter);
+      const products = await getProductList(state);
       setProducts(products);
     };
     fetchApiGetProductList();
-  }, [filter]);
+  }, [state]);
 
-  useEffect(() => {
-    console.log('api category');
-    const fetchApiGetCategoryList = async () => {
-      const categories = await getCategoryList();
-      setCategories(categories);
-    };
-    fetchApiGetCategoryList();
-  }, []);
-
-  const handleFilter = (type, input, id) => {
-    if (input.checked) dispatch(add(type, id));
-    else dispatch(del(type, id));
-  };
-
-  const handleFilterPrice = useCallback((rangePrice) => {
+  const handlePageChange = (currentPage) => {
     dispatch({
-      type: 'change_price',
-      payload: rangePrice,
+      type: 'change_page',
+      payload: currentPage,
     });
-  }, []);
-
-  const handlePagination = (currentPage) => {};
-
-  const handleClearFilter = () => {
-    dispatch({ type: 'clear_filter' });
   };
 
   return (
@@ -64,133 +43,31 @@ function Shop() {
       <div className={cx('wrapper', 'main', 'container')}>
         <div className={cx('banner')}></div>
         <div className={cx('content')}>
-          <div className={cx('filter')}>
-            <div className={cx('wedget')}>
-              <div className={cx('wedget__title')}>
-                <h3>Category</h3>
-              </div>
-              <div className={cx('wedget__content')}>
-                {categories.map((item) => {
-                  return (
-                    <CheckBox
-                      key={item.id}
-                      title={item.title}
-                      onChange={(input) => {
-                        handleFilter('category', input, item.id);
-                      }}
-                      checked={categoryId.includes(item.id)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-            <div className={cx('wedget')}>
-              <div className={cx('wedget__title')}>
-                <h3>Price Range</h3>
-              </div>
-              <div className={cx('wedget__content')}>
-                <PriceRangeSlider min={0} max={999} onChange={handleFilterPrice} reset={resetPrice} />
-              </div>
-            </div>
-            <div className={cx('wedget')}>
-              <div className={cx('wedget__title')}>
-                <h3>RAM</h3>
-              </div>
-              <div className={cx('wedget__content')}>
-                {fakeRams.map((item) => {
-                  return (
-                    <CheckBox
-                      key={item.title}
-                      title={item.title}
-                      onChange={(input) => {
-                        handleFilter('ram', input, input.value);
-                      }}
-                      checked={rams.includes(item.id)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-            <div className={cx('wedget')}>
-              <div className={cx('wedget__title')}>
-                <h3>ROM</h3>
-              </div>
-              <div className={cx('wedget__content')}>
-                {fakeRoms.map((item) => {
-                  return (
-                    <CheckBox
-                      key={item.title}
-                      title={item.title}
-                      onChange={(input) => {
-                        handleFilter('rom', input, input.value);
-                      }}
-                      checked={roms.includes(item.id)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-            <div className={cx('wedget')}>
-              <div className={cx('wedget__title')}>
-                <h3>Service and Promotion</h3>
-              </div>
-              <div className={cx('wedget__content')}>
-                {fakeServices.map((item) => {
-                  return (
-                    <CheckBox
-                      key={item.title}
-                      title={item.title}
-                      onChange={(input) => {
-                        handleFilter('service', input, input.value);
-                      }}
-                      checked={services.includes(item.id)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-            <button className={cx('btn-clear-filter')} onClick={handleClearFilter}>
-              Clear Filter
-            </button>
-          </div>
+          <Filter />
           <div className={cx('context')}>
             <div className={cx('filter__sort')}>
-              <div className={cx('sort-content')}>
-                <span>Sort by:</span>
-                <button className={cx('', 'sort_latest')}>latest</button>
-                <button className={cx('', 'sort_sales')}>top sales</button>
-                <select defaultValue="">
-                  <option disabled value="">
-                    Price
-                  </option>
-                  <option>Price: Low to Hight</option>
-                  <option>Price: Hight to Low</option>
-                </select>
-                <select defaultValue="">
-                  <option disabled value="">
-                    Name
-                  </option>
-                  <option>Price: Low to Hight</option>
-                  <option>Price: Hight to Low</option>
-                </select>
-              </div>
-
-              <div className={cx('pagination-mini')}>
-                <span>1/23</span>
-                <div className={cx('control-mini')}>
-                  <button>{'<'}</button>
-                  <button>{'>'}</button>
-                </div>
-              </div>
+              <FilterSort />
+              <PaginationMini
+                page={pagination?._page}
+                pageCount={pagination?._totalPages}
+                nextPage={nextPage.current}
+                prevPage={prevPage.current}
+              />
             </div>
             <div className={cx('products')}>
               <ProductList col={4} mdCol={3} smCol={2} gap={20}>
-                {products?.payload?.map((e) => {
+                {payload?.map((e) => {
                   return <ProductCard key={e?.id} data={e} />;
                 })}
               </ProductList>
             </div>
-            <Pagination onChange={handlePagination} totalPages={10} />
+            <Pagination
+              initialPage={pagination?._page}
+              pageCount={pagination?._totalPages}
+              onPageChange={handlePageChange}
+              nextPage={nextPage}
+              prevPage={prevPage}
+            />
           </div>
         </div>
       </div>

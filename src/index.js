@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import GlobalStyles from './components/GlobalStyles';
+import FilterProvider from './context/FilterProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <GlobalStyles>
-    <App />
+    <FilterProvider>
+      <App />
+    </FilterProvider>
   </GlobalStyles>,
 );
 

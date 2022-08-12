@@ -3,4 +3,13 @@
 .wrapper {
   min-height: 100vh;
   color: $third-color;
+
+  .section-big-sale {
+    padding-top: 200px;
+  }
+
+  .section-new-product {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
 }

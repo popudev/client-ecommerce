@@ -21,40 +21,8 @@
   padding-left: 20px;
 
   .products {
-    padding: 20px 0;
+    margin-top: 20px;
   }
-}
-
-.filter {
-  width: 20%;
-  min-height: 100vh;
-  background-color: $fourth-color;
-  padding: 20px;
-  .wedget {
-    border-bottom: 1px solid $third-color;
-
-    &__title {
-      font-size: 20px;
-      text-transform: uppercase;
-      margin: 20px 0;
-    }
-
-    &__content {
-      @include flex(flex-start, center);
-      flex-direction: column;
-      margin-bottom: 30px;
-    }
-  }
-}
-
-.btn-clear-filter {
-  width: 100%;
-  height: 50px;
-  background-color: $third-color;
-  font-size: 18px;
-  font-weight: 600;
-  text-transform: uppercase;
-  text-align: center;
 }
 
 .filter__sort {
@@ -63,33 +31,4 @@
   width: 100%;
   padding: 0 20px;
   @include flex(center, space-between);
-}
-
-.sort-content {
-  @include flex(center, flex-start);
-
-  & > * {
-    padding: 10px;
-    margin: 0 10px;
-    font-size: 14px;
-    text-transform: uppercase;
-  }
-}
-
-.pagination-mini {
-  @include flex(center, center);
-
-  & > * {
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  .control-mini {
-    margin-left: 5px;
-    button {
-      padding: 5px 10px;
-      font-size: 18px;
-      margin: 0 2px;
-    }
-  }
 }
