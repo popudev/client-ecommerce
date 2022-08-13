@@ -1,0 +1,26 @@
+@import '/src/sass';
+
+.wrapper {
+  @include flex(flex-start, center);
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.image {
+  width: 70px;
+  height: 100px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: conver;
+  }
+}
+
+.content {
+  flex: 1;
+  margin-left: 10px;
+
+  .title {
+  }
+}

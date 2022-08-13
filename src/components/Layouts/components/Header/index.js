@@ -6,6 +6,8 @@ import classNames from 'classnames/bind';
 import { logoImg } from '~/assets/images';
 import { useEffect, useRef } from 'react';
 
+import Search from '~/components/Search';
+
 const cx = classNames.bind(styles);
 const menuNav = [
   {
@@ -63,12 +65,7 @@ function Header() {
           <img src={logoImg} alt="logo" />
         </Link>
       </div>
-      <div className={cx('search')}>
-        <input className={cx('search__input')} placeholder="Search..."></input>
-        <button className={cx('search__btn')}>
-          <i className="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </div>
+      <Search />
       <div className={cx('menu')} ref={menuRef}>
         {menuNav.map((item, index) => {
           return (

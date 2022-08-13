@@ -1,0 +1,57 @@
+@import '/src/sass';
+
+.wrapper {
+  @include flex(center, center);
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.15px solid transparent;
+
+  @include tablet {
+    width: 400px;
+  }
+
+  @include mobile {
+    width: 200px;
+  }
+
+  input {
+    flex: 1;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 14px;
+    color: $text-main-color;
+
+    @include mobile {
+      width: 70%;
+    }
+  }
+
+  &:focus-within {
+    border-color: $third-color;
+  }
+
+  button {
+    @include button;
+    width: 100px;
+    height: 100%;
+
+    @include mobile {
+      width: 30%;
+    }
+
+    i {
+      font-size: 14px;
+      color: $third-color;
+    }
+
+    &:hover i {
+      color: #f5c276;
+    }
+  }
+}
+
+.view-all {
+  padding: 8px 10px;
+}

@@ -10,12 +10,17 @@ import { getProductList } from '~/services/productService';
 
 import styles from './Shop.module.scss';
 import { useFilterState } from '~/hooks';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
 const cx = classNames.bind(styles);
 
 function Shop() {
   console.log('re-render shop');
-  const [state, dispatch] = useFilterState();
+  const { search } = useLocation();
+  const { title } = queryString.parse(search);
+
+  const [filterState, dispatch] = useFilterState();
   const [products, setProducts] = useState([]);
   const { pagination, payload } = products;
 
@@ -25,11 +30,11 @@ function Shop() {
   useEffect(() => {
     console.log('api product');
     const fetchApiGetProductList = async () => {
-      const products = await getProductList(state);
+      const products = await getProductList({ ...filterState, title: title });
       setProducts(products);
     };
     fetchApiGetProductList();
-  }, [state]);
+  }, [filterState, title]);
 
   const handlePageChange = (currentPage) => {
     dispatch({

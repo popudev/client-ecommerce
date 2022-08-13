@@ -3,6 +3,7 @@ import httpRequest from '~/utils/httpRequest';
 export const getProductList = async (filter, limit = 12) => {
   try {
     let params = {
+      title_like: filter.title,
       categoryId: filter.categoryId,
       sale_gte: filter.price[0],
       sale_lte: filter.price[1],
