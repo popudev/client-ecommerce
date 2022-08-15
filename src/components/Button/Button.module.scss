@@ -1,0 +1,93 @@
+@import '/src/sass';
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 100px;
+  padding: 9px 16px;
+
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: $third-color;
+  border: 1px solid transparent;
+  user-select: none;
+
+  transition: all 0.1s ease;
+
+  + .wrapper {
+    margin-left: 8px;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.icon + .title,
+.title + .icon {
+  margin-left: 8px;
+}
+
+.icon {
+  display: inline-block;
+  width: 24px;
+  text-align: center;
+}
+
+// Button types
+.rounded {
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+  border-color: rgba(22, 24, 35, 0.12);
+
+  &:hover {
+    border-color: rgba(22, 24, 35, 0.2);
+    background-color: rgba(22, 24, 35, 0.03);
+  }
+}
+
+.primary {
+  color: $fourth-color;
+  background-color: $third-color;
+
+  &:hover {
+    color: $third-color;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), $second-color;
+  }
+}
+
+.outline {
+  color: var(--primary);
+  border-color: currentColor;
+
+  &:hover {
+    border-color: currentColor;
+    background-color: rgba(254, 44, 85, 0.06);
+  }
+}
+
+.text {
+  background-color: transparent;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Button sizes
+.small {
+  min-width: 88px;
+  padding: 4px 16px;
+}
+
+.large {
+  padding: 14px 16px;
+  min-width: 140px;
+}
+
+.full {
+  min-width: 100%;
+}

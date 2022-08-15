@@ -5,6 +5,8 @@
   box-shadow: rgb(0 0 0 / 60%) 0px 2px 12px;
   width: 100%;
   border-radius: 5px;
+  max-height: calc(100vh - #{$header-height});
+  overflow-y: auto;
 
   & > *:hover {
     transition: all 0.3s ease;

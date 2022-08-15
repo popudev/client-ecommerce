@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import classNames from 'classnames/bind';
 
 import Helmet from '~/components/Helmet';
@@ -10,18 +10,14 @@ import { getProductList } from '~/services/productService';
 
 import styles from './Shop.module.scss';
 import { useFilterState } from '~/hooks';
-import { useLocation } from 'react-router-dom';
-import queryString from 'query-string';
 
 const cx = classNames.bind(styles);
 
 function Shop() {
   console.log('re-render shop');
-  const { search } = useLocation();
-  const { title } = queryString.parse(search);
-
   const [filterState, dispatch] = useFilterState();
   const [products, setProducts] = useState([]);
+
   const { pagination, payload } = products;
 
   const nextPage = useRef(null);
@@ -30,16 +26,25 @@ function Shop() {
   useEffect(() => {
     console.log('api product');
     const fetchApiGetProductList = async () => {
-      const products = await getProductList({ ...filterState, title: title });
+      const products = await getProductList({ ...filterState });
       setProducts(products);
     };
     fetchApiGetProductList();
-  }, [filterState, title]);
+  }, [filterState]);
 
-  const handlePageChange = (currentPage) => {
+  const handlePageChange = useCallback(
+    (currentPage) => {
+      dispatch({
+        type: 'change_page',
+        payload: currentPage,
+      });
+    },
+    [dispatch],
+  );
+
+  const clearTitle = () => {
     dispatch({
-      type: 'change_page',
-      payload: currentPage,
+      type: 'clear_title',
     });
   };
 
@@ -48,10 +53,19 @@ function Shop() {
       <div className={cx('wrapper', 'main', 'container')}>
         <div className={cx('banner')}></div>
         <div className={cx('content')}>
-          <Filter />
+          <Filter filterState={filterState} dispatch={dispatch} />
           <div className={cx('context')}>
+            {filterState.title && (
+              <div className={cx('search_result_title')}>
+                <i className="fa-regular fa-lightbulb"></i>
+                <p>Search result for "{filterState.title}"</p>
+                <button className={cx('btn_clear_title', 'btn')} onClick={clearTitle}>
+                  <i className="fa-regular fa-circle-xmark"></i>
+                </button>
+              </div>
+            )}
             <div className={cx('filter__sort')}>
-              <FilterSort />
+              <FilterSort filterState={filterState} dispatch={dispatch} />
               <PaginationMini
                 page={pagination?._page}
                 pageCount={pagination?._totalPages}

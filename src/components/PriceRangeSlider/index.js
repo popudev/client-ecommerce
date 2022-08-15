@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, memo } from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './PriceRangeSlider.module.scss';
@@ -23,7 +23,6 @@ function PriceRangeSlider({ min, max, reset, onPriceChange }) {
     },
     [min, max],
   );
-
 
   const style = {
     left: calcPercent(minPrice) + '%',
@@ -103,4 +102,4 @@ function PriceRangeSlider({ min, max, reset, onPriceChange }) {
   );
 }
 
-export default PriceRangeSlider;
+export default memo(PriceRangeSlider);

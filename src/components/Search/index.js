@@ -1,43 +1,65 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useRef, memo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
+
+import Button from '~/components/Button';
 import Tippy from '~/components/Tippy';
 import { ProductItemSearch } from '~/components/Product';
-import Propper from '~/components/Propper';
-import { useDebounce } from '~/hooks';
+import Propper from '~/components/Popper';
+import { useDebounce, useDidMountEffect, useFilterState } from '~/hooks';
+import { getProductList } from '~/services/productService';
 
 const cx = classNames.bind(styles);
 
 function Search() {
   const [searchResult, setSearchResult] = useState([]);
-  const [title, setTitle] = useState('');
   const [focus, setFocus] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [filterState, dispatch] = useFilterState();
+  const [title, setTitle] = useState(filterState.title);
+
+  const navigator = useNavigate();
 
   const titleValue = useDebounce(title, 500);
+
   const focusValue = useDebounce(focus, 300);
 
-  useEffect(() => {
-    if (titleValue) {
-      console.log('api');
-      setTimeout(() => {
-        setSearchResult([
-          {
-            id: 1,
-          },
-          {
-            id: 2,
-          },
-          {
-            id: 3,
-          },
-        ]);
-      }, 3000);
-    } else {
+  const inputRef = useRef(null);
+
+  useDidMountEffect(() => {
+    if (!titleValue.trim()) {
       setSearchResult([]);
+      return;
     }
+
+    console.log('api search');
+    const fetchSearchProducts = async () => {
+      setLoading(true);
+      const result = await getProductList({ title: titleValue }, 6);
+      setSearchResult(result?.payload);
+      setLoading(false);
+    };
+
+    fetchSearchProducts();
   }, [titleValue]);
+
+  const handleClear = () => {
+    setTitle('');
+    inputRef.current.focus();
+  };
+
+  const handleSearchClick = () => {
+    dispatch({
+      type: 'change_title',
+      payload: titleValue,
+    });
+    setTitle('');
+    inputRef.current.blur();
+    navigator(`/shop`);
+  };
 
   return (
     <Tippy
@@ -48,30 +70,51 @@ function Search() {
             {searchResult.map((e) => (
               <ProductItemSearch key={e?.id} info={e} />
             ))}
-            <Link to={`/shop?title=${titleValue}`}>
+
+            <Button text full onClick={handleSearchClick}>
               <h4 className={cx('view-all')}>View all results for "{titleValue}"</h4>
-            </Link>
+            </Button>
           </Propper>
         );
       }}
     >
       <div className={cx('wrapper')}>
-        <input
-          className={cx('input')}
-          placeholder="Search..."
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-          onClick={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-        ></input>
-        <button className={cx('btn')}>
+        <div className={cx('input')}>
+          <input
+            ref={inputRef}
+            placeholder="Search..."
+            value={title}
+            onChange={(e) => {
+              const searchValue = e.target.value;
+              if (!searchValue.startsWith(' ')) {
+                setTitle(e.target.value);
+              }
+            }}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
+          />
+
+          {!!title && !loading && (
+            <button className={cx('clear')} onClick={handleClear}>
+              <i className="fa-solid fa-circle-xmark"></i>
+            </button>
+          )}
+
+          {loading && (
+            <button className={cx('spiner')}>
+              <i className="fa-solid fa-spinner"></i>
+            </button>
+          )}
+        </div>
+
+        {/* <button className={cx('btn')}>
+        </button> */}
+        <Button primary onClick={handleSearchClick} onMouseDown={(e) => e.preventDefault()}>
           <i className="fa-solid fa-magnifying-glass"></i>
-        </button>
+        </Button>
       </div>
     </Tippy>
   );
 }
 
-export default Search;
+export default memo(Search);

@@ -1,12 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Filter.module.scss';
-import { useFilterState } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
-function FilterSort() {
-  const [filterState, dispatch] = useFilterState();
+function FilterSort({ filterState, dispatch }) {
   const { sort } = filterState;
 
   const updateAtSelect = useRef(null);
@@ -56,4 +54,4 @@ function FilterSort() {
   );
 }
 
-export default FilterSort;
+export default memo(FilterSort);

@@ -1,7 +1,7 @@
 @import '/src/sass';
 
 .wrapper {
-  padding: 0 50px;
+  padding-bottom: 20px !important;
 }
 
 .banner {
@@ -31,4 +31,26 @@
   width: 100%;
   padding: 0 20px;
   @include flex(center, space-between);
+}
+
+.search_result_title {
+  @include flex(center, space-between);
+  width: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+
+  p {
+    flex-grow: 1;
+  }
+
+  i {
+    margin-right: 10px;
+  }
+
+  .btn_clear_title {
+    color: $third-color;
+    background-color: transparent;
+    font-size: 20px;
+  }
 }

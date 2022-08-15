@@ -59,8 +59,16 @@
     margin-left: 5px;
     button {
       padding: 5px 10px;
-      font-size: 18px;
+      font-size: 20px;
+      font-weight: 700;
       margin: 0 2px;
+      color: $fourth-color;
+      background-color: $third-color;
+      transition: all 0.1s ease;
+
+      &:hover {
+        opacity: 0.5;
+      }
     }
   }
 }

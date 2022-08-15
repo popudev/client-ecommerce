@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { fakeRams, fakeRoms, fakeServices } from '~/assets/data';
 import { getCategoryList } from '~/services/categoryService';
 import { add, del } from '~/reducer/actions';
@@ -7,15 +7,13 @@ import PriceRangeSlider from '~/components/PriceRangeSlider';
 
 import classNames from 'classnames/bind';
 import styles from './Filter.module.scss';
-import { useFilterState } from '~/hooks';
+import Button from '../Button';
 
 const cx = classNames.bind(styles);
 
-function Filter() {
-  console.log('re-render filter shop');
+function Filter({ filterState, dispatch }) {
   const [categories, setCategories] = useState([]);
 
-  const [filterState, dispatch] = useFilterState();
   const { categoryId, rams, roms, services, resetPrice } = filterState;
 
   useEffect(() => {
@@ -113,7 +111,7 @@ function Filter() {
           })}
         </div>
       </div>
-      <div className={cx('wedget')}>
+      <div className={cx('wedget', 'no_border')}>
         <div className={cx('wedget__title')}>
           <h3>Service and Promotion</h3>
         </div>
@@ -132,11 +130,11 @@ function Filter() {
           })}
         </div>
       </div>
-      <button className={cx('btn-clear-filter')} onClick={handleClearFilter}>
+      <Button primary className={cx('btn-clear-filter')} onClick={handleClearFilter}>
         Clear Filter
-      </button>
+      </Button>
     </div>
   );
 }
 
-export default Filter;
+export default memo(Filter);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 
 import styles from './Pagination.module.scss';
 import classNames from 'classnames/bind';
@@ -192,4 +192,4 @@ function Pagination(props) {
   );
 }
 
-export default Pagination;
+export default memo(Pagination);

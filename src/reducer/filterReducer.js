@@ -1,4 +1,5 @@
 export const initialState = {
+  title: '',
   categoryId: [],
   price: [0, 999],
   rams: [],
@@ -87,6 +88,23 @@ export default function filterReducer(state, action) {
         page: 1,
       };
 
+    case 'change_title':
+      if (state.title !== action.payload)
+        return {
+          ...state,
+          title: action.payload,
+          page: 1,
+        };
+
+      return state;
+
+    case 'clear_title':
+      return {
+        ...state,
+        title: '',
+        page: 1,
+      };
+
     case 'clear_filter':
       return {
         ...initialState,
@@ -110,6 +128,7 @@ export default function filterReducer(state, action) {
           return sortItem;
         }),
       };
+
     default:
       return state;
   }

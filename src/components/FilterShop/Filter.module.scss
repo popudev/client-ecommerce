@@ -5,7 +5,7 @@
   min-height: 100vh;
   background-color: $fourth-color;
   padding: 20px;
-  margin-bottom: 20px;
+
   .wedget {
     border-bottom: 1px solid $third-color;
 
@@ -20,6 +20,10 @@
       flex-direction: column;
       margin-bottom: 30px;
     }
+  }
+
+  .wedget.no_border {
+    border-bottom: none;
   }
 }
 
