@@ -5,6 +5,8 @@ import config from '~/config';
 // Pages
 import Home from '~/pages/Home';
 import Shop from '~/pages/Shop';
+import Login from '~/pages/Login';
+import Register from '~/pages/Register';
 
 // Public routes
 const publicRoutes = [
@@ -15,6 +17,17 @@ const publicRoutes = [
   {
     path: config.routes.shop,
     component: Shop,
+  },
+
+  {
+    path: config.routes.login,
+    component: Login,
+    layout: null,
+  },
+  {
+    path: config.routes.register,
+    component: Register,
+    layout: null,
   },
 ];
 

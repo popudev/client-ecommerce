@@ -101,6 +101,19 @@
   }
 }
 
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: center;
+  }
+}
+
 .open-menu-mobile,
 .close-menu-mobile {
   display: none;
@@ -115,5 +128,31 @@
   i {
     font-size: 27px;
     color: $third-color;
+  }
+}
+
+.menu_user-item {
+  @include flex(center, flex-start);
+  padding: 10px 20px;
+
+  .menu_user-icon {
+    text-align: center;
+    width: 40px;
+
+    font-size: 18px;
+  }
+
+  .menu_user-title {
+    font-size: 16px;
+  }
+
+  &.separate {
+    border-top: 1px solid $third-color;
+  }
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(80, 80, 80, 0.1);
   }
 }

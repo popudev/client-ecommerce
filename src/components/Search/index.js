@@ -25,7 +25,7 @@ function Search() {
 
   const titleValue = useDebounce(title, 500);
 
-  const focusValue = useDebounce(focus, 300);
+  const focusValue = useDebounce(focus, 200);
 
   const inputRef = useRef(null);
 
@@ -63,6 +63,7 @@ function Search() {
 
   return (
     <Tippy
+      interactive
       visible={searchResult.length > 0 && focusValue}
       render={() => {
         return (

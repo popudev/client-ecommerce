@@ -20,6 +20,7 @@ body {
   text-rendering: optimizeSpeed;
   background-color: $main-color;
   color: $third-color;
+  overflow: overlay;
 }
 
 input,

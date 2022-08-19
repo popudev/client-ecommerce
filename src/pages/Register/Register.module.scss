@@ -1,0 +1,88 @@
+@import '/src/sass';
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+
+  width: 100%;
+  height: 100%;
+  line-height: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.content {
+  @include flex(center, space-around);
+  flex-direction: column;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 640px;
+
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 50px 20px;
+  border-radius: 10px;
+}
+
+.heading {
+  font-size: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.from_login {
+  @include flex(center, center);
+  flex-direction: column;
+
+  .from_group {
+    @include flex(flex-start, center);
+    flex-direction: column;
+    margin: 5px 0;
+
+    label {
+      font-weight: 700;
+    }
+
+    input {
+      border: 1px solid #000;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  }
+
+  .btn_login {
+    margin-top: 20px;
+  }
+}
+
+.social_media {
+  margin-bottom: 20px;
+  p {
+    margin: 10px 0;
+    text-align: center;
+  }
+}
+
+.navigator {
+  margin-top: 20px;
+
+  a {
+    font-weight: 800;
+    margin-left: 5px;
+  }
+}

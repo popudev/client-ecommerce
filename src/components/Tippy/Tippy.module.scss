@@ -7,5 +7,15 @@
 .render {
   position: absolute;
   width: 100%;
-  margin-top: 5px;
+  margin-top: 8px;
+  animation: fader 0.1s ease;
+}
+
+@keyframes fader {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

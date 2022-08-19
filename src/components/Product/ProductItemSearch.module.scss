@@ -4,6 +4,11 @@
   @include flex(flex-start, center);
   padding: 8px 10px;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(80, 80, 80, 0.1);
+  }
 }
 
 .image {

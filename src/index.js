@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import GlobalStyles from './components/GlobalStyles';
 import FilterProvider from './context/FilterProvider';
+import GlobalStateProvider from './context/GlobalStateProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <GlobalStyles>
-    <FilterProvider>
-      <App />
-    </FilterProvider>
+    <GlobalStateProvider>
+      <FilterProvider>
+        <App />
+      </FilterProvider>
+    </GlobalStateProvider>
   </GlobalStyles>,
 );
 

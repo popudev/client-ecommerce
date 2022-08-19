@@ -7,9 +7,4 @@
   border-radius: 5px;
   max-height: calc(100vh - #{$header-height});
   overflow-y: auto;
-
-  & > *:hover {
-    transition: all 0.3s ease;
-    background-color: rgba(80, 80, 80, 0.1);
-  }
 }
