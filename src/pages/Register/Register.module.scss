@@ -34,7 +34,7 @@
 
   transform: translate(-50%, -50%);
   background-color: #fff;
-  padding: 50px 20px;
+  padding: 30px 20px;
   border-radius: 10px;
 }
 
@@ -42,28 +42,12 @@
   font-size: 40px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  text-shadow: 1px 1px white, -1px -1px #333;
 }
 
 .from_login {
   @include flex(center, center);
   flex-direction: column;
-
-  .from_group {
-    @include flex(flex-start, center);
-    flex-direction: column;
-    margin: 5px 0;
-
-    label {
-      font-weight: 700;
-    }
-
-    input {
-      border: 1px solid #000;
-      border-radius: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
-    }
-  }
 
   .btn_login {
     margin-top: 20px;
@@ -84,5 +68,20 @@
   a {
     font-weight: 800;
     margin-left: 5px;
+  }
+}
+
+.btn_home {
+  position: absolute;
+  line-height: 0;
+  text-align: center;
+  top: 10px;
+  right: 10px;
+  color: $third-color;
+  font-size: 30px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  &:hover {
+    color: $second-color;
   }
 }

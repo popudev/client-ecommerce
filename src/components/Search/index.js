@@ -34,8 +34,6 @@ function Search() {
       setSearchResult([]);
       return;
     }
-
-    console.log('api search');
     const fetchSearchProducts = async () => {
       setLoading(true);
       const result = await getProductList({ title: titleValue }, 6);
