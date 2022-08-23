@@ -61,12 +61,13 @@
 }
 
 .outline {
-  color: $main-color;
-  border-color: currentColor;
+  color: $third-color;
+  border-color: $third-color;
+  background-color: transparent;
 
   &:hover {
-    border-color: currentColor;
-    background-color: rgba($color: $third-color, $alpha: 0.06);
+    border-color: $third-color;
+    background-color: rgba($color: $third-color, $alpha: 0.2);
   }
 }
 

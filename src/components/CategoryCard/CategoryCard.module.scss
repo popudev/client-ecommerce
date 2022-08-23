@@ -57,22 +57,22 @@ $height: 220px;
     margin-bottom: 20px;
   }
 
-  & .btn-shop-now {
-    font-size: 25px;
-    font-weight: 700;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
+  // & .btn-shop-now {
+  //   font-size: 25px;
+  //   font-weight: 700;
+  //   padding: 10px;
+  //   background-color: #fff;
+  //   border-radius: 5px;
 
-    &:hover {
-      background-color: $third-color;
-      color: $main-color;
-    }
+  //   &:hover {
+  //     background-color: $third-color;
+  //     color: $main-color;
+  //   }
 
-    @include mobile {
-      font-size: 14px;
-    }
-  }
+  //   @include mobile {
+  //     font-size: 14px;
+  //   }
+  // }
 
   @include mobile {
     font-size: 18px;

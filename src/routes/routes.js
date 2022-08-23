@@ -5,6 +5,7 @@ import config from '~/config';
 // Pages
 import Home from '~/pages/Home';
 import Shop from '~/pages/Shop';
+import Cart from '~/pages/Cart';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
 
@@ -18,7 +19,10 @@ const publicRoutes = [
     path: config.routes.shop,
     component: Shop,
   },
-
+  {
+    path: config.routes.cart,
+    component: Cart,
+  },
   {
     path: config.routes.login,
     component: Login,

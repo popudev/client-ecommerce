@@ -6,8 +6,8 @@ import { useGlobalState } from '~/hooks';
 import styles from './Login.module.scss';
 
 import { background } from '~/assets/images';
-import Form from '~/components/Form/Form';
-import FormInput from '~/components/Form/FormInput';
+import { Form, FormInput } from '~/components/Form';
+
 
 const cx = classNames.bind(styles);
 
@@ -57,21 +57,6 @@ function Login() {
             <i className="fa-solid fa-square-xmark"></i>
           </Link>
           <h1 className={cx('heading')}>Login</h1>
-          {/* <form className={cx('from_login')}>
-            <div className={cx('from_group')}>
-              <label>Username</label>
-              <input />
-            </div>
-
-            <div className={cx('from_group')}>
-              <label>Password</label>
-              <input />
-            </div>
-
-            <Button primary className={cx('btn_login')}>
-              Login
-            </Button>
-          </form> */}
 
           <Form
             className={cx('from_login')}

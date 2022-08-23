@@ -1,0 +1,109 @@
+@import '/src/sass';
+
+.wrapper {
+  position: relative;
+}
+
+.banner {
+  width: 100%;
+  height: 200px;
+  background-color: rgba($color: #949090, $alpha: 1);
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead tr {
+    background-color: $fourth-color;
+    border-bottom: 20px solid $main-color;
+    th {
+      height: 80px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 10px solid $main-color;
+      td {
+        height: 120px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.checkout {
+  padding: 30px 20px;
+  background-color: $fourth-color;
+  margin: 20px 0;
+  @include flex(center, space-between);
+
+  .coupon,
+  .calc_coupon {
+    @include flex(flex-start, center);
+    flex-direction: column;
+  }
+
+  .coupon {
+    div {
+      @include flex(center, center);
+      height: 35px;
+    }
+
+    label {
+      font-size: 20px;
+    }
+
+    input {
+      height: 100%;
+      font-size: 20px;
+      width: 200px;
+      padding: 5px 10px;
+    }
+
+    button {
+      height: 100% !important;
+    }
+  }
+
+  .calc_coupon {
+    min-width: 250px;
+  }
+
+  .info {
+    @include flex(center, space-between);
+    width: 100%;
+    font-size: 20px;
+
+    h4 {
+      margin-right: 10px;
+    }
+  }
+
+  .total {
+    h4 {
+      font-size: 30px;
+    }
+    p {
+      font-size: 22px;
+    }
+  }
+
+  .btn_checkout {
+    width: 250px !important;
+    height: 50px;
+    font-size: 20px;
+  }
+}
+
+.checkout.shrink {
+  position: fixed;
+  bottom: 0;
+}
+
+.content.shrink {
+}

@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import Button from '../Button';
 import styles from './CategoryCard.module.scss';
 
 const cx = classNames.bind(styles);
@@ -11,7 +12,9 @@ function CategoryCard({ data }) {
       </div>
       <div className={cx('context')}>
         <div className={cx('title')}>{data.title}</div>
-        <button className={cx('btn-shop-now')}>SHOP NOW</button>
+        <Button outline large className={cx('btn-shop-now')}>
+          SHOP NOW
+        </Button>
       </div>
     </div>
   );
