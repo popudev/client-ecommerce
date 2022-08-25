@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import classNames from 'classnames/bind';
 import Helmet from '~/components/Helmet';
@@ -7,10 +7,12 @@ import styles from './Cart.module.scss';
 import { fakeProducts } from '~/assets/data';
 import ProductCart from '~/components/Product/ProductCart';
 import Button from '~/components/Button';
+import { useGlobalState } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
 function Cart() {
+  const { globalState } = useGlobalState();
   const checkoutRef = useRef(null);
   const contentRef = useRef(null);
 

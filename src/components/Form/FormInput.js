@@ -1,20 +1,26 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import { useDebounce, useDidMountEffect } from '~/hooks';
+import { useDidMountEffect } from '~/hooks';
 import styles from './FormInput.module.scss';
 
 const cx = classNames.bind(styles);
 
 function FormInput(props) {
-  const { type, name, label, className, setValueForm, validate, errorValidation } = props;
+  const { type, name, label, className, errorMess, setValueForm, validate, errorValidation } = props;
   const [error, setError] = useState(errorValidation);
-
-  const [value, setValue] = useState('');
-  const debouceValue = useDebounce(value, 500);
+  const [value, setValue] = useState(props.value || '');
 
   useDidMountEffect(() => {
-    setValueForm(debouceValue);
-  }, [debouceValue]);
+    if (errorMess.mess) setError(errorMess.mess);
+  }, [errorMess]);
+
+  // delay input
+  // const debouceValue = useDebounce(value, 400);
+  // useDidMountEffect(() => {
+  //  setValueForm(debouceValue);
+  //  const error = validate(debouceValue);
+  //  setError(error);
+  // }, [debouceValue]);
 
   useDidMountEffect(() => {
     setError(errorValidation);
@@ -23,6 +29,8 @@ function FormInput(props) {
   const handleOnChange = (e) => {
     const inputValue = e.target.value;
     setValue(inputValue);
+    setValueForm(inputValue);
+    if (error) setError('');
   };
 
   const handleOnBlur = (e) => {

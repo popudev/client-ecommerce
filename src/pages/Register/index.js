@@ -7,12 +7,21 @@ import styles from './Register.module.scss';
 
 import { background } from '~/assets/images';
 import { Form, FormInput } from '~/components/Form';
+import { registerUser } from '~/services/authenService';
 
 const cx = classNames.bind(styles);
 
 function Register() {
-  const { dispatch } = useGlobalState();
   const navigator = useNavigate();
+  const { globalState, dispatch } = useGlobalState();
+  const { register } = globalState;
+  let errorExistEmail = {};
+  let errorExistUsename = {};
+
+  if (register.error) {
+    if (register.error.keyPattern.username) errorExistUsename = { mess: 'Username is exist' };
+    if (register.error.keyPattern.email) errorExistEmail = { mess: 'Email is exist' };
+  }
 
   const initialValues = {
     fullname: '',
@@ -42,17 +51,8 @@ function Register() {
     },
   };
 
-  const handleSubmit = (values) => {
-    console.log(values);
-    dispatch({
-      type: 'loginSuccess',
-      payload: {
-        id: 1,
-        ...values,
-      },
-    });
-
-    navigator('/');
+  const handleSubmit = (user) => {
+    registerUser(user, dispatch, navigator);
   };
 
   return (
@@ -75,8 +75,8 @@ function Register() {
             onSubmit={handleSubmit}
           >
             <FormInput type="text" name="fullname" label="Fullname" />
-            <FormInput type="text" name="email" label="Email" />
-            <FormInput type="text" name="username" label="Username" />
+            <FormInput type="text" name="email" label="Email" errorMess={errorExistEmail} />
+            <FormInput type="text" name="username" label="Username" errorMess={errorExistUsename} />
             <FormInput type="password" name="password" label="Password" />
             <FormInput type="password" name="confirmPassword" label="Confirm Password" />
             <Button primary className={cx('btn_login')}>

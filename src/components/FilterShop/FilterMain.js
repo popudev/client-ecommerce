@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, memo } from 'react';
 import { fakeRams, fakeRoms, fakeServices } from '~/assets/data';
 import { getCategoryList } from '~/services/categoryService';
-import { add, del } from '~/reducer/actions';
+import { add, del } from '~/reducers/actions/filterAction';
 import CheckBox from '~/components/CheckBox';
 import PriceRangeSlider from '~/components/PriceRangeSlider';
 

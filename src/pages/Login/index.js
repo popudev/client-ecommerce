@@ -7,13 +7,22 @@ import styles from './Login.module.scss';
 
 import { background } from '~/assets/images';
 import { Form, FormInput } from '~/components/Form';
-
+import { loginUser } from '~/services/authenService';
 
 const cx = classNames.bind(styles);
 
 function Login() {
-  const { dispatch } = useGlobalState();
   const navigator = useNavigate();
+  const { globalState, dispatch } = useGlobalState();
+  const { error } = globalState.login;
+
+  let errorUsername = {};
+  let errorPassword = {};
+
+  if (error) {
+    if (error.key && error.key === 'username') errorUsername = { mess: error.mess };
+    if (error.key && error.key === 'password') errorPassword = { mess: error.mess };
+  }
 
   const initialValues = {
     username: '',
@@ -33,17 +42,8 @@ function Login() {
     },
   };
 
-  const handleSubmit = (values) => {
-    console.log(values);
-    dispatch({
-      type: 'loginSuccess',
-      payload: {
-        id: 1,
-        ...values,
-      },
-    });
-
-    navigator('/');
+  const handleSubmit = (user) => {
+    loginUser(user, dispatch, navigator);
   };
 
   return (
@@ -64,8 +64,14 @@ function Login() {
             validateSchema={validateSchema}
             onSubmit={handleSubmit}
           >
-            <FormInput type="text" name="username" label="Username" />
-            <FormInput type="password" name="password" label="Password" />
+            <FormInput
+              type="text"
+              name="username"
+              label="Username"
+              value={globalState.register?.username}
+              errorMess={errorUsername}
+            />
+            <FormInput type="password" name="password" label="Password" errorMess={errorPassword} />
             <Button primary className={cx('btn_login')}>
               Login
             </Button>
