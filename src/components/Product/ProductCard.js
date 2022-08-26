@@ -5,6 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { formatMoney } from '~/config';
 import styles from './ProductCard.module.scss';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { addProductToCart } from '~/services/cartService';
 
 const cx = classNames.bind(styles);
 
@@ -31,6 +32,13 @@ function ProductCard({ data, isHome }) {
   const handleBlurQuantity = (e) => {
     const number = Number.parseInt(e.target.value);
     if (!number) setQuantity(1);
+  };
+
+  const handleClick = () => {
+    addProductToCart({
+      productId: data.id,
+      quantity: quantity,
+    });
   };
 
   return (
@@ -62,7 +70,7 @@ function ProductCard({ data, isHome }) {
             </button>
           </div>
 
-          <button className={cx('btn-add-to-cart')}>
+          <button className={cx('btn-add-to-cart')} onClick={handleClick}>
             <i className="fa-solid fa-cart-plus"></i>
           </button>
         </div>
@@ -93,7 +101,7 @@ function ProductCard({ data, isHome }) {
           </button>
         </div>
 
-        <button className={cx('btn-add-to-cart')}>
+        <button className={cx('btn-add-to-cart')} onClick={handleClick}>
           <i className="fa-solid fa-cart-plus"></i>
         </button>
       </div>

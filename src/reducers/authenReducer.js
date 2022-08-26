@@ -1,6 +1,6 @@
 export const initialState = {
   login: {
-    currentUser: null,
+    currentUser: JSON.parse(localStorage.getItem('currentUser')) || null,
     isFetching: false,
     error: false,
   },
@@ -25,6 +25,7 @@ const authenReducer = (state, action) => {
       };
 
     case 'loginSuccess':
+      localStorage.setItem('currentUser', JSON.stringify(action.payload));
       return {
         ...state,
         login: {

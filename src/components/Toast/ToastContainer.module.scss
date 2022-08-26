@@ -1,0 +1,9 @@
+@import '/src/sass';
+
+.wrapper {
+  position: fixed;
+  z-index: 2;
+  top: $header-shrink-height;
+  right: 10px;
+  margin-top: 5px;
+}

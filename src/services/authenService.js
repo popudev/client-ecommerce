@@ -22,10 +22,11 @@ export const registerUser = async (user, dispatch, navigator) => {
 export const loginUser = async (user, dispatch, navigator) => {
   try {
     dispatch(loginStart());
-    const res = await httpRequest.post(`/auth/login`, user);
+    const res = await httpRequest.post(`/auth/login`, user, { withCredentials: true });
     dispatch(loginSuccess(res));
     navigator('/');
   } catch (err) {
-    dispatch(loginFailed(err.response.data));
+    console.log(err);
+    dispatch(loginFailed(err?.response?.data));
   }
 };

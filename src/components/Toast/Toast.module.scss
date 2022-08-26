@@ -1,0 +1,39 @@
+@import '/src/sass';
+
+.wrapper {
+  @include flex(center, center);
+  background-color: $fourth-color;
+  padding: 20px;
+  margin-bottom: 10px;
+  animation: slideInLeft 0.3s ease, faderOut linear 0.5s 1s forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes faderOut {
+  to {
+    opacity: 0;
+  }
+}
+
+.icon i {
+  display: none;
+  margin-right: 10px;
+}
+
+.icon.success i.success {
+  display: block;
+}
+
+.icon.error i.error {
+  display: block;
+}

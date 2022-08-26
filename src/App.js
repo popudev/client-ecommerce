@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { publicRoutes } from '~/routes';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DefaultLayout } from '~/layouts';
+import { ToastContainer } from './components/Toast';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           })}
         </Routes>
       </div>
+      <ToastContainer />
     </Router>
   );
 }
