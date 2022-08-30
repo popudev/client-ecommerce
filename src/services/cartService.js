@@ -14,3 +14,31 @@ export const addProductToCart = async (data) => {
     toast.error('Vui long dang nhap');
   }
 };
+
+export const getProductsCart = async () => {
+  try {
+    const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
+    const res = await httpRequest.get(`/cart`, {
+      headers: {
+        token: `Bear ${accessToken}`,
+      },
+    });
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteProduct = async (id) => {
+  try {
+    const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
+    const res = await httpRequest.delete(`/cart/product/${id}`, {
+      headers: {
+        token: `Bear ${accessToken}`,
+      },
+    });
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -6,11 +6,12 @@ import { formatMoney } from '~/config';
 import styles from './ProductCart.module.scss';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Button from '../Button';
+import { deleteProduct } from '~/services/cartService';
 
 const cx = classNames.bind(styles);
 
-function ProductCart({ data }) {
-  const [quantity, setQuantity] = useState(1);
+function ProductCart({ quantity: quantityInit, id, data, handleDelete }) {
+  const [quantity, setQuantity] = useState(quantityInit);
   const totalPrice = quantity * data.sale;
 
   const handlePlusQuantity = () => {
@@ -36,6 +37,11 @@ function ProductCart({ data }) {
   const handleBlurQuantity = (e) => {
     const number = Number.parseInt(e.target.value);
     if (!number) setQuantity(1);
+  };
+
+  const handleClickDelete = async () => {
+    await deleteProduct(id);
+    handleDelete();
   };
 
   return (
@@ -78,7 +84,9 @@ function ProductCart({ data }) {
       <td className={cx('total_price')}>{formatMoney(totalPrice)}</td>
       <td className={cx('actions')}>
         <div className={cx('action')}>
-          <Button outline>Delete</Button>
+          <Button outline onClick={handleClickDelete}>
+            Delete
+          </Button>
           <Button to="/" text>
             Details
           </Button>

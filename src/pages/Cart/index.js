@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 import Helmet from '~/components/Helmet';
@@ -7,45 +7,32 @@ import styles from './Cart.module.scss';
 import { fakeProducts } from '~/assets/data';
 import ProductCart from '~/components/Product/ProductCart';
 import Button from '~/components/Button';
-import { useGlobalState } from '~/hooks';
+import { getProductsCart } from '~/services/cartService';
 
 const cx = classNames.bind(styles);
 
 function Cart() {
-  const { globalState } = useGlobalState();
-  const checkoutRef = useRef(null);
-  const contentRef = useRef(null);
+  const [products, setProducts] = useState([]);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const heightCheckOut = checkoutRef.current.getBoundingClientRect().height;
-  //     const widthCheckOut = checkoutRef.current.getBoundingClientRect().width;
-  //     const scrollBottom =
-  //       document.documentElement.scrollHeight - window.innerHeight - document.documentElement.scrollTop;
+  const getProducts = async () => {
+    const result = await getProductsCart();
+    console.log(result);
+    setProducts(result);
+  };
 
-  //     if (scrollBottom > 342) {
-  //       contentRef.current.style.marginBottom = heightCheckOut + 'px';
-  //       checkoutRef.current.style.width = widthCheckOut + 'px';
-  //       checkoutRef.current.classList.add(cx('shrink'));
-  //     } else {
-  //       contentRef.current.style.marginBottom = 0;
-  //       checkoutRef.current.style.width = 100 + '%';
-  //       checkoutRef.current.classList.remove(cx('shrink'));
-  //     }
-  //   };
+  useEffect(() => {
+    getProducts();
+  }, []);
 
-  //   window.addEventListener('scroll', handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
+  const handleDeleteProduct = () => {
+    getProducts();
+  };
 
   return (
     <Helmet title="cart">
       <div className={cx('wrapper', 'main', 'container')}>
         <div className={cx('banner')}></div>
-        <div ref={contentRef} className={cx('content')}>
+        <div className={cx('content')}>
           <table className={cx('table')}>
             <thead>
               <tr className={cx('title')}>
@@ -59,16 +46,23 @@ function Cart() {
             </thead>
 
             <tbody>
-              <ProductCart data={fakeProducts[0]} />
-              <ProductCart data={fakeProducts[0]} />
-              <ProductCart data={fakeProducts[0]} />
-              <ProductCart data={fakeProducts[0]} />
-              <ProductCart data={fakeProducts[0]} />
-              <ProductCart data={fakeProducts[0]} />
+              {!products.length && <div>KHONG CO SAN PHAM</div>}
+              {!!products.length &&
+                products.map((e, index) => {
+                  return (
+                    <ProductCart
+                      key={index}
+                      id={e.productId}
+                      quantity={e.quantity}
+                      handleDelete={handleDeleteProduct}
+                      data={fakeProducts[0]}
+                    />
+                  );
+                })}
             </tbody>
           </table>
         </div>
-        <div ref={checkoutRef} className={cx('checkout')}>
+        <div className={cx('checkout')}>
           <div className={cx('coupon')}>
             <label>Have coupon ?</label>
             <div>
