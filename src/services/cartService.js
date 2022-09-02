@@ -15,7 +15,7 @@ export const addProductToCart = async (data) => {
   }
 };
 
-export const getProductsCart = async () => {
+export const getInfoCart = async () => {
   try {
     const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
     const res = await httpRequest.get(`/cart`, {
@@ -29,7 +29,7 @@ export const getProductsCart = async () => {
   }
 };
 
-export const deleteProduct = async (id) => {
+export const deleteProductToCart = async (id) => {
   try {
     const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
     const res = await httpRequest.delete(`/cart/product/${id}`, {
@@ -40,5 +40,19 @@ export const deleteProduct = async (id) => {
     return res;
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const changeQuantityToCart = async (data) => {
+  try {
+    const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
+    await httpRequest.post(`/cart`, data, {
+      headers: {
+        token: `Bear ${accessToken}`,
+      },
+    });
+    toast.success('So luong da duoc cap nhat');
+  } catch (err) {
+    toast.error('Vui long dang nhap');
   }
 };

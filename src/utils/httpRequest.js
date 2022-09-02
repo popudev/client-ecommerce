@@ -30,6 +30,8 @@ httpRequest.interceptors.request.use(async (config) => {
   const decodedToken = jwtDecode(accessToken);
   if (decodedToken.exp < date.getTime() / 1000) {
     const res = await refeshToken();
+    if (!res) return config;
+
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     localStorage.setItem(
       'currentUser',
@@ -38,7 +40,7 @@ httpRequest.interceptors.request.use(async (config) => {
         accessToken: res.accessToken,
       }),
     );
-    config.headers['token'] = `Bearer ${res.accessToken}`;
+    config.headers['token'] = `Bear ${res.accessToken}`;
   }
 
   return config;

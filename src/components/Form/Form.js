@@ -62,7 +62,9 @@ function Form(props) {
       }));
     }
 
-    if (!isOnlyOneError) onSubmit(values);
+    if (!isOnlyOneError) {
+      onSubmit(values);
+    }
   };
 
   return (

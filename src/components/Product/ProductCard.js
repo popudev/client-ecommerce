@@ -6,6 +6,7 @@ import { formatMoney } from '~/config';
 import styles from './ProductCard.module.scss';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { addProductToCart } from '~/services/cartService';
+import { product1 } from '~/assets/images';
 
 const cx = classNames.bind(styles);
 
@@ -36,7 +37,7 @@ function ProductCard({ data, isHome }) {
 
   const handleClick = () => {
     addProductToCart({
-      productId: data.id,
+      productId: data._id,
       quantity: quantity,
     });
   };
@@ -48,7 +49,7 @@ function ProductCard({ data, isHome }) {
           <LazyLoadImage
             alt={''}
             width={'100%'}
-            src={data.image} // use normal <img> attributes as props
+            src={product1} // use normal <img> attributes as props
             effect="blur"
           />
         </Link>

@@ -8,6 +8,7 @@ import Shop from '~/pages/Shop';
 import Cart from '~/pages/Cart';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
+import Admin from '~/pages/Admin';
 
 // Public routes
 const publicRoutes = [
@@ -31,6 +32,11 @@ const publicRoutes = [
   {
     path: config.routes.register,
     component: Register,
+    layout: null,
+  },
+  {
+    path: config.routes.admin,
+    component: Admin,
     layout: null,
   },
 ];

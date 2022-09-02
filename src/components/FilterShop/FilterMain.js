@@ -54,7 +54,7 @@ function Filter({ filterState, dispatch }) {
           {categories.map((item) => {
             return (
               <CheckBox
-                key={item.id}
+                key={item._id}
                 title={item.title}
                 onChange={(input) => {
                   handleFilter('category', input, item.id);

@@ -1,5 +1,5 @@
 export { default as logoImg } from './logo.svg';
-export { default as avatarDefault } from './user-2.jpg';
+export { default as avatarDefault } from './user.png';
 export { default as background } from './background.jpg';
 
 export { default as slide1 } from './slides/slide-1.png';

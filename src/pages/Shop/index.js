@@ -17,6 +17,7 @@ function Shop() {
   console.log('re-render shop');
   const [filterState, dispatch] = useFilterState();
   const [products, setProducts] = useState([]);
+  console.log('products: ', products);
 
   const { pagination, payload } = products;
 
@@ -76,7 +77,7 @@ function Shop() {
             <div className={cx('products')}>
               <ProductList col={4} mdCol={3} smCol={2} gap={20}>
                 {payload?.map((e) => {
-                  return <ProductCard key={e?.id} data={e} />;
+                  return <ProductCard key={e?._id} data={e} />;
                 })}
               </ProductList>
             </div>

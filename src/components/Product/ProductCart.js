@@ -6,7 +6,7 @@ import { formatMoney } from '~/config';
 import styles from './ProductCart.module.scss';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Button from '../Button';
-import { deleteProduct } from '~/services/cartService';
+import { deleteProductToCart, changeQuantityToCart } from '~/services/cartService';
 
 const cx = classNames.bind(styles);
 
@@ -16,14 +16,23 @@ function ProductCart({ quantity: quantityInit, id, data, handleDelete }) {
 
   const handlePlusQuantity = () => {
     setQuantity((prev) => prev + 1);
+    changeQuantityToCart({
+      productId: id,
+      quantity: 1,
+    });
   };
 
   const handleMinusQuantity = () => {
     if (quantity === 1) {
       //dispatch delete product in cart
+      handleClickDelete();
       return;
     }
     setQuantity((prev) => prev - 1);
+    changeQuantityToCart({
+      productId: id,
+      quantity: -1,
+    });
   };
 
   const handleChangeQuantity = (e) => {
@@ -40,7 +49,7 @@ function ProductCart({ quantity: quantityInit, id, data, handleDelete }) {
   };
 
   const handleClickDelete = async () => {
-    await deleteProduct(id);
+    await deleteProductToCart(id);
     handleDelete();
   };
 

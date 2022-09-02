@@ -7,25 +7,24 @@ import styles from './Cart.module.scss';
 import { fakeProducts } from '~/assets/data';
 import ProductCart from '~/components/Product/ProductCart';
 import Button from '~/components/Button';
-import { getProductsCart } from '~/services/cartService';
+import { getInfoCart } from '~/services/cartService';
 
 const cx = classNames.bind(styles);
 
 function Cart() {
-  const [products, setProducts] = useState([]);
+  const [items, setItems] = useState([]);
 
-  const getProducts = async () => {
-    const result = await getProductsCart();
-    console.log(result);
-    setProducts(result);
+  const getItems = async () => {
+    const result = await getInfoCart();
+    setItems(result);
   };
 
   useEffect(() => {
-    getProducts();
+    getItems();
   }, []);
 
   const handleDeleteProduct = () => {
-    getProducts();
+    getItems();
   };
 
   return (
@@ -46,14 +45,14 @@ function Cart() {
             </thead>
 
             <tbody>
-              {!products.length && <div>KHONG CO SAN PHAM</div>}
-              {!!products.length &&
-                products.map((e, index) => {
+              {!items.length && <div>KHONG CO SAN PHAM</div>}
+              {!!items.length &&
+                items.map((item) => {
                   return (
                     <ProductCart
-                      key={index}
-                      id={e.productId}
-                      quantity={e.quantity}
+                      key={item._id}
+                      id={item._id}
+                      quantity={item.quantity}
                       handleDelete={handleDeleteProduct}
                       data={fakeProducts[0]}
                     />
