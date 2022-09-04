@@ -1,5 +1,7 @@
 const toast = {};
 
+toast.timer = 0;
+
 toast.config = (setElements) => {
   toast.setElements = setElements;
 };
@@ -9,6 +11,7 @@ toast.success = (mess) => {
     return [
       ...prev,
       {
+        id: Math.random(),
         type: 'success',
         mess,
       },
@@ -20,7 +23,9 @@ toast.success = (mess) => {
       prev.shift();
       return [...prev];
     });
-  }, 1500);
+  }, 2000);
+
+  return true;
 };
 
 toast.error = (mess) => {
@@ -39,7 +44,8 @@ toast.error = (mess) => {
       prev.shift();
       return [...prev];
     });
-  }, 1500);
+  }, 2000);
+  return false;
 };
 
 export default toast;

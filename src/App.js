@@ -3,6 +3,7 @@ import { publicRoutes } from '~/routes';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DefaultLayout } from '~/layouts';
 import { ToastContainer } from './components/Toast';
+import Loading from './components/Loading';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         </Routes>
       </div>
       <ToastContainer />
+      <Loading />
     </Router>
   );
 }

@@ -5,7 +5,8 @@
   background-color: $fourth-color;
   padding: 20px;
   margin-bottom: 10px;
-  animation: slideInLeft 0.3s ease, faderOut linear 0.5s 1s forwards;
+  border: 1px solid #fff;
+  animation: slideInLeft 0.3s ease, slideOutLeft ease 0.4s 1s forwards;
 }
 
 @keyframes slideInLeft {
@@ -16,6 +17,13 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes slideOutLeft {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
   }
 }
 

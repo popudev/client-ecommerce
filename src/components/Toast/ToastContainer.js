@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from './core/toast';
 import styles from './ToastContainer.module.scss';
 import Toast from './Toast';
@@ -7,12 +7,15 @@ const cx = classNames.bind(styles);
 
 function ToastContainer() {
   const [elements, setElements] = useState([]);
-  toast.config(setElements);
+
+  useEffect(() => {
+    toast.config(setElements);
+  }, []);
 
   return (
     <div className={cx('wrapper')}>
       {elements.map((e) => {
-        return <Toast type={e.type} mess={e.mess} />;
+        return <Toast key={e.id} type={e.type} mess={e.mess} />;
       })}
     </div>
   );

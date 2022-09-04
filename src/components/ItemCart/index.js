@@ -1,38 +1,47 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { formatMoney } from '~/config';
-import styles from './ProductCart.module.scss';
+import styles from './ItemCart.module.scss';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Button from '../Button';
 import { deleteProductToCart, changeQuantityToCart } from '~/services/cartService';
+import { product1 } from '~/assets/images';
 
 const cx = classNames.bind(styles);
 
-function ProductCart({ quantity: quantityInit, id, data, handleDelete }) {
-  const [quantity, setQuantity] = useState(quantityInit);
-  const totalPrice = quantity * data.sale;
+function ItemCart({ data, handleDelete, handleChange }) {
+  const [quantity, setQuantity] = useState(data.quantity);
+  const totalPrice = quantity * data.product.sale;
 
-  const handlePlusQuantity = () => {
-    setQuantity((prev) => prev + 1);
-    changeQuantityToCart({
-      productId: id,
+  const handlePlusQuantity = async () => {
+    const isSuccess = await changeQuantityToCart({
+      productId: data.product._id,
       quantity: 1,
     });
+    if (isSuccess) {
+      setQuantity((prev) => prev + 1);
+      handleChange();
+    }
   };
 
-  const handleMinusQuantity = () => {
+  const handleMinusQuantity = async () => {
     if (quantity === 1) {
       //dispatch delete product in cart
       handleClickDelete();
       return;
     }
-    setQuantity((prev) => prev - 1);
-    changeQuantityToCart({
-      productId: id,
+
+    const isSuccess = await changeQuantityToCart({
+      productId: data.product._id,
       quantity: -1,
     });
+
+    if (isSuccess) {
+      setQuantity((prev) => prev - 1);
+      handleChange();
+    }
   };
 
   const handleChangeQuantity = (e) => {
@@ -49,8 +58,8 @@ function ProductCart({ quantity: quantityInit, id, data, handleDelete }) {
   };
 
   const handleClickDelete = async () => {
-    await deleteProductToCart(id);
-    handleDelete();
+    const isSuccess = await deleteProductToCart(data._id);
+    if (isSuccess) handleDelete();
   };
 
   return (
@@ -60,16 +69,16 @@ function ProductCart({ quantity: quantityInit, id, data, handleDelete }) {
           <LazyLoadImage
             alt={''}
             width={'100%'}
-            src={data.image} // use normal <img> attributes as props
+            src={product1} // use normal <img> attributes as props
             effect="blur"
           />
         </Link>
       </td>
 
-      <td className={cx('title')}>{data.title}</td>
+      <td className={cx('title')}>{data.product.title}</td>
       <td className={cx('info')}>
-        <span className={cx('price')}>{formatMoney(data.price)}</span>
-        <span className={cx('sale')}>{formatMoney(data.sale)}</span>
+        <span className={cx('price')}>{formatMoney(data.product.price)}</span>
+        <span className={cx('sale')}>{formatMoney(data.product.sale)}</span>
       </td>
 
       <td className={cx('control')}>
@@ -96,7 +105,7 @@ function ProductCart({ quantity: quantityInit, id, data, handleDelete }) {
           <Button outline onClick={handleClickDelete}>
             Delete
           </Button>
-          <Button to="/" text>
+          <Button to={`/product/${data.product._id}`} text>
             Details
           </Button>
         </div>
@@ -105,4 +114,4 @@ function ProductCart({ quantity: quantityInit, id, data, handleDelete }) {
   );
 }
 
-export default ProductCart;
+export default ItemCart;
