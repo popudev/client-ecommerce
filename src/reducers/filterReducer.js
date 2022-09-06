@@ -1,6 +1,6 @@
 export const initialState = {
   title: '',
-  categoryId: [],
+  listCategoryId: [],
   price: [0, 999],
   rams: [],
   roms: [],
@@ -28,14 +28,14 @@ export default function filterReducer(state, action) {
     case 'add_category':
       return {
         ...state,
-        categoryId: [...state.categoryId, action.payload],
+        listCategoryId: [...state.listCategoryId, action.payload],
         page: 1,
       };
 
     case 'delete_category':
       return {
         ...state,
-        categoryId: state.categoryId.filter((e) => e !== action.payload),
+        listCategoryId: state.listCategoryId.filter((e) => e !== action.payload),
         page: 1,
       };
 

@@ -4,13 +4,19 @@ import httpRequest from '~/utils/httpRequest';
 export const getProductList = async (filter, limit = 12) => {
   try {
     let params = {
-      titleLike: filter?.title,
-      categoryId: filter?.categoryId,
-      sale_gte: filter?.price ? filter?.price[0] : 0,
-      sale_lte: filter?.price ? filter?.price[1] : 999,
-      page: filter?.page,
+      title: filter?.title,
+      saleGte: filter?.price ? filter?.price[0] : 0,
+      saleLte: filter?.price ? filter?.price[1] : 999,
+      page: filter?.page || 1,
       limit: limit,
     };
+
+    if (filter?.listCategoryId?.length) {
+      params = {
+        ...params,
+        listCategoryId: filter.listCategoryId.join(','),
+      };
+    }
 
     const sort = filter?.sort?.filter((e) => e.order);
     if (sort?.length) {
@@ -30,7 +36,7 @@ export const getProductList = async (filter, limit = 12) => {
 
 export const addProduct = async (data) => {
   try {
-    const res = await httpRequest.post(`/product`, data);
+    await httpRequest.post(`/product`, data);
     toast.success('Them san pham thanh cong');
   } catch (err) {
     console.log(err);

@@ -33,6 +33,7 @@ toast.error = (mess) => {
     return [
       ...prev,
       {
+        id: Math.random(),
         type: 'error',
         mess,
       },

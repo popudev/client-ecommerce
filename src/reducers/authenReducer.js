@@ -1,6 +1,6 @@
 export const initialState = {
   login: {
-    currentUser: JSON.parse(localStorage.getItem('currentUser')) || null,
+    currentUser: null,
     isFetching: false,
     error: false,
   },

@@ -17,14 +17,15 @@ function Loading() {
   } else {
     document.documentElement.style.overflowY = 'overlay';
   }
+  return <></>;
 
-  return visible ? (
-    <div className={cx('wrapper')}>
-      <i className="fa-solid fa-spinner"></i>
-    </div>
-  ) : (
-    <></>
-  );
+  // return visible ? (
+  //   <div className={cx('wrapper')}>
+  //     <i className="fa-solid fa-spinner"></i>
+  //   </div>
+  // ) : (
+  //   <></>
+  // );
 }
 
 export default Loading;

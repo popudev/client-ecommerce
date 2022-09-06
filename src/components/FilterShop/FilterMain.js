@@ -14,7 +14,7 @@ const cx = classNames.bind(styles);
 function Filter({ filterState, dispatch }) {
   const [categories, setCategories] = useState([]);
 
-  const { categoryId, rams, roms, services, resetPrice } = filterState;
+  const { listCategoryId, rams, roms, services, resetPrice } = filterState;
 
   useEffect(() => {
     const fetchApiGetCategoryList = async () => {
@@ -57,9 +57,9 @@ function Filter({ filterState, dispatch }) {
                 key={item._id}
                 title={item.title}
                 onChange={(input) => {
-                  handleFilter('category', input, item.id);
+                  handleFilter('category', input, item._id);
                 }}
-                checked={categoryId.includes(item.id)}
+                checked={listCategoryId.includes(item._id)}
               />
             );
           })}

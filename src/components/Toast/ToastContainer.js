@@ -14,8 +14,8 @@ function ToastContainer() {
 
   return (
     <div className={cx('wrapper')}>
-      {elements.map((e) => {
-        return <Toast key={e.id} type={e.type} mess={e.mess} />;
+      {elements.map((e, i) => {
+        return <Toast key={e.id} delay={i + 1} type={e.type} mess={e.mess} />;
       })}
     </div>
   );

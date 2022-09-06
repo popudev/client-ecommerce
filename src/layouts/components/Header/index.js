@@ -5,12 +5,12 @@ import classNames from 'classnames/bind';
 
 import { logoImg } from '~/assets/images';
 import { avatarDefault } from '~/assets/images';
-import { useEffect, useRef } from 'react';
-import { useGlobalState } from '~/hooks';
+import { useEffect, useRef, useState } from 'react';
 
 import Search from '~/components/Search';
 import Tippy from '~/components/Tippy';
 import Popper from '~/components/Popper';
+import { getInfoUser } from '~/services/userService';
 
 const cx = classNames.bind(styles);
 const menuNav = [
@@ -61,8 +61,15 @@ const menuUser = [
 ];
 
 function Header() {
-  const { globalState } = useGlobalState();
-  const { currentUser } = globalState.login;
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const fetchGetInfoUser = async () => {
+      const user = await getInfoUser();
+      setCurrentUser(user);
+    };
+    fetchGetInfoUser();
+  }, []);
 
   const { pathname } = useLocation();
   const indexItemNavActive = menuNav.findIndex((e) => e.path === pathname);

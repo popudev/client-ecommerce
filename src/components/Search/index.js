@@ -37,7 +37,7 @@ function Search() {
     const fetchSearchProducts = async () => {
       setLoading(true);
       const result = await getProductList({ title: titleValue }, 6);
-      setSearchResult(result?.payload);
+      setSearchResult(result?.payload || []);
       setLoading(false);
     };
 

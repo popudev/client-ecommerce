@@ -6,7 +6,10 @@
   padding: 20px;
   margin-bottom: 10px;
   border: 1px solid #fff;
-  animation: slideInLeft 0.3s ease, slideOutLeft ease 0.4s 1s forwards;
+  animation-fill-mode: forwards;
+  animation-name: slideInLeft, faderOut;
+  animation-delay: 0s, 1s;
+  animation-duration: 0.5s;
 }
 
 @keyframes slideInLeft {
@@ -22,7 +25,6 @@
 
 @keyframes slideOutLeft {
   to {
-    opacity: 0;
     transform: translateX(100%);
   }
 }

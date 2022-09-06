@@ -12,11 +12,10 @@ function FilterSort({ filterState, dispatch }) {
   const nameSelect = useRef(null);
 
   useEffect(() => {
-    const isSort = sort.filter((e) => e.order);
-    if (!isSort.length) {
-      priceSelect.current.value = '';
-      nameSelect.current.value = '';
-    }
+    sort.forEach((e) => {
+      if (e.type === 'sale' && e.order === '') priceSelect.current.value = '';
+      else if (e.order === '') nameSelect.current.value = '';
+    });
   });
 
   const handleChangeSort = (e) => {
@@ -37,16 +36,12 @@ function FilterSort({ filterState, dispatch }) {
         <option value="desc">Oldest</option>
       </select>
       <select ref={priceSelect} name="sale" defaultValue={''} onChange={handleChangeSort}>
-        <option disabled value="">
-          Price
-        </option>
+        <option value="">Price</option>
         <option value="asc">Price: Low to Hight</option>
         <option value="desc">Price: Hight to Low</option>
       </select>
       <select ref={nameSelect} name="firtWord" defaultValue={''} onChange={handleChangeSort}>
-        <option disabled value="">
-          Name
-        </option>
+        <option value="">Name</option>
         <option value="asc">Name: A to Z</option>
         <option value="desc">Name: Z to A</option>
       </select>

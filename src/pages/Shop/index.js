@@ -17,7 +17,6 @@ function Shop() {
   console.log('re-render shop');
   const [filterState, dispatch] = useFilterState();
   const [products, setProducts] = useState([]);
-  console.log('products: ', products);
 
   const { pagination, payload } = products;
 
@@ -25,7 +24,6 @@ function Shop() {
   const prevPage = useRef(null);
 
   useEffect(() => {
-    console.log('api product');
     const fetchApiGetProductList = async () => {
       const products = await getProductList({ ...filterState });
       setProducts(products);
@@ -68,8 +66,8 @@ function Shop() {
             <div className={cx('filter__sort')}>
               <FilterSort filterState={filterState} dispatch={dispatch} />
               <PaginationMini
-                page={pagination?._page}
-                pageCount={pagination?._totalPages}
+                page={pagination?.page}
+                pageCount={pagination?.totalPage}
                 nextPage={nextPage.current}
                 prevPage={prevPage.current}
               />
@@ -82,8 +80,8 @@ function Shop() {
               </ProductList>
             </div>
             <Pagination
-              initialPage={pagination?._page}
-              pageCount={pagination?._totalPages}
+              initialPage={pagination?.page}
+              pageCount={pagination?.totalPage}
               onPageChange={handlePageChange}
               nextPage={nextPage}
               prevPage={prevPage}

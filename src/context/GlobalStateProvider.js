@@ -5,11 +5,6 @@ export const GlobalStateContext = createContext();
 
 export default function GlobalStateProvider({ children }) {
   const [globalState, dispatch] = useReducer(authenReducer, initialState);
-  const [toastMess, setToastMess] = useState('');
 
-  return (
-    <GlobalStateContext.Provider value={{ toastMess, setToastMess, globalState, dispatch }}>
-      {children}
-    </GlobalStateContext.Provider>
-  );
+  return <GlobalStateContext.Provider value={{ globalState, dispatch }}>{children}</GlobalStateContext.Provider>;
 }

@@ -1,22 +1,24 @@
 import httpRequest from '~/utils/httpRequest';
 import { toast } from '~/components/Toast/core';
 import { loading } from '~/components/Loading/core';
+import { getCurrentUser } from '~/utils/localStorage';
 
 export const addProductToCart = async (data) => {
   try {
     loading.run();
-    const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
+    const accessToken = getCurrentUser().accessToken || '';
     await httpRequest.post(`/cart`, data, {
       headers: {
-        token: `Bear ${accessToken}`,
+        token: `Bearer ${accessToken}`,
       },
     });
     loading.done();
     toast.success('Ban da them vao gio hang');
     return true;
   } catch (err) {
+    console.log('err: ', err);
     loading.done();
-    toast.error('Vui long dang nhap');
+    toast.error('Vui long dang nhap!!!');
     return false;
   }
 };
@@ -26,7 +28,7 @@ export const getInfoCart = async () => {
     const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
     const res = await httpRequest.get(`/cart`, {
       headers: {
-        token: `Bear ${accessToken}`,
+        token: `Bearer ${accessToken}`,
       },
     });
     return res;
@@ -41,7 +43,7 @@ export const deleteProductToCart = async (id) => {
     const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
     await httpRequest.delete(`/cart/product/${id}`, {
       headers: {
-        token: `Bear ${accessToken}`,
+        token: `Bearer ${accessToken}`,
       },
     });
     loading.done();
@@ -60,7 +62,7 @@ export const changeQuantityToCart = async (data) => {
     const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
     await httpRequest.post(`/cart`, data, {
       headers: {
-        token: `Bear ${accessToken}`,
+        token: `Bearer ${accessToken}`,
       },
     });
     loading.done();

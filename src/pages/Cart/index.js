@@ -17,7 +17,8 @@ function Cart() {
 
   const getItems = async () => {
     const result = await getInfoCart();
-    setItems(result);
+    if (result) setItems(result);
+    else setItems([]);
 
     const total = result.reduce((prev, curr) => {
       return prev + curr.product.sale * curr.quantity;
