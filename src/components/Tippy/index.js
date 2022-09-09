@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDebounce } from '~/hooks';
 import styles from './Tippy.module.scss';
 const cx = classNames.bind(styles);
@@ -38,6 +38,12 @@ function Tippy(props) {
   const handleMouseOut = () => {
     if (!interactive) setHover(false);
   };
+
+  useEffect(() => {
+    return () => {
+      document.documentElement.style.overflowY = 'overlay';
+    };
+  });
 
   return (
     <div className={cx('wrapper')} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>

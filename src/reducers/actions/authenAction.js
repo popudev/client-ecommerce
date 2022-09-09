@@ -1,9 +1,3 @@
-export function registerStart() {
-  return {
-    type: 'registerStart',
-  };
-}
-
 export function registerSuccess(payload) {
   return {
     type: 'registerSuccess',
@@ -18,12 +12,6 @@ export function registerFailed(payload) {
   };
 }
 
-export function loginStart() {
-  return {
-    type: 'loginStart',
-  };
-}
-
 export function loginSuccess(payload) {
   return {
     type: 'loginSuccess',
@@ -34,6 +22,20 @@ export function loginSuccess(payload) {
 export function loginFailed(payload) {
   return {
     type: 'loginFailed',
+    payload: payload,
+  };
+}
+
+export function logoutSuccess(payload) {
+  return {
+    type: 'logoutSuccess',
+    payload,
+  };
+}
+
+export function logoutFailed(payload) {
+  return {
+    type: 'logoutFailed',
     payload: payload,
   };
 }

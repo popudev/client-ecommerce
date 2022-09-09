@@ -25,7 +25,7 @@ function Login() {
   }
 
   const initialValues = {
-    username: '',
+    username: globalState.register?.username || '',
     password: '',
   };
 

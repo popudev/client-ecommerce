@@ -3,6 +3,7 @@ import styles from './ProductItemSearch.module.scss';
 import { product1 } from '~/assets/images';
 import { useNavigate } from 'react-router-dom';
 import { formatMoney } from '~/config';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -13,11 +14,11 @@ function ProductItemSearch({ info }) {
     <div
       className={cx('wrapper')}
       onClick={() => {
-        naviagator('/shop');
+        naviagator(`${config.routes.detail}/${info._id}`);
       }}
     >
       <div className={cx('image')}>
-        <img src={info.image} alt="" />
+        <img src={product1} alt="" />
       </div>
       <div className={cx('content')}>
         <div className={cx('title')}>{info.title}</div>

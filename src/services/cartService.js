@@ -6,7 +6,7 @@ import { getCurrentUser } from '~/utils/localStorage';
 export const addProductToCart = async (data) => {
   try {
     loading.run();
-    const accessToken = getCurrentUser().accessToken || '';
+    const accessToken = getCurrentUser()?.accessToken || '';
     await httpRequest.post(`/cart`, data, {
       headers: {
         token: `Bearer ${accessToken}`,
@@ -25,14 +25,17 @@ export const addProductToCart = async (data) => {
 
 export const getInfoCart = async () => {
   try {
+    loading.run();
     const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
     const res = await httpRequest.get(`/cart`, {
       headers: {
         token: `Bearer ${accessToken}`,
       },
     });
+    loading.done();
     return res;
   } catch (err) {
+    loading.done();
     console.log(err);
   }
 };

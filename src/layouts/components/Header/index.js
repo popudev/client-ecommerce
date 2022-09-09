@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
@@ -11,6 +11,8 @@ import Search from '~/components/Search';
 import Tippy from '~/components/Tippy';
 import Popper from '~/components/Popper';
 import { getInfoUser } from '~/services/userService';
+import { useGlobalState } from '~/hooks';
+import { logoutUser } from '~/services/authenService';
 
 const cx = classNames.bind(styles);
 const menuNav = [
@@ -55,13 +57,22 @@ const menuUser = [
   {
     title: 'Logout',
     icon: <i className="fa-solid fa-arrow-right-from-bracket"></i>,
-    path: '/cart',
+    path: '',
     separate: true,
+    onClick: (dispatch, navigator) => {
+      logoutUser(dispatch, navigator);
+    },
   },
 ];
 
 function Header() {
   const [currentUser, setCurrentUser] = useState(null);
+  const { globalState, dispatch } = useGlobalState();
+  const navigator = useNavigate();
+  const { pathname } = useLocation();
+  const indexItemNavActive = menuNav.findIndex((e) => e.path === pathname);
+  const headerRef = useRef(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const fetchGetInfoUser = async () => {
@@ -69,12 +80,7 @@ function Header() {
       setCurrentUser(user);
     };
     fetchGetInfoUser();
-  }, []);
-
-  const { pathname } = useLocation();
-  const indexItemNavActive = menuNav.findIndex((e) => e.path === pathname);
-
-  const headerRef = useRef(null);
+  }, [globalState.login.currentUser]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,9 +98,7 @@ function Header() {
     };
   }, []);
 
-  const menuRef = useRef(null);
   const menuToggle = () => {
-    document.documentElement.scrollTop = 0;
     menuRef.current.classList.toggle(cx('active'));
   };
 
@@ -129,7 +133,13 @@ function Header() {
                       <Popper width={200}>
                         {menuUser.map((e) => {
                           return (
-                            <Link to={e.path} key={e.path}>
+                            <Link
+                              to={e.path}
+                              key={e.path}
+                              onClick={() => {
+                                e.onClick(dispatch, navigator);
+                              }}
+                            >
                               <div className={cx('menu_user-item', { separate: e.separate })}>
                                 <div className={cx('menu_user-icon')}>{e.icon}</div>
                                 <span className={cx('menu_user-title')}>{e.title}</span>

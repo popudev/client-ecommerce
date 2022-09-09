@@ -1,3 +1,4 @@
+import { loading } from '~/components/Loading/core';
 import { toast } from '~/components/Toast/core';
 import httpRequest from '~/utils/httpRequest';
 
@@ -27,9 +28,12 @@ export const getProductList = async (filter, limit = 12) => {
       };
     }
 
+    loading.run();
     const res = await httpRequest.get(`/product`, { params });
+    loading.done();
     return res;
   } catch (err) {
+    loading.done();
     console.log(err);
   }
 };
@@ -41,5 +45,14 @@ export const addProduct = async (data) => {
   } catch (err) {
     console.log(err);
     toast.error('Co loi');
+  }
+};
+
+export const getProductById = async (productId) => {
+  try {
+    const res = await httpRequest.get(`/product/${productId}`);
+    return res;
+  } catch (err) {
+    console.log(err);
   }
 };

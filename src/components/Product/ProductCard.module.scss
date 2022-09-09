@@ -6,16 +6,6 @@
 
   border: $third-color 1px solid;
   background-color: $main-color;
-
-  button {
-    color: $third-color;
-    background-color: $second-color;
-    transition: all 0.1s ease;
-  }
-
-  button:hover {
-    opacity: 0.8;
-  }
 }
 
 .image {
@@ -31,7 +21,7 @@
     object-fit: cover;
   }
 
-  &:hover .control-under-image {
+  &:hover .control.under-image {
     bottom: 0;
   }
 }
@@ -70,40 +60,30 @@
   width: 100%;
   transition: all 0.2s ease;
 
-  &.active {
-    @include flex(center, center);
+  button {
+    font-size: inherit;
+    color: $third-color;
+    background-color: $second-color;
+    transition: all 0.1s ease;
+  }
+
+  button:hover {
+    opacity: 0.9;
   }
 }
 
-.control-under-image {
+.control.active {
+  @include flex(center, center);
+}
+
+.control.under-image {
+  @include flex(center, center);
   position: absolute;
   bottom: -100%;
   left: 0;
   opacity: 0.8;
   &:hover {
     opacity: 1;
-  }
-}
-
-.control-quatity {
-  width: 50%;
-  height: 100%;
-
-  input {
-    font-size: 16px;
-    font-weight: 600;
-    height: 100%;
-    width: 50%;
-    text-align: center;
-    background-color: $second-color;
-    color: $third-color;
-  }
-
-  button {
-    font-size: 16px;
-    text-align: center;
-    height: 100%;
-    width: 25%;
   }
 }
 

@@ -4,10 +4,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DefaultLayout } from '~/layouts';
 import { ToastContainer } from './components/Toast';
 import Loading from './components/Loading';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
+      <ToastContainer />
+      <Loading />
       <div className="App">
         <Routes>
           {publicRoutes.map((route, index) => {
@@ -34,8 +38,6 @@ function App() {
           })}
         </Routes>
       </div>
-      <ToastContainer />
-      <Loading />
     </Router>
   );
 }

@@ -13,9 +13,9 @@ const cx = classNames.bind(styles);
 function Home() {
   return (
     <Helmet title={'Home'}>
-      <div className={cx('wrapper', 'main')}>
+      <div className={cx('wrapper', 'main', 'container')}>
         {/* slider */}
-        <Slider data={fakeSlider} />
+        <Slider data={fakeSlider} shadow isLink="/shop" />
         {/* end slider */}
 
         <Section wrapperClassName={cx('section-big-sale')}>

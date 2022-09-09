@@ -16,6 +16,8 @@ function Button({
   small = false,
   large = false,
   full = false,
+  w50 = false,
+  hfull = false,
   children,
   className,
   leftIcon,
@@ -56,6 +58,8 @@ function Button({
     small,
     large,
     full,
+    w50,
+    hfull,
   });
 
   return (

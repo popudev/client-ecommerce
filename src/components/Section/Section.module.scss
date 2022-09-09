@@ -1,7 +1,7 @@
 @import '/src/sass';
 
 .wrapper {
-  background-color: $second-color;
+  background-color: transparent;
   color: #fff;
 
   @include mobile {

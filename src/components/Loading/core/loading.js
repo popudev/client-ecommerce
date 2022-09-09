@@ -4,12 +4,12 @@ const loading = {
   },
 
   run() {
-    console.log('run');
+    // console.log('run');
     loading.setVisible(true);
   },
 
   done() {
-    console.log('done');
+    // console.log('done');
     loading.setVisible(false);
   },
 };

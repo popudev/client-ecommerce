@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 import { getCurrentUser, setCurrentUser } from './localStorage';
 
 const httpRequest = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     'content-type': 'application/json',
   },

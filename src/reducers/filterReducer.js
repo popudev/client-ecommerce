@@ -127,6 +127,7 @@ export default function filterReducer(state, action) {
           }
           return sortItem;
         }),
+        page: 1,
       };
 
     default:

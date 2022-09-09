@@ -4,7 +4,11 @@
   height: calc(100vh - $header-height);
   overflow: hidden;
   position: relative;
-  box-shadow: $main-color 0 0 80px 120px;
+  background-color: $main-color;
+
+  &.shadow {
+    box-shadow: $main-color 0 0 80px 120px;
+  }
 
   @include tablet {
     height: calc(50vh - $header-tablet-height);

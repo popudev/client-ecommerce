@@ -7,7 +7,6 @@ const cx = classNames.bind(styles);
 function FilterSort({ filterState, dispatch }) {
   const { sort } = filterState;
 
-  const updateAtSelect = useRef(null);
   const priceSelect = useRef(null);
   const nameSelect = useRef(null);
 
@@ -31,7 +30,7 @@ function FilterSort({ filterState, dispatch }) {
   return (
     <div className={cx('sort-content')}>
       <span>Sort by:</span>
-      <select ref={updateAtSelect} name="updateAt" onChange={handleChangeSort}>
+      <select name="updateAt" onChange={handleChangeSort}>
         <option value="asc">Latest</option>
         <option value="desc">Oldest</option>
       </select>

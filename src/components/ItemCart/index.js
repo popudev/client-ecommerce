@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { formatMoney } from '~/config';
+import config, { formatMoney } from '~/config';
 import styles from './ItemCart.module.scss';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Button from '../Button';
@@ -65,7 +65,7 @@ function ItemCart({ data, handleDelete, handleChange }) {
   return (
     <tr className={cx('wrapper')}>
       <td className={cx('image')}>
-        <Link to="/products/">
+        <Link to={`${config.routes.detail}/${data._id}`}>
           <LazyLoadImage
             alt={''}
             width={'100%'}

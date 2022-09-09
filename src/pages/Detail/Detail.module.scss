@@ -1,0 +1,56 @@
+@import '/src/sass';
+
+.wrapper {
+  @include flex(center, space-between);
+  flex-direction: column;
+}
+
+.product_info {
+  @include flex(flex-start, flex-start);
+}
+
+.title {
+  letter-spacing: 5px;
+}
+
+.info {
+  margin-left: 40px;
+}
+
+.description {
+  width: 400px;
+  padding: 20px 0;
+}
+
+.quantity {
+  @include flex(center, center);
+  margin: 20px 0 40px 0;
+  height: 40px;
+  width: 250px;
+  span {
+    margin-right: 20px;
+  }
+}
+
+.prices {
+  color: #fff;
+}
+
+.price {
+  color: #999;
+  font-size: 20px;
+  text-decoration: line-through;
+  font-weight: 300;
+  margin-right: 10px;
+}
+
+.sale {
+  letter-spacing: 2px;
+
+  font-size: 30px;
+  margin: 0 20px;
+}
+
+.section_product_recommemt {
+  padding: 100px 0;
+}

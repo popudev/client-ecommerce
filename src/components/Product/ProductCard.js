@@ -5,34 +5,20 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { formatMoney } from '~/config';
 import styles from './ProductCard.module.scss';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { addProductToCart } from '~/services/cartService';
+
 import { product1 } from '~/assets/images';
+import config from '~/config';
+import ControlQuantity from '../ControlQuantity';
+import Button from '../Button';
+import { addProductToCart } from '~/services/cartService';
 
 const cx = classNames.bind(styles);
 
-function ProductCard({ data, isHome }) {
+function ProductCard({ data }) {
   const [quantity, setQuantity] = useState(1);
 
-  const handlePlusQuantity = () => {
-    setQuantity((prev) => prev + 1);
-  };
-
-  const handleMinusQuantity = () => {
-    if (quantity === 1) return;
-    setQuantity((prev) => prev - 1);
-  };
-
-  const handleChangeQuantity = (e) => {
-    const number = Number.parseInt(e.target.value);
-    if (!number) setQuantity('');
-    else {
-      setQuantity(number);
-    }
-  };
-
-  const handleBlurQuantity = (e) => {
-    const number = Number.parseInt(e.target.value);
-    if (!number) setQuantity(1);
+  const handleChangeQuantity = (quantity) => {
+    setQuantity(quantity);
   };
 
   const handleClick = () => {
@@ -45,7 +31,7 @@ function ProductCard({ data, isHome }) {
   return (
     <div className={cx('wrapper')}>
       <div className={cx('image')}>
-        <Link to="/products/">
+        <Link to={`${config.routes.detail}/${data._id}`}>
           <LazyLoadImage
             alt={''}
             width={'100%'}
@@ -54,26 +40,11 @@ function ProductCard({ data, isHome }) {
           />
         </Link>
 
-        <div className={cx('control', 'control-under-image', { active: !isHome })}>
-          <div className={cx('control-quatity')}>
-            <button className={cx('minus-quantity')} onClick={handleMinusQuantity}>
-              <i className="fa-solid fa-minus"></i>
-            </button>
-            <input
-              type="text"
-              value={quantity}
-              onChange={handleChangeQuantity}
-              onBlur={handleBlurQuantity}
-              className={cx('inp-quantity')}
-            ></input>
-            <button className={cx('plus-quantity')} onClick={handlePlusQuantity}>
-              <i className="fa-solid fa-plus"></i>
-            </button>
-          </div>
-
-          <button className={cx('btn-add-to-cart')} onClick={handleClick}>
+        <div className={cx('control', 'under-image')}>
+          <ControlQuantity w50 onChange={handleChangeQuantity} />
+          <Button w50 hfull onClick={handleClick}>
             <i className="fa-solid fa-cart-plus"></i>
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -85,27 +56,12 @@ function ProductCard({ data, isHome }) {
         </div>
       </div>
 
-      <div className={cx('control', { active: isHome })}>
-        <div className={cx('control-quatity')}>
-          <button className={cx('minus-quantity')} onClick={handleMinusQuantity}>
-            <i className="fa-solid fa-minus"></i>
-          </button>
-          <input
-            type="text"
-            value={quantity}
-            onChange={handleChangeQuantity}
-            onBlur={handleBlurQuantity}
-            className={cx('inp-quantity')}
-          ></input>
-          <button className={cx('plus-quantity')} onClick={handlePlusQuantity}>
-            <i className="fa-solid fa-plus"></i>
-          </button>
-        </div>
-
-        <button className={cx('btn-add-to-cart')} onClick={handleClick}>
+      {/* <div className={cx('control')}>
+        <ControlQuantity />
+        <Button w50 hfull>
           <i className="fa-solid fa-cart-plus"></i>
-        </button>
-      </div>
+        </Button>
+      </div> */}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import classNames from 'classnames/bind';
@@ -6,7 +6,9 @@ import styles from './Slider.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Slider({ data, auto, timeOut }) {
+function Slider(props) {
+  const { data, auto, timeOut, shadow, isLink } = props;
+
   const [activeSlide, setActiveSlide] = useState(0);
 
   const nextSlide = useCallback(() => {
@@ -31,8 +33,28 @@ function Slider({ data, auto, timeOut }) {
     }
   }, [nextSlide, timeOut, auto]);
 
+  const renderImage = () => {
+    return data.map((e, i) => {
+      return isLink ? (
+        <div key={i} className={cx('item', { active: i === activeSlide })}>
+          <Link to={isLink}>
+            <div className={cx('item-image')}>
+              <img src={e.image} alt="slide" />
+            </div>
+          </Link>
+        </div>
+      ) : (
+        <div key={i} className={cx('item', { active: i === activeSlide })}>
+          <div className={cx('item-image')}>
+            <img src={e.image} alt="slide" />
+          </div>
+        </div>
+      );
+    });
+  };
+
   return (
-    <div className={cx('wrapper', 'container')}>
+    <div className={cx('wrapper', { shadow })}>
       <div className={cx('indicators')}>
         {data.map((e, i) => {
           return (
@@ -47,19 +69,8 @@ function Slider({ data, auto, timeOut }) {
         })}
       </div>
 
-      <div className={cx('items')}>
-        {data.map((e, i) => {
-          return (
-            <div key={i} className={cx('item', { active: i === activeSlide })}>
-              <Link to="/shop">
-                <div className={cx('item-image')}>
-                  <img src={e.image} alt="slide" />
-                </div>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+      <div className={cx('items')}>{renderImage()}</div>
+
       <button className={cx('control-prev')} onClick={prevSlide}>
         <i className="fa-solid fa-angle-left"></i>
       </button>

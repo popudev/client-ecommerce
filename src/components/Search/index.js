@@ -67,7 +67,7 @@ function Search() {
         return (
           <Propper>
             {searchResult.map((e) => (
-              <ProductItemSearch key={e?.id} info={e} />
+              <ProductItemSearch key={e?._id} info={e} />
             ))}
 
             <Button text full onClick={handleSearchClick}>
