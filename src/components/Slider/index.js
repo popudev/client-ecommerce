@@ -7,7 +7,7 @@ import styles from './Slider.module.scss';
 const cx = classNames.bind(styles);
 
 function Slider(props) {
-  const { data, auto, timeOut, shadow, isLink } = props;
+  const { data, auto, timeOut, shadow, isLink, mainColor } = props;
 
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -54,7 +54,7 @@ function Slider(props) {
   };
 
   return (
-    <div className={cx('wrapper', { shadow })}>
+    <div className={cx('wrapper', { shadow, mainColor })}>
       <div className={cx('indicators')}>
         {data.map((e, i) => {
           return (

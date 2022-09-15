@@ -30,7 +30,9 @@ export const getProductList = async (filter, limit = 12) => {
 
     loading.run();
     const res = await httpRequest.get(`/product`, { params });
+
     loading.done();
+
     return res;
   } catch (err) {
     loading.done();

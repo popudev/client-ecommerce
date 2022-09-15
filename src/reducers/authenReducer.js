@@ -1,14 +1,16 @@
-import { setCurrentUser } from '~/utils/localStorage';
+import { setAccessToken } from '~/utils/localStorage';
 
 export const initialState = {
   login: {
     currentUser: null,
     error: false,
   },
+
   register: {
     username: null,
     error: false,
   },
+
   logout: {
     error: false,
   },
@@ -17,7 +19,7 @@ export const initialState = {
 const authenReducer = (state, action) => {
   switch (action.type) {
     case 'loginSuccess':
-      setCurrentUser(action.payload);
+      setAccessToken(action.payload?.accessToken);
       return {
         ...state,
         login: {
@@ -56,7 +58,7 @@ const authenReducer = (state, action) => {
       };
 
     case 'logoutSuccess':
-      setCurrentUser(null);
+      setAccessToken('');
       return {
         ...state,
         login: {

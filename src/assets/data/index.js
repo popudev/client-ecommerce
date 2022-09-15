@@ -58,6 +58,11 @@ export const fakeCategoryCard = [
     image: slide2,
     path: '/shop',
   },
+  {
+    title: 'Phone Sale 50%',
+    image: slide2,
+    path: '/shop',
+  },
 ];
 
 export const fakeProducts = [

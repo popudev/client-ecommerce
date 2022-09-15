@@ -111,3 +111,17 @@
     width: 10px;
   }
 }
+
+.wrapper.mainColor .control-prev,
+.wrapper.mainColor .control-next {
+  color: $main-color;
+}
+
+.wrapper.mainColor .indicator {
+  background-color: #999;
+}
+
+.wrapper.mainColor .indicator.active {
+  opacity: 1;
+  background-color: $main-color;
+}

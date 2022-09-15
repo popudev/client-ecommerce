@@ -1,12 +1,12 @@
 import httpRequest from '~/utils/httpRequest';
 import { toast } from '~/components/Toast/core';
 import { loading } from '~/components/Loading/core';
-import { getCurrentUser } from '~/utils/localStorage';
+import { getAccessToken } from '~/utils/localStorage';
 
 export const addProductToCart = async (data) => {
   try {
     loading.run();
-    const accessToken = getCurrentUser()?.accessToken || '';
+    const accessToken = getAccessToken();
     await httpRequest.post(`/cart`, data, {
       headers: {
         token: `Bearer ${accessToken}`,
@@ -26,7 +26,7 @@ export const addProductToCart = async (data) => {
 export const getInfoCart = async () => {
   try {
     loading.run();
-    const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
+    const accessToken = getAccessToken();
     const res = await httpRequest.get(`/cart`, {
       headers: {
         token: `Bearer ${accessToken}`,

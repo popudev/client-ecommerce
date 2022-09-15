@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getProductById } from '~/services/productService';
 
 import classNames from 'classnames/bind';
@@ -36,10 +36,28 @@ function Detail() {
 
   return (
     <div className={cx('wrapper', 'main', 'container')}>
+      <div className={cx('header')}>
+        <Button text to="/">
+          Popu Shop
+        </Button>
+        <span>{'>'}</span>
+        <Button text to="/shop">
+          Shop
+        </Button>
+        <span>{'>'}</span>
+        <Button text to="/">
+          {info?.categoryTitle || 'Iphone'}
+        </Button>
+        <span>{'>'}</span>
+        <Button text to="/">
+          {info?.title}
+        </Button>
+      </div>
+
       <div className={cx('product_info')}>
         <div className={cx('images')}>
           <div className={cx('slide_images')}>
-            <Slider data={[{ image: product1 }, { image: product1 }, { image: product1 }]} />
+            <Slider data={[{ image: product1 }, { image: product1 }, { image: product1 }]} mainColor />
           </div>
           <div className={cx('images_other')}></div>
         </div>
@@ -55,10 +73,12 @@ function Detail() {
             <ControlQuantity outline onChange={handleOnchange} />
           </div>
           <div className={cx('actions')}>
-            <Button outline leftIcon={<i className="fa-solid fa-cart-plus"></i>}>
+            <Button outline large leftIcon={<i className="fa-solid fa-cart-plus"></i>}>
               ADD TO CART
             </Button>
-            <Button primary>BUY NOW</Button>
+            <Button primary large>
+              BUY NOW
+            </Button>
           </div>
         </div>
       </div>

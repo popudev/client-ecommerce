@@ -48,9 +48,16 @@
   }
 
   .price {
+    color: #fff;
+
     text-decoration: line-through;
     font-weight: 500;
     margin-right: 10px;
+  }
+
+  .sale {
+    font-weight: 500;
+    color: #fff;
   }
 }
 

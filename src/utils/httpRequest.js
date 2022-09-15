@@ -1,7 +1,7 @@
 import axios from 'axios';
 import queryString from 'query-string';
 import jwtDecode from 'jwt-decode';
-import { getCurrentUser, setCurrentUser } from './localStorage';
+import { getAccessToken, setAccessToken } from './localStorage';
 
 const httpRequest = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -24,11 +24,7 @@ httpRequest.interceptors.request.use(async (config) => {
     const res = await httpRequest.get('/auth/refreshToken', { withCredentials: true });
     if (!res) return config;
 
-    const currentUser = getCurrentUser();
-    setCurrentUser({
-      ...currentUser,
-      accessToken: res.accessToken,
-    });
+    setAccessToken(res.accessToken);
 
     config.headers['token'] = `Bearer ${res.accessToken}`;
   }

@@ -8,8 +8,9 @@ import Shop from '~/pages/Shop';
 import Cart from '~/pages/Cart';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
-import Admin from '~/pages/Admin';
 import Detail from '~/pages/Detail';
+
+import Admin from '~/pages/AdminProduct';
 
 // Public routes
 const publicRoutes = [
@@ -36,16 +37,17 @@ const publicRoutes = [
     layout: null,
   },
   {
-    path: config.routes.admin,
-    component: Admin,
-    layout: null,
-  },
-  {
     path: config.routes.detail + '/:productId',
     component: Detail,
   },
 ];
 
-const privateRoutes = [];
+const privateRoutes = [
+  {
+    path: config.routes.admin,
+    component: Admin,
+    layout: null,
+  },
+];
 
 export { publicRoutes, privateRoutes };

@@ -5,12 +5,12 @@ import classNames from 'classnames/bind';
 
 import { logoImg } from '~/assets/images';
 import { avatarDefault } from '~/assets/images';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import Search from '~/components/Search';
 import Tippy from '~/components/Tippy';
 import Popper from '~/components/Popper';
-import { getInfoUser } from '~/services/userService';
+
 import { useGlobalState } from '~/hooks';
 import { logoutUser } from '~/services/authenService';
 
@@ -40,6 +40,10 @@ const menuNav = [
 
 const menuUser = [
   {
+    title: 'Hello',
+    path: '/user',
+  },
+  {
     title: 'Admin',
     icon: <i className="fa-solid fa-screwdriver-wrench"></i>,
     path: '/admin',
@@ -66,21 +70,14 @@ const menuUser = [
 ];
 
 function Header() {
-  const [currentUser, setCurrentUser] = useState(null);
   const { globalState, dispatch } = useGlobalState();
+  const currentUser = globalState.login.currentUser;
+
   const navigator = useNavigate();
   const { pathname } = useLocation();
   const indexItemNavActive = menuNav.findIndex((e) => e.path === pathname);
   const headerRef = useRef(null);
   const menuRef = useRef(null);
-
-  useEffect(() => {
-    const fetchGetInfoUser = async () => {
-      const user = await getInfoUser();
-      setCurrentUser(user);
-    };
-    fetchGetInfoUser();
-  }, [globalState.login.currentUser]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -131,7 +128,8 @@ function Header() {
                     placement="bottom-end"
                     render={() => (
                       <Popper width={200}>
-                        {menuUser.map((e) => {
+                        {menuUser.map((e, index) => {
+                          if (index === 0) e.title = currentUser?.fullname;
                           return (
                             <Link
                               to={e.path}

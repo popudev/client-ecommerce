@@ -54,3 +54,13 @@
 .section_product_recommemt {
   padding: 100px 0;
 }
+
+.header {
+  @include flex(center, flex-start);
+  padding: 0 30px;
+  height: 80px;
+  background-color: $fourth-color;
+  margin-bottom: 20px;
+  opacity: 0.8;
+  width: 100%;
+}

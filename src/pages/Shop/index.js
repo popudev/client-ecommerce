@@ -25,9 +25,11 @@ function Shop() {
 
   useEffect(() => {
     const fetchApiGetProductList = async () => {
-      const products = await getProductList({ ...filterState });
+      const products = await getProductList(filterState);
+
       setProducts(products);
     };
+
     fetchApiGetProductList();
   }, [filterState]);
 

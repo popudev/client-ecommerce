@@ -21,7 +21,7 @@ function Home() {
         <Section wrapperClassName={cx('section-big-sale')}>
           <SectionTitle>Big Sale Collection</SectionTitle>
           <SectionBody>
-            <Grid col={3} mdCol={1} smCol={1} gap={20}>
+            <Grid col={2} mdCol={1} smCol={1} gap={10}>
               {fakeCategoryCard.map((e, i) => {
                 return <CategoryCard key={i} data={e} />;
               })}
