@@ -20,6 +20,7 @@ httpRequest.interceptors.request.use(async (config) => {
   // Handle token here ...
   const date = new Date();
   const decodedToken = jwtDecode(accessToken);
+
   if (decodedToken.exp < date.getTime() / 1000) {
     const res = await httpRequest.get('/auth/refreshToken', { withCredentials: true });
     if (!res) return config;
