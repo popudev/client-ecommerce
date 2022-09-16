@@ -1,6 +1,5 @@
 import axios from 'axios';
 import queryString from 'query-string';
-import jwtDecode from 'jwt-decode';
 import { setAccessToken } from './localStorage';
 
 const httpRequest = axios.create({
@@ -78,7 +77,7 @@ httpRequest.interceptors.response.use(
 
       return new Promise(function (resolve, reject) {
         axios
-          .get('http://localhost:8000/auth/refreshToken', { withCredentials: true })
+          .get(process.env.REACT_APP_API_URL + '/auth/refreshToken', { withCredentials: true })
           .then(({ data }) => {
             setAccessToken(data.accessToken);
             originalRequest.headers['token'] = 'Bearer ' + data.accessToken;

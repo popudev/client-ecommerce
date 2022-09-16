@@ -12,9 +12,6 @@ import { useGlobalState } from '~/hooks';
 const cx = classNames.bind(styles);
 
 function Home() {
-  const { globalState } = useGlobalState();
-  console.log(globalState);
-
   return (
     <Helmet title={'Home'}>
       <div className={cx('wrapper', 'main', 'container')}>
