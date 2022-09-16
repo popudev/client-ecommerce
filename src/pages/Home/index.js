@@ -7,10 +7,14 @@ import Grid from '~/components/Gird';
 import CategoryCard from '~/components/CategoryCard';
 import { ProductList, ProductCard } from '~/components/Product';
 import { fakeCategoryCard, fakeProducts, fakeSlider } from '~/assets/data';
+import { useGlobalState } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
 function Home() {
+  const { globalState } = useGlobalState();
+  console.log(globalState);
+
   return (
     <Helmet title={'Home'}>
       <div className={cx('wrapper', 'main', 'container')}>

@@ -135,7 +135,7 @@ function Header() {
                               to={e.path}
                               key={e.path}
                               onClick={() => {
-                                e.onClick(dispatch, navigator);
+                                if (typeof e.onClick === 'function') e.onClick(dispatch, navigator);
                               }}
                             >
                               <div className={cx('menu_user-item', { separate: e.separate })}>

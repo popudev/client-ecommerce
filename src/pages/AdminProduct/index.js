@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 function AdminProduct() {
   return (
     <Helmet title="Admin">
-      <div className={cx('wrapper')}></div>
+      <div className={cx('wrapper')}>Admin</div>
     </Helmet>
   );
 }

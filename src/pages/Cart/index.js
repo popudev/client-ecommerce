@@ -17,6 +17,7 @@ function Cart() {
 
   const getItems = async () => {
     const result = await getInfoCart();
+    console.log(result);
     if (!result) return setItems([]);
 
     setItems(result);

@@ -1,18 +1,12 @@
-import { useState, useEffect } from 'react';
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
-import { getAccessToken } from '~/utils/localStorage';
+import { useGlobalState } from '~/hooks';
 
-const RequireAuth = ({ allowedRoles }) => {
+const RequireAuth = () => {
+  const { globalState } = useGlobalState();
   const location = useLocation();
-  const user = {};
+  const user = globalState.login.currentUser;
 
-  return user?.admin ? (
-    <Outlet />
-  ) : user ? (
-    <Navigate to="/unauthorized" state={{ from: location }} replace />
-  ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
-  );
+  return user?.admin ? <Outlet /> : <Navigate to="/notfound" state={{ from: location }} replace />;
 };
 
 export default RequireAuth;

@@ -6,6 +6,7 @@ import { ToastContainer } from './components/Toast';
 import Loading from './components/Loading';
 import ScrollToTop from './components/ScrollToTop';
 import RequireAuth from './components/RequireAuth';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -38,20 +39,19 @@ function App() {
             );
           })}
 
-          <Route element={<RequireAuth />}>
-            {privateRoutes.map((route, index) => {
-              const Page = route.component;
-              let Layout = DefaultLayout;
+          {privateRoutes.map((route, index) => {
+            const Page = route.component;
+            let Layout = DefaultLayout;
 
-              if (route.layout) {
-                Layout = route.layout;
-              } else if (route.layout === null) {
-                Layout = Fragment;
-              }
+            if (route.layout) {
+              Layout = route.layout;
+            } else if (route.layout === null) {
+              Layout = Fragment;
+            }
 
-              return (
+            return (
+              <Route key={index} element={<RequireAuth />}>
                 <Route
-                  key={index}
                   path={route.path}
                   element={
                     <Layout>
@@ -59,9 +59,11 @@ function App() {
                     </Layout>
                   }
                 />
-              );
-            })}
-          </Route>
+              </Route>
+            );
+          })}
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>

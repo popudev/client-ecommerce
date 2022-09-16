@@ -8,6 +8,8 @@ import styles from './Login.module.scss';
 import { background } from '~/assets/images';
 import { Form, FormInput } from '~/components/Form';
 import { loginUser } from '~/services/authenService';
+import { getAccessToken } from '~/utils/localStorage';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -15,6 +17,12 @@ function Login() {
   const navigator = useNavigate();
   const { globalState, dispatch } = useGlobalState();
   const { error } = globalState.login;
+
+  useEffect(() => {
+    if (globalState.login.currentUser && getAccessToken()) {
+      navigator('/', { replace: true });
+    }
+  });
 
   let errorUsername = {};
   let errorPassword = {};

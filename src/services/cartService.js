@@ -36,14 +36,13 @@ export const getInfoCart = async () => {
     return res;
   } catch (err) {
     loading.done();
-    console.log(err);
   }
 };
 
 export const deleteProductToCart = async (id) => {
   try {
     loading.run();
-    const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
+    const accessToken = getAccessToken();
     await httpRequest.delete(`/cart/product/${id}`, {
       headers: {
         token: `Bearer ${accessToken}`,
@@ -62,7 +61,7 @@ export const deleteProductToCart = async (id) => {
 export const changeQuantityToCart = async (data) => {
   try {
     loading.run();
-    const accessToken = JSON.parse(localStorage.getItem('currentUser'))?.accessToken || '';
+    const accessToken = getAccessToken();
     await httpRequest.post(`/cart`, data, {
       headers: {
         token: `Bearer ${accessToken}`,

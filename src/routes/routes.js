@@ -9,11 +9,17 @@ import Cart from '~/pages/Cart';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
 import Detail from '~/pages/Detail';
+import NotFound from '~/pages/NotFound';
 
-import Admin from '~/pages/AdminProduct';
+import AdminProduct from '~/pages/AdminProduct';
 
 // Public routes
 const publicRoutes = [
+  {
+    path: config.routes.notfound,
+    component: NotFound,
+    layout: null,
+  },
   {
     path: config.routes.home,
     component: Home,
@@ -45,7 +51,7 @@ const publicRoutes = [
 const privateRoutes = [
   {
     path: config.routes.admin,
-    component: Admin,
+    component: AdminProduct,
     layout: null,
   },
 ];

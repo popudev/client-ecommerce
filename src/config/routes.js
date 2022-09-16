@@ -6,6 +6,7 @@ const routes = {
   register: '/register',
   admin: '/admin',
   detail: '/detail',
+  notfound: '/notfound',
 };
 
 export default routes;
