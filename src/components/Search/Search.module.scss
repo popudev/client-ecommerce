@@ -20,22 +20,9 @@
     border-color: $third-color;
   }
 
-  .btn {
-    @include button;
-    width: 100px;
-    height: 100%;
-
+  button {
     @include mobile {
-      width: 30%;
-    }
-
-    i {
-      font-size: 14px;
-      color: $third-color;
-    }
-
-    &:hover i {
-      color: #f5c276;
+      min-width: 0;
     }
   }
 }
@@ -61,7 +48,7 @@
     color: $text-main-color;
 
     @include mobile {
-      width: 70%;
+      width: 100%;
     }
   }
 }

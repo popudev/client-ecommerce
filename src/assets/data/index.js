@@ -45,22 +45,17 @@ export const fakeSlider = [
 export const fakeCategoryCard = [
   {
     title: 'Phone Sale 50%',
-    image: slide4,
+    image: product2,
     path: '/shop',
   },
   {
     title: 'Phone Sale 50%',
-    image: slide1,
+    image: product2,
     path: '/shop',
   },
   {
     title: 'Phone Sale 50%',
-    image: slide2,
-    path: '/shop',
-  },
-  {
-    title: 'Phone Sale 50%',
-    image: slide2,
+    image: product2,
     path: '/shop',
   },
 ];

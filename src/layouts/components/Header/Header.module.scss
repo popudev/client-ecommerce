@@ -51,7 +51,11 @@
   }
 
   @include tablet {
-    height: 60px;
+    height: 75px;
+  }
+
+  @include mobile {
+    height: 55px;
   }
 }
 
@@ -113,6 +117,10 @@
     height: 100%;
     object-fit: center;
   }
+
+  @include tablet {
+    margin: 20px 0;
+  }
 }
 
 .open-menu-mobile,
@@ -127,7 +135,7 @@
   }
 
   i {
-    font-size: 27px;
+    font-size: 30px;
     color: $third-color;
   }
 }

@@ -10,6 +10,8 @@ import { getProductList } from '~/services/productService';
 
 import styles from './Shop.module.scss';
 import { useFilterState } from '~/hooks';
+import { banner } from '~/assets/images';
+import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
@@ -22,6 +24,8 @@ function Shop() {
 
   const nextPage = useRef(null);
   const prevPage = useRef(null);
+  const overplay = useRef(null);
+  const onToggle = useRef(null);
 
   useEffect(() => {
     const fetchApiGetProductList = async () => {
@@ -49,12 +53,18 @@ function Shop() {
     });
   };
 
+  const handleActiveFilter = () => {
+    onToggle.current();
+  };
+
   return (
     <Helmet title={'Shop'}>
       <div className={cx('wrapper', 'main', 'container')}>
-        <div className={cx('banner')}></div>
+        <div className={cx('banner')}>
+          <img src={banner} alt="" />
+        </div>
         <div className={cx('content')}>
-          <Filter filterState={filterState} dispatch={dispatch} />
+          <Filter filterState={filterState} dispatch={dispatch} onToggle={onToggle} />
           <div className={cx('context')}>
             {filterState.title && (
               <div className={cx('search_result_title')}>
@@ -66,6 +76,14 @@ function Shop() {
               </div>
             )}
             <div className={cx('filter__sort')}>
+              <div className={cx('filter_btn')}>
+                <button className={cx('btn_active_filter')} onClick={handleActiveFilter}>
+                  <i className="fa-solid fa-sliders"></i>
+                </button>
+                <button className={cx('btn_active_filter')} onClick={handleActiveFilter}>
+                  <i className="fa-solid fa-arrow-up-wide-short"></i>
+                </button>
+              </div>
               <FilterSort filterState={filterState} dispatch={dispatch} />
               <PaginationMini
                 page={pagination?.page}

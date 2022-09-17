@@ -19,6 +19,12 @@
     &:hover {
       background-color: rgba($color: #000, $alpha: 0.1);
     }
+
+    @include mobile {
+      font-size: 18px;
+      width: 30px;
+      height: 30px;
+    }
   }
 
   .number {
@@ -42,6 +48,13 @@
 
       &:hover {
         background-color: rgba($color: #000, $alpha: 0.3);
+      }
+
+      @include mobile {
+        margin: 0 10px;
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
       }
     }
   }

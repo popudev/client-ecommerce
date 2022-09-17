@@ -2,6 +2,7 @@ export { default as logoImg } from './logo.svg';
 export { default as avatarDefault } from './user.png';
 export { default as background } from './background.jpg';
 export { default as notFoundImg } from './NotFound.png';
+export { default as banner } from './banner.png';
 
 export { default as slide1 } from './slides/slide-1.png';
 export { default as slide2 } from './slides/slide-2.png';

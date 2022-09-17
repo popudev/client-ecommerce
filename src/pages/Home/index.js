@@ -7,7 +7,7 @@ import Grid from '~/components/Gird';
 import CategoryCard from '~/components/CategoryCard';
 import { ProductList, ProductCard } from '~/components/Product';
 import { fakeCategoryCard, fakeProducts, fakeSlider } from '~/assets/data';
-import { useGlobalState } from '~/hooks';
+import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
@@ -20,9 +20,8 @@ function Home() {
         {/* end slider */}
 
         <Section wrapperClassName={cx('section-big-sale')}>
-          <SectionTitle>Big Sale Collection</SectionTitle>
           <SectionBody>
-            <Grid col={2} mdCol={1} smCol={1} gap={10}>
+            <Grid col={3} mdCol={2} smCol={1} gap={10}>
               {fakeCategoryCard.map((e, i) => {
                 return <CategoryCard key={i} data={e} />;
               })}
@@ -38,6 +37,72 @@ function Home() {
                 return <ProductCard key={i} isHome={true} data={e} />;
               })}
             </ProductList>
+          </SectionBody>
+        </Section>
+
+        <Section>
+          <SectionBody wrapperClassName={cx('section-deal')}>
+            <div className={cx('clock')}>
+              <div className={cx('clock_item')}>
+                <h3>02</h3>
+                <span>DAYS</span>
+              </div>
+              <div className={cx('clock_item')}>
+                <h3>10</h3>
+                <span>HOURS</span>
+              </div>
+              <div className={cx('clock_item')}>
+                <h3>34</h3>
+                <span>MINS</span>
+              </div>
+              <div className={cx('clock_item')}>
+                <h3>60</h3>
+                <span>SECS</span>
+              </div>
+            </div>
+
+            <h2>HOT DEAL THIS WEEK</h2>
+            <p>NEW COLLECTION UP TO 50% OFF</p>
+            <Button large primary>
+              SHOP NOW
+            </Button>
+          </SectionBody>
+        </Section>
+
+        <Section wrapperClassName={cx('section-new-product')}>
+          <SectionTitle>TOP SELLING</SectionTitle>
+          <SectionBody>
+            <ProductList col={6} mdCol={3} smCol={2} gap={10}>
+              {fakeProducts.map((e, i) => {
+                return <ProductCard key={i} isHome={true} data={e} />;
+              })}
+            </ProductList>
+          </SectionBody>
+        </Section>
+
+        <Section wrapperClassName={cx('section-newsletter')}>
+          <SectionBody>
+            <h2>Sign Up for the NEWSLETTER</h2>
+            <form>
+              <div className={cx('form_group')}>
+                <input text placeholder="Enter your email..." />
+                <Button primary>Subscribe</Button>
+              </div>
+            </form>
+            <div className={cx('social')}>
+              <Button square outline>
+                <i className="fa-brands fa-facebook-f"></i>
+              </Button>
+              <Button square outline>
+                <i className="fa-brands fa-tiktok"></i>
+              </Button>
+              <Button square outline>
+                <i className="fa-brands fa-instagram"></i>
+              </Button>
+              <Button square outline>
+                <i className="fa-brands fa-github"></i>
+              </Button>
+            </div>
           </SectionBody>
         </Section>
       </div>

@@ -11,6 +11,12 @@
   & > * {
     justify-items: center;
   }
+
+  @include tablet {
+    & > * {
+      justify-items: flex-start;
+    }
+  }
 }
 
 .logo {

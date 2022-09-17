@@ -8,13 +8,21 @@ import PriceRangeSlider from '~/components/PriceRangeSlider';
 import classNames from 'classnames/bind';
 import styles from './Filter.module.scss';
 import Button from '../Button';
+import overplay from '../OverPlay/core/overplay';
 
 const cx = classNames.bind(styles);
 
-function Filter({ filterState, dispatch }) {
+function Filter({ filterState, dispatch, onToggle }) {
   const [categories, setCategories] = useState([]);
-
+  const [visible, setVisible] = useState(false);
   const { listCategoryId, rams, roms, services, resetPrice } = filterState;
+
+  const handleOnToggle = () => {
+    overplay.toggle();
+    setVisible((prev) => !prev);
+  };
+
+  onToggle.current = handleOnToggle;
 
   useEffect(() => {
     const fetchApiGetCategoryList = async () => {
@@ -45,7 +53,10 @@ function Filter({ filterState, dispatch }) {
   };
 
   return (
-    <div className={cx('filter')}>
+    <div className={cx('filter', { active: visible })}>
+      <button className={cx('btn_disabel_filter')} onClick={handleOnToggle}>
+        <i className="fa-regular fa-circle-xmark"></i>
+      </button>
       <div className={cx('wedget')}>
         <div className={cx('wedget__title')}>
           <h3>Category</h3>

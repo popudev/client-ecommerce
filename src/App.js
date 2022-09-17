@@ -7,6 +7,7 @@ import Loading from './components/Loading';
 import ScrollToTop from './components/ScrollToTop';
 import RequireAuth from './components/RequireAuth';
 import NotFound from './pages/NotFound';
+import OverPlay from './components/OverPlay';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <ScrollToTop />
       <ToastContainer />
       <Loading />
+      <OverPlay />
       <div className="App">
         <Routes>
           {publicRoutes.map((route, index) => {

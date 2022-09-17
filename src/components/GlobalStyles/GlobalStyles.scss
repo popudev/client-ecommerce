@@ -21,6 +21,7 @@ body {
   background-color: $main-color;
   color: $third-color;
   overflow: overlay;
+  overflow-y: hidden;
 }
 
 input,
@@ -86,8 +87,9 @@ li {
 .container {
   width: 100%;
   max-width: 1620px;
+  // max-width: 1350px;
   margin: auto;
-  padding: 0 50px;
+  padding: 0 100px;
 
   @include tablet {
     padding: 0 20px;

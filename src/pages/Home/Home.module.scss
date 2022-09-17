@@ -3,14 +3,86 @@
 .wrapper {
   min-height: 100vh;
   color: $third-color;
-  background-color: $second-color;
+  // background-color: $second-color;
 
   .section-big-sale {
-    padding-top: 200px;
+    padding-top: 150px;
   }
 
   .section-new-product {
     padding-top: 100px;
     padding-bottom: 100px;
+  }
+
+  .section-deal {
+    @include flex(center, center);
+    flex-direction: column;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-color: $fourth-color;
+
+    & > h2 {
+      font-size: 35px;
+    }
+
+    & > p {
+      font-size: 30px;
+      margin-bottom: 20px;
+      font-weight: 200;
+    }
+  }
+
+  .clock {
+    @include flex(center, center);
+    margin: 20px 0;
+  }
+
+  .clock_item {
+    @include flex(center, center);
+    width: 120px;
+    height: 120px;
+    margin: 0 10px;
+    border-radius: 50%;
+    color: $main-color;
+    background-color: #fff;
+    flex-direction: column;
+    font-size: 24px;
+  }
+}
+
+.section-newsletter {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  margin-bottom: 100px;
+  background-color: $main-color;
+  @include flex(center, center);
+  flex-direction: column;
+
+  border-top: $second-color 1px solid;
+  border-bottom: $second-color 1px solid;
+
+  h2 {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .form_group {
+    @include flex(center, space-between);
+    width: 520px;
+    height: 35px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px 0;
+
+    input {
+      height: 100%;
+      padding: 0px 20px;
+      font-size: 16px;
+      flex: 1;
+    }
+  }
+
+  .social {
+    @include flex(center, center);
   }
 }

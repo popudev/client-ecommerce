@@ -6,9 +6,14 @@
 
 .banner {
   width: 100%;
-  height: 200px;
-  background-color: rgba($color: #949090, $alpha: 1);
+  height: 250px;
+  background-color: #f6f6e9;
   margin-bottom: 20px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .content {
@@ -18,7 +23,6 @@
 
 .context {
   flex: 1;
-  padding-left: 20px;
 
   .products {
     margin-top: 20px;
@@ -52,5 +56,21 @@
     color: $third-color;
     background-color: transparent;
     font-size: 20px;
+  }
+}
+
+.filter_btn {
+  @include flex(center, center);
+}
+
+.btn_active_filter {
+  font-size: 30px;
+  display: none;
+  background-color: transparent;
+  color: $third-color;
+  margin-right: 15px;
+
+  @include tablet {
+    display: block;
   }
 }

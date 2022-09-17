@@ -13,6 +13,7 @@ import Popper from '~/components/Popper';
 
 import { useGlobalState } from '~/hooks';
 import { logoutUser } from '~/services/authenService';
+import overplay from '~/components/OverPlay/core/overplay';
 
 const cx = classNames.bind(styles);
 const menuNav = [
@@ -96,6 +97,7 @@ function Header() {
   }, []);
 
   const menuToggle = () => {
+    overplay.toggle();
     menuRef.current.classList.toggle(cx('active'));
   };
 

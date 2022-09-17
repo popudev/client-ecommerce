@@ -79,6 +79,10 @@
 }
 
 // Button sizes
+.square {
+  min-width: 0;
+}
+
 .small {
   min-width: 88px;
   padding: 4px 16px;

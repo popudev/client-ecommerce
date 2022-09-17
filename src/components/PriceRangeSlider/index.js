@@ -17,9 +17,9 @@ function PriceRangeSlider({ min, max, reset, onPriceChange }) {
     (value, rev = false) => {
       const deviant = max - min;
       if (!rev) {
-        return Math.round(((value - min) * 100) / deviant);
+        return ((value - min) * 100) / deviant;
       }
-      return Math.round(min + (deviant * value) / 100);
+      return min + (deviant * value) / 100;
     },
     [min, max],
   );

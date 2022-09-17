@@ -2,9 +2,12 @@
 
 .filter {
   width: 20%;
+  min-width: 250px;
   min-height: 100vh;
   background-color: $fourth-color;
   padding: 20px;
+
+  margin-right: 20px;
 
   .wedget {
     border-bottom: 1px solid $third-color;
@@ -24,6 +27,25 @@
 
   .wedget.no_border {
     border-bottom: none;
+  }
+
+  @include tablet {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    z-index: 101;
+    height: 100vh;
+    width: 55%;
+    overflow-y: scroll;
+    transition: left 0.3s ease;
+
+    &.active {
+      left: 0;
+    }
+  }
+
+  @include mobile {
+    width: 100%;
   }
 }
 
@@ -45,5 +67,37 @@
     margin: 0 10px;
     font-size: 14px;
     text-transform: uppercase;
+  }
+
+  @include tablet {
+    & > * {
+      padding: 5px;
+      margin: 0 5px;
+    }
+  }
+
+  @include mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    & > * {
+      padding: 5px;
+      margin: 0 5px;
+    }
+  }
+}
+
+.btn_disabel_filter {
+  display: none;
+  background-color: transparent;
+  font-size: 40px;
+  line-height: 40px;
+  color: $third-color;
+  position: absolute;
+  top: 30px;
+  right: 20px;
+
+  @include tablet {
+    display: block;
   }
 }
