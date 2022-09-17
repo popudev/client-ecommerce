@@ -24,8 +24,8 @@ function Shop() {
 
   const nextPage = useRef(null);
   const prevPage = useRef(null);
-  const overplay = useRef(null);
   const onToggle = useRef(null);
+  const onToggleSort = useRef(null);
 
   useEffect(() => {
     const fetchApiGetProductList = async () => {
@@ -57,6 +57,10 @@ function Shop() {
     onToggle.current();
   };
 
+  const handleActiveFilterSort = () => {
+    onToggleSort.current();
+  };
+
   return (
     <Helmet title={'Shop'}>
       <div className={cx('wrapper', 'main', 'container')}>
@@ -80,11 +84,11 @@ function Shop() {
                 <button className={cx('btn_active_filter')} onClick={handleActiveFilter}>
                   <i className="fa-solid fa-sliders"></i>
                 </button>
-                <button className={cx('btn_active_filter')} onClick={handleActiveFilter}>
+                <button className={cx('btn_active_filter')} onClick={handleActiveFilterSort}>
                   <i className="fa-solid fa-arrow-up-wide-short"></i>
                 </button>
               </div>
-              <FilterSort filterState={filterState} dispatch={dispatch} />
+              <FilterSort filterState={filterState} dispatch={dispatch} onToggle={onToggleSort} />
               <PaginationMini
                 page={pagination?.page}
                 pageCount={pagination?.totalPage}

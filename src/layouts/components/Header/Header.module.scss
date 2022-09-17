@@ -3,7 +3,7 @@
 .wrapper {
   @include flex(center, space-between);
   position: fixed;
-  z-index: 100;
+  z-index: 99;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -22,13 +22,13 @@
 
     @include tablet {
       .logo {
-        transform: none;
+        transform: scale(100%);
       }
     }
 
     @include mobile {
       .logo {
-        transform: none;
+        transform: scale(100%);
       }
     }
   }
@@ -38,7 +38,7 @@
   }
 
   @include mobile {
-    height: $header-mobile-height;
+    height: $header-shrink-height;
   }
 }
 

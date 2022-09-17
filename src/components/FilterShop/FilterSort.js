@@ -1,11 +1,20 @@
-import { useEffect, useRef, memo } from 'react';
+import { useEffect, useRef, memo, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Filter.module.scss';
+import { useSearchParams } from 'react-router-dom';
+import overplay from '../OverPlay/core/overplay';
 
 const cx = classNames.bind(styles);
 
-function FilterSort({ filterState, dispatch }) {
+function FilterSort({ filterState, dispatch, onToggle }) {
   const { sort } = filterState;
+  const [visible, setVisible] = useState(false);
+  const handleOnToggle = () => {
+    overplay.toggle();
+    setVisible((prev) => !prev);
+  };
+
+  if (onToggle) onToggle.current = handleOnToggle;
 
   const priceSelect = useRef(null);
   const nameSelect = useRef(null);
@@ -28,7 +37,7 @@ function FilterSort({ filterState, dispatch }) {
   };
 
   return (
-    <div className={cx('sort-content')}>
+    <div className={cx('sort-content', { active: visible })}>
       <span>Sort by:</span>
       <select name="updateAt" onChange={handleChangeSort}>
         <option value="asc">Latest</option>
@@ -44,6 +53,9 @@ function FilterSort({ filterState, dispatch }) {
         <option value="asc">Name: A to Z</option>
         <option value="desc">Name: Z to A</option>
       </select>
+      <button onClick={handleOnToggle}>
+        <i class="fa-regular fa-circle-xmark"></i>
+      </button>
     </div>
   );
 }

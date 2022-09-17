@@ -166,6 +166,10 @@ function Pagination(props) {
         {'<'}
       </button>
       <ul className={cx('number')}>
+        <li className={cx('mobile')}>
+          {selected + 1}/{pageCount}
+        </li>
+
         {createPagenation().map((pageBreaking) => {
           return (
             <li

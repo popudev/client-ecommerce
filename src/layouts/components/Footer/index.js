@@ -158,8 +158,7 @@ function Footer() {
           </li>
         </ul>
         <span className={cx('copyright')}>
-          Copyright ©<script>document.write(new Date().getFullYear());</script>2022 All rights reserved | This template
-          is made with <i className="fa-brands fa-heart-o" aria-hidden="true"></i>
+          Copyright ©2022 All rights reserved | This template is made with PopuShop
         </span>
       </div>
     </footer>

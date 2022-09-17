@@ -32,6 +32,7 @@
   width: 100%;
   flex: 1;
   text-align: center;
+  padding: 0 10px;
   // padding: 20px 10px;
 
   .title {
@@ -40,7 +41,7 @@
     font-weight: 600;
 
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
