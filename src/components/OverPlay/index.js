@@ -18,6 +18,14 @@ function OverPlay() {
     setVisible((prev) => !prev);
   };
 
+  overplay.active = () => {
+    setVisible(true);
+  };
+
+  overplay.disable = () => {
+    setVisible(false);
+  };
+
   return <div className={cx('wrapper', { active: visible })}></div>;
 }
 

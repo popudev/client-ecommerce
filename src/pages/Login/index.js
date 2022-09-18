@@ -18,11 +18,11 @@ function Login() {
   const { globalState, dispatch } = useGlobalState();
   const { error } = globalState.login;
 
-  useEffect(() => {
-    if (globalState.login.currentUser && getAccessToken()) {
-      navigator('/', { replace: true });
-    }
-  });
+  // useEffect(() => {
+  //   if (globalState.login.currentUser && getAccessToken()) {
+  //     navigator('/', { replace: true });
+  //   }
+  // });
 
   let errorUsername = {};
   let errorPassword = {};
