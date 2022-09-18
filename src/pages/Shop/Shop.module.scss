@@ -63,14 +63,23 @@
   @include flex(center, center);
 }
 
+.btn_active_filterSort,
 .btn_active_filter {
   font-size: 30px;
   display: none;
   background-color: transparent;
   color: $third-color;
   margin-right: 15px;
+}
 
+.btn_active_filter {
   @include tablet {
+    display: block;
+  }
+}
+
+.btn_active_filterSort {
+  @include mobile {
     display: block;
   }
 }

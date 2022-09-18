@@ -1,0 +1,42 @@
+@import '/src/sass';
+
+.wrapper {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead tr {
+    background-color: $fourth-color;
+    border-bottom: 20px solid $main-color;
+    th {
+      height: 80px;
+      font-size: 18px;
+      font-weight: 700;
+      // min-width: 140px;
+
+      @include mobile {
+        font-size: 16px;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 10px solid $main-color;
+      height: 120px;
+
+      @include tablet {
+        height: 140px;
+      }
+
+      @include mobile {
+        height: 200px;
+      }
+
+      td {
+        text-align: center;
+        padding: 10px;
+        // vertical-align: center;
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ import Button from '~/components/Button';
 import { getInfoCart } from '~/services/cartService';
 import { formatMoney } from '~/config';
 import ItemCart from '~/components/ItemCart';
+import Table from '~/components/Table';
 
 const cx = classNames.bind(styles);
 
@@ -48,49 +49,54 @@ function Cart() {
         {items.length ? (
           <>
             <div className={cx('content')}>
-              <table className={cx('table')}>
-                <thead>
-                  <tr className={cx('title')}>
-                    <th>Image</th>
-                    <th>Title</th>
-                    <th>Unit Price</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {items.map((item) => {
-                    return (
-                      <ItemCart
-                        key={item._id}
-                        data={item}
-                        handleDelete={handleDeleteProduct}
-                        handleChange={handleChangeQuantity}
-                      />
-                    );
-                  })}
-                </tbody>
-              </table>
+              <Table
+                className={cx('table')}
+                titles={['Image', 'Title', 'Unit Price', 'Quantity', 'Total Price', 'Actions']}
+              >
+                {items.map((item) => {
+                  return (
+                    <ItemCart
+                      key={item._id}
+                      data={item}
+                      handleDelete={handleDeleteProduct}
+                      handleChange={handleChangeQuantity}
+                    />
+                  );
+                })}
+              </Table>
+              <Table className={cx('table_mobile')} titles={['Image', 'Info', 'Actions']}>
+                {items.map((item) => {
+                  return (
+                    <ItemCart
+                      key={item._id}
+                      data={item}
+                      mobile
+                      handleDelete={handleDeleteProduct}
+                      handleChange={handleChangeQuantity}
+                    />
+                  );
+                })}
+              </Table>
             </div>
             <div className={cx('checkout')}>
               <div className={cx('coupon')}>
-                <label>Have coupon ?</label>
-                <div>
-                  <input />
-                  <Button primary>Apply</Button>
+                <div className={cx('input_coupon')}>
+                  <label>Have coupon ?</label>
+                  <div>
+                    <input />
+                    <Button primary>Apply</Button>
+                  </div>
                 </div>
-              </div>
 
-              <div className={cx('calc_coupon')}>
-                <div className={cx('info')}>
-                  <h4>Total Price:</h4>
-                  <p>{formatMoney(totalPrice)}</p>
-                </div>
-                <div className={cx('info')}>
-                  <h4>Discount:</h4>
-                  <p>{formatMoney(discount)}</p>
+                <div className={cx('calc_coupon')}>
+                  <div className={cx('info')}>
+                    <h4>Total Price:</h4>
+                    <p>{formatMoney(totalPrice)}</p>
+                  </div>
+                  <div className={cx('info')}>
+                    <h4>Discount:</h4>
+                    <p>{formatMoney(discount)}</p>
+                  </div>
                 </div>
               </div>
 

@@ -84,7 +84,7 @@ function Shop() {
                 <button className={cx('btn_active_filter')} onClick={handleActiveFilter}>
                   <i className="fa-solid fa-sliders"></i>
                 </button>
-                <button className={cx('btn_active_filter')} onClick={handleActiveFilterSort}>
+                <button className={cx('btn_active_filterSort')} onClick={handleActiveFilterSort}>
                   <i className="fa-solid fa-arrow-up-wide-short"></i>
                 </button>
               </div>

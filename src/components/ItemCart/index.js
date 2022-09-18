@@ -11,7 +11,7 @@ import { product1 } from '~/assets/images';
 
 const cx = classNames.bind(styles);
 
-function ItemCart({ data, handleDelete, handleChange }) {
+function ItemCart({ data, handleDelete, handleChange, mobile }) {
   const [quantity, setQuantity] = useState(data.quantity);
   const totalPrice = quantity * data.product.sale;
 
@@ -75,31 +75,65 @@ function ItemCart({ data, handleDelete, handleChange }) {
         </Link>
       </td>
 
-      <td className={cx('title')}>{data.product.title}</td>
-      <td className={cx('info')}>
-        <span className={cx('price')}>{formatMoney(data.product.price)}</span>
-        <span className={cx('sale')}>{formatMoney(data.product.sale)}</span>
-      </td>
+      {mobile ? (
+        <>
+          <td className={cx('info', { mobile })}>
+            <h2 className={cx('title')}>{data.product.title}</h2>
+            <span className={cx('price')}>{formatMoney(data.product.price)}</span>
+            <span className={cx('sale')}>{formatMoney(data.product.sale)}</span>
+            <div className={cx('control')}>
+              <div className={cx('control-quatity')}>
+                <button className={cx('btn', 'minus-quantity')} onClick={handleMinusQuantity}>
+                  <i className="fa-solid fa-minus"></i>
+                </button>
+                <input
+                  type="text"
+                  value={quantity}
+                  onChange={handleChangeQuantity}
+                  onBlur={handleBlurQuantity}
+                  className={cx('inp-quantity')}
+                ></input>
+                <button className={cx('btn', 'plus-quantity')} onClick={handlePlusQuantity}>
+                  <i className="fa-solid fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <div className={cx('total_price')}>Total: {formatMoney(totalPrice)}</div>
+          </td>
+        </>
+      ) : (
+        <>
+          <td className={cx('title')}>{data.product.title}</td>
+          <td className={cx('info')}>
+            <span className={cx('price')}>{formatMoney(data.product.price)}</span>
+            <span className={cx('sale')}>{formatMoney(data.product.sale)}</span>
+          </td>
+        </>
+      )}
 
-      <td className={cx('control')}>
-        <div className={cx('control-quatity')}>
-          <button className={cx('btn', 'minus-quantity')} onClick={handleMinusQuantity}>
-            <i className="fa-solid fa-minus"></i>
-          </button>
-          <input
-            type="text"
-            value={quantity}
-            onChange={handleChangeQuantity}
-            onBlur={handleBlurQuantity}
-            className={cx('inp-quantity')}
-          ></input>
-          <button className={cx('btn', 'plus-quantity')} onClick={handlePlusQuantity}>
-            <i className="fa-solid fa-plus"></i>
-          </button>
-        </div>
-      </td>
+      {!mobile && (
+        <>
+          <td className={cx('control')}>
+            <div className={cx('control-quatity')}>
+              <button className={cx('btn', 'minus-quantity')} onClick={handleMinusQuantity}>
+                <i className="fa-solid fa-minus"></i>
+              </button>
+              <input
+                type="text"
+                value={quantity}
+                onChange={handleChangeQuantity}
+                onBlur={handleBlurQuantity}
+                className={cx('inp-quantity')}
+              ></input>
+              <button className={cx('btn', 'plus-quantity')} onClick={handlePlusQuantity}>
+                <i className="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </td>
+          <td className={cx('total_price')}>{formatMoney(totalPrice)}</td>
+        </>
+      )}
 
-      <td className={cx('total_price')}>{formatMoney(totalPrice)}</td>
       <td className={cx('actions')}>
         <div className={cx('action')}>
           <Button outline onClick={handleClickDelete}>
