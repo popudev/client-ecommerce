@@ -66,12 +66,22 @@ li {
   .grid-col-#{$val} {
     grid-template-columns: repeat($val, 1fr);
   }
+
+  .grap-#{$val*10} {
+    gap: $val;
+  }
 }
 
 @each $val in $number {
   .grid-col-md-#{$val} {
     @include tablet {
       grid-template-columns: repeat($val, 1fr);
+    }
+  }
+
+  .grap-md-#{$val*10} {
+    @include tablet {
+      gap: $val;
     }
   }
 }
@@ -82,6 +92,12 @@ li {
       grid-template-columns: repeat($val, 1fr);
     }
   }
+
+  .grap-sm-#{$val*10} {
+    @include mobile {
+      gap: $val;
+    }
+  }
 }
 
 .container {
@@ -89,7 +105,7 @@ li {
   max-width: 1620px;
   // max-width: 1350px;
   margin: auto;
-  padding: 0 100px;
+  padding: 0 50px;
 
   @include tablet {
     padding: 0 20px;

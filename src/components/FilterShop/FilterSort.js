@@ -54,7 +54,7 @@ function FilterSort({ filterState, dispatch, onToggle }) {
         <option value="desc">Name: Z to A</option>
       </select>
       <button onClick={handleOnToggle}>
-        <i class="fa-regular fa-circle-xmark"></i>
+        <i className="fa-regular fa-circle-xmark"></i>
       </button>
     </div>
   );

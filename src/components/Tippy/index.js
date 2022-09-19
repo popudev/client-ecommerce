@@ -9,17 +9,27 @@ function Tippy(props) {
   const [hover, setHover] = useState(false);
   const hoverValue = useDebounce(hover, 100);
 
-  if (visible || hoverValue) {
-    document.documentElement.style.overflowY = 'hidden';
-  } else {
-    document.documentElement.style.overflowY = 'overlay';
-  }
+  useEffect(() => {
+    if (visible || hoverValue) {
+      document.documentElement.style.overflowY = 'hidden';
+    } else {
+      document.documentElement.style.overflowY = 'overlay';
+    }
+  });
 
   let style = {
     width,
   };
 
   switch (placement) {
+    case 'bottom':
+      style = {
+        ...style,
+        left: '50%',
+        transform: 'translateX(-50%)',
+      };
+      break;
+
     case 'bottom-end':
       style = {
         ...style,

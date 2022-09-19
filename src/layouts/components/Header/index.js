@@ -97,8 +97,12 @@ function Header() {
   }, []);
 
   const menuToggle = () => {
-    overplay.toggle();
     menuRef.current.classList.toggle(cx('active'));
+    if (menuRef.current.classList.value.includes(cx('active'))) {
+      document.documentElement.style.overflowY = 'hidden';
+    } else {
+      document.documentElement.style.overflowY = 'overlay';
+    }
   };
 
   return (

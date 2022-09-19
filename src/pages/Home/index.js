@@ -21,7 +21,7 @@ function Home() {
 
         <Section wrapperClassName={cx('section-big-sale')}>
           <SectionBody>
-            <Grid col={3} mdCol={2} smCol={1} gap={10}>
+            <Grid col={3} mdCol={1} smCol={1} gap={10} mdGap={20} smGap={10}>
               {fakeCategoryCard.map((e, i) => {
                 return <CategoryCard key={i} data={e} />;
               })}
@@ -32,7 +32,7 @@ function Home() {
         <Section wrapperClassName={cx('section-new-product')}>
           <SectionTitle>NEW PRODUCTS</SectionTitle>
           <SectionBody>
-            <ProductList col={5} mdCol={3} smCol={2} gap={10}>
+            <ProductList col={5} mdCol={3} smCol={2} gap={10} mdGap={20} smGap={10}>
               {fakeProducts.map((e, i) => {
                 return <ProductCard key={i} isHome={true} data={e} />;
               })}
@@ -72,7 +72,7 @@ function Home() {
         <Section wrapperClassName={cx('section-new-product')}>
           <SectionTitle>TOP SELLING</SectionTitle>
           <SectionBody>
-            <ProductList col={6} mdCol={3} smCol={2} gap={10}>
+            <ProductList col={6} mdCol={3} smCol={2} gap={10} mdGap={20} smGap={10}>
               {fakeProducts.map((e, i) => {
                 return <ProductCard key={i} isHome={true} data={e} />;
               })}
@@ -85,7 +85,7 @@ function Home() {
             <h2>Sign Up for the NEWSLETTER</h2>
             <form>
               <div className={cx('form_group')}>
-                <input text placeholder="Enter your email..." />
+                <input type="email" placeholder="Enter your email..." />
                 <Button primary>Subscribe</Button>
               </div>
             </form>

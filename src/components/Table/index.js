@@ -16,7 +16,7 @@ function Table(props) {
         <thead>
           <tr className={cx('title')}>
             {titles.map((title) => {
-              return <th>{title}</th>;
+              return <th key={title}>{title}</th>;
             })}
           </tr>
         </thead>

@@ -5,6 +5,8 @@ const cx = classNames.bind(styles);
 function PaginationMini(props) {
   const { page, pageCount, nextPage, prevPage } = props;
 
+  console.log('re-render pagination mini');
+
   return (
     <div className={cx('pagination-mini')}>
       <span>
@@ -13,14 +15,14 @@ function PaginationMini(props) {
       <div className={cx('control-mini')}>
         <button
           onClick={() => {
-            prevPage();
+            prevPage.current();
           }}
         >
           {'<'}
         </button>
         <button
           onClick={() => {
-            nextPage();
+            nextPage.current();
           }}
         >
           {'>'}

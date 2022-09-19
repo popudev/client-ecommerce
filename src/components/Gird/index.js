@@ -1,19 +1,28 @@
 import { PropTypes } from 'prop-types';
+import classNames from 'classnames/bind';
+import styles from './Grid.module.scss';
+
+const cx = classNames.bind(styles);
 
 function Grid(props) {
-  const style = {
-    gap: props.gap ? `${props.gap}px` : '0',
-  };
-
   const col = props.col ? `grid-col-${props.col}` : '';
   const mdCol = props.mdCol ? `grid-col-md-${props.mdCol}` : '';
   const smCol = props.smCol ? `grid-col-sm-${props.smCol}` : '';
+  const gap = props.gap ? `gap-${props.gap}` : '';
+  const mdGap = props.mdGap ? `gap-md-${props.mdGap}` : '';
+  const smGap = props.smGap ? `gap-sm-${props.smGap}` : '';
 
-  return (
-    <div className={`${props.wrapperClassName} grid ${col} ${mdCol} ${smCol}`} style={style}>
-      {props.children}
-    </div>
-  );
+  const classes = cx('wrapper', {
+    [props.wrapperClassName]: props.wrapperClassName,
+    [col]: col,
+    [mdCol]: mdCol,
+    [smCol]: smCol,
+    [gap]: gap,
+    [mdGap]: mdGap,
+    [smGap]: smGap,
+  });
+
+  return <div className={classes}>{props.children}</div>;
 }
 
 Grid.propTypes = {

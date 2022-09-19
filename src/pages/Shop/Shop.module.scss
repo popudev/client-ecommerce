@@ -60,13 +60,16 @@
 }
 
 .filter_btn {
-  @include flex(center, center);
+  display: none;
+  @include tablet {
+    @include flex(center, center);
+  }
 }
 
 .btn_active_filterSort,
 .btn_active_filter {
-  font-size: 30px;
   display: none;
+  font-size: 30px;
   background-color: transparent;
   color: $third-color;
   margin-right: 15px;

@@ -64,11 +64,12 @@ function Cart() {
                   );
                 })}
               </Table>
+
               <Table className={cx('table_mobile')} titles={['Image', 'Info', 'Actions']}>
                 {items.map((item) => {
                   return (
                     <ItemCart
-                      key={item._id}
+                      key={item._id + 2}
                       data={item}
                       mobile
                       handleDelete={handleDeleteProduct}

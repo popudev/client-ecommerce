@@ -3,10 +3,6 @@
 .wrapper {
   background-color: transparent;
   color: #fff;
-
-  @include mobile {
-    padding: 100px 10px 50px;
-  }
 }
 
 .title {

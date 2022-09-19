@@ -1,0 +1,43 @@
+@import '/src/sass';
+
+@each $val in $number {
+  .grid-col-#{$val} {
+    grid-template-columns: repeat($val, 1fr);
+  }
+
+  .gap-#{$val*10} {
+    grid-gap: $val * 10px;
+  }
+}
+
+@each $val in $number {
+  .grid-col-md-#{$val} {
+    @include tablet {
+      grid-template-columns: repeat($val, 1fr);
+    }
+  }
+
+  .gap-md-#{$val*10} {
+    @include tablet {
+      grid-gap: $val * 10px;
+    }
+  }
+}
+
+@each $val in $number {
+  .grid-col-sm-#{$val} {
+    @include mobile {
+      grid-template-columns: repeat($val, 1fr);
+    }
+  }
+
+  .gap-sm-#{$val*10} {
+    @include mobile {
+      grid-gap: $val * 10px;
+    }
+  }
+}
+
+.wrapper {
+  display: grid;
+}

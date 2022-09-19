@@ -7,6 +7,11 @@
 .render {
   position: absolute;
   width: 100%;
+
+  @include mobile {
+    width: 90vw !important;
+  }
+
   margin-top: 8px;
   animation: fader 0.1s ease;
 }

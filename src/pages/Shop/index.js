@@ -92,12 +92,12 @@ function Shop() {
               <PaginationMini
                 page={pagination?.page}
                 pageCount={pagination?.totalPage}
-                nextPage={nextPage.current}
-                prevPage={prevPage.current}
+                nextPage={nextPage}
+                prevPage={prevPage}
               />
             </div>
             <div className={cx('products')}>
-              <ProductList col={4} mdCol={3} smCol={2} gap={20}>
+              <ProductList col={4} mdCol={3} smCol={2} gap={20} smGap={10}>
                 {payload?.map((e) => {
                   return <ProductCard key={e?._id} data={e} />;
                 })}
