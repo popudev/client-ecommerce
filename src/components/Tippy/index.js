@@ -5,7 +5,7 @@ import styles from './Tippy.module.scss';
 const cx = classNames.bind(styles);
 
 function Tippy(props) {
-  const { interactive = false, children, render, visible, placement = 'bottom', width = '100%' } = props;
+  const { interactive = false, className, children, render, visible, placement = 'bottom', width = '100%' } = props;
   const [hover, setHover] = useState(false);
   const hoverValue = useDebounce(hover, 100);
 
@@ -55,8 +55,12 @@ function Tippy(props) {
     };
   });
 
+  const classes = cx('wrapper', {
+    [className]: className,
+  });
+
   return (
-    <div className={cx('wrapper')} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+    <div className={classes} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
       {children}
       {(visible || hoverValue) && (
         <div className={cx('render')} style={style}>

@@ -62,43 +62,6 @@ li {
   }
 }
 
-@each $val in $number {
-  .grid-col-#{$val} {
-    grid-template-columns: repeat($val, 1fr);
-  }
-
-  .grap-#{$val*10} {
-    gap: $val;
-  }
-}
-
-@each $val in $number {
-  .grid-col-md-#{$val} {
-    @include tablet {
-      grid-template-columns: repeat($val, 1fr);
-    }
-  }
-
-  .grap-md-#{$val*10} {
-    @include tablet {
-      gap: $val;
-    }
-  }
-}
-
-@each $val in $number {
-  .grid-col-sm-#{$val} {
-    @include mobile {
-      grid-template-columns: repeat($val, 1fr);
-    }
-  }
-
-  .grap-sm-#{$val*10} {
-    @include mobile {
-      gap: $val;
-    }
-  }
-}
 
 .container {
   width: 100%;
