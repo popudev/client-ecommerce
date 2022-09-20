@@ -9,10 +9,17 @@
   @include flex(center, space-between);
   margin-bottom: 15px;
 
+  span {
+    font-size: 14px;
+  }
+
   input {
     width: 30%;
     font-size: 16px;
-    padding: 8px 2px;
+    padding: 5px 2px;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: $third-color 1px solid;
     text-align: center;
   }
 }

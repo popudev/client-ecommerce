@@ -3,31 +3,34 @@ import { avatarDefault } from '~/assets/images';
 import Tippy from '~/components/Tippy';
 import Popper from '~/components/Popper';
 import { logoutUser } from '~/services/authenService';
-import { useEffect, useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { useGlobalState } from '~/hooks';
 import classNames from 'classnames/bind';
 import styles from './Menu.module.scss';
-import { renderIntoDocument } from 'react-dom/test-utils';
 
 const cx = classNames.bind(styles);
 
 const menuNav = [
   {
+    id: 1,
     title: 'Home',
     icon: <i className="fa-solid fa-house-chimney"></i>,
     path: '/',
   },
   {
+    id: 2,
     title: 'Shop',
     icon: <i className="fa-solid fa-shop"></i>,
     path: '/shop',
   },
   {
+    id: 3,
     title: 'Cart',
     icon: <i className="fa-solid fa-cart-shopping"></i>,
     path: '/cart',
   },
   {
+    id: 4,
     title: 'Login',
     icon: <i className="fa-solid fa-user"></i>,
     path: '/login',
@@ -36,33 +39,40 @@ const menuNav = [
 
 const menuUser = [
   {
+    id: 5,
     title: 'Hello',
-    path: '/user',
+    path: '/infomation',
     visable: true,
+    separate: true,
   },
   {
+    id: 6,
     title: 'Admin',
     icon: <i className="fa-solid fa-screwdriver-wrench"></i>,
     path: '/admin',
     visable: false,
   },
   {
+    id: 7,
     title: 'Infomation',
     icon: <i className="fa-solid fa-user"></i>,
-    path: '/',
+    path: '/infomation',
     visable: true,
   },
   {
+    id: 8,
     title: 'Orders',
     icon: <i className="fa-solid fa-file-invoice-dollar"></i>,
-    path: '/shop',
+    path: '/orders',
+    separate: true,
     visable: true,
   },
   {
+    id: 9,
     title: 'Logout',
     icon: <i className="fa-solid fa-arrow-right-from-bracket"></i>,
     path: '',
-    separate: true,
+
     visable: true,
 
     onClick: (dispatch, navigator) => {
@@ -79,15 +89,16 @@ function Menu() {
   const navigator = useNavigate();
   const { pathname } = useLocation();
   const indexItemNavActive = menuNav.findIndex((e) => e.path === pathname);
+  const indexItemUserNavActive = menuUser.findIndex((e) => e.path === pathname);
 
   if (currentUser?.admin) {
     menuUser[1].visable = true;
   } else {
     menuUser[1].visable = false;
   }
+
   const menuToggle = () => {
     menuRef.current.classList.toggle(cx('active'));
-    console.log('helo');
     if (menuRef.current.classList.value.includes(cx('active'))) {
       document.documentElement.style.overflowY = 'hidden';
     } else {
@@ -100,11 +111,11 @@ function Menu() {
       <Popper width={200}>
         {menuUser.map((item, index) => {
           if (index === 0) item.title = currentUser?.fullname;
-          if (!item.visable) return <></>;
+          if (!item.visable) return <Fragment key={item.id}></Fragment>;
           return (
             <Link
               to={item.path}
-              key={item.path}
+              key={item.id}
               onClick={() => {
                 if (typeof item.onClick === 'function') item.onClick(dispatch, navigator);
               }}
@@ -120,69 +131,79 @@ function Menu() {
     );
   };
 
+  const renderMenuNav = () => {
+    let element = [];
+
+    if (!currentUser) {
+      element = menuNav.map((item, index) => {
+        return (
+          <Link to={item.path} key={item.id} onClick={menuToggle}>
+            <div className={cx('menu__item', { active: indexItemNavActive === index })}>
+              <div className={cx('item__logo')}>{item.icon}</div>
+              <p className={cx('item__title')}>{item.title}</p>
+            </div>
+          </Link>
+        );
+      });
+    } else {
+      element = menuNav.map((item, index) => {
+        return item.title === 'Login' ? (
+          <Tippy
+            key={item.id}
+            className={cx('avatar_mobile')}
+            width="auto"
+            placement="bottom-end"
+            renderForMobile={false}
+            render={renderMenuUser}
+          >
+            <Link to={item.path}>
+              <div className={cx('avatar')}>
+                <img src={avatarDefault} alt="" />
+              </div>
+            </Link>
+          </Tippy>
+        ) : (
+          <Link to={item.path} key={item.id} onClick={menuToggle}>
+            <div className={cx('menu__item', { active: indexItemNavActive === index })}>
+              <div className={cx('item__logo')}>{item.icon}</div>
+              <p className={cx('item__title')}>{item.title}</p>
+            </div>
+          </Link>
+        );
+      });
+    }
+
+    return element;
+  };
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('content')} ref={menuRef}>
-        <div className={cx('main')}>
-          {!currentUser
-            ? menuNav.map((item, index) => {
+        <div className={cx('context')}>
+          <div className={cx('main')}>{renderMenuNav()}</div>
+
+          <div className={cx('mobile')}>
+            {currentUser &&
+              menuUser.map((item, index) => {
+                if (!index) return <Fragment key={item.id}></Fragment>;
+                if (!item.visable) return <Fragment key={item.id}></Fragment>;
                 return (
-                  <Link to={item.path} key={item.path} onClick={menuToggle}>
-                    <div className={cx('menu__item', { active: indexItemNavActive === index })}>
-                      <div className={cx('item__logo')}>{item.icon}</div>
-                      <p className={cx('item__title')}>{item.title}</p>
-                    </div>
-                  </Link>
-                );
-              })
-            : menuNav.map((item, index) => {
-                return item.title === 'Login' ? (
-                  <Tippy
-                    key={item.path}
-                    className={cx('avatar_mobile')}
-                    width="auto"
-                    placement="bottom-end"
-                    mobile={false}
-                    render={renderMenuUser}
+                  <Link
+                    to={item.path}
+                    key={item.id}
+                    onClick={() => {
+                      if (typeof item.onClick === 'function') item.onClick(dispatch, navigator);
+                      menuToggle();
+                    }}
                   >
-                    <Link to={item.path} key={item.path}>
-                      <div className={cx('avatar')}>
-                        <img src={avatarDefault} alt="" />
-                      </div>
-                    </Link>
-                  </Tippy>
-                ) : (
-                  <Link to={item.path} key={item.path} onClick={menuToggle}>
-                    <div className={cx('menu__item', { active: indexItemNavActive === index })}>
+                    <div className={cx('menu__item', { active: indexItemUserNavActive === index })}>
                       <div className={cx('item__logo')}>{item.icon}</div>
                       <p className={cx('item__title')}>{item.title}</p>
                     </div>
                   </Link>
                 );
               })}
-        </div>
-
-        <div className={cx('mobile')}>
-          {currentUser &&
-            menuUser.map((item, index) => {
-              if (!index) return <></>;
-              if (!item.visable) return <></>;
-              return (
-                <Link
-                  to={item.path}
-                  key={item.path}
-                  onClick={() => {
-                    if (typeof item.onClick === 'function') item.onClick(dispatch, navigator);
-                    menuToggle();
-                  }}
-                >
-                  <div className={cx('menu__item', { active: indexItemNavActive === index })}>
-                    <div className={cx('item__logo')}>{item.icon}</div>
-                    <p className={cx('item__title')}>{item.title}</p>
-                  </div>
-                </Link>
-              );
-            })}
+          </div>
         </div>
 
         <div className={cx('close-menu-mobile')} onClick={menuToggle}>

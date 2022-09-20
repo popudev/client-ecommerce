@@ -10,8 +10,9 @@ import { getProductList } from '~/services/productService';
 
 import styles from './Shop.module.scss';
 import { useFilterState } from '~/hooks';
+import Banner from '~/components/Banner';
+
 import { banner } from '~/assets/images';
-import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
@@ -64,9 +65,7 @@ function Shop() {
   return (
     <Helmet title={'Shop'}>
       <div className={cx('wrapper', 'main', 'container')}>
-        <div className={cx('banner')}>
-          <img src={banner} alt="" />
-        </div>
+        <Banner image={banner} />
         <div className={cx('content')}>
           <Filter filterState={filterState} dispatch={dispatch} onToggle={onToggle} />
           <div className={cx('context')}>

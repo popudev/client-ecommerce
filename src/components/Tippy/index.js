@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDebounce } from '~/hooks';
 import styles from './Tippy.module.scss';
 const cx = classNames.bind(styles);
@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 function Tippy(props) {
   const {
     interactive = false,
-    mobile = true,
+    renderForMobile = true,
     className,
     children,
     render,
@@ -15,6 +15,7 @@ function Tippy(props) {
     placement = 'bottom',
     width = '100%',
   } = props;
+
   const [hover, setHover] = useState(false);
   const hoverValue = useDebounce(hover, 100);
 
@@ -24,6 +25,9 @@ function Tippy(props) {
     } else {
       document.documentElement.style.overflowY = 'overlay';
     }
+    return () => {
+      document.documentElement.style.overflowY = 'overlay';
+    };
   });
 
   let style = {
@@ -58,15 +62,9 @@ function Tippy(props) {
     if (!interactive) setHover(false);
   };
 
-  useEffect(() => {
-    return () => {
-      document.documentElement.style.overflowY = 'overlay';
-    };
-  });
-
   const classes = cx('wrapper', {
     [className]: className,
-    mobile: !mobile,
+    mobile: !renderForMobile,
   });
 
   return (

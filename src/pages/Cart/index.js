@@ -8,6 +8,8 @@ import { getInfoCart } from '~/services/cartService';
 import { formatMoney } from '~/config';
 import ItemCart from '~/components/ItemCart';
 import Table from '~/components/Table';
+import Banner from '~/components/Banner';
+import { banner } from '~/assets/images';
 
 const cx = classNames.bind(styles);
 
@@ -45,7 +47,7 @@ function Cart() {
   return (
     <Helmet title="cart">
       <div className={cx('wrapper', 'main', 'container')}>
-        <div className={cx('banner')}></div>
+        <Banner image={banner} />
         {items.length ? (
           <>
             <div className={cx('content')}>

@@ -2,11 +2,13 @@
 
 .wrapper {
   position: relative;
+  display: block;
 
   &.mobile {
     .render {
       @include tablet {
         display: none;
+        visibility: visible;
       }
     }
   }

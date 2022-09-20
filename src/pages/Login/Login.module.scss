@@ -30,13 +30,19 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  min-width: 640px;
   min-height: 80vh;
+  width: 100vw;
+  max-width: 640px;
 
   transform: translate(-50%, -50%);
   background-color: #fff;
   padding: 30px 20px;
   border-radius: 10px;
+
+  @include mobile {
+    height: 100vh;
+    border-radius: unset;
+  }
 }
 
 .heading {
@@ -60,6 +66,15 @@
   p {
     margin: 10px 0;
     text-align: center;
+  }
+
+  @include mobile {
+    @include flex(center, center);
+    flex-direction: column;
+    button {
+      margin: 5px 0 !important;
+      width: 200px;
+    }
   }
 }
 

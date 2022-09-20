@@ -19,13 +19,18 @@
       transform: translateX(0);
     }
   }
+}
+
+.context {
+  @include tablet {
+    @include flex(center, center);
+    flex-direction: column;
+  }
 
   @include mobile {
-    @include flex(center, center);
     flex-direction: row;
-
     & > * {
-      margin: 0 10px;
+      margin: 0 15px;
     }
   }
 }
@@ -86,6 +91,7 @@
   height: 50px;
   border-radius: 50%;
   overflow: hidden;
+  margin: 0 8px;
 
   img {
     width: 100%;
@@ -142,10 +148,16 @@
 
   .menu_user-title {
     font-size: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
   }
 
   &.separate {
-    border-top: 1px solid $third-color;
+    border-bottom: 1px solid $third-color;
   }
 
   transition: all 0.3s ease;
