@@ -2,6 +2,14 @@
 
 .wrapper {
   position: relative;
+
+  &.mobile {
+    .render {
+      @include tablet {
+        display: none;
+      }
+    }
+  }
 }
 
 .render {

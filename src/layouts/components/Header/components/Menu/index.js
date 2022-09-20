@@ -38,27 +38,33 @@ const menuUser = [
   {
     title: 'Hello',
     path: '/user',
+    visable: true,
   },
   {
     title: 'Admin',
     icon: <i className="fa-solid fa-screwdriver-wrench"></i>,
     path: '/admin',
+    visable: false,
   },
   {
     title: 'Infomation',
     icon: <i className="fa-solid fa-user"></i>,
     path: '/',
+    visable: true,
   },
   {
     title: 'Orders',
     icon: <i className="fa-solid fa-file-invoice-dollar"></i>,
     path: '/shop',
+    visable: true,
   },
   {
     title: 'Logout',
     icon: <i className="fa-solid fa-arrow-right-from-bracket"></i>,
     path: '',
     separate: true,
+    visable: true,
+
     onClick: (dispatch, navigator) => {
       logoutUser(dispatch, navigator);
     },
@@ -74,6 +80,11 @@ function Menu() {
   const { pathname } = useLocation();
   const indexItemNavActive = menuNav.findIndex((e) => e.path === pathname);
 
+  if (currentUser?.admin) {
+    menuUser[1].visable = true;
+  } else {
+    menuUser[1].visable = false;
+  }
   const menuToggle = () => {
     menuRef.current.classList.toggle(cx('active'));
     console.log('helo');
@@ -87,19 +98,20 @@ function Menu() {
   const renderMenuUser = () => {
     return (
       <Popper width={200}>
-        {menuUser.map((e, index) => {
-          if (index === 0) e.title = currentUser?.fullname;
+        {menuUser.map((item, index) => {
+          if (index === 0) item.title = currentUser?.fullname;
+          if (!item.visable) return <></>;
           return (
             <Link
-              to={e.path}
-              key={e.path}
+              to={item.path}
+              key={item.path}
               onClick={() => {
-                if (typeof e.onClick === 'function') e.onClick(dispatch, navigator);
+                if (typeof item.onClick === 'function') item.onClick(dispatch, navigator);
               }}
             >
-              <div className={cx('menu_user-item', { separate: e.separate })}>
-                <div className={cx('menu_user-icon')}>{e.icon}</div>
-                <span className={cx('menu_user-title')}>{e.title}</span>
+              <div className={cx('menu_user-item', { separate: item.separate })}>
+                <div className={cx('menu_user-icon')}>{item.icon}</div>
+                <span className={cx('menu_user-title')}>{item.title}</span>
               </div>
             </Link>
           );
@@ -130,6 +142,7 @@ function Menu() {
                     className={cx('avatar_mobile')}
                     width="auto"
                     placement="bottom-end"
+                    mobile={false}
                     render={renderMenuUser}
                   >
                     <Link to={item.path} key={item.path}>
@@ -153,11 +166,21 @@ function Menu() {
           {currentUser &&
             menuUser.map((item, index) => {
               if (!index) return <></>;
+              if (!item.visable) return <></>;
               return (
-                <div className={cx('menu__item')}>
-                  <div className={cx('item__logo')}>{item.icon}</div>
-                  <p className={cx('item__title')}>{item.title}</p>
-                </div>
+                <Link
+                  to={item.path}
+                  key={item.path}
+                  onClick={() => {
+                    if (typeof item.onClick === 'function') item.onClick(dispatch, navigator);
+                    menuToggle();
+                  }}
+                >
+                  <div className={cx('menu__item', { active: indexItemNavActive === index })}>
+                    <div className={cx('item__logo')}>{item.icon}</div>
+                    <p className={cx('item__title')}>{item.title}</p>
+                  </div>
+                </Link>
               );
             })}
         </div>

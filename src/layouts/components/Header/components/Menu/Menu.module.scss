@@ -47,7 +47,7 @@
 .mobile {
   display: none;
   @include tablet {
-    @include flex(center, space-between);
+    @include flex(center, flex-start);
   }
   @include mobile {
     flex-direction: column;
@@ -93,20 +93,24 @@
     object-fit: center;
   }
 
-  @include mobile {
-    display: none;
-  }
-}
-
-.avatar_mobile {
   @include tablet {
-    display: none;
+    margin: 20px 20px;
   }
 
-  @include mobile {
-    display: block;
-  }
+  // @include mobile {
+  //   display: none;
+  // }
 }
+
+// .avatar_mobile {
+//   @include tablet {
+//     display: none;
+//   }
+
+//   @include mobile {
+//     display: block;
+//   }
+// }
 
 .open-menu-mobile,
 .close-menu-mobile {

@@ -5,7 +5,16 @@ import styles from './Tippy.module.scss';
 const cx = classNames.bind(styles);
 
 function Tippy(props) {
-  const { interactive = false, className, children, render, visible, placement = 'bottom', width = '100%' } = props;
+  const {
+    interactive = false,
+    mobile = true,
+    className,
+    children,
+    render,
+    visible,
+    placement = 'bottom',
+    width = '100%',
+  } = props;
   const [hover, setHover] = useState(false);
   const hoverValue = useDebounce(hover, 100);
 
@@ -57,6 +66,7 @@ function Tippy(props) {
 
   const classes = cx('wrapper', {
     [className]: className,
+    mobile: !mobile,
   });
 
   return (
