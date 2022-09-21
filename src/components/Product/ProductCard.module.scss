@@ -14,6 +14,7 @@
   height: 70%;
   overflow: hidden;
   padding: 1px;
+  min-height: 150px;
 
   img {
     width: 100%;
@@ -23,6 +24,10 @@
 
   &:hover .control.under-image {
     bottom: 0;
+  }
+
+  &.doneload {
+    min-height: unset;
   }
 }
 

@@ -20,6 +20,7 @@ function Shop() {
   console.log('re-render shop');
   const [filterState, dispatch] = useFilterState();
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { pagination, payload } = products;
 
@@ -31,8 +32,8 @@ function Shop() {
   useEffect(() => {
     const fetchApiGetProductList = async () => {
       const products = await getProductList(filterState);
-
       setProducts(products);
+      setLoading(false);
     };
 
     fetchApiGetProductList();

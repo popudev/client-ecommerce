@@ -8,7 +8,7 @@ import Button from '~/components/Button';
 import Tippy from '~/components/Tippy';
 import { ProductItemSearch } from '~/components/Product';
 import Propper from '~/components/Popper';
-import { useDebounce, useDidMountEffect, useFilterState } from '~/hooks';
+import { useDebounce, useDidUpdate, useFilterState } from '~/hooks';
 import { getProductList } from '~/services/productService';
 
 const cx = classNames.bind(styles);
@@ -29,7 +29,7 @@ function Search() {
 
   const inputRef = useRef(null);
 
-  useDidMountEffect(() => {
+  useDidUpdate(() => {
     if (!titleValue.trim()) {
       setSearchResult([]);
       return;

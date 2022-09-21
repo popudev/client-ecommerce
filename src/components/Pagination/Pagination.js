@@ -2,7 +2,7 @@ import { useState, memo } from 'react';
 
 import styles from './Pagination.module.scss';
 import classNames from 'classnames/bind';
-import { useDidMountEffect } from '~/hooks';
+import { useDidUpdate } from '~/hooks';
 const cx = classNames.bind(styles);
 
 function Pagination(props) {
@@ -10,7 +10,7 @@ function Pagination(props) {
 
   const {
     initialPage = 1,
-    pageCount = 10,
+    pageCount = 1,
     pageRangeDisplayed = 3,
     marginPagesDisplayed = 2,
     breakLabel = '...',
@@ -22,7 +22,7 @@ function Pagination(props) {
 
   const [selected, setSelected] = useState(initialPage - 1);
 
-  useDidMountEffect(() => {
+  useDidUpdate(() => {
     setSelected(initialPage - 1);
   }, [initialPage]);
 

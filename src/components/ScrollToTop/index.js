@@ -1,10 +1,10 @@
 import { useLocation } from 'react-router-dom';
-import { useDidMountEffect } from '~/hooks';
+import { useDidUpdate } from '~/hooks';
 import overplay from '../OverPlay/core/overplay';
 
 function ScrollToTop() {
   const pathname = useLocation();
-  useDidMountEffect(() => {
+  useDidUpdate(() => {
     document.documentElement.scrollTop = 0;
     overplay.disable();
   }, [pathname]);

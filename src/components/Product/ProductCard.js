@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { formatMoney } from '~/config';
@@ -11,6 +11,9 @@ import config from '~/config';
 import ControlQuantity from '../ControlQuantity';
 import Button from '../Button';
 import { addProductToCart } from '~/services/cartService';
+
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const cx = classNames.bind(styles);
 
@@ -28,12 +31,17 @@ function ProductCard({ data }) {
     });
   };
 
+  const imgRef = useRef(null);
+
   return (
     <div className={cx('wrapper')}>
-      <div className={cx('image')}>
+      <div ref={imgRef} className={cx('image')}>
         <Link to={`${config.routes.detail}/${data._id}`}>
           <LazyLoadImage
             alt={''}
+            afterLoad={() => {
+              imgRef.current?.classList.add(cx('doneload'));
+            }}
             width={'100%'}
             src={product1} // use normal <img> attributes as props
             effect="blur"
@@ -65,5 +73,20 @@ function ProductCard({ data }) {
     </div>
   );
 }
+
+const Loading = () => {
+  return (
+    <div className={cx('wrapper')}>
+      <div className={cx('image')}>
+        <Skeleton width={206} height={254} />
+      </div>
+      <div className={cx('context')}>
+        <Skeleton count={2} />
+      </div>
+    </div>
+  );
+};
+
+ProductCard.Loading = Loading;
 
 export default ProductCard;

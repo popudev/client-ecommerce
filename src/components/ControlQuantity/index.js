@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './ControlQuantity.module.scss';
 import classNames from 'classnames/bind';
-import { useDidMountEffect } from '~/hooks';
+import { useDidUpdate } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -10,7 +10,7 @@ function ControlQuantity(props) {
 
   const [quantity, setQuantity] = useState(1);
 
-  useDidMountEffect(() => {
+  useDidUpdate(() => {
     if (typeof onChange === 'function') onChange(quantity);
   }, [quantity]);
 

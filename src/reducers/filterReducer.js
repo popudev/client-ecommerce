@@ -1,7 +1,7 @@
 export const initialState = {
   title: '',
   listCategoryId: [],
-  price: [0, 999],
+  price: [],
   rams: [],
   roms: [],
   services: [],

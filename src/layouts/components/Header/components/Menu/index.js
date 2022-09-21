@@ -108,9 +108,15 @@ function Menu() {
 
   const renderMenuUser = () => {
     return (
-      <Popper width={200}>
+      <Popper minWidth={200} width={'max-content'}>
         {menuUser.map((item, index) => {
-          if (index === 0) item.title = currentUser?.fullname;
+          if (index === 0) {
+            return (
+              <div className={cx('menu_user-item', 'username', { separate: item.separate })}>
+                <span className={cx('menu_user-title')}>{currentUser?.username}</span>
+              </div>
+            );
+          }
           if (!item.visable) return <Fragment key={item.id}></Fragment>;
           return (
             <Link
@@ -150,7 +156,7 @@ function Menu() {
         return item.title === 'Login' ? (
           <Tippy
             key={item.id}
-            className={cx('avatar_mobile')}
+            className={cx('tippy_wrapper_avatar')}
             width="auto"
             placement="bottom-end"
             renderForMobile={false}
@@ -179,6 +185,14 @@ function Menu() {
   return (
     <div className={cx('wrapper')}>
       <div className={cx('content')} ref={menuRef}>
+        <div className={cx('avatar_mobile')}>
+          <Link to="/infomation">
+            <div className={cx('avatar')}>
+              <img src={avatarDefault} alt="" />
+            </div>
+          </Link>
+          <span>{currentUser?.username}</span>
+        </div>
         <div className={cx('context')}>
           <div className={cx('main')}>{renderMenuNav()}</div>
 

@@ -4,17 +4,7 @@
   padding-bottom: 20px !important;
 }
 
-.banner {
-  width: 100%;
-  height: 250px;
-  background-color: #f6f6e9;
-  margin-bottom: 20px;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
+
 
 .content {
   @include flex(flex-start, flex-start);

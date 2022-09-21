@@ -2,11 +2,12 @@ import { useState, useCallback, memo } from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './PriceRangeSlider.module.scss';
-import { useDebounce, useDidMountEffect } from '~/hooks';
+import { useDebounce, useDidUpdate, usePrevious } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
 function PriceRangeSlider({ min, max, reset, onPriceChange }) {
+  console.log('re-render price range');
   const [minPrice, setMinPrice] = useState(min);
   const [maxPrice, setMaxPrice] = useState(max);
 
@@ -41,11 +42,15 @@ function PriceRangeSlider({ min, max, reset, onPriceChange }) {
     setMaxPrice(value);
   };
 
-  useDidMountEffect(() => {
-    onPriceChange([debouncedValueMin, debouncedValueMax]);
+  const resetPrev = usePrevious(reset);
+  console.log('resetPrev', resetPrev);
+  console.log('reset: ', reset);
+
+  useDidUpdate(() => {
+    if (resetPrev === reset) onPriceChange([debouncedValueMin, debouncedValueMax]);
   }, [debouncedValueMax, debouncedValueMin, onPriceChange]);
 
-  useDidMountEffect(() => {
+  useDidUpdate(() => {
     setMinPrice(min);
     setMaxPrice(max);
   }, [reset]);

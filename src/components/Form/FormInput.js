@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import { useDidMountEffect } from '~/hooks';
+import { useDidUpdate } from '~/hooks';
 import styles from './FormInput.module.scss';
 
 const cx = classNames.bind(styles);
@@ -10,19 +10,19 @@ function FormInput(props) {
   const [error, setError] = useState(errorValidation);
   const [value, setValue] = useState(props.value || '');
 
-  useDidMountEffect(() => {
+  useDidUpdate(() => {
     if (errorMess.mess) setError(errorMess.mess);
   }, [errorMess]);
 
   // delay input
   // const debouceValue = useDebounce(value, 400);
-  // useDidMountEffect(() => {
+  // useDidUpdate(() => {
   //  setValueForm(debouceValue);
   //  const error = validate(debouceValue);
   //  setError(error);
   // }, [debouceValue]);
 
-  useDidMountEffect(() => {
+  useDidUpdate(() => {
     setError(errorValidation);
   }, [errorValidation]);
 

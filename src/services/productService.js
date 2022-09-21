@@ -6,8 +6,8 @@ export const getProductList = async (filter, limit = 12) => {
   try {
     let params = {
       title: filter?.title,
-      saleGte: filter?.price ? filter?.price[0] : 0,
-      saleLte: filter?.price ? filter?.price[1] : 999,
+      saleGte: filter?.price[0],
+      saleLte: filter?.price[1],
       page: filter?.page || 1,
       limit: limit,
     };

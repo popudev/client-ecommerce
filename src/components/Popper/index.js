@@ -5,8 +5,9 @@ import styles from './Popper.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Popper({ children, width, height }) {
+function Popper({ children, minWidth, width, height }) {
   const style = {
+    minWidth,
     width,
     height,
   };
