@@ -5,8 +5,6 @@ const cx = classNames.bind(styles);
 function PaginationMini(props) {
   const { page, pageCount, nextPage, prevPage } = props;
 
-  console.log('re-render pagination mini');
-
   return (
     <div className={cx('pagination-mini')}>
       <span>

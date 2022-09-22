@@ -5,7 +5,6 @@ export const initialState = {
   rams: [],
   roms: [],
   services: [],
-  resetPrice: false,
   page: 1,
   sort: [
     {
@@ -108,7 +107,6 @@ export default function filterReducer(state, action) {
     case 'clear_filter':
       return {
         ...initialState,
-        resetPrice: !state.resetPrice,
       };
 
     case 'change_page':

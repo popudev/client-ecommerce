@@ -2,14 +2,20 @@ import { useState, useCallback, memo } from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './PriceRangeSlider.module.scss';
-import { useDebounce, useDidUpdate, usePrevious } from '~/hooks';
+import { useDebounce, useDidUpdate } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
-function PriceRangeSlider({ min, max, reset, onPriceChange }) {
-  console.log('re-render price range');
+function PriceRangeSlider({ min, max, onPriceChange, onResetPrice }) {
   const [minPrice, setMinPrice] = useState(min);
   const [maxPrice, setMaxPrice] = useState(max);
+  const [resetPrice, setResetPrice] = useState(false);
+
+  console.log('re-render price range', resetPrice);
+
+  onResetPrice.current = () => {
+    setResetPrice(true);
+  };
 
   const debouncedValueMin = useDebounce(minPrice, 500);
   const debouncedValueMax = useDebounce(maxPrice, 500);
@@ -42,18 +48,17 @@ function PriceRangeSlider({ min, max, reset, onPriceChange }) {
     setMaxPrice(value);
   };
 
-  const resetPrev = usePrevious(reset);
-  console.log('resetPrev', resetPrev);
-  console.log('reset: ', reset);
-
   useDidUpdate(() => {
-    if (resetPrev === reset) onPriceChange([debouncedValueMin, debouncedValueMax]);
+    if (!resetPrice) onPriceChange([debouncedValueMin, debouncedValueMax]);
+    else setResetPrice(false);
   }, [debouncedValueMax, debouncedValueMin, onPriceChange]);
 
   useDidUpdate(() => {
-    setMinPrice(min);
-    setMaxPrice(max);
-  }, [reset]);
+    if (resetPrice) {
+      setMinPrice(min);
+      setMaxPrice(max);
+    }
+  }, [resetPrice]);
 
   return (
     <div className={cx('wrapper')}>

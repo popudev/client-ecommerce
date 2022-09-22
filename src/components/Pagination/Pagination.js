@@ -6,8 +6,6 @@ import { useDidUpdate } from '~/hooks';
 const cx = classNames.bind(styles);
 
 function Pagination(props) {
-  console.log('re-render pagination');
-
   const {
     initialPage = 1,
     pageCount = 1,

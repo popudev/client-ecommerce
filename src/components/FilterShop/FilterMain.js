@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, memo } from 'react';
+import { useState, useEffect, useCallback, memo, useRef } from 'react';
 import { fakeRams, fakeRoms, fakeServices } from '~/assets/data';
 import { getCategoryList } from '~/services/categoryService';
 import { add, del } from '~/reducers/actions/filterAction';
@@ -14,8 +14,9 @@ const cx = classNames.bind(styles);
 
 function Filter({ filterState, dispatch, onToggle }) {
   const [categories, setCategories] = useState([]);
+  const resetPrice = useRef();
   const [visible, setVisible] = useState(false);
-  const { listCategoryId, rams, roms, services, resetPrice } = filterState;
+  const { listCategoryId, rams, roms, services } = filterState;
 
   const handleOnToggle = () => {
     overplay.toggle();
@@ -49,6 +50,7 @@ function Filter({ filterState, dispatch, onToggle }) {
 
   const handleClearFilter = () => {
     document.documentElement.scrollTop = 0;
+    resetPrice.current();
     dispatch({ type: 'clear_filter' });
   };
 
@@ -81,7 +83,7 @@ function Filter({ filterState, dispatch, onToggle }) {
           <h3>Price Range</h3>
         </div>
         <div className={cx('wedget__content')}>
-          <PriceRangeSlider min={0} max={999} onPriceChange={handlePriceChange} reset={resetPrice} />
+          <PriceRangeSlider min={0} max={999} onPriceChange={handlePriceChange} onResetPrice={resetPrice} />
         </div>
       </div>
       <div className={cx('wedget')}>
