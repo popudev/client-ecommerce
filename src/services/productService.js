@@ -58,7 +58,6 @@ export const getProductById = async (productId) => {
     return res;
   } catch (err) {
     loading.done();
-
     console.log(err);
   }
 };

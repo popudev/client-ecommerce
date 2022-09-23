@@ -135,7 +135,7 @@ function Detail() {
   return (
     <SkeletonTheme baseColor="#1c0a00" highlightColor="#361500" borderRadius={0}>
       <div className={cx('wrapper', 'main', 'container')}>
-        {loading ? (
+        {!loading ? (
           <>
             <Header.Loading />
             <ProductDetails.Loading />
