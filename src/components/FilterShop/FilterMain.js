@@ -67,6 +67,7 @@ function Filter({ filterState, dispatch, onToggle }) {
           {categories.map((item) => {
             return (
               <CheckBox
+                upper
                 key={item._id}
                 title={item.title}
                 onChange={(input) => {

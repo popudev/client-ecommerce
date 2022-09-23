@@ -24,10 +24,11 @@
 .avatar_mobile {
   display: none;
   flex-direction: column;
-  margin-bottom: 10px;
+
   & > span {
     font-size: 18px;
     font-weight: 700;
+    margin-bottom: 10px;
   }
 
   @include tablet {

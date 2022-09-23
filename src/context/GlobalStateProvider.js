@@ -3,7 +3,6 @@ import authenReducer, { initialState } from '~/reducers/authenReducer';
 import { loginSuccess } from '~/reducers/actions/authenAction';
 import { getInfoUser } from '~/services/userService';
 import { getAccessToken } from '~/utils/localStorage';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 export const GlobalStateContext = createContext();
 

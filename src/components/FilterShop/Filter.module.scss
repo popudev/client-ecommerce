@@ -61,12 +61,15 @@
 
 .sort-content {
   @include flex(center, flex-start);
+  flex: 1;
 
-  & > * {
+  & > *:not(span) {
+    min-width: 100px;
     padding: 10px;
     margin: 0 10px;
     font-size: 14px;
     text-transform: uppercase;
+    width: 20%;
   }
 
   button {

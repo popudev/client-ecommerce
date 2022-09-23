@@ -5,17 +5,17 @@ import styles from './CheckBox.module.scss';
 const cx = classNames.bind(styles);
 
 function CheckBox(props) {
+  const { title, checked, onChange, upper } = props;
   const inputRef = useRef(null);
 
-  const onChange = () => {
-    props.onChange(inputRef.current);
+  const handleOnChange = () => {
+    onChange(inputRef.current);
   };
 
   return (
     <label className={cx('wrapper')}>
-      <input ref={inputRef} type="checkbox" checked={props.checked} onChange={onChange} value={props.title} />
-
-      <span className={cx('title')}>{props.title}</span>
+      <input ref={inputRef} type="checkbox" checked={checked} onChange={handleOnChange} value={title} />
+      <span className={cx('title', { upper: upper })}>{title}</span>
     </label>
   );
 }

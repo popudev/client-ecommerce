@@ -8,8 +8,9 @@ import styles from './Login.module.scss';
 import { background } from '~/assets/images';
 import { Form, FormInput } from '~/components/Form';
 import { loginUser } from '~/services/authenService';
-import { getAccessToken } from '~/utils/localStorage';
-import { useEffect } from 'react';
+import { getRememberUsername, setRememberUsername } from '~/utils/localStorage';
+import { useState } from 'react';
+import CheckBox from '~/components/CheckBox';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,7 @@ function Login() {
   const navigator = useNavigate();
   const { globalState, dispatch } = useGlobalState();
   const { error } = globalState.login;
+  const [remember, setRemember] = useState(getRememberUsername());
 
   // useEffect(() => {
   //   if (globalState.login.currentUser && getAccessToken()) {
@@ -54,6 +56,11 @@ function Login() {
     loginUser(user, dispatch, navigator);
   };
 
+  const handleRememberUsername = (checkbox) => {
+    setRememberUsername(checkbox.checked);
+    setRemember(checkbox.checked);
+  };
+
   return (
     <Helmet title={'Login'}>
       <div className={cx('wrapper')}>
@@ -80,6 +87,7 @@ function Login() {
               errorMess={errorUsername}
             />
             <FormInput type="password" name="password" label="Password" errorMess={errorPassword} />
+            <CheckBox title="Remember username ?" onChange={handleRememberUsername} checked={remember} />
             <Button primary className={cx('btn_login')}>
               Login
             </Button>

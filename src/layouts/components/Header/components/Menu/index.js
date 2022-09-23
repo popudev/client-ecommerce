@@ -112,7 +112,7 @@ function Menu() {
         {menuUser.map((item, index) => {
           if (index === 0) {
             return (
-              <div className={cx('menu_user-item', 'username', { separate: item.separate })}>
+              <div key={item.id} className={cx('menu_user-item', 'username', { separate: item.separate })}>
                 <span className={cx('menu_user-title')}>{currentUser?.username}</span>
               </div>
             );
@@ -186,21 +186,30 @@ function Menu() {
     <div className={cx('wrapper')}>
       <div className={cx('content')} ref={menuRef}>
         <div className={cx('avatar_mobile')}>
-          <Link to="/infomation">
-            <div className={cx('avatar')}>
-              <img src={avatarDefault} alt="" />
-            </div>
-          </Link>
+          {currentUser && (
+            <Link to="/infomation">
+              <div className={cx('avatar')}>
+                <img src={avatarDefault} alt="" />
+              </div>
+            </Link>
+          )}
           <span>{currentUser?.username}</span>
+          {currentUser?.admin && (
+            <Link to="/admin">
+              <div className={cx('menu__item', { active: indexItemUserNavActive === 1 })}>
+                <div className={cx('item__logo')}>{menuUser[1].icon}</div>
+                <p className={cx('item__title')}>{menuUser[1].title}</p>
+              </div>
+            </Link>
+          )}
         </div>
         <div className={cx('context')}>
           <div className={cx('main')}>{renderMenuNav()}</div>
 
-          <div className={cx('mobile')}>
-            {currentUser &&
-              menuUser.map((item, index) => {
-                if (!index) return <Fragment key={item.id}></Fragment>;
-                if (!item.visable) return <Fragment key={item.id}></Fragment>;
+          {currentUser && (
+            <div className={cx('mobile')}>
+              {menuUser.map((item, index) => {
+                if (!index || !item.visable || item.title === 'Admin') return <Fragment key={item.id}></Fragment>;
                 return (
                   <Link
                     to={item.path}
@@ -217,7 +226,8 @@ function Menu() {
                   </Link>
                 );
               })}
-          </div>
+            </div>
+          )}
         </div>
 
         <div className={cx('close-menu-mobile')} onClick={menuToggle}>

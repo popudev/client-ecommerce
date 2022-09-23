@@ -1,4 +1,4 @@
-import { setAccessToken } from '~/utils/localStorage';
+import { getRememberUsername, setAccessToken } from '~/utils/localStorage';
 
 export const initialState = {
   login: {
@@ -19,6 +19,10 @@ export const initialState = {
 const authenReducer = (state, action) => {
   switch (action.type) {
     case 'loginSuccess':
+      let username = null;
+
+      if (getRememberUsername()) username = action.payload?.username;
+
       setAccessToken(action.payload?.accessToken);
       return {
         ...state,
@@ -26,6 +30,10 @@ const authenReducer = (state, action) => {
           ...state.login,
           error: false,
           currentUser: action.payload,
+        },
+        register: {
+          ...state.register,
+          username: username,
         },
       };
 

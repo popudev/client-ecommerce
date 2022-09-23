@@ -23,7 +23,7 @@ export const registerUser = async (user, dispatch, navigator) => {
   }
 };
 
-export const loginUser = async (user, dispatch, navigator) => {
+export const loginUser = async (user, dispatch, navigator, remember = false) => {
   try {
     loading.run();
     const res = await httpRequest.post(`/auth/login`, user, { withCredentials: true });
@@ -42,7 +42,7 @@ export const logoutUser = async (dispatch, navigator) => {
     loading.run();
     await httpRequest.get(`/auth/logout`, { withCredentials: true });
     dispatch(logoutSuccess());
-    navigator('/');
+    navigator('/login');
     loading.done();
   } catch (err) {
     console.log(err);

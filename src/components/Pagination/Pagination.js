@@ -3,6 +3,7 @@ import { useState, memo } from 'react';
 import styles from './Pagination.module.scss';
 import classNames from 'classnames/bind';
 import { useDidUpdate } from '~/hooks';
+import InputPage from './InputPage';
 const cx = classNames.bind(styles);
 
 function Pagination(props) {
@@ -165,7 +166,13 @@ function Pagination(props) {
       </button>
       <ul className={cx('number')}>
         <li className={cx('mobile')}>
-          {selected + 1}/{pageCount}
+          <InputPage
+            pageInit={selected + 1}
+            pageCount={pageCount}
+            onPageChange={(page) => {
+              handlePageChange(page - 1);
+            }}
+          />
         </li>
 
         {createPagenation().map((pageBreaking) => {

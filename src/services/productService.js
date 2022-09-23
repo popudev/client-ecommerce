@@ -2,7 +2,7 @@ import { loading } from '~/components/Loading/core';
 import { toast } from '~/components/Toast/core';
 import httpRequest from '~/utils/httpRequest';
 
-export const getProductList = async (filter, limit = 12) => {
+export const getProductList = async (filter, limit = 20) => {
   try {
     let params = {
       title: filter?.title,

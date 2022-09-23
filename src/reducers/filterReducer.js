@@ -8,16 +8,16 @@ export const initialState = {
   page: 1,
   sort: [
     {
-      type: 'updateAt',
-      order: 'asc',
-    },
-    {
       type: 'firtWord',
       order: '',
     },
     {
       type: 'sale',
       order: '',
+    },
+    {
+      type: 'updatedAt',
+      order: 'desc',
     },
   ],
 };

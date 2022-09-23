@@ -8,6 +8,7 @@ function PaginationMini(props) {
   return (
     <div className={cx('pagination-mini')}>
       <span>
+        {/* <InputPage pageInit={page} pageCount={pageCount} /> */}
         {page}/{pageCount}
       </span>
       <div className={cx('control-mini')}>

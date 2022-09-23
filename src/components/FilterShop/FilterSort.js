@@ -39,9 +39,9 @@ function FilterSort({ filterState, dispatch, onToggle }) {
   return (
     <div className={cx('sort-content', { active: visible })}>
       <span>Sort by:</span>
-      <select name="updateAt" onChange={handleChangeSort}>
-        <option value="asc">Latest</option>
-        <option value="desc">Oldest</option>
+      <select name="updatedAt" onChange={handleChangeSort}>
+        <option value="desc">Latest</option>
+        <option value="asc">Oldest</option>
       </select>
       <select ref={priceSelect} name="sale" defaultValue={''} onChange={handleChangeSort}>
         <option value="">Price</option>
