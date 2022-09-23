@@ -1,7 +1,7 @@
 @import '/src/sass';
 
 .wrapper {
-  height: calc(100vh - $header-height);
+  height: 100%;
   overflow: hidden;
   position: relative;
   background-color: $main-color;
@@ -9,14 +9,6 @@
   // &.shadow {
   //   box-shadow: $main-color 0 0 80px 120px;
   // }
-
-  @include tablet {
-    height: calc(50vh - $header-tablet-height);
-  }
-
-  @include mobile {
-    height: calc(40vh - $header-mobile-height);
-  }
 }
 
 .items {
@@ -47,6 +39,7 @@
 .item-image {
   height: 100%;
   width: 100%;
+  line-height: 0;
 
   img {
     width: 100%;
@@ -91,6 +84,9 @@
   bottom: 0;
   transform: translateX(-50%);
   z-index: 10;
+  width: 100%;
+  @include flex(center, center);
+  padding-bottom: 10px;
 }
 
 .indicator {
@@ -105,10 +101,6 @@
   &.active {
     opacity: 1;
     background-color: $third-color;
-  }
-
-  @include mobile {
-    width: 10px;
   }
 }
 

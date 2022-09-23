@@ -20,6 +20,7 @@ function Shop() {
   console.log('re-render shop');
   const [filterState, dispatch] = useFilterState();
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { pagination, payload } = products;
 
@@ -29,9 +30,11 @@ function Shop() {
   const onToggleSort = useRef(null);
 
   useEffect(() => {
+    setLoading(true);
     const fetchApiGetProductList = async () => {
       const products = await getProductList(filterState);
       setProducts(products);
+      setLoading(false);
     };
 
     fetchApiGetProductList();
@@ -96,9 +99,17 @@ function Shop() {
             </div>
             <div className={cx('products')}>
               <ProductList col={4} mdCol={3} smCol={2} gap={20} smGap={10}>
-                {payload?.map((e) => {
-                  return <ProductCard key={e?._id} data={e} />;
-                })}
+                {loading &&
+                  Array(20)
+                    .fill(0)
+                    .map((e, index) => {
+                      return <ProductCard.Loading key={index} />;
+                    })}
+
+                {!loading &&
+                  payload?.map((e) => {
+                    return <ProductCard key={e?._id} data={e} />;
+                  })}
               </ProductList>
             </div>
             <Pagination

@@ -12,7 +12,7 @@ import ControlQuantity from '../ControlQuantity';
 import Button from '../Button';
 import { addProductToCart } from '~/services/cartService';
 
-import Skeleton from 'react-loading-skeleton';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const cx = classNames.bind(styles);
@@ -76,14 +76,16 @@ function ProductCard({ data }) {
 
 const Loading = () => {
   return (
-    <div className={cx('wrapper')}>
-      <div className={cx('image')}>
-        <Skeleton width={206} height={254} />
+    <SkeletonTheme baseColor="#1c0a00" highlightColor="#361500" borderRadius={0}>
+      <div className={cx('wrapper')}>
+        <div className={cx('image')}>
+          <Skeleton width="100%" height="100%" />
+        </div>
+        <div className={cx('context_loading')}>
+          <Skeleton count={2} width="100%" height={40} />
+        </div>
       </div>
-      <div className={cx('context')}>
-        <Skeleton count={2} />
-      </div>
-    </div>
+    </SkeletonTheme>
   );
 };
 

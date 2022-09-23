@@ -64,6 +64,12 @@ function Filter({ filterState, dispatch, onToggle }) {
           <h3>Category</h3>
         </div>
         <div className={cx('wedget__content')}>
+          {!categories.length &&
+            Array(5)
+              .fill(0)
+              .map((e, index) => {
+                return <CheckBox.Loading key={index} />;
+              })}
           {categories.map((item) => {
             return (
               <CheckBox
@@ -100,7 +106,7 @@ function Filter({ filterState, dispatch, onToggle }) {
                 onChange={(input) => {
                   handleFilter('ram', input, input.value);
                 }}
-                checked={rams.includes(item.id)}
+                checked={rams.includes(item.title)}
               />
             );
           })}
@@ -119,7 +125,7 @@ function Filter({ filterState, dispatch, onToggle }) {
                 onChange={(input) => {
                   handleFilter('rom', input, input.value);
                 }}
-                checked={roms.includes(item.id)}
+                checked={roms.includes(item.title)}
               />
             );
           })}
@@ -138,7 +144,7 @@ function Filter({ filterState, dispatch, onToggle }) {
                 onChange={(input) => {
                   handleFilter('service', input, input.value);
                 }}
-                checked={services.includes(item.id)}
+                checked={services.includes(item.title)}
               />
             );
           })}

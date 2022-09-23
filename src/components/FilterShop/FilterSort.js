@@ -1,7 +1,6 @@
 import { useEffect, useRef, memo, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Filter.module.scss';
-import { useSearchParams } from 'react-router-dom';
 import overplay from '../OverPlay/core/overplay';
 
 const cx = classNames.bind(styles);

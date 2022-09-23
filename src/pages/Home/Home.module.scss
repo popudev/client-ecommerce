@@ -5,6 +5,19 @@
   color: $third-color;
   // background-color: $second-color;
 
+  .slider {
+    height: calc(100vh - $header-height);
+    max-height: 1000px;
+
+    @include tablet {
+      height: calc(50vh - $header-tablet-height);
+    }
+
+    @include mobile {
+      height: calc(40vh - $header-mobile-height);
+    }
+  }
+
   .section-big-sale {
     padding-top: 50px;
   }

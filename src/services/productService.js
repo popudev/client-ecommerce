@@ -52,9 +52,13 @@ export const addProduct = async (data) => {
 
 export const getProductById = async (productId) => {
   try {
+    loading.run();
     const res = await httpRequest.get(`/product/${productId}`);
+    loading.done();
     return res;
   } catch (err) {
+    loading.done();
+
     console.log(err);
   }
 };
