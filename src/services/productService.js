@@ -1,13 +1,14 @@
-import { loading } from '~/components/Loading/core';
-import { toast } from '~/components/Toast/core';
 import httpRequest from '~/utils/httpRequest';
 
-export const getProductList = async (filter, limit = 20) => {
+import { loading } from '~/components/Loading/core';
+import { toast } from '~/components/Toast/core';
+
+export const getProductList = async (filter, limit = 20, pagination = true) => {
   try {
     let params = {
       title: filter?.title,
-      saleGte: filter?.price[0],
-      saleLte: filter?.price[1],
+      saleGte: filter?.price && filter?.price[0],
+      saleLte: filter?.price && filter?.price[1],
       page: filter?.page || 1,
       limit: limit,
     };
@@ -30,23 +31,12 @@ export const getProductList = async (filter, limit = 20) => {
 
     loading.run();
     const res = await httpRequest.get(`/product`, { params });
-
     loading.done();
 
-    return res;
+    return pagination ? res : res?.payload;
   } catch (err) {
     loading.done();
     console.log(err);
-  }
-};
-
-export const addProduct = async (data) => {
-  try {
-    await httpRequest.post(`/product`, data);
-    toast.success('Them san pham thanh cong');
-  } catch (err) {
-    console.log(err);
-    toast.error('Co loi');
   }
 };
 
@@ -58,6 +48,33 @@ export const getProductById = async (productId) => {
     return res;
   } catch (err) {
     loading.done();
+    return false;
     console.log(err);
+  }
+};
+
+export const getProductByTitle = async (title, limit = 10) => {
+  try {
+    const res = await httpRequest.get(`/product`, { params: { title, limit, page: 1 } });
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getProductsRandom = async (number) => {
+  try {
+    const res = await httpRequest.get(`/product/random`, { params: { number: number } });
+    return res || [];
+  } catch (err) {}
+};
+
+export const addProduct = async (data) => {
+  try {
+    await httpRequest.post(`/product`, data);
+    toast.success('Them san pham thanh cong');
+  } catch (err) {
+    console.log(err);
+    toast.error('Co loi');
   }
 };

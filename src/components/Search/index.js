@@ -1,15 +1,17 @@
-import { useState, useRef, memo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { memo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
-import styles from './Search.module.scss';
+
+import { useDebounce, useDidUpdate, useFilterState } from '~/hooks';
+import { getProductByTitle } from '~/services/productService';
 
 import Button from '~/components/Button';
-import Tippy from '~/components/Tippy';
-import { ProductItemSearch } from '~/components/Product';
 import Propper from '~/components/Popper';
-import { useDebounce, useDidUpdate, useFilterState } from '~/hooks';
-import { getProductList } from '~/services/productService';
+import ProductItemSearch from '~/components/ProductItemSearch';
+import Tippy from '~/components/Tippy';
+
+import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -36,7 +38,7 @@ function Search() {
     }
     const fetchSearchProducts = async () => {
       setLoading(true);
-      const result = await getProductList({ title: titleValue }, 6);
+      const result = await getProductByTitle(titleValue, 6);
       setSearchResult(result?.payload || []);
       setLoading(false);
     };

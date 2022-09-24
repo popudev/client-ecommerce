@@ -1,16 +1,19 @@
-import classNames from 'classnames/bind';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '~/components/Button';
-import Helmet from '~/components/Helmet';
-import { useGlobalState } from '~/hooks';
-import styles from './Login.module.scss';
+
+import classNames from 'classnames/bind';
 
 import { background } from '~/assets/images';
-import { Form, FormInput } from '~/components/Form';
+import { useGlobalState } from '~/hooks';
 import { loginUser } from '~/services/authenService';
 import { getRememberUsername, setRememberUsername } from '~/utils/localStorage';
-import { useState } from 'react';
-import CheckBox from '~/components/CheckBox';
+
+import Button from '~/components/Button';
+import CheckBox from '~/components/CheckBox/CheckBox';
+import { Form, FormInput } from '~/components/Form';
+import Helmet from '~/components/Helmet';
+
+import styles from './Login.module.scss';
 
 const cx = classNames.bind(styles);
 

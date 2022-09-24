@@ -1,17 +1,22 @@
-import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import config, { formatMoney } from '~/config';
-import styles from './ItemCart.module.scss';
+import { Link } from 'react-router-dom';
+
+import classNames from 'classnames/bind';
+
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import Button from '../Button';
-import { deleteProductToCart, changeQuantityToCart } from '~/services/cartService';
+
 import { product1 } from '~/assets/images';
+import config, { formatMoney } from '~/config';
+import { changeQuantityToCart, deleteProductToCart } from '~/services/cartService';
+
+import Button from '../Button';
+
+import styles from './ProductItemCart.module.scss';
 
 const cx = classNames.bind(styles);
 
-function ItemCart({ data, handleDelete, handleChange, mobile }) {
+function ProductItemCart({ data, handleDelete, handleChange, mobile }) {
   const [quantity, setQuantity] = useState(data.quantity);
   const totalPrice = quantity * data.product.sale;
 
@@ -65,7 +70,7 @@ function ItemCart({ data, handleDelete, handleChange, mobile }) {
   return (
     <tr className={cx('wrapper')}>
       <td className={cx('image')}>
-        <Link to={`${config.routes.detail}/${data._id}`}>
+        <Link to={`${config.routes.detail}/${data.product._id}`}>
           <LazyLoadImage
             alt={''}
             width={'100%'}
@@ -148,4 +153,4 @@ function ItemCart({ data, handleDelete, handleChange, mobile }) {
   );
 }
 
-export default ItemCart;
+export default ProductItemCart;

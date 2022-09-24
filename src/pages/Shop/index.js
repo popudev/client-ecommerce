@@ -1,18 +1,18 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
 import classNames from 'classnames/bind';
 
-import Helmet from '~/components/Helmet';
-import { ProductList, ProductCard } from '~/components/Product';
-import { Filter, FilterSort } from '~/components/FilterShop';
-import { Pagination, PaginationMini } from '~/components/Pagination';
-
+import { banner } from '~/assets/images';
+import { useFilterState } from '~/hooks';
 import { getProductList } from '~/services/productService';
 
-import styles from './Shop.module.scss';
-import { useFilterState } from '~/hooks';
 import Banner from '~/components/Banner';
+import { Filter, FilterSort } from '~/components/FilterShop';
+import Helmet from '~/components/Helmet';
+import { Pagination, PaginationMini } from '~/components/Pagination';
+import { ProductList } from '~/components/Product';
 
-import { banner } from '~/assets/images';
+import styles from './Shop.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -90,27 +90,18 @@ function Shop() {
                 </button>
               </div>
               <FilterSort filterState={filterState} dispatch={dispatch} onToggle={onToggleSort} />
-              <PaginationMini
-                page={pagination?.page}
-                pageCount={pagination?.totalPage}
-                nextPage={nextPage}
-                prevPage={prevPage}
-              />
+              {loading && <PaginationMini.Loading />}
+              {!loading && (
+                <PaginationMini
+                  page={pagination?.page}
+                  pageCount={pagination?.totalPage}
+                  nextPage={nextPage}
+                  prevPage={prevPage}
+                />
+              )}
             </div>
             <div className={cx('products')}>
-              <ProductList col={4} mdCol={3} smCol={2} gap={20} smGap={10}>
-                {loading &&
-                  Array(20)
-                    .fill(0)
-                    .map((e, index) => {
-                      return <ProductCard.Loading key={index} />;
-                    })}
-
-                {!loading &&
-                  payload?.map((e) => {
-                    return <ProductCard key={e?._id} data={e} />;
-                  })}
-              </ProductList>
+              <ProductList col={4} mdCol={3} smCol={2} gap={10} smGap={10} data={payload} loading={loading} />
             </div>
             <Pagination
               initialPage={pagination?.page}

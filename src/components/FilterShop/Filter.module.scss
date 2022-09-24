@@ -106,7 +106,7 @@
       font-weight: 700;
     }
 
-    & > * {
+    & > *:not(span) {
       width: 70%;
       margin-bottom: 20px;
       padding: 10px;

@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
-import Helmet from '~/components/Helmet';
-import styles from './Cart.module.scss';
-import Button from '~/components/Button';
-import { getInfoCart } from '~/services/cartService';
-import { formatMoney } from '~/config';
-import ItemCart from '~/components/ItemCart';
-import Table from '~/components/Table';
-import Banner from '~/components/Banner';
+
 import { banner } from '~/assets/images';
+import { formatMoney } from '~/config';
+import { getInfoCart } from '~/services/cartService';
+
+import Banner from '~/components/Banner';
+import Button from '~/components/Button';
+import Helmet from '~/components/Helmet';
+import ProductItemCart from '~/components/ProductItemCart';
+import Table from '~/components/Table';
+
+import styles from './Cart.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -57,7 +60,7 @@ function Cart() {
               >
                 {items.map((item) => {
                   return (
-                    <ItemCart
+                    <ProductItemCart
                       key={item._id}
                       data={item}
                       handleDelete={handleDeleteProduct}
@@ -70,7 +73,7 @@ function Cart() {
               <Table className={cx('table_mobile')} titles={['Image', 'Info', 'Actions']}>
                 {items.map((item) => {
                   return (
-                    <ItemCart
+                    <ProductItemCart
                       key={item._id + 2}
                       data={item}
                       mobile

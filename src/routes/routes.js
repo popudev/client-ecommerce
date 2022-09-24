@@ -1,17 +1,12 @@
 import config from '~/config';
-
-// Layouts
-
-// Pages
-import Home from '~/pages/Home';
-import Shop from '~/pages/Shop';
-import Cart from '~/pages/Cart';
-import Login from '~/pages/Login';
-import Register from '~/pages/Register';
-import Detail from '~/pages/Detail';
-import NotFound from '~/pages/NotFound';
-
 import AdminProduct from '~/pages/AdminProduct';
+import Cart from '~/pages/Cart';
+import Detail from '~/pages/Detail';
+import Home from '~/pages/Home';
+import Login from '~/pages/Login';
+import NotFound from '~/pages/NotFound';
+import Register from '~/pages/Register';
+import Shop from '~/pages/Shop';
 
 // Public routes
 const publicRoutes = [

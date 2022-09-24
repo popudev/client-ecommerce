@@ -1,19 +1,19 @@
 import classNames from 'classnames/bind';
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { formatMoney } from '~/config';
-import styles from './ProductCard.module.scss';
+import { Link } from 'react-router-dom';
+
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { product1 } from '~/assets/images';
-import config from '~/config';
-import ControlQuantity from '../ControlQuantity';
-import Button from '../Button';
+import config, { formatMoney } from '~/config';
 import { addProductToCart } from '~/services/cartService';
 
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Button from '~/components/Button';
+import ControlQuantity from '~/components/ControlQuantity';
+import Skeleton from '~/components/Skeleton';
+
+import styles from './ProductCard.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -76,16 +76,14 @@ function ProductCard({ data }) {
 
 const Loading = () => {
   return (
-    <SkeletonTheme baseColor="#1c0a00" highlightColor="#361500" borderRadius={0}>
-      <div className={cx('wrapper')}>
-        <div className={cx('image')}>
-          <Skeleton width="100%" height="100%" />
-        </div>
-        <div className={cx('context_loading')}>
-          <Skeleton count={2} width="100%" height={40} />
-        </div>
+    <div className={cx('wrapper')}>
+      <div className={cx('image')}>
+        <Skeleton width="100%" height="100%" />
       </div>
-    </SkeletonTheme>
+      <div className={cx('context_loading')}>
+        <Skeleton count={2} width="100%" height={40} />
+      </div>
+    </div>
   );
 };
 

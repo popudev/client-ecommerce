@@ -1,14 +1,18 @@
-import { useState, useEffect, useCallback, memo, useRef } from 'react';
-import { fakeRams, fakeRoms, fakeServices } from '~/assets/data';
-import { getCategoryList } from '~/services/categoryService';
-import { add, del } from '~/reducers/actions/filterAction';
-import CheckBox from '~/components/CheckBox';
-import PriceRangeSlider from '~/components/PriceRangeSlider';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames/bind';
-import styles from './Filter.module.scss';
-import Button from '../Button';
+
+import { fakeRams, fakeRoms, fakeServices } from '~/assets/data';
+import { add, del } from '~/reducers/actions/filterAction';
+import { getCategoryList } from '~/services/categoryService';
+
+import Button from '~/components/Button';
+import CheckBox from '~/components/CheckBox/CheckBox';
+import PriceRangeSlider from '~/components/PriceRangeSlider';
+
 import overplay from '../OverPlay/core/overplay';
+
+import styles from './Filter.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -65,7 +69,7 @@ function Filter({ filterState, dispatch, onToggle }) {
         </div>
         <div className={cx('wedget__content')}>
           {!categories.length &&
-            Array(5)
+            Array(10)
               .fill(0)
               .map((e, index) => {
                 return <CheckBox.Loading key={index} />;
