@@ -1,13 +1,16 @@
-import classNames from 'classnames/bind';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '~/components/Button';
-import Helmet from '~/components/Helmet';
-import { useGlobalState } from '~/hooks';
-import styles from './Register.module.scss';
+
+import classNames from 'classnames/bind';
 
 import { background } from '~/assets/images';
-import { Form, FormInput } from '~/components/Form';
+import { useGlobalState } from '~/hooks';
 import { registerUser } from '~/services/authenService';
+
+import Button from '~/components/Button';
+import { Form, FormInput } from '~/components/Form';
+import Helmet from '~/components/Helmet';
+
+import styles from './Register.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -19,8 +22,8 @@ function Register() {
   let errorExistUsename = {};
 
   if (register.error) {
-    if (register.error.keyPattern.username) errorExistUsename = { mess: 'Username is exist' };
     if (register.error.keyPattern.email) errorExistEmail = { mess: 'Email is exist' };
+    if (register.error.keyPattern.username) errorExistUsename = { mess: 'Username is exist' };
   }
 
   const initialValues = {
@@ -41,9 +44,13 @@ function Register() {
     },
     username: {
       required: true,
+      min: 6,
+      max: 20,
     },
     password: {
       required: true,
+      min: 6,
+      max: 20,
     },
     confirmPassword: {
       required: true,
@@ -85,8 +92,10 @@ function Register() {
           </Form>
 
           <div className={cx('navigator')}>
-            <span>Ban da co tai khoan ?</span>
-            <Link to="/login">Dang nhap</Link>
+            <span>Do you have an account ?</span>
+            <Button fill text to="/login">
+              Login
+            </Button>
           </div>
         </div>
       </div>

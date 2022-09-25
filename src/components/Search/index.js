@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 
+import config from '~/config';
 import { useDebounce, useDidUpdate, useFilterState } from '~/hooks';
 import { getProductByTitle } from '~/services/productService';
 
@@ -58,7 +59,7 @@ function Search() {
     });
     setTitle('');
     inputRef.current.blur();
-    navigator(`/shop`);
+    navigator(config.routes.shop);
   };
 
   return (

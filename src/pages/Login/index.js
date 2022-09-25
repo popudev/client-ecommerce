@@ -45,7 +45,7 @@ function Login() {
   const validateSchema = {
     username: {
       required: true,
-      min: 5,
+      min: 6,
       max: 20,
     },
     password: {
@@ -62,6 +62,10 @@ function Login() {
   const handleRememberUsername = (checkbox) => {
     setRememberUsername(checkbox.checked);
     setRemember(checkbox.checked);
+  };
+
+  const github = () => {
+    window.open('http://localhost:8000/auth/github', '_seft');
   };
 
   return (
@@ -100,16 +104,25 @@ function Login() {
             <Button outline leftIcon={<i className="fa-brands fa-google"></i>}>
               GOOGLE
             </Button>
+
             <Button outline leftIcon={<i className="fa-brands fa-facebook-f"></i>}>
               FACEBOOK
             </Button>
-            <Button outline leftIcon={<i className="fa-brands fa-github"></i>}>
+
+            <Button onClick={github} outline leftIcon={<i className="fa-brands fa-github"></i>}>
               GITHUB
             </Button>
           </div>
           <div className={cx('navigator')}>
-            <span>Ban chua co tai khoan ?</span>
-            <Link to="/register">Dang ky</Link>
+            <span>Don't you have an account ?</span>
+            <Button fill text to="/register">
+              Register
+            </Button>
+          </div>
+          <div className={cx('navigator')}>
+            <Button fill text to="/register">
+              Forgotten password ?
+            </Button>
           </div>
         </div>
       </div>

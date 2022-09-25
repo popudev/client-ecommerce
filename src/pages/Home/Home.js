@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { fakeCategoryCard, fakeProducts, fakeSlider } from '~/assets/data';
+import { fakeCategoryCard, fakeSlider } from '~/assets/data';
 import { getProductList, getProductsRandom } from '~/services/productService';
 
 import Button from '~/components/Button';
@@ -54,7 +54,7 @@ function Home() {
       <div className={cx('wrapper', 'main', 'container')}>
         {/* slider */}
         <div className={cx('slider')}>
-          <Slider data={fakeSlider} shadow isLink="/shop" />
+          <Slider data={fakeSlider} auto isLink="/shop" />
         </div>
         {/* end slider */}
 

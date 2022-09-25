@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import FormInput from './FormInput';
 
 function Form(props) {
@@ -8,15 +9,15 @@ function Form(props) {
   const [errorValidations, setErrorValidations] = useState({});
 
   const validation = {
-    required: (value, isRequired) => (isRequired ? (value ? '' : 'Bat buoc nhap') : ''),
-    min: (value, min) => (value.length >= min ? '' : 'Chuoi dai hon min ki tu'),
-    max: (value, max) => (value.length <= max ? '' : 'Chuoi dai toi da max ki tu'),
+    required: (value, isRequired) => (isRequired ? (value ? '' : 'Required !!!') : ''),
+    min: (value, min) => (value.length >= min ? '' : `At least ${min} characters !!!`),
+    max: (value, max) => (value.length <= max ? '' : `Up to ${max} characters !!!`),
     email: (value, isEmail) => {
       if (!isEmail) return;
       const error = !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
-      return error ? 'Email ko hop le' : '';
+      return error ? 'Email is not valid !!!' : '';
     },
-    confirm: (value, confirmValue) => (value === values[confirmValue] ? '' : 'Ko khop'),
+    confirm: (value, confirmValue) => (value === values[confirmValue] ? '' : 'Confirm password does not match !!!'),
   };
 
   const validate = (value, name) => {

@@ -1,11 +1,15 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './Header.module.scss';
+
 import classNames from 'classnames/bind';
 
 import { logoImg } from '~/assets/images';
-import { useEffect, useRef } from 'react';
+
 import Search from '~/components/Search';
+
 import Menu from './components/Menu';
+
+import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -22,6 +26,8 @@ function Header() {
     };
 
     window.addEventListener('scroll', handleScroll);
+
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);

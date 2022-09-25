@@ -4,8 +4,10 @@
   @include flex(center, center);
   background-color: $fourth-color;
   padding: 20px;
+  min-width: 250px;
   margin-bottom: 10px;
   border: 1px solid #fff;
+  color: #fff;
   animation-fill-mode: forwards;
   animation-name: slideInLeft, faderOut;
   animation-delay: 0s, 1s;
@@ -38,12 +40,15 @@
 .icon i {
   display: none;
   margin-right: 10px;
+  font-size: 18px;
 }
 
 .icon.success i.success {
   display: block;
+  color: rgb(73, 255, 73);
 }
 
 .icon.error i.error {
+  color: rgb(250, 82, 82);
   display: block;
 }

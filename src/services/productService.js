@@ -1,7 +1,6 @@
 import httpRequest from '~/utils/httpRequest';
 
 import { loading } from '~/components/Loading/core';
-import { toast } from '~/components/Toast/core';
 
 export const getProductList = async (filter, limit = 20, pagination = true) => {
   try {
@@ -47,9 +46,7 @@ export const getProductById = async (productId) => {
     loading.done();
     return res;
   } catch (err) {
-    loading.done();
-    return false;
-    console.log(err);
+    return loading.done().err;
   }
 };
 
@@ -57,9 +54,7 @@ export const getProductByTitle = async (title, limit = 10) => {
   try {
     const res = await httpRequest.get(`/product`, { params: { title, limit, page: 1 } });
     return res;
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };
 
 export const getProductsRandom = async (number) => {
@@ -69,12 +64,12 @@ export const getProductsRandom = async (number) => {
   } catch (err) {}
 };
 
-export const addProduct = async (data) => {
-  try {
-    await httpRequest.post(`/product`, data);
-    toast.success('Them san pham thanh cong');
-  } catch (err) {
-    console.log(err);
-    toast.error('Co loi');
-  }
-};
+// export const addProduct = async (data) => {
+//   try {
+//     await httpRequest.post(`/product`, data);
+//     toast.success('Them san pham thanh cong');
+//   } catch (err) {
+//     console.log(err);
+//     toast.error('Co loi');
+//   }
+// };

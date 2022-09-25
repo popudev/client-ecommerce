@@ -1,6 +1,8 @@
-import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
+
+import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
+
 import styles from './Button.module.scss';
 
 const cx = classNames.bind(styles);
@@ -19,6 +21,7 @@ function Button({
   w50 = false,
   hfull = false,
   square = false,
+  fill = false,
   children,
   className,
   leftIcon,
@@ -62,6 +65,7 @@ function Button({
     full,
     w50,
     hfull,
+    fill,
   });
 
   return (

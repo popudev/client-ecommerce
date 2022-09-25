@@ -1,6 +1,7 @@
-import { loading } from '~/components/Loading/core';
 import httpRequest from '~/utils/httpRequest';
 import { getAccessToken } from '~/utils/localStorage';
+
+import { loading } from '~/components/Loading/core';
 
 export const getInfoUser = async () => {
   try {

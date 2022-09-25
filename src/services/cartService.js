@@ -1,25 +1,25 @@
+import config from '~/config';
 import httpRequest from '~/utils/httpRequest';
-import { toast } from '~/components/Toast/core';
-import { loading } from '~/components/Loading/core';
 import { getAccessToken } from '~/utils/localStorage';
+
+import { loading } from '~/components/Loading/core';
 
 export const addProductToCart = async (data) => {
   try {
     loading.run();
+
     const accessToken = getAccessToken();
     await httpRequest.post(`/cart`, data, {
       headers: {
         token: `Bearer ${accessToken}`,
       },
     });
-    loading.done();
-    toast.success('Ban da them vao gio hang');
-    return true;
+
+    return loading.done().success(config.notifications.cart.add);
   } catch (err) {
-    console.log('err: ', err);
-    loading.done();
-    toast.error('Vui long dang nhap!!!');
-    return false;
+    return err.status === 401
+      ? loading.done().error(config.notifications.auth.unauth)
+      : loading.done().error(config.notifications.server.error);
   }
 };
 
@@ -35,7 +35,9 @@ export const getInfoCart = async () => {
     loading.done();
     return res;
   } catch (err) {
-    loading.done();
+    return err.status === 401
+      ? loading.done().error(config.notifications.auth.unauth)
+      : loading.done().error(config.notifications.server.error);
   }
 };
 
@@ -48,13 +50,11 @@ export const deleteProductToCart = async (id) => {
         token: `Bearer ${accessToken}`,
       },
     });
-    loading.done();
-    toast.success('So luong da duoc cap nhat');
-    return true;
+    return loading.done().success(config.notifications.cart.delete);
   } catch (err) {
-    loading.done();
-    toast.error('Vui long dang nhap');
-    return false;
+    return err.status === 401
+      ? loading.done().error(config.notifications.auth.unauth)
+      : loading.done().error(config.notifications.server.error);
   }
 };
 
@@ -67,12 +67,10 @@ export const changeQuantityToCart = async (data) => {
         token: `Bearer ${accessToken}`,
       },
     });
-    loading.done();
-    toast.success('So luong da duoc cap nhat');
-    return true;
+    return loading.done().success(config.notifications.cart.change);
   } catch (err) {
-    loading.done();
-    toast.error('Vui long dang nhap');
-    return false;
+    return err.status === 401
+      ? loading.done().error(config.notifications.auth.unauth)
+      : loading.done().error(config.notifications.server.error);
   }
 };

@@ -33,6 +33,7 @@ function Detail() {
     <div className={cx('wrapper', 'main', 'container')}>
       {loading ? (
         <>
+          <Header.Loading />
           <ProductDetail.Loading />
         </>
       ) : (

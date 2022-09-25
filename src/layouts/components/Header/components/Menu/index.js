@@ -1,11 +1,16 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { avatarDefault } from '~/assets/images';
-import Tippy from '~/components/Tippy';
-import Popper from '~/components/Popper';
-import { logoutUser } from '~/services/authenService';
 import { Fragment, useRef } from 'react';
-import { useGlobalState } from '~/hooks';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
 import classNames from 'classnames/bind';
+
+import { avatarDefault } from '~/assets/images';
+import config from '~/config';
+import { useGlobalState } from '~/hooks';
+import { logoutUser } from '~/services/authenService';
+
+import Popper from '~/components/Popper';
+import Tippy from '~/components/Tippy';
+
 import styles from './Menu.module.scss';
 
 const cx = classNames.bind(styles);
@@ -15,25 +20,25 @@ const menuNav = [
     id: 1,
     title: 'Home',
     icon: <i className="fa-solid fa-house-chimney"></i>,
-    path: '/',
+    path: config.routes.home,
   },
   {
     id: 2,
     title: 'Shop',
     icon: <i className="fa-solid fa-shop"></i>,
-    path: '/shop',
+    path: config.routes.shop,
   },
   {
     id: 3,
     title: 'Cart',
     icon: <i className="fa-solid fa-cart-shopping"></i>,
-    path: '/cart',
+    path: config.routes.cart,
   },
   {
     id: 4,
     title: 'Login',
     icon: <i className="fa-solid fa-user"></i>,
-    path: '/login',
+    path: config.routes.login,
   },
 ];
 

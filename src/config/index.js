@@ -1,3 +1,4 @@
+import notifications from './notifications';
 import routes from './routes';
 
 export const formatMoney = (n) => {
@@ -7,6 +8,7 @@ export const formatMoney = (n) => {
 
 const config = {
   routes,
+  notifications,
 };
 
 export default config;

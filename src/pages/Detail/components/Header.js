@@ -31,9 +31,8 @@ const Header = ({ info }) => {
 
 Header.Loading = () => {
   return (
-    <div className={cx('header', 'loading__mobile')}>
-      {/* <div className={cx('header__action')}></div> */}
-      <Skeleton width="50%" height={60} borderRadius={10} />
+    <div className={cx('header')}>
+      <Skeleton width="100%" height={60} />
     </div>
   );
 };

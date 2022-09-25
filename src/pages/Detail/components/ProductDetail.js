@@ -70,7 +70,9 @@ const ProductDetail = ({ info }) => {
 ProductDetail.Loading = () => {
   return (
     <div className={cx('product_info', 'loading__mobile')}>
-      <div className={cx('banner')}>{/* <img src={bannerDetail} alt="" /> */}</div>
+      <div className={cx('banner')}>
+        <Skeleton height="100%" />
+      </div>
       <div className={cx('images')}>
         <Skeleton height="100%" />
       </div>
@@ -87,7 +89,9 @@ ProductDetail.Loading = () => {
           <Skeleton width={150} height="60px" />
         </div>
       </div>
-      <div className={cx('banner')}>{/* <img src={bannerDetail} alt="" /> */}</div>
+      <div className={cx('banner')}>
+        <Skeleton height="100%" />
+      </div>
     </div>
   );
 };

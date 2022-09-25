@@ -1,5 +1,6 @@
 import axios from 'axios';
 import queryString from 'query-string';
+
 import { setAccessToken } from './localStorage';
 
 const httpRequest = axios.create({
@@ -95,7 +96,7 @@ httpRequest.interceptors.response.use(
       });
     }
 
-    return Promise.reject(error);
+    return Promise.reject(error.response);
   },
 );
 

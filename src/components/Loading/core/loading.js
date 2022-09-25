@@ -1,3 +1,5 @@
+import { toast } from '~/components/Toast/core';
+
 const loading = {
   config(setVisible) {
     loading.setVisible = setVisible;
@@ -8,9 +10,15 @@ const loading = {
     loading.setVisible(true);
   },
 
-  done() {
+  done(callBack) {
     // console.log('done');
     loading.setVisible(false);
+
+    return {
+      ...toast,
+      err: false,
+      succ: true,
+    };
   },
 };
 

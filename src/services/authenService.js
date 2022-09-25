@@ -1,4 +1,3 @@
-import httpRequest from '~/utils/httpRequest';
 import {
   loginFailed,
   loginSuccess,
@@ -7,6 +6,8 @@ import {
   registerFailed,
   registerSuccess,
 } from '~/reducers/actions/authenAction';
+import httpRequest from '~/utils/httpRequest';
+
 import { loading } from '~/components/Loading/core';
 import { toast } from '~/components/Toast/core';
 
@@ -18,21 +19,21 @@ export const registerUser = async (user, dispatch, navigator) => {
     navigator('/login');
     loading.done();
   } catch (err) {
-    dispatch(registerFailed(err.response.data));
+    dispatch(registerFailed(err.data));
     loading.done();
   }
 };
 
-export const loginUser = async (user, dispatch, navigator, remember = false) => {
+export const loginUser = async (user, dispatch, navigator) => {
   try {
     loading.run();
     const res = await httpRequest.post(`/auth/login`, user, { withCredentials: true });
     dispatch(loginSuccess(res));
-    navigator('/');
+    navigator(-1);
     loading.done();
   } catch (err) {
     console.log(err);
-    dispatch(loginFailed(err?.response?.data));
+    dispatch(loginFailed(err.data));
     loading.done();
   }
 };
@@ -45,9 +46,7 @@ export const logoutUser = async (dispatch, navigator) => {
     navigator('/login');
     loading.done();
   } catch (err) {
-    console.log(err);
-    dispatch(logoutFailed(err?.response?.data));
-    loading.done();
-    toast.error(err?.response?.data);
+    dispatch(logoutFailed(err.data));
+    loading.done().error(err.data);
   }
 };

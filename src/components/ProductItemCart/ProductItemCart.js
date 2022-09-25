@@ -144,7 +144,7 @@ function ProductItemCart({ data, handleDelete, handleChange, mobile }) {
           <Button outline onClick={handleClickDelete}>
             Delete
           </Button>
-          <Button to={`/product/${data.product._id}`} text>
+          <Button to={`${config.routes.detail}/${data.product._id}`} text>
             Details
           </Button>
         </div>

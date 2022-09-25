@@ -1,7 +1,9 @@
+import { memo } from 'react';
+
 import classNames from 'classnames/bind';
-import { useEffect, useLayoutEffect, useState } from 'react';
 
 import styles from './Toast.module.scss';
+
 const cx = classNames.bind(styles);
 
 function Toast({ type, mess }) {
@@ -16,4 +18,4 @@ function Toast({ type, mess }) {
   );
 }
 
-export default Toast;
+export default memo(Toast);
