@@ -169,7 +169,7 @@ function Menu() {
           >
             <Link to={item.path}>
               <div className={cx('avatar')}>
-                <img src={avatarDefault} alt="" />
+                <img src={currentUser?.avatar || avatarDefault} alt="" />
               </div>
             </Link>
           </Tippy>

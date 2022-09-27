@@ -9,7 +9,6 @@ import {
 import httpRequest from '~/utils/httpRequest';
 
 import { loading } from '~/components/Loading/core';
-import { toast } from '~/components/Toast/core';
 
 export const registerUser = async (user, dispatch, navigator) => {
   try {
@@ -49,4 +48,14 @@ export const logoutUser = async (dispatch, navigator) => {
     dispatch(logoutFailed(err.data));
     loading.done().error(err.data);
   }
+};
+
+export const loginSuccessThirdParty = async (dispatch, navigator) => {
+  try {
+    const res = await httpRequest.get(`/auth/login/success`, { withCredentials: true });
+    console.log('res: ', res);
+    dispatch(loginSuccess(res));
+    navigator('/', { replace: true });
+    console.log(res);
+  } catch (err) {}
 };

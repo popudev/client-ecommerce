@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 
 import { background } from '~/assets/images';
 import { useGlobalState } from '~/hooks';
-import { loginUser } from '~/services/authenService';
+import { loginSuccessThirdParty, loginUser } from '~/services/authenService';
 import { getRememberUsername, setRememberUsername } from '~/utils/localStorage';
 
 import Button from '~/components/Button';
@@ -20,7 +20,7 @@ const cx = classNames.bind(styles);
 function Login() {
   const navigator = useNavigate();
   const { globalState, dispatch } = useGlobalState();
-  const { error } = globalState.login;
+  const { error, currentUser } = globalState.login;
   const [remember, setRemember] = useState(getRememberUsername());
 
   // useEffect(() => {
@@ -28,6 +28,12 @@ function Login() {
   //     navigator('/', { replace: true });
   //   }
   // });
+
+  useEffect(() => {
+    (function () {
+      if (!currentUser) loginSuccessThirdParty(dispatch, navigator);
+    })();
+  }, [currentUser, dispatch, navigator]);
 
   let errorUsername = {};
   let errorPassword = {};
@@ -65,7 +71,15 @@ function Login() {
   };
 
   const github = () => {
-    window.open('http://localhost:8000/auth/github', '_seft');
+    window.open(process.env.REACT_APP_API_URL + '/auth/github', '_self');
+  };
+
+  const google = () => {
+    window.open(process.env.REACT_APP_API_URL + '/auth/google', '_self');
+  };
+
+  const facebook = () => {
+    window.open(process.env.REACT_APP_API_URL + '/auth/facebook', '_self');
   };
 
   return (
@@ -101,11 +115,11 @@ function Login() {
           </Form>
           <div className={cx('social_media')}>
             <p>--OR LOGIN WITH--</p>
-            <Button outline leftIcon={<i className="fa-brands fa-google"></i>}>
+            <Button onClick={google} outline leftIcon={<i className="fa-brands fa-google"></i>}>
               GOOGLE
             </Button>
 
-            <Button outline leftIcon={<i className="fa-brands fa-facebook-f"></i>}>
+            <Button onClick={facebook} outline leftIcon={<i className="fa-brands fa-facebook-f"></i>}>
               FACEBOOK
             </Button>
 
