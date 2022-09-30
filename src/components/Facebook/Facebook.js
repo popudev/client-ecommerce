@@ -22,6 +22,7 @@ function Facebook(props) {
 
   const getInfoUser = () => {
     window.FB.api('/me?fields=id,name,email,picture', (userInfo) => {
+      loading.run();
       if (!userInfo || userInfo.error) {
         onError();
       } else {
@@ -34,6 +35,7 @@ function Facebook(props) {
 
         onSuccess(userFb, 'facebook');
       }
+      loading.done();
     });
   };
 
@@ -42,7 +44,6 @@ function Facebook(props) {
       return React.cloneElement(child, {
         onClick: () => {
           window.FB.getLoginStatus((response) => {
-            loading.run();
             if (response.status === 'connected') getInfoUser();
             else {
               login();
@@ -59,7 +60,7 @@ function Facebook(props) {
     () => {
       window.fbAsyncInit = () => {
         window.FB.init({
-          version: `v3.1`,
+          version: 'v15.0',
           appId: process.env.REACT_APP_FACEBOOK_APP_ID,
           xfbml: true,
           cookie: true,

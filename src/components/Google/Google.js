@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import useScript from '~/hooks/useScript';
 
 function Google(props) {
-  const { children, onSuccess, onError } = props;
+  const { children, onSuccess = () => {}, onError = () => {} } = props;
 
   const googleBtn = useRef();
 
@@ -36,10 +36,10 @@ function Google(props) {
               email: res.gv.Tv,
               avatar: res.gv.gO,
             };
-            if (typeof onSuccess === 'function') onSuccess(googleUser, 'google');
+            onSuccess(googleUser, 'google');
           },
           function (error) {
-            if (typeof onError === 'function') onError(error);
+            onError(error);
           },
         );
       });
