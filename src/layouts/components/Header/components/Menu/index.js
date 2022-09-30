@@ -118,7 +118,7 @@ function Menu() {
           if (index === 0) {
             return (
               <div key={item.id} className={cx('menu_user-item', 'username', { separate: item.separate })}>
-                <span className={cx('menu_user-title')}>{currentUser?.username}</span>
+                <span className={cx('menu_user-title')}>{currentUser?.username || currentUser?.fullname}</span>
               </div>
             );
           }
@@ -194,11 +194,11 @@ function Menu() {
           {currentUser && (
             <Link to="/infomation">
               <div className={cx('avatar')}>
-                <img src={avatarDefault} alt="" />
+                <img src={currentUser?.avatar || avatarDefault} alt="" />
               </div>
             </Link>
           )}
-          <span>{currentUser?.username}</span>
+          <span>{currentUser?.username || currentUser?.fullname}</span>
           {currentUser?.admin && (
             <Link to="/admin">
               <div className={cx('menu__item', { active: indexItemUserNavActive === 1 })}>

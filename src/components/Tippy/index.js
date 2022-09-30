@@ -1,7 +1,11 @@
+import { useEffect, useState } from 'react';
+
 import classNames from 'classnames/bind';
-import { useEffect, useRef, useState } from 'react';
+
 import { useDebounce } from '~/hooks';
+
 import styles from './Tippy.module.scss';
+
 const cx = classNames.bind(styles);
 
 function Tippy(props) {

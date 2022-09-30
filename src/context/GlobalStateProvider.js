@@ -1,6 +1,7 @@
-import { createContext, useReducer, useEffect } from 'react';
-import authenReducer, { initialState } from '~/reducers/authenReducer';
+import { createContext, useEffect, useReducer } from 'react';
+
 import { loginSuccess } from '~/reducers/actions/authenAction';
+import authenReducer, { initialState } from '~/reducers/authenReducer';
 import { getInfoUser } from '~/services/userService';
 import { getAccessToken } from '~/utils/localStorage';
 

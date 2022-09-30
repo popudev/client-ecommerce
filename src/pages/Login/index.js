@@ -1,16 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 
 import { background } from '~/assets/images';
 import { useGlobalState } from '~/hooks';
-import { loginSuccessThirdParty, loginUser } from '~/services/authenService';
+import { loginGoogle, loginUser } from '~/services/authenService';
 import { getRememberUsername, setRememberUsername } from '~/utils/localStorage';
 
 import Button from '~/components/Button';
 import CheckBox from '~/components/CheckBox/CheckBox';
+import Facebook from '~/components/Facebook';
 import { Form, FormInput } from '~/components/Form';
+import Github from '~/components/Github';
+import Google from '~/components/Google';
 import Helmet from '~/components/Helmet';
 
 import styles from './Login.module.scss';
@@ -20,7 +23,7 @@ const cx = classNames.bind(styles);
 function Login() {
   const navigator = useNavigate();
   const { globalState, dispatch } = useGlobalState();
-  const { error, currentUser } = globalState.login;
+  const { error } = globalState.login;
   const [remember, setRemember] = useState(getRememberUsername());
 
   // useEffect(() => {
@@ -28,12 +31,6 @@ function Login() {
   //     navigator('/', { replace: true });
   //   }
   // });
-
-  useEffect(() => {
-    (function () {
-      if (!currentUser) loginSuccessThirdParty(dispatch, navigator);
-    })();
-  }, [currentUser, dispatch, navigator]);
 
   let errorUsername = {};
   let errorPassword = {};
@@ -70,16 +67,8 @@ function Login() {
     setRemember(checkbox.checked);
   };
 
-  const github = () => {
-    window.open(process.env.REACT_APP_API_URL + '/auth/github', '_self');
-  };
-
-  const google = () => {
-    window.open(process.env.REACT_APP_API_URL + '/auth/google', '_self');
-  };
-
-  const facebook = () => {
-    window.open(process.env.REACT_APP_API_URL + '/auth/facebook', '_self');
+  const handleLoginSocialSuccess = (response, type) => {
+    if (type === 'google') loginGoogle(response, dispatch, navigator);
   };
 
   return (
@@ -115,17 +104,23 @@ function Login() {
           </Form>
           <div className={cx('social_media')}>
             <p>--OR LOGIN WITH--</p>
-            <Button onClick={google} outline leftIcon={<i className="fa-brands fa-google"></i>}>
-              GOOGLE
-            </Button>
+            <Google onSuccess={handleLoginSocialSuccess}>
+              <Button outline leftIcon={<i className="fa-brands fa-google"></i>}>
+                GOOGLE
+              </Button>
+            </Google>
 
-            <Button onClick={facebook} outline leftIcon={<i className="fa-brands fa-facebook-f"></i>}>
-              FACEBOOK
-            </Button>
+            <Facebook>
+              <Button outline leftIcon={<i className="fa-brands fa-facebook-f"></i>}>
+                FACEBOOK
+              </Button>
+            </Facebook>
 
-            <Button onClick={github} outline leftIcon={<i className="fa-brands fa-github"></i>}>
-              GITHUB
-            </Button>
+            <Github>
+              <Button outline leftIcon={<i className="fa-brands fa-github"></i>}>
+                GITHUB
+              </Button>
+            </Github>
           </div>
           <div className={cx('navigator')}>
             <span>Don't you have an account ?</span>

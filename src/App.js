@@ -1,13 +1,16 @@
 import { Fragment } from 'react';
-import { publicRoutes, privateRoutes } from '~/routes';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+
 import { DefaultLayout } from '~/layouts';
-import { ToastContainer } from './components/Toast';
+import { privateRoutes, publicRoutes } from '~/routes';
+
 import Loading from './components/Loading';
-import ScrollToTop from './components/ScrollToTop';
-import RequireAuth from './components/RequireAuth';
-import NotFound from './pages/NotFound';
 import OverPlay from './components/OverPlay';
+import RequireAuth from './components/RequireAuth';
+import ScrollToTop from './components/ScrollToTop';
+import { ToastContainer } from './components/Toast';
+
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
