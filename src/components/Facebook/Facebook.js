@@ -13,9 +13,17 @@ function Facebook(props) {
             (response) => {
               console.log('response firt: ', response);
               if (response.authResponse) {
-                window.FB.api('/me', function (response) {
-                  console.log('response second: ', response);
-                  onSuccess(response, 'facebook');
+                window.FB.api('/me?fields=id,name,email,picture', function (userInfo) {
+                  console.log('userInfo: ', userInfo);
+
+                  const userFb = {
+                    facebookId: userInfo.id,
+                    fullname: userInfo.name,
+                    email: userInfo.email,
+                    avatar: userInfo.picture?.data?.url,
+                  };
+
+                  onSuccess(userFb, 'facebook');
                 });
               } else {
                 onError();
