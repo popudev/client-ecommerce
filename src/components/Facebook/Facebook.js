@@ -22,7 +22,6 @@ function Facebook(props) {
 
   const getInfoUser = () => {
     window.FB.api('/me?fields=id,name,email,picture', (userInfo) => {
-      loading.run();
       if (!userInfo || userInfo.error) {
         onError();
       } else {
@@ -43,6 +42,7 @@ function Facebook(props) {
     return React.Children.map(children, (child) => {
       return React.cloneElement(child, {
         onClick: () => {
+          loading.run();
           window.FB.getLoginStatus((response) => {
             if (response.status === 'connected') getInfoUser();
             else {
