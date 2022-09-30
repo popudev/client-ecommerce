@@ -14,6 +14,7 @@ function Facebook(props) {
           getInfoUser();
         } else {
           onError();
+          loading.done();
         }
       },
       { scope: 'public_profile,email' },
@@ -42,8 +43,8 @@ function Facebook(props) {
     return React.Children.map(children, (child) => {
       return React.cloneElement(child, {
         onClick: () => {
-          loading.run();
           window.FB.getLoginStatus((response) => {
+            loading.run();
             if (response.status === 'connected') getInfoUser();
             else {
               login();

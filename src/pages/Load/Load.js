@@ -4,11 +4,9 @@ import { loading } from '~/components/Loading/core';
 
 function Load() {
   useEffect(() => {
-    loading.setImportance(true);
     loading.run();
 
     return () => {
-      loading.setImportance(false);
       loading.done();
     };
   });

@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 
 import useScript from '~/hooks/useScript';
 
+import { loading } from '../Loading/core';
+
 function Google(props) {
   const { children, onSuccess = () => {}, onError = () => {} } = props;
 
@@ -11,6 +13,9 @@ function Google(props) {
     return React.Children.map(children, (child) => {
       return React.cloneElement(child, {
         ref: googleBtn,
+        onClick: () => {
+          loading.run();
+        },
       });
     });
   };
@@ -37,9 +42,11 @@ function Google(props) {
               avatar: res.gv.gO,
             };
             onSuccess(googleUser, 'google');
+            loading.done();
           },
           function (error) {
             onError(error);
+            loading.done();
           },
         );
       });

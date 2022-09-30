@@ -4,6 +4,8 @@ import queryString from 'query-string';
 
 import usePopupWindow from '~/hooks/usePopupWindow';
 
+import { loading } from '../Loading/core';
+
 function Github(props) {
   const { children, onSuccess = () => {}, onError = () => {} } = props;
   const params = {
@@ -15,13 +17,17 @@ function Github(props) {
   });
 
   const handleOnClick = () => {
+    loading.run();
+
     popup
       .open()
       .then((res) => {
         onSuccess(res, 'github');
+        loading.done();
       })
       .catch((res) => {
         onError(res, 'github');
+        loading.done();
       });
   };
 
