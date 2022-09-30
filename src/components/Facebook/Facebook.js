@@ -7,40 +7,47 @@ import { loading } from '../Loading/core';
 function Facebook(props) {
   const { children, onSuccess = () => {}, onError = () => {} } = props;
 
+  const login = () => {
+    window.FB.login(
+      (response) => {
+        if (response.authResponse) {
+          getInfoUser();
+        } else {
+          onError();
+        }
+      },
+      { scope: 'public_profile,email' },
+    );
+  };
+
+  const getInfoUser = () => {
+    window.FB.api('/me?fields=id,name,email,picture', (userInfo) => {
+      if (!userInfo || userInfo.error) {
+        onError();
+      } else {
+        const userFb = {
+          facebookId: userInfo.id,
+          fullname: userInfo.name,
+          email: userInfo.email,
+          avatar: userInfo.picture?.data?.url,
+        };
+
+        onSuccess(userFb, 'facebook');
+      }
+    });
+  };
+
   const renderChildren = () => {
     return React.Children.map(children, (child) => {
       return React.cloneElement(child, {
         onClick: () => {
-          window.FB.login(
-            (response) => {
-              if (response.authResponse) {
-                loading.run();
-
-                window.FB.getLoginStatus(function (response) {
-                  console.log('response: ', response);
-                });
-
-                window.FB.api('/me?fields=id,name,email,picture', function (userInfo) {
-                  if (!response || response.error) {
-                    loading.done();
-                    onError();
-                  } else {
-                    const userFb = {
-                      facebookId: userInfo.id,
-                      fullname: userInfo.name,
-                      email: userInfo.email,
-                      avatar: userInfo.picture?.data?.url,
-                    };
-
-                    onSuccess(userFb, 'facebook');
-                  }
-                });
-              } else {
-                onError();
-              }
-            },
-            { scope: 'public_profile,email' },
-          );
+          window.FB.getLoginStatus((response) => {
+            loading.run();
+            if (response.status === 'connected') getInfoUser();
+            else {
+              login();
+            }
+          });
         },
       });
     });
