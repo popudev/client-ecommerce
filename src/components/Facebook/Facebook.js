@@ -15,15 +15,25 @@ function Facebook(props) {
             (response) => {
               if (response.authResponse) {
                 loading.run();
-                window.FB.api('/me?fields=id,name,email,picture', function (userInfo) {
-                  const userFb = {
-                    facebookId: userInfo.id,
-                    fullname: userInfo.name,
-                    email: userInfo.email,
-                    avatar: userInfo.picture?.data?.url,
-                  };
 
-                  onSuccess(userFb, 'facebook');
+                window.FB.getLoginStatus(function (response) {
+                  console.log('response: ', response);
+                });
+
+                window.FB.api('/me?fields=id,name,email,picture', function (userInfo) {
+                  if (!response || response.error) {
+                    loading.done();
+                    onError();
+                  } else {
+                    const userFb = {
+                      facebookId: userInfo.id,
+                      fullname: userInfo.name,
+                      email: userInfo.email,
+                      avatar: userInfo.picture?.data?.url,
+                    };
+
+                    onSuccess(userFb, 'facebook');
+                  }
                 });
               } else {
                 onError();
