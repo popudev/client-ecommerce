@@ -1,6 +1,8 @@
 import { toast } from '~/components/Toast/core';
 
 const loading = {
+  importance: false,
+
   config(setVisible) {
     loading.setVisible = setVisible;
   },
@@ -10,9 +12,13 @@ const loading = {
     loading.setVisible(true);
   },
 
+  setImportance(importance = false) {
+    this.importance = importance;
+  },
+
   done(callBack) {
     // console.log('done');
-    loading.setVisible(false);
+    if (!this.importance) loading.setVisible(false);
 
     return {
       ...toast,

@@ -1,3 +1,5 @@
+import queryString from 'query-string';
+
 import {
   loginFailed,
   loginSuccess,
@@ -51,34 +53,16 @@ export const loginGoogle = async (user, dispatch, navigator) => {
   }
 };
 
-export const loginGithub = async (code, dispatch, navigator) => {
+export const loginGithub = async (user, dispatch, navigator) => {
   try {
     loading.run();
-
-    const payload = {
-      code,
-      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-      client_secret: process.env.REACT_APP_GOOGLE_CLIENT_SECRET,
-    };
-
-    const resAcctokenGithub = await httpRequest.post('https://github.com/login/oauth/access_token', payload);
-
-    if (!resAcctokenGithub) return false;
-
-    const userGithub = await httpRequest.get('https://api.github.com/user', {
-      headers: {
-        Authentization: 'Bearer ' + resAcctokenGithub.access_token,
-      },
-    });
-
-    console.log('userGithub', userGithub);
-
-    // dispatch(loginSuccess(res));
-    // navigator('/');
+    const res = await httpRequest.post(`/auth/login/github`, user, { withCredentials: true });
+    dispatch(loginSuccess(res));
+    navigator('/');
     loading.done();
   } catch (err) {
     console.log(err);
-    // dispatch(loginFailed(err.data));
+    dispatch(loginFailed(err.data));
     loading.done();
   }
 };

@@ -3,13 +3,14 @@ import React from 'react';
 import useScript from '~/hooks/useScript';
 
 function Facebook(props) {
-  const { children, onSuccess, onError } = props;
+  const { children, onSuccess = () => {}, onError = () => {} } = props;
 
   const renderChildren = () => {
     return React.Children.map(children, (child) => {
       return React.cloneElement(child, {
         onClick: () => {
           window.FB.login((response) => {
+            console.log('response: ', response);
             if (response.authResponse) {
               window.FB.api('/me', function (response) {
                 onSuccess();

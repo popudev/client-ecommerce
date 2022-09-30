@@ -3,6 +3,7 @@ import AdminProduct from '~/pages/AdminProduct';
 import Cart from '~/pages/Cart';
 import Detail from '~/pages/Detail';
 import Home from '~/pages/Home';
+import Load from '~/pages/Load';
 import Login from '~/pages/Login';
 import NotFound from '~/pages/NotFound';
 import Register from '~/pages/Register';
@@ -40,6 +41,11 @@ const publicRoutes = [
   {
     path: config.routes.detail + '/:productId',
     component: Detail,
+  },
+  {
+    path: config.routes.load,
+    component: Load,
+    layout: null,
   },
 ];
 

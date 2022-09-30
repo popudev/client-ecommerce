@@ -7,6 +7,7 @@ const routes = {
   admin: '/admin',
   detail: '/detail',
   notfound: '/notfound',
+  load: '/load',
 };
 
 export default routes;

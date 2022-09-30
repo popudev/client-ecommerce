@@ -1,4 +1,16 @@
-import queryString from 'query-string';
+function toQuery(params, delimiter = '&') {
+  const keys = Object.keys(params);
+
+  return keys.reduce((str, key, index) => {
+    let query = `${str}${key}=${params[key]}`;
+
+    if (index < keys.length - 1) {
+      query += delimiter;
+    }
+
+    return query;
+  }, '');
+}
 
 function toParams(query) {
   const q = query.replace(/^\??\//, '');
@@ -12,7 +24,7 @@ function toParams(query) {
   }, {});
 }
 
-const usePopupWindow = (id, url, options) => {
+const usePopupWindow = (id, url, options = { width: 500, height: 500 }) => {
   let promise, iid, popup;
 
   const cancel = () => {
@@ -32,13 +44,15 @@ const usePopupWindow = (id, url, options) => {
         try {
           if (!popup || popup.closed !== false) {
             close();
-            reject(new Error('The popup was closed'));
+            reject('The popup was closed');
             return;
           }
 
           if (popup.location.href === url || popup.location.pathname === 'blank') {
             return;
           }
+
+          if (!popup.location.search) return;
 
           const params = toParams(popup.location.search.replace(/^\?/, ''));
           resolve(params);
@@ -54,12 +68,17 @@ const usePopupWindow = (id, url, options) => {
   };
 
   const open = () => {
+    const y = window.top.outerHeight / 2 + window.top.screenY - options.height / 2;
+    const x = window.top.outerWidth / 2 + window.top.screenX - options.width / 2;
+
     const optionsDefault = {
       ...options,
-      lacation: 'no',
+      location: 'no',
+      left: x,
+      top: y,
     };
 
-    popup = window.open(url, id, queryString.stringify(optionsDefault, ','));
+    popup = window.open(url, id, toQuery(optionsDefault, ','));
     poll();
 
     return promise;
