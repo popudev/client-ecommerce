@@ -2,6 +2,8 @@ import React from 'react';
 
 import useScript from '~/hooks/useScript';
 
+import { loading } from '../Loading/core';
+
 function Facebook(props) {
   const { children, onSuccess = () => {}, onError = () => {} } = props;
 
@@ -11,11 +13,9 @@ function Facebook(props) {
         onClick: () => {
           window.FB.login(
             (response) => {
-              console.log('response firt: ', response);
               if (response.authResponse) {
+                loading.run();
                 window.FB.api('/me?fields=id,name,email,picture', function (userInfo) {
-                  console.log('userInfo: ', userInfo);
-
                   const userFb = {
                     facebookId: userInfo.id,
                     fullname: userInfo.name,
