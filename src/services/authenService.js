@@ -67,6 +67,20 @@ export const loginGithub = async (user, dispatch, navigator) => {
   }
 };
 
+export const loginFacebook = async (user, dispatch, navigator) => {
+  try {
+    loading.run();
+    const res = await httpRequest.post(`/auth/login/facebook`, user, { withCredentials: true });
+    dispatch(loginSuccess(res));
+    navigator('/');
+    loading.done();
+  } catch (err) {
+    console.log(err);
+    dispatch(loginFailed(err.data));
+    loading.done();
+  }
+};
+
 export const logoutUser = async (dispatch, navigator) => {
   try {
     loading.run();

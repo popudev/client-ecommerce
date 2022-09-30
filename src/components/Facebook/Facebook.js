@@ -9,17 +9,20 @@ function Facebook(props) {
     return React.Children.map(children, (child) => {
       return React.cloneElement(child, {
         onClick: () => {
-          window.FB.login((response) => {
-            console.log('response: ', response);
-            if (response.authResponse) {
-              window.FB.api('/me', function (response) {
-                console.log('user: ', response);
-                onSuccess();
-              });
-            } else {
-              onError();
-            }
-          });
+          window.FB.login(
+            (response) => {
+              console.log('response firt: ', response);
+              if (response.authResponse) {
+                window.FB.api('/me', function (response) {
+                  console.log('response second: ', response);
+                  onSuccess(response, 'facebook');
+                });
+              } else {
+                onError();
+              }
+            },
+            { scope: 'public_profile,email' },
+          );
         },
       });
     });

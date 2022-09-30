@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 
 import { background } from '~/assets/images';
 import { useGlobalState } from '~/hooks';
-import { loginGithub, loginGoogle, loginUser } from '~/services/authenService';
+import { loginFacebook, loginGithub, loginGoogle, loginUser } from '~/services/authenService';
 import { getRememberUsername, setRememberUsername } from '~/utils/localStorage';
 
 import Button from '~/components/Button';
@@ -70,6 +70,7 @@ function Login() {
   const handleLoginSocialSuccess = (response, type) => {
     if (type === 'google') loginGoogle(response, dispatch, navigator);
     if (type === 'github') loginGithub(response, dispatch, navigator);
+    if (type === 'facebook') loginFacebook(response, dispatch, navigator);
   };
 
   return (
@@ -111,7 +112,7 @@ function Login() {
               </Button>
             </Google>
 
-            <Facebook>
+            <Facebook onSuccess={handleLoginSocialSuccess}>
               <Button outline leftIcon={<i className="fa-brands fa-facebook-f"></i>}>
                 FACEBOOK
               </Button>
