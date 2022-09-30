@@ -13,6 +13,7 @@ function Facebook(props) {
             console.log('response: ', response);
             if (response.authResponse) {
               window.FB.api('/me', function (response) {
+                console.log('user: ', response);
                 onSuccess();
               });
             } else {
