@@ -28,7 +28,9 @@ toast.success = (mess) => {
   return true;
 };
 
-toast.error = (mess) => {
+toast.error = (mess, condition = true) => {
+  if (!condition) return;
+
   toast.setElements((prev) => {
     return [
       ...prev,

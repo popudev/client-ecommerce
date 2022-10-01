@@ -20,8 +20,9 @@ export const registerUser = async (user, dispatch, navigator) => {
     navigator('/login');
     loading.done();
   } catch (err) {
+    console.log('err: ', err);
     dispatch(registerFailed(err.data));
-    loading.done();
+    loading.done().error('Server Error', err.status === 503);
   }
 };
 
@@ -35,7 +36,7 @@ export const loginUser = async (user, dispatch, navigator) => {
   } catch (err) {
     console.log(err);
     dispatch(loginFailed(err.data));
-    loading.done();
+    loading.done().error('Server Error', err.status === 503);
   }
 };
 
@@ -48,8 +49,8 @@ export const loginGoogle = async (user, dispatch, navigator) => {
     loading.done();
   } catch (err) {
     console.log(err);
-    dispatch(loginFailed(err.data));
-    loading.done();
+    dispatch(loginFailed(err?.data));
+    loading.done().error('Server Error', err?.status === 503);
   }
 };
 
@@ -63,7 +64,7 @@ export const loginGithub = async (user, dispatch, navigator) => {
   } catch (err) {
     console.log(err);
     dispatch(loginFailed(err.data));
-    loading.done();
+    loading.done().error('Server Error', err.status === 503);
   }
 };
 
@@ -77,7 +78,7 @@ export const loginFacebook = async (user, dispatch, navigator) => {
   } catch (err) {
     console.log(err);
     dispatch(loginFailed(err.data));
-    loading.done();
+    loading.done().error('Server Error', err.status === 503);
   }
 };
 

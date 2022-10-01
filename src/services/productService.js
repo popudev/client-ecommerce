@@ -34,8 +34,7 @@ export const getProductList = async (filter, limit = 20, pagination = true) => {
 
     return pagination ? res : res?.payload;
   } catch (err) {
-    loading.done();
-    console.log(err);
+    loading.done().error('Server Error');
   }
 };
 
@@ -46,7 +45,7 @@ export const getProductById = async (productId) => {
     loading.done();
     return res;
   } catch (err) {
-    return loading.done().err;
+    return loading.done().error('Server Error');
   }
 };
 
@@ -54,14 +53,18 @@ export const getProductByTitle = async (title, limit = 10) => {
   try {
     const res = await httpRequest.get(`/product`, { params: { title, limit, page: 1 } });
     return res;
-  } catch (err) {}
+  } catch (err) {
+    loading.done().error('Server Error');
+  }
 };
 
 export const getProductsRandom = async (number) => {
   try {
     const res = await httpRequest.get(`/product/random`, { params: { number: number } });
     return res || [];
-  } catch (err) {}
+  } catch (err) {
+    loading.done().error('Server Error');
+  }
 };
 
 // export const addProduct = async (data) => {

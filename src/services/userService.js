@@ -15,6 +15,6 @@ export const getInfoUser = async () => {
     loading.done();
     return res;
   } catch (err) {
-    loading.done();
+    loading.done().error('Server Error');
   }
 };

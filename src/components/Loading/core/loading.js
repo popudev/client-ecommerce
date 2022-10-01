@@ -13,7 +13,7 @@ const loading = {
     if (this.queue.length) loading.setVisible(true);
   },
 
-  done(callBack) {
+  done() {
     // console.log('done');
     this.queue.pop();
     if (!this.queue.length) loading.setVisible(false);
