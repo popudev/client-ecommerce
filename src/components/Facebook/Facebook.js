@@ -57,13 +57,13 @@ function Facebook(props) {
     return React.Children.map(children, (child) => {
       return React.cloneElement(child, {
         onClick: () => {
-          if (isMobile) {
-            window.location.href = `https://www.facebook.com/dialog/oauth?${queryString.stringify({
-              client_id: process.env.REACT_APP_FACEBOOK_APP_ID,
-              scope: 'public_profile,email',
-              state: 'facebookdirect',
-            })}}`;
-          }
+          // if (isMobile) {
+          //   window.location.href = `https://www.facebook.com/dialog/oauth?${queryString.stringify({
+          //     client_id: process.env.REACT_APP_FACEBOOK_APP_ID,
+          //     scope: 'public_profile,email',
+          //     state: 'facebookdirect',
+          //   })}}`;
+          // }
           window.FB.getLoginStatus((response) => {
             loading.run();
             if (response.status === 'connected') getInfoUser();

@@ -66,7 +66,7 @@
   background-color: transparent;
 
   &:hover {
-    border-color: $third-color;
+    // border-color: $third-color;
     background-color: rgba($color: $third-color, $alpha: 0.2);
   }
 }
@@ -109,4 +109,36 @@
 .fill {
   padding: 0;
   min-width: unset;
+}
+
+//Button color
+.facebook {
+  color: #fff;
+  border-color: #1278f3;
+  background-color: #1278f3;
+
+  &:hover {
+    color: #1278f3;
+    background-color: #fff;
+  }
+}
+
+.google {
+  color: #fff;
+  border-color: #dc4e41;
+  background-color: #dc4e41;
+  &:hover {
+    color: #dc4e41;
+    background-color: #fff;
+  }
+}
+
+.github {
+  color: #fff;
+  border-color: #171515;
+  background-color: #171515;
+  &:hover {
+    color: #171515;
+    background-color: #fff;
+  }
 }

@@ -4,7 +4,8 @@ export const getAccessToken = () => {
 };
 
 export const setAccessToken = (accessToken) => {
-  localStorage.setItem('accessToken', JSON.stringify(accessToken));
+  if (accessToken) localStorage.setItem('accessToken', JSON.stringify(accessToken));
+  else localStorage.removeItem('accessToken');
 };
 
 export const getRememberUsername = () => {

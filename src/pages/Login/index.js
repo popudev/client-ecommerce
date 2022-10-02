@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 import { background } from '~/assets/images';
 import { useGlobalState } from '~/hooks';
 import { loginFacebook, loginGithub, loginGoogle, loginUser } from '~/services/authenService';
-import { getRememberUsername, setRememberUsername } from '~/utils/localStorage';
+import { getAccessToken, getRememberUsername, setRememberUsername } from '~/utils/localStorage';
 
 import Button from '~/components/Button';
 import CheckBox from '~/components/CheckBox/CheckBox';
@@ -26,11 +26,9 @@ function Login() {
   const { error } = globalState.login;
   const [remember, setRemember] = useState(getRememberUsername());
 
-  // useEffect(() => {
-  //   if (globalState.login.currentUser && getAccessToken()) {
-  //     navigator('/', { replace: true });
-  //   }
-  // });
+  if (globalState.login.currentUser && getAccessToken()) {
+    navigator('/', { replace: true });
+  }
 
   let errorUsername = {};
   let errorPassword = {};
@@ -107,19 +105,19 @@ function Login() {
           <div className={cx('social_media')}>
             <p>--OR LOGIN WITH--</p>
             <Google onSuccess={handleLoginSocialSuccess}>
-              <Button outline leftIcon={<i className="fa-brands fa-google"></i>}>
+              <Button google outline leftIcon={<i className="fa-brands fa-google"></i>}>
                 GOOGLE
               </Button>
             </Google>
 
             <Facebook onSuccess={handleLoginSocialSuccess}>
-              <Button outline leftIcon={<i className="fa-brands fa-facebook-f"></i>}>
+              <Button facebook outline leftIcon={<i className="fa-brands fa-facebook-f"></i>}>
                 FACEBOOK
               </Button>
             </Facebook>
 
             <Github onSuccess={handleLoginSocialSuccess}>
-              <Button outline leftIcon={<i className="fa-brands fa-github"></i>}>
+              <Button github outline leftIcon={<i className="fa-brands fa-github"></i>}>
                 GITHUB
               </Button>
             </Github>

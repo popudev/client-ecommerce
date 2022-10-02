@@ -25,6 +25,9 @@ const Button = React.forwardRef(
       hfull = false,
       square = false,
       fill = false,
+      facebook,
+      google,
+      github,
       children,
       className,
       leftIcon,
@@ -71,6 +74,9 @@ const Button = React.forwardRef(
       w50,
       hfull,
       fill,
+      facebook,
+      google,
+      github,
     });
 
     return (
