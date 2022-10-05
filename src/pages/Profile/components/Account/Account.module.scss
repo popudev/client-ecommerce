@@ -1,0 +1,57 @@
+@import '/src/sass';
+
+.wrapper {
+  .title {
+    margin-bottom: 20px;
+  }
+}
+
+.content {
+  @include flex(center, space-between);
+}
+
+.form {
+  flex: 1;
+
+  @include flex(center, center);
+  padding: 0 20px;
+}
+
+.form_account {
+  @include flex(center, center);
+  flex-direction: column;
+
+  // padding: 0 60px 0 10px;
+
+  & input {
+    min-width: 360px;
+    color: #fff;
+  }
+
+  .btn_account {
+    margin-top: 20px;
+  }
+}
+
+// .border {
+//   height: 100%;
+//   width: 2px;
+//   height: 100vh;
+//   border-left: 1px solid $third-color;
+// }
+
+.avatar {
+  padding: 50px;
+  @include flex(center, center);
+  flex-direction: column;
+  border-left: 1px solid $third-color;
+
+  .avatar__image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .btn_random {
+    margin-top: 30px;
+  }
+}

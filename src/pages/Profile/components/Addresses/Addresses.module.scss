@@ -1,0 +1,78 @@
+@import 'src/sass';
+
+.header {
+  @include flex(center, space-between);
+  margin-bottom: 40px;
+}
+
+.address_item {
+  @include flex(center, space-between);
+  color: #fff;
+  padding: 10px 10px 40px 10px;
+  border-bottom: 1px solid $third-color;
+
+  & + & {
+    margin-top: 40px;
+  }
+
+  .address_item__info {
+    & > div {
+      margin-bottom: 5px;
+    }
+
+    .info_fullname {
+      font-size: 18px;
+    }
+
+    .info_phone {
+      font-weight: 600;
+    }
+
+    button {
+      margin-top: 10px;
+      color: greenyellow;
+      border-color: greenyellow;
+      opacity: 1;
+    }
+  }
+
+  .address_item__actions {
+    @include flex(center, center);
+    flex-direction: column;
+
+    .action_urd {
+      button {
+        padding: 10px;
+      }
+    }
+
+    button {
+      margin: 0;
+      color: #fff;
+    }
+  }
+}
+
+.form {
+  padding: 50px;
+  background-color: #fff;
+  @include flex(center, center);
+  flex-direction: column;
+
+  .form_title {
+    margin-bottom: 20px;
+  }
+
+  .form_add_address {
+    @include flex(center, center);
+    flex-direction: column;
+
+    input[type='text'] {
+      width: 340px;
+    }
+
+    .action {
+      margin-top: 20px;
+    }
+  }
+}

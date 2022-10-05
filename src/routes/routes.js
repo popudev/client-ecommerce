@@ -6,6 +6,7 @@ import Home from '~/pages/Home';
 import Load from '~/pages/Load';
 import Login from '~/pages/Login';
 import NotFound from '~/pages/NotFound';
+import Profile from '~/pages/Profile';
 import Register from '~/pages/Register';
 import Shop from '~/pages/Shop';
 
@@ -15,6 +16,10 @@ const publicRoutes = [
     path: config.routes.notfound,
     component: NotFound,
     layout: null,
+  },
+  {
+    path: config.routes.profile + '/*',
+    component: Profile,
   },
   {
     path: config.routes.home,

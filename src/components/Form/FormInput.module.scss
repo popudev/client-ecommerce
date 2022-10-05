@@ -4,6 +4,7 @@
   @include flex(flex-start, center);
   flex-direction: column;
   margin: 5px 0 18px 0;
+  width: 100%;
 
   label {
     font-weight: 700;
@@ -11,7 +12,6 @@
 
   input {
     border: 1px solid #000;
-    border-radius: 20px;
     padding: 10px 20px;
     font-size: 16px;
   }
@@ -28,4 +28,26 @@
   width: 100%;
   font-size: 12px;
   font-weight: 300;
+}
+
+.disabled {
+  opacity: 0.5;
+  input {
+    font-weight: 700;
+  }
+}
+
+.border {
+  input {
+    border-radius: 20px;
+  }
+}
+
+.outline {
+  input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $third-color;
+    color: $third-color;
+  }
 }

@@ -59,9 +59,9 @@ const menuUser = [
   },
   {
     id: 7,
-    title: 'Infomation',
+    title: 'Profile',
     icon: <i className="fa-solid fa-user"></i>,
-    path: '/infomation',
+    path: '/profile',
     visable: true,
   },
   {

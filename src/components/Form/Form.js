@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 
+import CheckBox from '../CheckBox';
+
 import FormInput from './FormInput';
 
 function Form(props) {
   const { children, initialValues, onSubmit, className, validateSchema } = props;
 
   const [values, setValues] = useState(initialValues);
+
   const [errorValidations, setErrorValidations] = useState({});
 
-  const validation = {
+  const validationRules = {
     required: (value, isRequired) => (isRequired ? (value ? '' : 'Required !!!') : ''),
     min: (value, min) => (value.length >= min ? '' : `At least ${min} characters !!!`),
     max: (value, max) => (value.length <= max ? '' : `Up to ${max} characters !!!`),
@@ -21,10 +24,11 @@ function Form(props) {
   };
 
   const validate = (value, name) => {
+    if (!validateSchema) return false;
     let error = false;
     const validator = validateSchema[name];
     for (let key in validator) {
-      error = validation[key] ? validation[key](value, validator[key]) : false;
+      error = validationRules[key] ? validationRules[key](value, validator[key]) : false;
       if (error) return error;
     }
     return error;
@@ -32,9 +36,11 @@ function Form(props) {
 
   const renderChildren = () => {
     return React.Children.map(children, (child) => {
-      if (child.type !== FormInput) return child;
+      if (child.type !== FormInput && child.type !== CheckBox) return child;
 
       return React.cloneElement(child, {
+        value: values[child.props.name],
+        errorValidation: errorValidations[child.props.name] ? errorValidations[child.props.name].errorMess : false,
         validate: (value) => validate(value, child.props.name),
         setValueForm: (value) => {
           setValues({
@@ -42,7 +48,6 @@ function Form(props) {
             [child.props.name]: value,
           });
         },
-        errorValidation: errorValidations[child.props.name] ? errorValidations[child.props.name].errorMess : false,
       });
     });
   };

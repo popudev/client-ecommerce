@@ -52,7 +52,7 @@
   text-shadow: 1px 1px white, -1px -1px #333;
 }
 
-.from_login {
+.form_login {
   @include flex(center, center);
   flex-direction: column;
 

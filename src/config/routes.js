@@ -8,6 +8,7 @@ const routes = {
   detail: '/detail',
   notfound: '/notfound',
   load: '/load',
+  profile: '/profile',
 };
 
 export default routes;

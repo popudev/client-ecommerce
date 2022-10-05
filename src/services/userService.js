@@ -1,3 +1,4 @@
+import { loginSuccess } from '~/reducers/actions/authenAction';
 import httpRequest from '~/utils/httpRequest';
 import { getAccessToken } from '~/utils/localStorage';
 
@@ -16,5 +17,21 @@ export const getInfoUser = async () => {
     return res;
   } catch (err) {
     loading.done().error('Server Error');
+  }
+};
+
+export const updateInfoUser = async (user, dispatch) => {
+  try {
+    loading.run();
+    const accessToken = getAccessToken();
+    const res = await httpRequest.patch(`/user`, user, {
+      headers: {
+        token: `Bearer ${accessToken}`,
+      },
+    });
+    dispatch(loginSuccess(res));
+    return loading.done().success('Updated information');
+  } catch (err) {
+    return loading.done().error(err.data);
   }
 };

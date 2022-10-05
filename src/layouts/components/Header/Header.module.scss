@@ -3,10 +3,12 @@
 .wrapper {
   @include flex(center, space-between);
   position: fixed;
-  z-index: 99;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+
+  z-index: 99;
+
   height: $header-height;
   background-color: $main-color;
 

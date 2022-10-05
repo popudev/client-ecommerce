@@ -20,10 +20,8 @@ const authenReducer = (state, action) => {
   switch (action.type) {
     case 'loginSuccess':
       let username = null;
-
       if (getRememberUsername()) username = action.payload?.username;
-
-      setAccessToken(action.payload?.accessToken);
+      if (action.payload?.accessToken) setAccessToken(action.payload?.accessToken);
       return {
         ...state,
         login: {
