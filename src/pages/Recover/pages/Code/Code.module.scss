@@ -1,0 +1,32 @@
+@import '/src/sass';
+
+.header {
+  padding: 10px 0 20px 0;
+  font-size: 24px;
+  width: 100%;
+  border-bottom: 1px solid $third-color;
+}
+
+.desc {
+  padding-top: 20px;
+}
+
+.actions {
+  border-top: 1px solid $third-color;
+  width: 100%;
+  text-align: end;
+  padding-top: 20px;
+}
+
+.content {
+  @include flex(flex-start, space-around);
+  width: 100%;
+  padding: 10px 0 20px 0;
+}
+
+.form_code {
+  input {
+    width: 150px;
+  }
+  margin-right: 10px;
+}

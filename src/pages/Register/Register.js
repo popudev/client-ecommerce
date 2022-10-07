@@ -2,8 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 
-import { background } from '~/assets/images';
-import { useGlobalState } from '~/hooks';
+import { useAuthenState } from '~/hooks';
 import { registerUser } from '~/services/authenService';
 
 import Button from '~/components/Button';
@@ -16,8 +15,8 @@ const cx = classNames.bind(styles);
 
 function Register() {
   const navigator = useNavigate();
-  const { globalState, dispatch } = useGlobalState();
-  const { register } = globalState;
+  const { authenState, dispatch } = useAuthenState();
+  const { register } = authenState;
   let errorExistEmail = {};
   let errorExistUsename = {};
 
@@ -65,38 +64,33 @@ function Register() {
   return (
     <Helmet title={'Register'}>
       <div className={cx('wrapper')}>
-        <div className={cx('background')}>
-          <img src={background} alt="" />
-        </div>
-        <div className={cx('content')}>
-          <Link to="/" className={cx('btn_home')}>
-            <i className="fa-solid fa-square-xmark"></i>
-          </Link>
+        <Link to="/" className={cx('btn_home')}>
+          <i className="fa-solid fa-square-xmark"></i>
+        </Link>
 
-          <h1 className={cx('heading')}>Register</h1>
+        <h1 className={cx('heading')}>Register</h1>
 
-          <Form
-            className={cx('form_register')}
-            initialValues={initialValues}
-            validateSchema={validateSchema}
-            onSubmit={handleSubmit}
-          >
-            <FormInput border type="text" name="fullname" label="Fullname" />
-            <FormInput border type="text" name="email" label="Email" errorMess={errorExistEmail} />
-            <FormInput border type="text" name="username" label="Username" errorMess={errorExistUsename} />
-            <FormInput border type="password" name="password" label="Password" />
-            <FormInput border type="password" name="confirmPassword" label="Confirm Password" />
-            <Button primary className={cx('btn_login')}>
-              Register
-            </Button>
-          </Form>
+        <Form
+          className={cx('form_register')}
+          initialValues={initialValues}
+          validateSchema={validateSchema}
+          onSubmit={handleSubmit}
+        >
+          <FormInput border type="text" name="fullname" label="Fullname" />
+          <FormInput border type="text" name="email" label="Email" errorMess={errorExistEmail} />
+          <FormInput border type="text" name="username" label="Username" errorMess={errorExistUsename} />
+          <FormInput border type="password" name="password" label="Password" />
+          <FormInput border type="password" name="confirmPassword" label="Confirm Password" />
+          <Button primary className={cx('btn_register')}>
+            Register
+          </Button>
+        </Form>
 
-          <div className={cx('navigator')}>
-            <span>Do you have an account ?</span>
-            <Button fill text to="/login">
-              Login
-            </Button>
-          </div>
+        <div className={cx('navigator')}>
+          <span>Do you have an account ?</span>
+          <Button fill text to="/login">
+            Login
+          </Button>
         </div>
       </div>
     </Helmet>

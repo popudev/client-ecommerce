@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { useDidUpdate } from '~/hooks';
 
 import CheckBox from '../CheckBox';
 
 import FormInput from './FormInput';
 
 function Form(props) {
-  const { children, initialValues, onSubmit, className, validateSchema } = props;
+  const { children, initialValues, onSubmit, className, validateSchema, submitRef = {}, cleanRef = {} } = props;
 
   const [values, setValues] = useState(initialValues);
+  const [clean, setClean] = useState(false);
+
+  useDidUpdate(() => {
+    setValues({ ...initialValues });
+  }, [clean]);
+
+  useEffect(() => {
+    cleanRef.current = () => setClean((prev) => !prev);
+  }, [cleanRef]);
 
   const [errorValidations, setErrorValidations] = useState({});
 
@@ -73,9 +84,16 @@ function Form(props) {
     }
   };
 
+  const btnSubmitRef = useRef();
+
+  useEffect(() => {
+    submitRef.current = () => btnSubmitRef.current.click();
+  });
+
   return (
     <form className={className} onSubmit={handleSubmit}>
       {renderChildren()}
+      <button style={{ display: 'none' }} ref={btnSubmitRef} type="submit"></button>
     </form>
   );
 }

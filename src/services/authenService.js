@@ -6,9 +6,12 @@ import {
   registerFailed,
   registerSuccess,
 } from '~/reducers/actions/authenAction';
+import { updateCodeVia } from '~/reducers/actions/recoverAction';
 import httpRequest from '~/utils/httpRequest';
+import { getAccessToken } from '~/utils/localStorage';
 
 import { loading } from '~/components/Loading/core';
+import { notification } from '~/components/Modal/Notification/core';
 
 export const registerUser = async (user, dispatch, navigator) => {
   try {
@@ -88,5 +91,54 @@ export const logoutUser = async (dispatch, navigator) => {
   } catch (err) {
     dispatch(logoutFailed(err.data));
     loading.done().error(err.data);
+  }
+};
+
+export const verifyEmail = async () => {
+  try {
+    loading.run();
+    await httpRequest.get(`/auth/verify/email`, {
+      headers: {
+        token: `Bearer ${getAccessToken()}`,
+      },
+    });
+    loading.done();
+    notification.setTitle('A new verification link has been sent to the email addres.');
+  } catch (err) {
+    return loading.done().error(err.data);
+  }
+};
+
+export const sendCodeViaEmail = async (email, navigator) => {
+  try {
+    loading.run();
+    await httpRequest.post(`/auth/code/email`, { email });
+    loading.done();
+    navigator('/recover/code', { replace: true });
+  } catch (err) {
+    return loading.done().error(err.data);
+  }
+};
+
+export const verifyCodeViaEmail = async (data, dispatch, navigator) => {
+  try {
+    loading.run();
+    await httpRequest.post(`/auth/verify/code`, data);
+    dispatch(updateCodeVia(data.code));
+    navigator('/recover/password', { replace: true });
+    loading.done();
+  } catch (err) {
+    return loading.done().error(err.data);
+  }
+};
+
+export const changePasswordWithCodeVia = async (data, navigator) => {
+  try {
+    loading.run();
+    await httpRequest.post(`/auth/recover/password`, data);
+    navigator('/login', { replace: true });
+    loading.done();
+  } catch (err) {
+    return loading.done().error(err.data);
   }
 };

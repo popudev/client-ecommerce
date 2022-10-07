@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 
-import { background } from '~/assets/images';
-import { useGlobalState } from '~/hooks';
+import { useAuthenState } from '~/hooks';
 import { loginFacebook, loginGithub, loginGoogle, loginUser } from '~/services/authenService';
 import { getAccessToken, getRememberUsername, setRememberUsername } from '~/utils/localStorage';
 
@@ -22,12 +21,12 @@ const cx = classNames.bind(styles);
 
 function Login() {
   const navigator = useNavigate();
-  const { globalState, dispatch } = useGlobalState();
-  const { error } = globalState.login;
+  const { authenState, dispatch } = useAuthenState();
+  const { error } = authenState.login;
   const [remember, setRemember] = useState(getRememberUsername());
 
   useEffect(() => {
-    if (globalState.login.currentUser && getAccessToken()) {
+    if (authenState.login.currentUser && getAccessToken()) {
       navigator('/', { replace: true });
     }
   });
@@ -41,7 +40,7 @@ function Login() {
   }
 
   const initialValues = {
-    username: globalState.register?.username || '',
+    username: authenState.register?.username || '',
     password: '',
   };
 
@@ -76,59 +75,54 @@ function Login() {
   return (
     <Helmet title={'Login'}>
       <div className={cx('wrapper')}>
-        <div className={cx('background')}>
-          <img src={background} alt="" />
+        <Link to="/" className={cx('btn_home')}>
+          <i className="fa-solid fa-square-xmark"></i>
+        </Link>
+        <h1 className={cx('heading')}>Login</h1>
+
+        <Form
+          className={cx('form_login')}
+          initialValues={initialValues}
+          validateSchema={validateSchema}
+          onSubmit={handleSubmit}
+        >
+          <FormInput border type="text" name="username" label="Username" errorMess={errorUsername} />
+          <FormInput border type="password" name="password" label="Password" errorMess={errorPassword} />
+          <CheckBox title="Remember username ?" onChange={handleRememberUsername} checked={remember} />
+          <Button primary className={cx('btn_login')}>
+            Login
+          </Button>
+        </Form>
+        <div className={cx('social_media')}>
+          <p>--OR LOGIN WITH--</p>
+          <Google onSuccess={handleLoginSocialSuccess}>
+            <Button google outline leftIcon={<i className="fa-brands fa-google"></i>}>
+              GOOGLE
+            </Button>
+          </Google>
+
+          <Facebook onSuccess={handleLoginSocialSuccess}>
+            <Button facebook outline leftIcon={<i className="fa-brands fa-facebook-f"></i>}>
+              FACEBOOK
+            </Button>
+          </Facebook>
+
+          <Github onSuccess={handleLoginSocialSuccess}>
+            <Button github outline leftIcon={<i className="fa-brands fa-github"></i>}>
+              GITHUB
+            </Button>
+          </Github>
         </div>
-        <div className={cx('content')}>
-          <Link to="/" className={cx('btn_home')}>
-            <i className="fa-solid fa-square-xmark"></i>
-          </Link>
-          <h1 className={cx('heading')}>Login</h1>
-
-          <Form
-            className={cx('form_login')}
-            initialValues={initialValues}
-            validateSchema={validateSchema}
-            onSubmit={handleSubmit}
-          >
-            <FormInput border type="text" name="username" label="Username" errorMess={errorUsername} />
-            <FormInput border type="password" name="password" label="Password" errorMess={errorPassword} />
-            <CheckBox title="Remember username ?" onChange={handleRememberUsername} checked={remember} />
-            <Button primary className={cx('btn_login')}>
-              Login
-            </Button>
-          </Form>
-          <div className={cx('social_media')}>
-            <p>--OR LOGIN WITH--</p>
-            <Google onSuccess={handleLoginSocialSuccess}>
-              <Button google outline leftIcon={<i className="fa-brands fa-google"></i>}>
-                GOOGLE
-              </Button>
-            </Google>
-
-            <Facebook onSuccess={handleLoginSocialSuccess}>
-              <Button facebook outline leftIcon={<i className="fa-brands fa-facebook-f"></i>}>
-                FACEBOOK
-              </Button>
-            </Facebook>
-
-            <Github onSuccess={handleLoginSocialSuccess}>
-              <Button github outline leftIcon={<i className="fa-brands fa-github"></i>}>
-                GITHUB
-              </Button>
-            </Github>
-          </div>
-          <div className={cx('navigator')}>
-            <span>Don't you have an account ?</span>
-            <Button fill text to="/register">
-              Register
-            </Button>
-          </div>
-          <div className={cx('navigator')}>
-            <Button fill text to="/register">
-              Forgotten password ?
-            </Button>
-          </div>
+        <div className={cx('navigator')}>
+          <span>Don't you have an account ?</span>
+          <Button fill text to="/register">
+            Register
+          </Button>
+        </div>
+        <div className={cx('navigator')}>
+          <Button fill text to="/forgotten">
+            Forgotten password ?
+          </Button>
         </div>
       </div>
     </Helmet>

@@ -4,6 +4,8 @@ import classNames from 'classnames/bind';
 
 import { useDidUpdate } from '~/hooks';
 
+import Input from '../Input/Input';
+
 import styles from './FormInput.module.scss';
 
 const cx = classNames.bind(styles);
@@ -17,15 +19,22 @@ function FormInput(props) {
     errorMess,
     setValueForm,
     validate,
+    value: initialValue,
     disabled = false,
     errorValidation,
     outline = false,
     border = false,
     row = false,
+    children,
+    ...propsOther
   } = props;
 
   const [error, setError] = useState(errorValidation);
-  const [value, setValue] = useState(props.value || '');
+  const [value, setValue] = useState(initialValue || '');
+
+  useDidUpdate(() => {
+    setValue(initialValue);
+  }, [initialValue]);
 
   useDidUpdate(() => {
     if (errorMess?.mess) setError(errorMess?.mess);
@@ -70,23 +79,21 @@ function FormInput(props) {
       disabled: true,
     };
 
-  let Component = 'input';
-  if (type === 'textarea') {
-    Component = 'textarea';
-  }
-
   return (
     <div className={classes}>
       {label && <label htmlFor={name}>{label}</label>}
-      <Component
+      <Input
         id={name}
         type={type}
         name={name}
         value={value}
         onChange={handleOnChange}
         onBlur={handleOnBlur}
+        {...propsOther}
         {...disabledAttr}
-      />
+      >
+        {children}
+      </Input>
       {error && <span className={cx('error')}>{error}</span>}
     </div>
   );

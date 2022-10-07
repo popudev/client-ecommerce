@@ -54,7 +54,7 @@ function Home() {
       <div className={cx('wrapper', 'main', 'container')}>
         {/* slider */}
         <div className={cx('slider')}>
-          <Slider data={fakeSlider} auto isLink="/shop" />
+          <Slider data={fakeSlider} isLink="/shop" />
         </div>
         {/* end slider */}
 

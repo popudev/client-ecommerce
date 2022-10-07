@@ -1,0 +1,30 @@
+@import '/src/sass';
+
+.wrapper {
+  background-color: $fourth-color;
+  padding: 50px;
+  @include flex(center, center);
+  flex-direction: column;
+  max-width: 400px;
+  border: 1px solid #fff;
+}
+
+.content {
+  @include flex(center, center);
+  flex-direction: column;
+
+  .icon {
+    .success {
+      color: rgb(73, 255, 73);
+    }
+
+    i {
+      font-size: 60px;
+    }
+  }
+
+  .title {
+    font-size: 18px;
+    margin: 20px 0;
+  }
+}

@@ -1,0 +1,32 @@
+@import '/src/sass';
+
+.wrapper {
+  position: relative;
+  width: 100%;
+
+  button {
+    position: absolute;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    background-color: transparent;
+    color: $third-color;
+    line-height: 18px;
+
+    .eye,
+    .eyeSlash {
+      display: none;
+      width: 22.5px;
+    }
+
+    .eye.active {
+      display: block;
+    }
+
+    .eyeSlash.active {
+      display: block;
+    }
+  }
+}

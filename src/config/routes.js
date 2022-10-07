@@ -9,6 +9,8 @@ const routes = {
   notfound: '/notfound',
   load: '/load',
   profile: '/profile',
+  forgotten: '/forgotten',
+  recover: '/recover',
 };
 
 export default routes;

@@ -1,18 +1,17 @@
-import { useEffect } from 'react';
-import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Fragment } from 'react';
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 
 import config from '~/config';
-import { useGlobalState } from '~/hooks';
+import { useAuthenState } from '~/hooks';
 
 import Avatar from '~/components/Avatar';
 
-import Account from './components/Account';
-import Addresses from './components/Addresses';
-import Password from './components/Password';
-import Purchase from './components/Purchase';
-
+import Account from './pages/Account';
+import Addresses from './pages/Addresses';
+import Password from './pages/Password';
+import Purchase from './pages/Purchase';
 import styles from './Profile.module.scss';
 
 const cx = classNames.bind(styles);
@@ -22,36 +21,39 @@ const menuNavigate = [
     title: 'Account',
     icon: <i className="fa-solid fa-user"></i>,
     path: '',
+    visible: true,
     component: Account,
   },
   {
     title: 'Password',
     icon: <i className="fa-solid fa-key"></i>,
     path: '/password',
+    visible: false,
     component: Password,
   },
   {
     title: 'Addresses',
     icon: <i className="fa-sharp fa-solid fa-location-dot"></i>,
     path: '/addresses',
+    visible: true,
     component: Addresses,
   },
   {
     title: 'Purchase',
     icon: <i className="fa-solid fa-bag-shopping"></i>,
     path: '/purchase',
+    visible: true,
     component: Purchase,
   },
 ];
 
 function Profile() {
-  const { globalState } = useGlobalState();
-  const { login } = globalState;
+  const { authenState } = useAuthenState();
+  const { login } = authenState;
   const { currentUser } = login;
-
-  const navigator = useNavigate();
   const { pathname } = useLocation();
-  console.log('pathname: ', pathname);
+
+  if (currentUser?.provider === 'local') menuNavigate[1].visible = true;
 
   // useEffect(() => {
   //   if (!currentUser) {
@@ -69,7 +71,7 @@ function Profile() {
 
         <div className={cx('navigate')}>
           {menuNavigate.map((item, index) => {
-            return (
+            return item.visible ? (
               <Link
                 key={item.path}
                 to={config.routes.profile + item.path}
@@ -80,10 +82,13 @@ function Profile() {
                 <div className={cx('navigate__icon')}>{item.icon}</div>
                 <div className={cx('navigate__title')}>{item.title}</div>
               </Link>
+            ) : (
+              <Fragment key={item.path} />
             );
           })}
         </div>
       </div>
+
       <div className={cx('content')}>
         <Routes>
           {menuNavigate.map((item) => {

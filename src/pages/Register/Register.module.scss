@@ -1,39 +1,11 @@
 @import '/src/sass';
 
 .wrapper {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-}
-
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0.5;
-
-  width: 100%;
-  height: 100%;
-  line-height: 0;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-.content {
-  @include flex(center, space-around);
+  @include flex(center, center);
   flex-direction: column;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  max-width: 640px;
   width: 100vw;
+  max-width: 640px;
 
-  transform: translate(-50%, -50%);
   background-color: #fff;
   padding: 30px 20px;
   border-radius: 10px;
@@ -55,16 +27,8 @@
   @include flex(center, center);
   flex-direction: column;
 
-  .btn_login {
+  .btn_register {
     margin-top: 20px;
-  }
-}
-
-.social_media {
-  margin-bottom: 20px;
-  p {
-    margin: 10px 0;
-    text-align: center;
   }
 }
 

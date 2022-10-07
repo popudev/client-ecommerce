@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { addAddress, getAddress, updateAddress, updateAddressDefault } from '~/services/addressService';
+import { addAddress, getAddress, updateAddress } from '~/services/addressService';
 
 import Button from '~/components/Button';
 import CheckBox from '~/components/CheckBox';
@@ -13,21 +13,6 @@ import styles from './Addresses.module.scss';
 import AddressItem from './AddressItem';
 
 const cx = classNames.bind(styles);
-
-const addresses = [
-  {
-    fullname: 'Phu Thinh',
-    phone: '0224522100',
-    address: 'Dai hoc Sai Gon',
-    defaultAddress: true,
-  },
-  {
-    fullname: 'Tu Dy',
-    phone: '02245224511',
-    address: 'Dai hoc Luat',
-    defaultAddress: false,
-  },
-];
 
 function Addresses() {
   console.log('re-render');
@@ -83,7 +68,6 @@ function Addresses() {
   useEffect(() => {
     (async () => {
       const res = await getAddress();
-      console.log(res);
       setAddressList(res);
     })();
   }, [callApi]);

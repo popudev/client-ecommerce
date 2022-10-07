@@ -9,7 +9,7 @@ import styles from './CheckBox.module.scss';
 const cx = classNames.bind(styles);
 
 function CheckBox(props) {
-  const { title, checked, onChange = () => {}, upper, value: checkedForm, setValueForm = () => {} } = props;
+  const { title, checked, disabled, onChange = () => {}, upper, value: checkedForm, setValueForm = () => {} } = props;
   const inputRef = useRef(null);
 
   const handleOnChange = () => {
@@ -17,9 +17,23 @@ function CheckBox(props) {
     onChange(inputRef.current);
   };
 
+  let disabledAttr = {};
+  if (disabled) {
+    disabledAttr = {
+      disabled: true,
+    };
+  }
+
   return (
     <label className={cx('wrapper')}>
-      <input ref={inputRef} type="checkbox" checked={checkedForm || checked} onChange={handleOnChange} value={title} />
+      <input
+        ref={inputRef}
+        type="checkbox"
+        checked={checkedForm || checked}
+        onChange={handleOnChange}
+        value={title}
+        {...disabledAttr}
+      />
       <span className={cx('title', { upper: upper })}>{title}</span>
     </label>
   );

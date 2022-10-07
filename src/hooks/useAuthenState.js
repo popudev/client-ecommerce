@@ -1,8 +1,9 @@
 import { useContext } from 'react';
-import { GlobalStateContext } from '~/context/GlobalStateProvider';
 
-export default function useGlobalState() {
-  const context = useContext(GlobalStateContext);
+import { AuthenContext } from '~/context/AuthenProvider';
+
+export default function useAuthenState() {
+  const context = useContext(AuthenContext);
 
   if (context === undefined) {
     throw new Error('Context should be use winthin a CountProvider');

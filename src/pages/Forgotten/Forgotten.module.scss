@@ -1,0 +1,48 @@
+@import '/src/sass';
+
+.wrapper {
+  @include flex(center, space-around);
+  flex-direction: column;
+
+  width: 100vw;
+  max-width: 500px;
+
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+
+  @include mobile {
+    height: 100vh;
+    border-radius: unset;
+    @include flex(center, center);
+  }
+}
+
+.header {
+  padding: 10px 0 20px 0;
+  font-size: 24px;
+  width: 100%;
+  border-bottom: 1px solid $third-color;
+}
+
+.desc {
+  padding: 20px 0;
+}
+
+.form_find_account {
+  width: 100%;
+  input {
+    width: 100%;
+    color: black;
+  }
+
+  .form_input {
+    padding-bottom: 20px;
+  }
+
+  .actions {
+    padding-top: 20px;
+    text-align: end;
+    border-top: 1px solid $third-color;
+  }
+}

@@ -3,7 +3,8 @@
 .form_group {
   @include flex(flex-start, center);
   flex-direction: column;
-  margin: 5px 0 18px 0;
+  margin-bottom: 18px;
+  padding-top: 5px;
   width: 100%;
 
   label {
@@ -31,9 +32,9 @@
 }
 
 .disabled {
-  opacity: 0.5;
   input {
     font-weight: 700;
+    opacity: 0.5;
   }
 }
 

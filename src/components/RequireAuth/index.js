@@ -1,10 +1,11 @@
-import { useLocation, Navigate, Outlet } from 'react-router-dom';
-import { useGlobalState } from '~/hooks';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+
+import { useAuthenState } from '~/hooks';
 
 const RequireAuth = () => {
-  const { globalState } = useGlobalState();
+  const { authenState } = useAuthenState();
   const location = useLocation();
-  const user = globalState.login.currentUser;
+  const user = authenState.login.currentUser;
 
   return user?.admin ? <Outlet /> : <Navigate to="/notfound" state={{ from: location }} replace />;
 };

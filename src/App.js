@@ -5,6 +5,7 @@ import { DefaultLayout } from '~/layouts';
 import { privateRoutes, publicRoutes } from '~/routes';
 
 import Loading from './components/Loading';
+import Notification from './components/Modal/Notification';
 import OverPlay from './components/OverPlay';
 import RequireAuth from './components/RequireAuth';
 import ScrollToTop from './components/ScrollToTop';
@@ -19,6 +20,7 @@ function App() {
       <ToastContainer />
       <Loading />
       <OverPlay />
+      <Notification />
       <div className="App">
         <Routes>
           {publicRoutes.map((route, index) => {

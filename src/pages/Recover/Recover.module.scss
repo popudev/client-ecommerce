@@ -1,0 +1,19 @@
+@import '/src/sass';
+
+.wrapper {
+  @include flex(center, space-around);
+  flex-direction: column;
+
+  width: 100vw;
+  max-width: 500px;
+
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+
+  @include mobile {
+    height: 100vh;
+    border-radius: unset;
+    @include flex(center, center);
+  }
+}

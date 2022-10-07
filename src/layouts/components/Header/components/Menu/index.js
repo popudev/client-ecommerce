@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 
 import { avatarDefault } from '~/assets/images';
 import config from '~/config';
-import { useGlobalState } from '~/hooks';
+import { useAuthenState } from '~/hooks';
 import { logoutUser } from '~/services/authenService';
 
 import Popper from '~/components/Popper';
@@ -88,8 +88,8 @@ const menuUser = [
 
 function Menu() {
   const menuRef = useRef(null);
-  const { globalState, dispatch } = useGlobalState();
-  const currentUser = globalState.login.currentUser;
+  const { authenState, dispatch } = useAuthenState();
+  const currentUser = authenState.login.currentUser;
 
   const navigator = useNavigate();
   const { pathname } = useLocation();
