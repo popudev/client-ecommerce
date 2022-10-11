@@ -18,7 +18,6 @@ function Account() {
   const { authenState, dispatch } = useAuthenState();
   const { login } = authenState;
   const { currentUser } = login;
-
   const [randomUrl, setRandomUrl] = useState(currentUser?.avatar);
 
   const initialValues = {
@@ -29,7 +28,9 @@ function Account() {
   };
 
   const handleRandomAvatar = () => {
-    const url = `https://api.multiavatar.com/${Math.round(Math.random() * 100000)}.svg`;
+    const url = `https://api.multiavatar.com/${Math.round(
+      Math.random() * 100000,
+    )}.svg`;
     setRandomUrl(url);
   };
 
@@ -38,8 +39,6 @@ function Account() {
       ...values,
       avatar: randomUrl,
     };
-    console.log('user: ', user);
-
     updateInfoUser(user, dispatch);
   };
 
@@ -53,12 +52,36 @@ function Account() {
 
       <div className={cx('content')}>
         <div className={cx('form')}>
-          <Form className={cx('form_account')} initialValues={initialValues} onSubmit={handleSubmit}>
-            {currentUser?.username && <FormInput outline disabled type="text" name="username" label="Username" />}
+          <Form
+            className={cx('form_account')}
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
+          >
+            {currentUser?.username && (
+              <FormInput
+                outline
+                disabled
+                type="text"
+                name="username"
+                label="Username"
+              />
+            )}
             <FormInput outline type="text" name="fullname" label="Full Name" />
-            <FormInput outline type="text" disabled={currentUser?.provider !== 'local'} name="email" label="Email">
+            <FormInput
+              outline
+              type="text"
+              disabled={currentUser?.provider !== 'local'}
+              name="email"
+              label="Email"
+            >
               {!currentUser?.verify && (
-                <Button type="button" fill className={cx('btn_verify')} outline onClick={handleVerifyEmail}>
+                <Button
+                  type="button"
+                  fill
+                  className={cx('btn_verify')}
+                  outline
+                  onClick={handleVerifyEmail}
+                >
                   verify
                 </Button>
               )}
@@ -80,7 +103,11 @@ function Account() {
 
         <div className={cx('avatar')}>
           <Avatar className={cx('avatar__image')} avatar={randomUrl} />
-          <Button outline className={cx('btn_random')} onClick={handleRandomAvatar}>
+          <Button
+            outline
+            className={cx('btn_random')}
+            onClick={handleRandomAvatar}
+          >
             Random Avatar
           </Button>
         </div>

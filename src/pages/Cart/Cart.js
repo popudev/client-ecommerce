@@ -1,25 +1,34 @@
 import { useEffect, useState } from 'react';
-
-import classNames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
 
 import { banner } from '~/assets/images';
 import config, { formatMoney } from '~/config';
+import { useAuthenState } from '~/hooks';
+import useCheckOutState from '~/hooks/useCheckOutState';
+import { updateTotalPriceDiscountProducts } from '~/reducers/actions/checkOutAction';
 import { getInfoCart } from '~/services/cartService';
 
 import Banner from '~/components/Banner';
 import Button from '~/components/Button';
 import Helmet from '~/components/Helmet';
+import { notification } from '~/components/Modal/Notification/core';
 import ProductItemCart from '~/components/ProductItemCart';
 import Table from '~/components/Table';
 
 import styles from './Cart.module.scss';
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
 function Cart() {
+  const { authenState } = useAuthenState();
+  const { currentUser } = authenState.login;
   const [items, setItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
+
+  const { dispatch } = useCheckOutState();
+  const navigator = useNavigate();
 
   const getItems = async () => {
     const result = await getInfoCart();
@@ -44,6 +53,18 @@ function Cart() {
 
   const handleChangeQuantity = () => {
     getItems();
+  };
+
+  const handleCheckOut = () => {
+    if (currentUser?.verify) {
+      dispatch(updateTotalPriceDiscountProducts(totalPrice, discount, items));
+      navigator(config.routes.checkout.address.href);
+    } else {
+      notification.setTitle(
+        'Account not verified. Please open profile > account > verify email',
+        notification.type.error,
+      );
+    }
   };
 
   return (
@@ -110,7 +131,7 @@ function Cart() {
                   <h4>Total:</h4>
                   <p>{formatMoney(totalPrice - discount)}</p>
                 </div>
-                <Button primary className={cx('btn_checkout')}>
+                <Button primary className={cx('btn_checkout')} onClick={handleCheckOut}>
                   Check Out
                 </Button>
               </div>

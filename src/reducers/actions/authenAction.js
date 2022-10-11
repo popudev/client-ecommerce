@@ -1,5 +1,4 @@
 export function registerSuccess(payload) {
-  console.log('payload: ', payload);
   return {
     type: 'registerSuccess',
     payload,

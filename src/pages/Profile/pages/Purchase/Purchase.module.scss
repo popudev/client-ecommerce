@@ -1,0 +1,55 @@
+@import '/src/sass';
+
+.wrapper {
+  margin-bottom: 20px;
+}
+
+.status_orders {
+  @include flex(center, space-between);
+
+  button.active {
+    background-color: rgba($color: $third-color, $alpha: 0.2);
+  }
+
+  button {
+    flex: 1;
+  }
+}
+
+.main_wrapper {
+  .orders {
+    margin-top: 20px;
+  }
+
+  .empty {
+    @include flex(center, center);
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: $fourth-color;
+
+    & > * {
+      margin-bottom: 20px;
+    }
+
+    i {
+      font-size: 50px;
+    }
+  }
+}
+
+.order_wrapper {
+  margin-bottom: 20px;
+  .actions_status {
+    background-color: $fourth-color;
+    padding: 20px;
+    @include flex(center, space-between);
+    margin-bottom: 20px;
+  }
+  .status {
+    span {
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #fff;
+    }
+  }
+}

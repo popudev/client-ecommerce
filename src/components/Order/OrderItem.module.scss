@@ -1,0 +1,39 @@
+@import '/src/sass';
+
+.item {
+  padding: 30px;
+  background-color: $fourth-color;
+  & + & {
+    margin-top: 20px;
+  }
+
+  .status {
+    font-size: 20px;
+    margin-bottom: 20px;
+    span {
+      font-weight: 700;
+      color: #fff;
+    }
+  }
+
+  .total {
+    width: 100%;
+    padding: 10px 0;
+    @include flex(center, flex-end);
+    font-size: 30px;
+    p {
+      color: #fff;
+      margin-left: 10px;
+      font-weight: 700;
+    }
+  }
+
+  .actions_time {
+    @include flex(flex-end, space-between);
+    .time {
+      span {
+        color: #fff;
+      }
+    }
+  }
+}

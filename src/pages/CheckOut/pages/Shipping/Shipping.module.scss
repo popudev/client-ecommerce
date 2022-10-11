@@ -1,0 +1,44 @@
+@import '/src/sass';
+
+.wrapper {
+  h1 {
+    margin-bottom: 40px;
+  }
+}
+
+.shipping_card {
+  opacity: 0.5;
+  cursor: pointer;
+  @include flex(flex-start, flex-start);
+  padding: 20px;
+  border: 1px solid $third-color;
+  transition: all 0.1s linear;
+
+  &:hover {
+    opacity: 1;
+    background-color: rgba($color: $third-color, $alpha: 0.2);
+  }
+
+  & + & {
+    margin-top: 20px;
+  }
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.shippping_content {
+  p {
+    span:nth-child(2) {
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+}
+
+.actions {
+  padding-top: 20px;
+  text-align: end;
+  width: 100%;
+}

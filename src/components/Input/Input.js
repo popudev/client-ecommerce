@@ -29,9 +29,12 @@ function Input(props) {
   ) : (
     <div className={cx('wrapper')}>
       <Component ref={inputPass} type={type} {...propsOther} />
-      <button tabindex="-1" type="button" onClick={handleToggleType}>
+      <button tabIndex="-1" type="button" onClick={handleToggleType}>
         <i ref={iconEye} className={cx('fa-solid fa-eye', 'eye', 'active')}></i>
-        <i ref={iconEyeSlash} className={cx('fa-sharp fa-solid fa-eye-slash', 'eyeSlash')}></i>
+        <i
+          ref={iconEyeSlash}
+          className={cx('fa-sharp fa-solid fa-eye-slash', 'eyeSlash')}
+        ></i>
       </button>
     </div>
   );

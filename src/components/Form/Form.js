@@ -7,10 +7,19 @@ import CheckBox from '../CheckBox';
 import FormInput from './FormInput';
 
 function Form(props) {
-  const { children, initialValues, onSubmit, className, validateSchema, submitRef = {}, cleanRef = {} } = props;
+  const {
+    children,
+    initialValues,
+    onSubmit,
+    className,
+    validateSchema,
+    submitRef = {},
+    cleanRef = {},
+  } = props;
 
   const [values, setValues] = useState(initialValues);
   const [clean, setClean] = useState(false);
+  const [errorValidations, setErrorValidations] = useState({});
 
   useDidUpdate(() => {
     setValues({ ...initialValues });
@@ -20,7 +29,21 @@ function Form(props) {
     cleanRef.current = () => setClean((prev) => !prev);
   }, [cleanRef]);
 
-  const [errorValidations, setErrorValidations] = useState({});
+  // useEffect(() => {
+  //   // clearErrorRef.current = () => {
+  //   //   let error = {};
+  //   //   const errorMess = '';
+  //   //   for (let key in values) {
+  //   //     error = {
+  //   //       ...error,
+  //   //       [key]: {
+  //   //         errorMess,
+  //   //       },
+  //   //     };
+  //   //   }
+  //     setErrorValidations(error);
+  //   };
+  // }, [clearErrorRef, values]);
 
   const validationRules = {
     required: (value, isRequired) => (isRequired ? (value ? '' : 'Required !!!') : ''),
@@ -31,7 +54,13 @@ function Form(props) {
       const error = !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
       return error ? 'Email is not valid !!!' : '';
     },
-    confirm: (value, confirmValue) => (value === values[confirmValue] ? '' : 'Confirm password does not match !!!'),
+    number: (value, isNumber) => {
+      if (!isNumber) return;
+      const error = !/^[0-9]*$/g.test(value);
+      return error ? 'Only number !!!' : '';
+    },
+    confirm: (value, confirmValue) =>
+      value === values[confirmValue] ? '' : 'Confirm password does not match !!!',
   };
 
   const validate = (value, name) => {
@@ -51,7 +80,9 @@ function Form(props) {
 
       return React.cloneElement(child, {
         value: values[child.props.name],
-        errorValidation: errorValidations[child.props.name] ? errorValidations[child.props.name].errorMess : false,
+        errorValidation: errorValidations[child.props.name]
+          ? errorValidations[child.props.name].errorMess
+          : '',
         validate: (value) => validate(value, child.props.name),
         setValueForm: (value) => {
           setValues({

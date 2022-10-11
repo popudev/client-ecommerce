@@ -18,13 +18,23 @@
       color: rgb(73, 255, 73);
     }
 
+    .error {
+      color: rgb(250, 82, 82);
+    }
+
+    .warning {
+      color: #f5c535;
+    }
+
     i {
       font-size: 60px;
     }
   }
 
   .title {
+    text-align: center;
     font-size: 18px;
     margin: 20px 0;
+    color: #fff;
   }
 }

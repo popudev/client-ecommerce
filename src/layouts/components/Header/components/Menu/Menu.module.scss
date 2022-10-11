@@ -148,20 +148,6 @@
   @include flex(center, flex-start);
   padding: 10px 20px;
 
-  &.username {
-    text-align: center;
-
-    .menu_user-title {
-      text-align: center;
-      width: 100%;
-      font-weight: 700;
-    }
-
-    &:hover {
-      background-color: transparent;
-    }
-  }
-
   .menu_user-icon {
     width: 30px;
     font-size: 18px;
@@ -185,5 +171,20 @@
 
   &:hover {
     background-color: rgba(80, 80, 80, 0.1);
+  }
+}
+
+.username {
+  text-align: center;
+  pointer-events: none;
+
+  .menu_user-title {
+    text-align: center;
+    width: 100%;
+    font-weight: 700;
+  }
+
+  &:hover {
+    background-color: transparent;
   }
 }

@@ -11,30 +11,31 @@ import styles from './Password.module.scss';
 
 const cx = classNames.bind(styles);
 
+const initialValues = {
+  currentPassword: '',
+  newPassword: '',
+  confirmNewPassword: '',
+};
+
+const validateSchema = {
+  currentPassword: {
+    required: true,
+    min: 6,
+  },
+  newPassword: {
+    required: true,
+    min: 6,
+  },
+  confirmNewPassword: {
+    required: true,
+    min: 6,
+  },
+};
+
 function Password() {
   const [errorCurrentPassword, setErrorCurrentPassword] = useState({});
   const [errorNewPassword, setErrorNewPassword] = useState({});
-
-  const initialValues = {
-    currentPassword: '',
-    newPassword: '',
-    confirmNewPassword: '',
-  };
-
-  const validateSchema = {
-    currentPassword: {
-      required: true,
-      min: 6,
-    },
-    newPassword: {
-      required: true,
-      min: 6,
-    },
-    confirmNewPassword: {
-      required: true,
-      min: 6,
-    },
-  };
+  const cleanRef = useRef({});
 
   const handleSubmit = async (values) => {
     const res = await changePasswordUser(values);
@@ -44,8 +45,6 @@ function Password() {
       else setErrorNewPassword({ ...res });
     }
   };
-
-  const cleanRef = useRef({});
 
   return (
     <div className={cx('wrapper')}>
@@ -67,13 +66,29 @@ function Password() {
               errorMess={errorCurrentPassword}
             />
 
-            <FormInput outline type="password" name="newPassword" label="New Password" errorMess={errorNewPassword} />
+            <FormInput
+              outline
+              type="password"
+              name="newPassword"
+              label="New Password"
+              errorMess={errorNewPassword}
+            />
 
-            <FormInput outline type="password" name="confirmNewPassword" label="Confirm Password" />
+            <FormInput
+              outline
+              type="password"
+              name="confirmNewPassword"
+              label="Confirm Password"
+            />
             <Button type="submit" primary className={cx('btn_change')}>
               Change Password
             </Button>
-            <Button type="button" to="/forgotten" text className={cx('btn_forgotten_password')}>
+            <Button
+              type="button"
+              to="/forgotten"
+              text
+              className={cx('btn_forgotten_password')}
+            >
               Forgotten Current Password ?
             </Button>
           </Form>

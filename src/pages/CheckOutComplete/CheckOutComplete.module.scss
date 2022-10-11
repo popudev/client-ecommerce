@@ -1,0 +1,34 @@
+@import '/src/sass';
+
+.wrapper {
+  padding-bottom: 20px !important;
+}
+
+.header {
+  padding: 100px 0;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+  background-color: $fourth-color;
+  i {
+    font-size: 70px;
+    color: rgb(73, 255, 73);
+  }
+
+  h1 {
+    padding: 20px;
+  }
+
+  p {
+    max-width: 500px;
+    margin: auto;
+  }
+
+  .actions {
+    margin-top: 20px;
+  }
+}
+
+.section_product_recommemt {
+  margin-top: 30px;
+}

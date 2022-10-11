@@ -14,20 +14,41 @@ import AddressItem from './AddressItem';
 
 const cx = classNames.bind(styles);
 
-function Addresses() {
-  console.log('re-render');
-  const toggleModalAddress = useRef();
+const validateSchema = {
+  fullname: {
+    required: true,
+    min: 6,
+  },
+  phone: {
+    required: true,
+    number: true,
+    min: 10,
+    max: 10,
+  },
+  address: {
+    required: true,
+    min: 6,
+  },
+};
 
+function Addresses() {
+  const [addressList, setAddressList] = useState([]);
+  const [callApi, setCallApi] = useState(false);
+  const [statusSubmit, setStatusSubmit] = useState('');
   const [initialValues, setInitialValues] = useState({
     fullname: '',
     phone: '',
     address: '',
   });
 
-  const [addressList, setAddressList] = useState([]);
+  const toggleModalAddress = useRef();
 
-  const [callApi, setCallApi] = useState(false);
-  const [statusSubmit, setStatusSubmit] = useState('');
+  useEffect(() => {
+    (async () => {
+      const res = await getAddress();
+      setAddressList(res);
+    })();
+  }, [callApi]);
 
   const handleAddAddress = () => {
     setInitialValues({
@@ -65,30 +86,13 @@ function Addresses() {
     toggleModalAddress.current();
   };
 
-  useEffect(() => {
-    (async () => {
-      const res = await getAddress();
-      setAddressList(res);
-    })();
-  }, [callApi]);
-
-  const validateSchema = {
-    fullname: {
-      required: true,
-    },
-    phone: {
-      required: true,
-    },
-    address: {
-      required: true,
-    },
-  };
-
   return (
     <div className={cx('wrapper')}>
       <Modal toggleModal={toggleModalAddress}>
         <div className={cx('form')}>
-          <h2 className={cx('form_title')}>{statusSubmit === 'add' ? 'New Address' : 'Update Address'}</h2>
+          <h2 className={cx('form_title')}>
+            {statusSubmit === 'add' ? 'New Address' : 'Update Address'}
+          </h2>
           <Form
             className={cx('form_add_address')}
             initialValues={initialValues}
@@ -98,7 +102,11 @@ function Addresses() {
             <FormInput type="text" name="fullname" label="Full Name" />
             <FormInput type="text" name="phone" label="Phone" />
             <FormInput type="text" name="address" label="Address" />
-            {!initialValues.defaultAddress ? <CheckBox title="Set Address Default" name="defaultAddress" /> : <></>}
+            {!initialValues.defaultAddress ? (
+              <CheckBox title="Set Address Default" name="defaultAddress" />
+            ) : (
+              <></>
+            )}
             <div className={cx('action')}>
               <Button type="button" text onClick={handleCancelAddAddress}>
                 Cancel
@@ -110,6 +118,7 @@ function Addresses() {
           </Form>
         </div>
       </Modal>
+
       <div className={cx('header')}>
         <h1 className={cx('title')}>My Addresses</h1>
         <Button onClick={handleAddAddress} className={cx('btn_add_address')} outline>
@@ -118,8 +127,15 @@ function Addresses() {
       </div>
       <div className={cx('content')}>
         <div className={cx('address_list')}>
-          {addressList.map((e, index) => {
-            return <AddressItem key={e._id} data={e} onEdit={handleEdit} onDefaultOrDelete={handleDefaultOrDelete} />;
+          {addressList.map((item) => {
+            return (
+              <AddressItem
+                key={item._id}
+                data={item}
+                onEdit={handleEdit}
+                onDefaultOrDelete={handleDefaultOrDelete}
+              />
+            );
           })}
         </div>
       </div>

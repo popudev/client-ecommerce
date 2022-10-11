@@ -1,0 +1,99 @@
+@import '/src/sass';
+
+.wrapper {
+  @include flex(center, flex-start);
+  flex-direction: column;
+  width: 100%;
+}
+
+.content {
+  padding: 20px;
+  border: 1px solid $third-color;
+  width: 100%;
+  max-width: 700px;
+  @include flex(flex-end, flex-start);
+  flex-direction: column;
+  .title {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid $third-color;
+    padding-bottom: 20px;
+    p {
+      color: #fff;
+    }
+  }
+  h3 {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+}
+
+.actions {
+  width: 100%;
+  max-width: 700px;
+  background-color: $fourth-color;
+  padding: 30px 20px;
+  text-align: end;
+  border: 1px solid $third-color;
+}
+
+.address_item {
+  width: 100%;
+  padding: 0 40px;
+  .info {
+    color: #fff;
+  }
+}
+
+.products {
+  width: 100%;
+  padding: 0 40px;
+}
+
+.shippping {
+  width: 100%;
+  padding: 0 40px;
+  h4 {
+    color: #fff;
+  }
+  p {
+    span:nth-child(2) {
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+}
+
+.payment,
+.time {
+  h4 {
+    color: #fff;
+  }
+  width: 100%;
+  padding: 0 40px;
+}
+
+.checkout_total {
+  width: fit-content;
+  padding-top: 20px;
+  .info {
+    @include flex(center, flex-start);
+    font-size: 24px;
+    width: 100%;
+    p {
+      text-align: end;
+      flex: 1;
+      color: #fff;
+      font-weight: 700;
+      margin-left: 20px;
+    }
+
+    &.total {
+      border-top: 1px solid $third-color;
+      padding-top: 5px;
+      margin-top: 5px;
+      font-size: 30px;
+    }
+  }
+}

@@ -6,7 +6,7 @@
   "htmlWhitespaceSensitivity": "css",
   "insertPragma": false,
   "jsxSingleQuote": false,
-  "printWidth": 120,
+  "printWidth": 100,
   "proseWrap": "preserve",
   "quoteProps": "as-needed",
   "requirePragma": false,
@@ -23,9 +23,10 @@
     "^~/(?!components)",
     "~/components/(.*)$",
     "./components/(.*)$",
-    "^(../)",
-    "^(./)",
-    "(\\.scss$)"
+    "^(..)",
+    "^(.)",
+    "classnames/bind",
+    "(.module.scss$)"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,

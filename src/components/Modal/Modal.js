@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import classNames from 'classnames/bind';
-
 import overplay from '../OverPlay/core/overplay';
-
 import styles from './Modal.module.scss';
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 

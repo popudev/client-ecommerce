@@ -2,6 +2,8 @@ import config from '~/config';
 import CenterLayout from '~/layouts/CenterLayout';
 import AdminProduct from '~/pages/AdminProduct';
 import Cart from '~/pages/Cart';
+import CheckOut from '~/pages/CheckOut';
+import CheckOutComplete from '~/pages/CheckOutComplete';
 import Detail from '~/pages/Detail';
 import Forgotten from '~/pages/Forgotten';
 import Home from '~/pages/Home';
@@ -65,6 +67,14 @@ const publicRoutes = [
     path: config.routes.recover + '/*',
     component: Recover,
     layout: CenterLayout,
+  },
+  {
+    path: config.routes.checkout.complete + '/:orderId',
+    component: CheckOutComplete,
+  },
+  {
+    path: config.routes.checkout + '/*',
+    component: CheckOut,
   },
 ];
 

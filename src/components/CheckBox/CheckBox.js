@@ -9,7 +9,16 @@ import styles from './CheckBox.module.scss';
 const cx = classNames.bind(styles);
 
 function CheckBox(props) {
-  const { title, checked, disabled, onChange = () => {}, upper, value: checkedForm, setValueForm = () => {} } = props;
+  const {
+    title,
+    className,
+    checked,
+    disabled,
+    onChange = () => {},
+    upper,
+    value: checkedForm,
+    setValueForm = () => {},
+  } = props;
   const inputRef = useRef(null);
 
   const handleOnChange = () => {
@@ -25,7 +34,7 @@ function CheckBox(props) {
   }
 
   return (
-    <label className={cx('wrapper')}>
+    <label className={cx('wrapper', { [className]: className })}>
       <input
         ref={inputRef}
         type="checkbox"

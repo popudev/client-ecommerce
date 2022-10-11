@@ -1,5 +1,5 @@
-import { Fragment } from 'react';
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Fragment, useEffect } from 'react';
+import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 
@@ -20,30 +20,36 @@ const menuNavigate = [
   {
     title: 'Account',
     icon: <i className="fa-solid fa-user"></i>,
-    path: '',
-    visible: true,
+    path: config.routes.profile.account,
+    link: config.routes.profile.account.href,
     component: Account,
   },
   {
     title: 'Password',
     icon: <i className="fa-solid fa-key"></i>,
-    path: '/password',
-    visible: false,
+    path: config.routes.profile.password,
+    link: config.routes.profile.password.href,
+    disable: true,
     component: Password,
   },
   {
     title: 'Addresses',
     icon: <i className="fa-sharp fa-solid fa-location-dot"></i>,
-    path: '/addresses',
-    visible: true,
+    path: config.routes.profile.addresses,
+    link: config.routes.profile.addresses.href,
     component: Addresses,
   },
   {
     title: 'Purchase',
     icon: <i className="fa-solid fa-bag-shopping"></i>,
-    path: '/purchase',
-    visible: true,
+    path: config.routes.profile.purchase + '/*',
+    link: config.routes.profile.purchase.href,
     component: Purchase,
+  },
+  {
+    path: '/*',
+    disable: true,
+    component: () => <Navigate to="/notfound" replace />,
   },
 ];
 
@@ -53,13 +59,7 @@ function Profile() {
   const { currentUser } = login;
   const { pathname } = useLocation();
 
-  if (currentUser?.provider === 'local') menuNavigate[1].visible = true;
-
-  // useEffect(() => {
-  //   if (!currentUser) {
-  //     navigator(config.routes.login, { replace: true });
-  //   }
-  // });
+  if (currentUser?.provider === 'local') menuNavigate[1].disable = false;
 
   return currentUser ? (
     <div className={cx('wrapper', 'container', 'main')}>
@@ -70,20 +70,20 @@ function Profile() {
         </div>
 
         <div className={cx('navigate')}>
-          {menuNavigate.map((item, index) => {
-            return item.visible ? (
+          {menuNavigate.map((item) => {
+            if (item.disable) return <Fragment key={item.path} />;
+
+            return (
               <Link
                 key={item.path}
-                to={config.routes.profile + item.path}
+                to={item.link}
                 className={cx('navigate__item', {
-                  active: pathname === config.routes.profile + item.path,
+                  active: pathname.includes(item.link),
                 })}
               >
                 <div className={cx('navigate__icon')}>{item.icon}</div>
                 <div className={cx('navigate__title')}>{item.title}</div>
               </Link>
-            ) : (
-              <Fragment key={item.path} />
             );
           })}
         </div>
