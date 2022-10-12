@@ -6,9 +6,11 @@ import { updateTotalPriceDiscountProducts } from '~/reducers/actions/checkOutAct
 import { updateOrderStatus } from '~/services/orderService';
 
 import Button from '../Button';
-import { notification } from '../Modal/Notification/core';
+import { notification } from '../Notification/core';
 import ProductItemCheckOut from '../ProductItemCheckOut';
+
 import styles from './OrderItem.module.scss';
+
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
@@ -41,7 +43,7 @@ function OrderItem({ data, onCancel = () => {} }) {
   return (
     <div className={cx('item')}>
       <div className={cx('status')}>
-        Status: <span>{config.order.status[data?.status || 0]}</span>
+        Status: <span>{data?.status?.title}</span>
       </div>
       <div className={cx('products')}>
         {data?.products?.map((product) => {
@@ -59,7 +61,7 @@ function OrderItem({ data, onCancel = () => {} }) {
           <p>Time Order:</p> <span>{new Date(data?.createdAt).toLocaleString()}</span>
         </div>
         <div className={cx('actions')}>
-          {data?.status !== 1 && (
+          {data?.status?.code !== config.order.status.pending && (
             <Button primary onClick={handleOrderAgain}>
               Order Again
             </Button>
@@ -67,7 +69,7 @@ function OrderItem({ data, onCancel = () => {} }) {
           <Button primary onClick={() => handleViewDetails(data?._id)}>
             View Details
           </Button>
-          {data?.status === 1 && (
+          {data?.status?.code === config.order.status.pending && (
             <Button outline onClick={handleCancel}>
               Cancel
             </Button>

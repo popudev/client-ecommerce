@@ -109,8 +109,31 @@
     &.total {
       border-top: 1px solid $third-color;
       padding-top: 5px;
-      margin-top: 5px;
+
       font-size: 30px;
     }
+  }
+}
+
+.form_coupon {
+  @include flex(flex-start, center);
+  height: 35px;
+  margin: 10px 0 18px 0;
+
+  div {
+    padding: 0;
+    height: 100%;
+  }
+
+  input {
+    height: 100%;
+    font-size: 20px;
+    width: 200px;
+    padding: 0 10px;
+    border: none;
+  }
+
+  button {
+    height: 100% !important;
   }
 }

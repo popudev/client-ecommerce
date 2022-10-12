@@ -6,6 +6,7 @@
   @include flex(center, center);
   flex-direction: column;
   max-width: 400px;
+  min-width: 300px;
   border: 1px solid #fff;
 }
 
@@ -24,6 +25,10 @@
 
     .warning {
       color: #f5c535;
+    }
+
+    .liveSlow {
+      color: #e4a0b7;
     }
 
     i {

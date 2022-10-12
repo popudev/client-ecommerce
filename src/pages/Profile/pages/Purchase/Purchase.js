@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
-
 import config from '~/config';
 
 import Main from './pages/Main';
 import Order from './pages/Order';
 import styles from './Purchase.module.scss';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 

@@ -6,8 +6,10 @@ const notification = {
     success: 'success',
     error: 'error',
     warning: 'warning',
+    liveSlow: 'liveSlow',
   },
   setTitle: () => {},
+  close: () => {},
 };
 
 export default notification;

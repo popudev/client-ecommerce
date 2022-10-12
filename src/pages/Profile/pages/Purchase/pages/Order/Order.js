@@ -7,7 +7,8 @@ import { getOrderById } from '~/services/orderService';
 import Button from '~/components/Button';
 import { OrderDetails } from '~/components/Order';
 
-import styles from '../Purchase.module.scss';
+import styles from './Order.module.scss';
+
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
@@ -46,7 +47,7 @@ function Order() {
             Order ID: <span>{orderId}</span>
           </p>
           <p>
-            Status: <span>{config.order.status[order?.status || 0]}</span>
+            Status: <span>{order?.status?.title}</span>
           </p>
         </div>
       </div>

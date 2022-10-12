@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
-
 import config from '~/config';
 import useCheckOutState from '~/hooks/useCheckOutState';
 import { updateAddress } from '~/reducers/actions/checkOutAction';
@@ -16,6 +14,8 @@ import Radio from '~/components/Radio';
 import styles from './Address.module.scss';
 import AddressItem from './AddressItem';
 import AddressModal from './AddressModal';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
@@ -66,8 +66,11 @@ function Address() {
 
   const handleContinue = () => {
     if (option === 2) submitRef.current();
-    else dispatch(updateAddress(currentAddress));
-    navigator(config.routes.checkout.shipping.href);
+    else {
+      const { address, fullname, phone } = currentAddress;
+      dispatch(updateAddress({ address, fullname, phone }));
+      navigator(config.routes.checkout.shipping.href);
+    }
   };
 
   const handleRadio = (input) => {

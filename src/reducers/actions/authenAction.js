@@ -33,9 +33,8 @@ export function logoutSuccess(payload) {
   };
 }
 
-export function logoutFailed(payload) {
+export function logoutFailed() {
   return {
     type: 'logoutFailed',
-    payload: payload,
   };
 }

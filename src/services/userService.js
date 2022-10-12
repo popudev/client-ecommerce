@@ -1,5 +1,6 @@
 import { loginSuccess } from '~/reducers/actions/authenAction';
 import { updateAccount } from '~/reducers/actions/recoverAction';
+import checkStatusErrorApi from '~/utils/checkStatusErrorApi';
 import httpRequest from '~/utils/httpRequest';
 import { getAccessToken } from '~/utils/localStorage';
 
@@ -17,7 +18,7 @@ export const getInfoUser = async () => {
     loading.done();
     return res;
   } catch (err) {
-    loading.done().error('Server Error');
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -33,7 +34,7 @@ export const updateInfoUser = async (user, dispatch) => {
     dispatch(loginSuccess(res));
     return loading.done().success('Updated information');
   } catch (err) {
-    return loading.done().error(err.data);
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -48,8 +49,7 @@ export const changePasswordUser = async (passwords) => {
     });
     return loading.done().success('Updated information');
   } catch (err) {
-    loading.done().error(err?.data?.mess);
-    return err?.data;
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -65,7 +65,6 @@ export const getUserByEmailOrPhone = async (search, dispatch, navigator) => {
     navigator('/recover/intiate', { replace: true });
     return loading.done().succ;
   } catch (err) {
-    loading.done();
-    return err?.data;
+    return checkStatusErrorApi(err);
   }
 };

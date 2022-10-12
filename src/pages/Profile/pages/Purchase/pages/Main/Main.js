@@ -7,7 +7,8 @@ import Button from '~/components/Button';
 import { OrderItem } from '~/components/Order';
 import { Pagination } from '~/components/Pagination';
 
-import styles from '../Purchase.module.scss';
+import styles from './Main.module.scss';
+
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
@@ -32,7 +33,7 @@ const statusOrder = [
 ];
 
 function Main() {
-  const [statusFilter, setStatusFilter] = useState(1);
+  const [statusFilter, setStatusFilter] = useState(0);
   const [pageCurrent, setPageCurrent] = useState(1);
   const [orders, setOrders] = useState({});
   const { pagination, payload } = orders;

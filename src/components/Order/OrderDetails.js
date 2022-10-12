@@ -6,9 +6,11 @@ import { updateTotalPriceDiscountProducts } from '~/reducers/actions/checkOutAct
 import { updateOrderStatus } from '~/services/orderService';
 
 import Button from '../Button';
-import { notification } from '../Modal/Notification/core';
+import { notification } from '../Notification/core';
 import ProductItemCheckOut from '../ProductItemCheckOut';
+
 import styles from './OrderDetails.module.scss';
+
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
@@ -23,7 +25,7 @@ function OrderDetails({ data, actions = false, onCancel = () => {} }) {
     );
 
     if (result === notification.yes) {
-      const res = await updateOrderStatus(data._id, 3);
+      const res = await updateOrderStatus(data._id, config.order.status.cancel);
       if (res) onCancel();
     }
   };
@@ -38,7 +40,7 @@ function OrderDetails({ data, actions = false, onCancel = () => {} }) {
       <div className={cx('content')}>
         <div className={cx('title')}>
           <h2>Order Summary</h2>
-          <p>{config.order.status[data?.status || 0]}</p>
+          <p>{data?.status?.title}</p>
         </div>
         <h3>Delivery Address</h3>
         <div className={cx('address_item')}>
@@ -82,7 +84,7 @@ function OrderDetails({ data, actions = false, onCancel = () => {} }) {
           </div>
           <div className={cx('info')}>
             <h4>Discount:</h4>
-            <p>{formatMoney(data?.discount)}</p>
+            <p>- {formatMoney(data?.discount)}</p>
           </div>
 
           <div className={cx('info')}>
@@ -98,7 +100,7 @@ function OrderDetails({ data, actions = false, onCancel = () => {} }) {
       </div>
       {actions && (
         <div className={cx('actions')}>
-          {data?.status !== 1 && (
+          {data?.status?.code !== config.order.status.pending && (
             <Button primary large onClick={handleOrderAgain}>
               Order Again
             </Button>
@@ -106,7 +108,7 @@ function OrderDetails({ data, actions = false, onCancel = () => {} }) {
           <Button primary large>
             Contact
           </Button>
-          {data?.status === 1 && (
+          {data?.status?.code === config.order.status.pending && (
             <Button outline large onClick={handleCancel}>
               Cancel
             </Button>

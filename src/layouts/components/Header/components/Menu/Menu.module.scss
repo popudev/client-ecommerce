@@ -147,6 +147,7 @@
 .menu_user-item {
   @include flex(center, flex-start);
   padding: 10px 20px;
+  cursor: pointer;
 
   .menu_user-icon {
     width: 30px;

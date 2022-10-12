@@ -54,9 +54,17 @@
   }
 
   .input_coupon {
-    div {
-      @include flex(center, center);
+    form {
+      @include flex(flex-start, center);
       height: 35px;
+      div {
+        padding: 0;
+        height: 100%;
+      }
+      input {
+        height: 100%;
+        border: none;
+      }
     }
 
     label {

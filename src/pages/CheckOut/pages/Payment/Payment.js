@@ -11,6 +11,7 @@ import Button from '~/components/Button';
 import Radio from '~/components/Radio';
 
 import styles from './Payment.module.scss';
+
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
@@ -67,7 +68,7 @@ function Payment() {
         <Button outline onClick={handleBack}>
           Back
         </Button>
-        <Button large primary onClick={handleComplete}>
+        <Button primary onClick={handleComplete}>
           Complete Order
         </Button>
       </div>

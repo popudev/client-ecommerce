@@ -1,18 +1,20 @@
 import { Fragment, useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
-
 import config, { formatMoney } from '~/config';
 import useCheckOutState from '~/hooks/useCheckOutState';
 import { resetState } from '~/reducers/actions/checkOutAction';
 
+import Button from '~/components/Button';
+import { Form, FormInput } from '~/components/Form';
 import ProductItemCheckOut from '~/components/ProductItemCheckOut';
 
 import styles from './CheckOut.module.scss';
 import Address from './pages/Address';
 import Payment from './pages/Payment';
 import Shipping from './pages/Shipping';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
@@ -110,16 +112,22 @@ function CheckOut() {
             <h4>Total Price:</h4>
             <p>{formatMoney(totalPrice)}</p>
           </div>
-          <div className={cx('info')}>
-            <h4>Discount:</h4>
-            <p>{formatMoney(discount)}</p>
-          </div>
           {shipping && (
             <div className={cx('info')}>
               <h4>Shipping:</h4>
               <p>{formatMoney(shipping.charge)}</p>
             </div>
           )}
+          <div className={cx('info')}>
+            <h4>Discount:</h4>
+            <p>- {formatMoney(discount)}</p>
+          </div>
+
+          <Form className={cx('form_coupon')} initialValues={{ coupon: '' }}>
+            <FormInput placeholder="Have coupon ?" name="coupon" />
+            <Button primary>Apply</Button>
+          </Form>
+
           <div className={cx('info', 'total')}>
             <h4>Total:</h4>
             <p>{formatMoney(total)}</p>

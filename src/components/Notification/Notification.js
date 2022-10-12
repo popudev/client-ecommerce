@@ -21,7 +21,7 @@ function Notification() {
     setType(type);
     toggleModalAddress.current();
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       notification.clickOk = () => {
         resolve(notification.ok);
       };
@@ -30,6 +30,10 @@ function Notification() {
       };
       notification.clickNo = () => {
         resolve(notification.no);
+      };
+      notification.close = () => {
+        toggleModalAddress.current();
+        reject();
       };
     });
   };
@@ -49,6 +53,12 @@ function Notification() {
     toggleModalAddress.current();
   };
 
+  const renderTitle = () => {
+    if (typeof title === 'string') return title;
+
+    return title.map((item, index) => <p key={index}>{item}</p>);
+  };
+
   return (
     <Modal toggleModal={toggleModalAddress}>
       <div className={cx('wrapper')}>
@@ -65,8 +75,12 @@ function Notification() {
             {type === notification.type.success && (
               <i className={cx('success', 'fa-solid fa-circle-check')}></i>
             )}
+
+            {type === notification.type.liveSlow && (
+              <i className={cx('liveSlow', 'fa-regular fa-face-kiss-wink-heart')}></i>
+            )}
           </div>
-          <div className={cx('title')}>{title}</div>
+          <div className={cx('title')}>{renderTitle()}</div>
         </div>
         <div className={cx('actions')}>
           {type !== notification.type.warning && (

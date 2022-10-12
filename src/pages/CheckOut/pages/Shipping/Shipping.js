@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
-
 import config, { formatMoney } from '~/config';
 import useCheckOutState from '~/hooks/useCheckOutState';
-import { updateShipping } from '~/reducers/actions/checkOutAction';
+import { updateAddress, updateShipping } from '~/reducers/actions/checkOutAction';
 
 import Button from '~/components/Button';
 import Radio from '~/components/Radio';
 
 import styles from './Shipping.module.scss';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
@@ -49,6 +49,11 @@ function Shipping() {
     setOption(value);
   };
 
+  const handleBack = () => {
+    dispatch(updateAddress(null));
+    navigator(config.routes.checkout.address.href);
+  };
+
   return (
     <div className={cx('wrapper')}>
       <h1 className={cx('header')}>Shipping Selection</h1>
@@ -77,10 +82,10 @@ function Shipping() {
         <Button text to={config.routes.cart}>
           Cancel
         </Button>
-        <Button outline to={config.routes.checkout.address.href}>
+        <Button outline onClick={handleBack}>
           Back
         </Button>
-        <Button large primary onClick={handleContinue}>
+        <Button primary onClick={handleContinue}>
           Continue
         </Button>
       </div>

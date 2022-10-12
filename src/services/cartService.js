@@ -1,8 +1,10 @@
 import config from '~/config';
+import checkStatusErrorApi from '~/utils/checkStatusErrorApi';
 import httpRequest from '~/utils/httpRequest';
 import { getAccessToken } from '~/utils/localStorage';
 
 import { loading } from '~/components/Loading/core';
+import { notification } from '~/components/Notification/core';
 
 export const addProductToCart = async (data) => {
   try {
@@ -17,9 +19,7 @@ export const addProductToCart = async (data) => {
 
     return loading.done().success(config.notifications.cart.add);
   } catch (err) {
-    return err.status === 401
-      ? loading.done().error(config.notifications.auth.unauth)
-      : loading.done().error(config.notifications.server.error);
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -35,9 +35,7 @@ export const getInfoCart = async () => {
     loading.done();
     return res;
   } catch (err) {
-    return err.status === 401
-      ? loading.done().error(config.notifications.auth.unauth)
-      : loading.done().error(config.notifications.server.error);
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -52,9 +50,7 @@ export const deleteProductToCart = async (id) => {
     });
     return loading.done().success(config.notifications.cart.delete);
   } catch (err) {
-    return err.status === 401
-      ? loading.done().error(config.notifications.auth.unauth)
-      : loading.done().error(config.notifications.server.error);
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -69,8 +65,6 @@ export const changeQuantityToCart = async (data) => {
     });
     return loading.done().success(config.notifications.cart.change);
   } catch (err) {
-    return err.status === 401
-      ? loading.done().error(config.notifications.auth.unauth)
-      : loading.done().error(config.notifications.server.error);
+    return checkStatusErrorApi(err);
   }
 };

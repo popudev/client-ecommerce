@@ -1,3 +1,5 @@
+import { checkOutFailed } from '~/reducers/actions/checkOutAction';
+import checkStatusErrorApi from '~/utils/checkStatusErrorApi';
 import httpRequest from '~/utils/httpRequest';
 import { getAccessToken } from '~/utils/localStorage';
 
@@ -12,7 +14,9 @@ export const getAddress = async () => {
     });
 
     return res;
-  } catch (err) {}
+  } catch (err) {
+    return checkStatusErrorApi(err);
+  }
 };
 
 export const addAddress = async (address) => {
@@ -25,7 +29,7 @@ export const addAddress = async (address) => {
     });
     return loading.done().success('Added An Address');
   } catch (err) {
-    return loading.done().error('Server Error');
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -39,7 +43,7 @@ export const updateAddress = async (address) => {
     });
     return loading.done().success('Updated Address');
   } catch (err) {
-    return loading.done().error('Server Error');
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -53,7 +57,7 @@ export const updateAddressDefault = async (address) => {
     });
     return loading.done().success('Updated Address');
   } catch (err) {
-    return loading.done().error('Server Error');
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -67,6 +71,6 @@ export const deleteAddress = async (id) => {
     });
     return loading.done().success('Deleted Address');
   } catch (err) {
-    return loading.done().error('Server Error');
+    return checkStatusErrorApi(err);
   }
 };

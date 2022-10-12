@@ -1,7 +1,5 @@
-import { Fragment, useEffect } from 'react';
-import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-
-import classNames from 'classnames/bind';
+import { Fragment } from 'react';
+import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import config from '~/config';
 import { useAuthenState } from '~/hooks';
@@ -13,6 +11,8 @@ import Addresses from './pages/Addresses';
 import Password from './pages/Password';
 import Purchase from './pages/Purchase';
 import styles from './Profile.module.scss';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 

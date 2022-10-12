@@ -1,5 +1,6 @@
 import config from '~/config';
 import { checkOutFailed } from '~/reducers/actions/checkOutAction';
+import checkStatusErrorApi from '~/utils/checkStatusErrorApi';
 import httpRequest from '~/utils/httpRequest';
 import { getAccessToken } from '~/utils/localStorage';
 
@@ -19,6 +20,7 @@ export const addOrder = async (data, dispatch, navigator) => {
     navigator(`/checkout/complete/${res._id}`);
   } catch (err) {
     dispatch(checkOutFailed());
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -39,9 +41,7 @@ export const getOrderList = async (statusFilter, page, limit = 5) => {
     loading.done();
     return res;
   } catch (err) {
-    return err.status === 401
-      ? loading.done().error(config.notifications.auth.unauth)
-      : loading.done().error(config.notifications.server.error);
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -57,9 +57,7 @@ export const getOrderById = async (orderId) => {
     loading.done();
     return res;
   } catch (err) {
-    return err.status === 401
-      ? loading.done().error(config.notifications.auth.unauth)
-      : loading.done().error(config.notifications.server.error);
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -78,8 +76,6 @@ export const updateOrderStatus = async (id, status) => {
     );
     return loading.done().success('Updated Order Status');
   } catch (err) {
-    return err.status === 401
-      ? loading.done().error(config.notifications.auth.unauth)
-      : loading.done().error(config.notifications.server.error);
+    return checkStatusErrorApi(err);
   }
 };

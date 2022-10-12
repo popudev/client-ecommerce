@@ -10,6 +10,7 @@ import Popper from '~/components/Popper';
 import Tippy from '~/components/Tippy';
 
 import styles from './Menu.module.scss';
+
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
@@ -105,8 +106,12 @@ function Menu() {
       <Popper minWidth={200} width={'max-content'}>
         {menuUser.map((item, index) => {
           if (item.disable) return <Fragment key={item.id} />;
+
+          let Component = Link;
+          if (item.title === 'Logout') Component = 'div';
+
           return (
-            <Link
+            <Component
               key={item.id}
               to={item.path}
               onClick={() => {
@@ -118,7 +123,7 @@ function Menu() {
                 {!!index && <div className={cx('menu_user-icon')}>{item.icon}</div>}
                 <span className={cx('menu_user-title')}>{item.title}</span>
               </div>
-            </Link>
+            </Component>
           );
         })}
       </Popper>

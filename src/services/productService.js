@@ -1,3 +1,4 @@
+import checkStatusErrorApi from '~/utils/checkStatusErrorApi';
 import httpRequest from '~/utils/httpRequest';
 
 import { loading } from '~/components/Loading/core';
@@ -34,7 +35,7 @@ export const getProductList = async (filter, limit = 20, pagination = true) => {
 
     return pagination ? res : res?.payload;
   } catch (err) {
-    loading.done().error('Server Error');
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -45,7 +46,7 @@ export const getProductById = async (productId) => {
     loading.done();
     return res;
   } catch (err) {
-    return loading.done().error('Server Error');
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -54,7 +55,7 @@ export const getProductByTitle = async (title, limit = 10) => {
     const res = await httpRequest.get(`/product`, { params: { title, limit, page: 1 } });
     return res;
   } catch (err) {
-    loading.done().error('Server Error');
+    return checkStatusErrorApi(err);
   }
 };
 
@@ -63,7 +64,7 @@ export const getProductsRandom = async (number) => {
     const res = await httpRequest.get(`/product/random`, { params: { number: number } });
     return res || [];
   } catch (err) {
-    loading.done().error('Server Error');
+    return checkStatusErrorApi(err);
   }
 };
 

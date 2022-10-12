@@ -10,15 +10,21 @@ import { getInfoCart } from '~/services/cartService';
 
 import Banner from '~/components/Banner';
 import Button from '~/components/Button';
+import { Form, FormInput } from '~/components/Form';
 import Helmet from '~/components/Helmet';
-import { notification } from '~/components/Modal/Notification/core';
+import { notification } from '~/components/Notification/core';
 import ProductItemCart from '~/components/ProductItemCart';
 import Table from '~/components/Table';
 
 import styles from './Cart.module.scss';
+
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
+
+const initialValues = {
+  coupon: '',
+};
 
 function Cart() {
   const { authenState } = useAuthenState();
@@ -61,7 +67,7 @@ function Cart() {
       navigator(config.routes.checkout.address.href);
     } else {
       notification.setTitle(
-        'Account not verified. Please open profile > account > verify email',
+        ['Account not verified', 'Please open profile > account > verify email'],
         notification.type.error,
       );
     }
@@ -107,11 +113,11 @@ function Cart() {
             <div className={cx('checkout')}>
               <div className={cx('coupon')}>
                 <div className={cx('input_coupon')}>
-                  <label>Have coupon ?</label>
-                  <div>
-                    <input />
+                  <label htmlFor="coupon">Have coupon ?</label>
+                  <Form initialValues={initialValues}>
+                    <FormInput placeholder="Enter coupon..." name="coupon" />
                     <Button primary>Apply</Button>
-                  </div>
+                  </Form>
                 </div>
 
                 <div className={cx('calc_coupon')}>
@@ -121,7 +127,7 @@ function Cart() {
                   </div>
                   <div className={cx('info')}>
                     <h4>Discount:</h4>
-                    <p>{formatMoney(discount)}</p>
+                    <p>- {formatMoney(discount)}</p>
                   </div>
                 </div>
               </div>

@@ -30,7 +30,7 @@ export default function checkOutReducer(state, action) {
       return {
         ...state,
         shipping: action.payload,
-        total: state.totalPrice - state.discount + action.payload.charge,
+        total: state.totalPrice - state.discount + (action.payload?.charge || 0),
       };
 
     case 'checkOutSuccess':

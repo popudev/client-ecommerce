@@ -5,7 +5,7 @@ import { DefaultLayout } from '~/layouts';
 import { privateRoutes, publicRoutes } from '~/routes';
 
 import Loading from './components/Loading';
-import Notification from './components/Modal/Notification';
+import Notification from './components/Notification';
 import OverPlay from './components/OverPlay';
 import RequireAuth from './components/RequireAuth';
 import ScrollToTop from './components/ScrollToTop';

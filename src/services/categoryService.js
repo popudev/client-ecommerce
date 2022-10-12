@@ -1,3 +1,4 @@
+import checkStatusErrorApi from '~/utils/checkStatusErrorApi';
 import httpRequest from '~/utils/httpRequest';
 
 export const getCategoryList = async () => {
@@ -5,6 +6,6 @@ export const getCategoryList = async () => {
     const res = await httpRequest.get(`/category`);
     return res;
   } catch (err) {
-    console.log(err);
+    return checkStatusErrorApi(err);
   }
 };

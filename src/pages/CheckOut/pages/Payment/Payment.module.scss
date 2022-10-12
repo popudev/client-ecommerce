@@ -13,6 +13,10 @@
     background-color: unset;
   }
 
+  h3 {
+    color: #fff;
+  }
+
   opacity: 0.5;
   cursor: pointer;
   @include flex(flex-start, flex-start);
