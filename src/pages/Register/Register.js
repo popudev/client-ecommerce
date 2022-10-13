@@ -1,7 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
-
 import { useAuthenState } from '~/hooks';
 import { registerUser } from '~/services/authenService';
 
@@ -11,11 +9,13 @@ import Helmet from '~/components/Helmet';
 
 import styles from './Register.module.scss';
 
+import classNames from 'classnames/bind';
+
 const cx = classNames.bind(styles);
 
 function Register() {
   const navigator = useNavigate();
-  const { authenState, dispatch } = useAuthenState();
+  const { authenState, authenDispatch } = useAuthenState();
   const { register } = authenState;
   let errorExistEmail = {};
   let errorExistUsename = {};
@@ -58,7 +58,7 @@ function Register() {
   };
 
   const handleSubmit = (user) => {
-    registerUser(user, dispatch, navigator);
+    registerUser(user, authenDispatch, navigator);
   };
 
   return (
@@ -78,7 +78,13 @@ function Register() {
         >
           <FormInput border type="text" name="fullname" label="Fullname" />
           <FormInput border type="text" name="email" label="Email" errorMess={errorExistEmail} />
-          <FormInput border type="text" name="username" label="Username" errorMess={errorExistUsename} />
+          <FormInput
+            border
+            type="text"
+            name="username"
+            label="Username"
+            errorMess={errorExistUsename}
+          />
           <FormInput border type="password" name="password" label="Password" />
           <FormInput border type="password" name="confirmPassword" label="Confirm Password" />
           <Button primary className={cx('btn_register')}>

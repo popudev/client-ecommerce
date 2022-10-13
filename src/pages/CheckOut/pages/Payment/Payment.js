@@ -17,25 +17,23 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 function Payment() {
-  const { state, dispatch } = useCheckOutState();
+  const { checkOutState, checkOutDispatch } = useCheckOutState();
   const [option, setOption] = useState(1);
   const navigator = useNavigate();
 
-  useDidUpdate(() => {}, [state]);
-
   const handleComplete = () => {
     const data = {
-      ...state,
+      ...checkOutState,
       payment: {
         option: option,
         type: 'Cash On Delivery',
       },
     };
-    addOrder(data, dispatch, navigator);
+    addOrder(data, checkOutDispatch, navigator);
   };
 
   const handleBack = () => {
-    dispatch(updateShipping(null));
+    checkOutDispatch(updateShipping(null));
     navigator(config.routes.checkout.shipping.href);
   };
 

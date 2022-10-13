@@ -8,7 +8,7 @@ import { getAccessToken } from '~/utils/localStorage';
 export const AuthenContext = createContext();
 
 export default function AuthenProvider({ children }) {
-  const [authenState, dispatch] = useReducer(authenReducer, initialState);
+  const [authenState, authenDispatch] = useReducer(authenReducer, initialState);
   const currentUser = authenState.login.currentUser;
 
   // stay logged in
@@ -16,7 +16,7 @@ export default function AuthenProvider({ children }) {
     const fetchGetInfoUser = async () => {
       const infoUser = await getInfoUser();
       if (infoUser)
-        dispatch(
+        authenDispatch(
           loginSuccess({
             ...infoUser,
             accessToken: getAccessToken(),
@@ -25,7 +25,11 @@ export default function AuthenProvider({ children }) {
     };
 
     if (!currentUser && getAccessToken()) fetchGetInfoUser();
-  }, [currentUser, dispatch]);
+  }, [currentUser, authenDispatch]);
 
-  return <AuthenContext.Provider value={{ authenState, dispatch }}>{children}</AuthenContext.Provider>;
+  return (
+    <AuthenContext.Provider value={{ authenState, authenDispatch }}>
+      {children}
+    </AuthenContext.Provider>
+  );
 }

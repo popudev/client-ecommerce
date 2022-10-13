@@ -33,13 +33,14 @@ function Address() {
     },
     phone: {
       required: true,
+      number: true,
     },
     address: {
       required: true,
     },
   };
 
-  const { dispatch } = useCheckOutState();
+  const { checkOutDispatch } = useCheckOutState();
   const [option, setOption] = useState(1);
   const [addressList, setAddressList] = useState([]);
   const [currentAddress, setCurrentAddress] = useState({});
@@ -58,17 +59,18 @@ function Address() {
   }, []);
 
   const handleSubmit = (values) => {
-    dispatch(updateAddress(values));
+    checkOutDispatch(updateAddress(values));
     if (values.save) {
       addAddress(values);
     }
+    navigator(config.routes.checkout.shipping.href);
   };
 
   const handleContinue = () => {
     if (option === 2) submitRef.current();
     else {
       const { address, fullname, phone } = currentAddress;
-      dispatch(updateAddress({ address, fullname, phone }));
+      checkOutDispatch(updateAddress({ address, fullname, phone }));
       navigator(config.routes.checkout.shipping.href);
     }
   };
@@ -137,7 +139,7 @@ function Address() {
         <Button text to={config.routes.cart}>
           Cancel
         </Button>
-        <Button large primary onClick={handleContinue}>
+        <Button primary onClick={handleContinue}>
           Continue
         </Button>
       </div>

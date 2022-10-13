@@ -1,9 +1,14 @@
 import { createContext, useReducer } from 'react';
+
 import filterReducer, { initialState } from '~/reducers/filterReducer';
 
 export const FilterContext = createContext();
 
 export default function FilterProvider({ children }) {
-  const [state, dispatch] = useReducer(filterReducer, initialState);
-  return <FilterContext.Provider value={[state, dispatch]}>{children}</FilterContext.Provider>;
+  const [filterState, filterDispatch] = useReducer(filterReducer, initialState);
+  return (
+    <FilterContext.Provider value={{ filterState, filterDispatch }}>
+      {children}
+    </FilterContext.Provider>
+  );
 }

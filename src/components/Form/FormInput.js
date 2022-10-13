@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import classNames from 'classnames/bind';
-
 import { useDidUpdate } from '~/hooks';
 
 import Input from '../Input/Input';
 
 import styles from './FormInput.module.scss';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
@@ -53,14 +53,14 @@ function FormInput(props) {
   }, [errorValidation]);
 
   const handleOnChange = (e) => {
-    const inputValue = e.target.value;
+    const inputValue = e.target.value.trim();
     setValue(inputValue);
     setValueForm(inputValue);
     if (error) setError('');
   };
 
   const handleOnBlur = (e) => {
-    const inputValue = e.target.value;
+    const inputValue = e.target.value.trim();
     const error = validate(inputValue);
     setError(error);
   };

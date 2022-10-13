@@ -1,9 +1,9 @@
-import classNames from 'classnames/bind';
-
 import Grid from '../Gird';
 
 import ProductCard from './ProductCard';
 import styles from './ProductList.module.scss';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +20,7 @@ function ProductList(props) {
             })}
 
         {!loading &&
+          data &&
           data?.map((product) => {
             return <ProductCard key={product?._id} data={product} />;
           })}

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
-
 import { useAuthenState } from '~/hooks';
 import { loginFacebook, loginGithub, loginGoogle, loginUser } from '~/services/authenService';
 import { getAccessToken, getRememberUsername, setRememberUsername } from '~/utils/localStorage';
@@ -17,11 +15,13 @@ import Helmet from '~/components/Helmet';
 
 import styles from './Login.module.scss';
 
+import classNames from 'classnames/bind';
+
 const cx = classNames.bind(styles);
 
 function Login() {
   const navigator = useNavigate();
-  const { authenState, dispatch } = useAuthenState();
+  const { authenState, authenDispatch } = useAuthenState();
   const { error } = authenState.login;
   const [remember, setRemember] = useState(getRememberUsername());
 
@@ -58,7 +58,7 @@ function Login() {
   };
 
   const handleSubmit = (user) => {
-    loginUser(user, dispatch, navigator);
+    loginUser(user, authenDispatch, navigator);
   };
 
   const handleRememberUsername = (checkbox) => {
@@ -67,9 +67,9 @@ function Login() {
   };
 
   const handleLoginSocialSuccess = (response, type) => {
-    if (type === 'google') loginGoogle(response, dispatch, navigator);
-    if (type === 'github') loginGithub(response, dispatch, navigator);
-    if (type === 'facebook') loginFacebook(response, dispatch, navigator);
+    if (type === 'google') loginGoogle(response, authenDispatch, navigator);
+    if (type === 'github') loginGithub(response, authenDispatch, navigator);
+    if (type === 'facebook') loginFacebook(response, authenDispatch, navigator);
   };
 
   return (
@@ -86,9 +86,25 @@ function Login() {
           validateSchema={validateSchema}
           onSubmit={handleSubmit}
         >
-          <FormInput border type="text" name="username" label="Username" errorMess={errorUsername} />
-          <FormInput border type="password" name="password" label="Password" errorMess={errorPassword} />
-          <CheckBox title="Remember username ?" onChange={handleRememberUsername} checked={remember} />
+          <FormInput
+            border
+            type="text"
+            name="username"
+            label="Username"
+            errorMess={errorUsername}
+          />
+          <FormInput
+            border
+            type="password"
+            name="password"
+            label="Password"
+            errorMess={errorPassword}
+          />
+          <CheckBox
+            title="Remember username ?"
+            onChange={handleRememberUsername}
+            checked={remember}
+          />
           <Button primary className={cx('btn_login')}>
             Login
           </Button>

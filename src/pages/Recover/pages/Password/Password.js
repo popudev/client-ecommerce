@@ -1,8 +1,6 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
-
 import useRecoverState from '~/hooks/useRecoverState';
 import { changePasswordWithCodeVia } from '~/services/authenService';
 
@@ -11,10 +9,12 @@ import { Form, FormInput } from '~/components/Form';
 
 import styles from './Password.module.scss';
 
+import classNames from 'classnames/bind';
+
 const cx = classNames.bind(styles);
 
 function Password() {
-  const { state } = useRecoverState();
+  const { recoverState } = useRecoverState();
   const submitRef = useRef({});
   const navigator = useNavigate();
 
@@ -42,8 +42,8 @@ function Password() {
   const handleSubmit = (values) => {
     const data = {
       password: values.password,
-      code: state?.code,
-      email: state?.accountFound?.email,
+      code: recoverState?.code,
+      email: recoverState?.accountFound?.email,
     };
 
     changePasswordWithCodeVia(data, navigator);
@@ -54,8 +54,8 @@ function Password() {
       <h1 className={cx('header')}>Choose a new password</h1>
 
       <p className={cx('desc')}>
-        Create a new password that is at least 6 characters long. A strong password has a combination of letters, digits
-        and punctuation marks.
+        Create a new password that is at least 6 characters long. A strong password has a
+        combination of letters, digits and punctuation marks.
       </p>
 
       <Form
@@ -66,7 +66,12 @@ function Password() {
         submitRef={submitRef}
       >
         <FormInput border type="password" name="password" placeholder="New password..." />
-        <FormInput border type="password" name="confirmPassword" placeholder="Confirm password..." />
+        <FormInput
+          border
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm password..."
+        />
       </Form>
 
       <div className={cx('actions')}>

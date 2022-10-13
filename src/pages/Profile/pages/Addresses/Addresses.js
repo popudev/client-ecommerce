@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 
-import classNames from 'classnames/bind';
-
 import { addAddress, getAddress, updateAddress } from '~/services/addressService';
 
 import Button from '~/components/Button';
@@ -9,8 +7,11 @@ import CheckBox from '~/components/CheckBox';
 import { Form, FormInput } from '~/components/Form';
 import Modal from '~/components/Modal/Modal';
 
+import AddressItem from './components/AddressItem';
+
 import styles from './Addresses.module.scss';
-import AddressItem from './AddressItem';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
@@ -125,6 +126,7 @@ function Addresses() {
           + Add New Address
         </Button>
       </div>
+
       <div className={cx('content')}>
         <div className={cx('address_list')}>
           {addressList.map((item) => {
@@ -137,6 +139,13 @@ function Addresses() {
               />
             );
           })}
+
+          {!addressList?.length && (
+            <div className={cx('empty')}>
+              <i className="fa-sharp fa-solid fa-location-dot"></i>
+              <h2>No addresses yet</h2>
+            </div>
+          )}
         </div>
       </div>
     </div>

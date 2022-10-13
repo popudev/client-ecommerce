@@ -33,7 +33,7 @@ function Cart() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
 
-  const { dispatch } = useCheckOutState();
+  const { checkOutDispatch } = useCheckOutState();
   const navigator = useNavigate();
 
   const getItems = async () => {
@@ -57,19 +57,19 @@ function Cart() {
     getItems();
   };
 
-  const handleChangeQuantity = () => {
-    getItems();
-  };
-
   const handleCheckOut = () => {
     if (currentUser?.verify) {
-      dispatch(updateTotalPriceDiscountProducts(totalPrice, discount, items));
+      checkOutDispatch(updateTotalPriceDiscountProducts(totalPrice, discount, items));
       navigator(config.routes.checkout.address.href);
     } else {
-      notification.setTitle(
-        ['Account not verified', 'Please open profile > account > verify email'],
-        notification.type.error,
-      );
+      notification
+        .setTitle(
+          ['Account not verified', 'Please open profile > account > verify email'],
+          notification.type.error,
+        )
+        .then(() => {
+          navigator(config.routes.profile.account.href);
+        });
     }
   };
 
@@ -90,7 +90,6 @@ function Cart() {
                       key={item._id}
                       data={item}
                       handleDelete={handleDeleteProduct}
-                      handleChange={handleChangeQuantity}
                     />
                   );
                 })}
@@ -104,7 +103,6 @@ function Cart() {
                       data={item}
                       mobile
                       handleDelete={handleDeleteProduct}
-                      handleChange={handleChangeQuantity}
                     />
                   );
                 })}

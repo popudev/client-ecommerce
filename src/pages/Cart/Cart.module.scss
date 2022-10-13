@@ -2,6 +2,13 @@
 
 .wrapper {
   position: relative;
+  h4 {
+    color: $third-color;
+  }
+  p {
+    color: #fff;
+    font-weight: 700;
+  }
 }
 
 .banner {
@@ -101,8 +108,11 @@
   .total {
     h4 {
       font-size: 30px;
+      color: $third-color;
     }
     p {
+      color: #fff;
+      font-weight: 700;
       font-size: 22px;
     }
   }

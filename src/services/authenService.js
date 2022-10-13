@@ -95,10 +95,10 @@ export const logoutUser = async (dispatch, navigator) => {
   }
 };
 
-export const verifyEmail = async () => {
+export const sendVerificationEmail = async () => {
   try {
     loading.run();
-    await httpRequest.get(`/auth/verify/email`, {
+    await httpRequest.get(`/auth/send/emailVerify`, {
       headers: {
         token: `Bearer ${getAccessToken()}`,
       },
@@ -113,7 +113,7 @@ export const verifyEmail = async () => {
 export const sendCodeViaEmail = async (email, navigator) => {
   try {
     loading.run();
-    await httpRequest.post(`/auth/code/email`, { email });
+    await httpRequest.post(`/auth/send/code`, { email });
     loading.done();
     navigator('/recover/code', { replace: true });
   } catch (err) {
@@ -121,10 +121,10 @@ export const sendCodeViaEmail = async (email, navigator) => {
   }
 };
 
-export const verifyCodeViaEmail = async (data, dispatch, navigator) => {
+export const confirmCodeViaEmail = async (data, dispatch, navigator) => {
   try {
     loading.run();
-    await httpRequest.post(`/auth/verify/code`, data);
+    await httpRequest.post(`/auth/confirmation/code`, data);
     dispatch(updateCodeVia(data.code));
     navigator('/recover/password', { replace: true });
     loading.done();

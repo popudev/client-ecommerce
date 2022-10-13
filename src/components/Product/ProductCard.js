@@ -1,4 +1,3 @@
-import classNames from 'classnames/bind';
 import { useRef, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
@@ -15,12 +14,14 @@ import Skeleton from '~/components/Skeleton';
 
 import styles from './ProductCard.module.scss';
 
+import classNames from 'classnames/bind';
+
 const cx = classNames.bind(styles);
 
 function ProductCard({ data }) {
   const [quantity, setQuantity] = useState(1);
 
-  const handleChangeQuantity = (quantity) => {
+  const handleQuantityChange = (quantity) => {
     setQuantity(quantity);
   };
 
@@ -49,7 +50,7 @@ function ProductCard({ data }) {
         </Link>
 
         <div className={cx('control', 'under-image')}>
-          <ControlQuantity w50 onChange={handleChangeQuantity} />
+          <ControlQuantity w50 onQuantityChange={handleQuantityChange} />
           <Button w50 hfull onClick={handleClick}>
             <i className="fa-solid fa-cart-plus"></i>
           </Button>

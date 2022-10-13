@@ -1,8 +1,6 @@
 import { memo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
-
 import config from '~/config';
 import { useDebounce, useDidUpdate, useFilterState } from '~/hooks';
 import { getProductByTitle } from '~/services/productService';
@@ -14,6 +12,8 @@ import Tippy from '~/components/Tippy';
 
 import styles from './Search.module.scss';
 
+import classNames from 'classnames/bind';
+
 const cx = classNames.bind(styles);
 
 function Search() {
@@ -21,7 +21,7 @@ function Search() {
   const [focus, setFocus] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [filterState, dispatch] = useFilterState();
+  const { filterState, filterDispatch } = useFilterState();
   const [title, setTitle] = useState(filterState.title);
 
   const navigator = useNavigate();
@@ -53,7 +53,7 @@ function Search() {
   };
 
   const handleSearchClick = () => {
-    dispatch({
+    filterDispatch({
       type: 'change_title',
       payload: titleValue,
     });

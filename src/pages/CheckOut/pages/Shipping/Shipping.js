@@ -36,12 +36,12 @@ function Shipping() {
     },
   ];
 
-  const { dispatch } = useCheckOutState();
+  const { checkOutDispatch } = useCheckOutState();
   const navigator = useNavigate();
   const [option, setOption] = useState(1);
 
   const handleContinue = () => {
-    dispatch(updateShipping(types[option - 1]));
+    checkOutDispatch(updateShipping(types[option - 1]));
     navigator(config.routes.checkout.payment.href);
   };
 
@@ -50,7 +50,7 @@ function Shipping() {
   };
 
   const handleBack = () => {
-    dispatch(updateAddress(null));
+    checkOutDispatch(updateAddress(null));
     navigator(config.routes.checkout.address.href);
   };
 

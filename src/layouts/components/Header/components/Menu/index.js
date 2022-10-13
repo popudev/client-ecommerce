@@ -82,11 +82,15 @@ const menuUser = [
 
 function Menu() {
   const menuRef = useRef(null);
-  const { authenState, dispatch } = useAuthenState();
+  const { authenState, authenDispatch } = useAuthenState();
   const currentUser = authenState.login.currentUser;
 
   const navigator = useNavigate();
   const { pathname } = useLocation();
+
+  if (currentUser) {
+    menuUser[0].title = currentUser?.username || currentUser?.fullname;
+  }
 
   if (currentUser?.admin) {
     menuUser[1].disable = false;
@@ -115,7 +119,7 @@ function Menu() {
               key={item.id}
               to={item.path}
               onClick={() => {
-                if (typeof item.onClick === 'function') item.onClick(dispatch, navigator);
+                if (typeof item.onClick === 'function') item.onClick(authenDispatch, navigator);
               }}
               className={cx({ username: index === 0 })}
             >
@@ -211,7 +215,8 @@ function Menu() {
                     to={item.path}
                     key={item.id}
                     onClick={() => {
-                      if (typeof item.onClick === 'function') item.onClick(dispatch, navigator);
+                      if (typeof item.onClick === 'function')
+                        item.onClick(authenDispatch, navigator);
                       menuToggle();
                     }}
                   >

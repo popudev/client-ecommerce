@@ -1,4 +1,3 @@
-import { checkOutFailed } from '~/reducers/actions/checkOutAction';
 import checkStatusErrorApi from '~/utils/checkStatusErrorApi';
 import httpRequest from '~/utils/httpRequest';
 import { getAccessToken } from '~/utils/localStorage';
@@ -7,12 +6,13 @@ import { loading } from '~/components/Loading/core';
 
 export const getAddress = async () => {
   try {
+    loading.run();
     const res = await httpRequest.get('/address', {
       headers: {
         token: 'Bearer ' + getAccessToken(),
       },
     });
-
+    loading.done();
     return res;
   } catch (err) {
     return checkStatusErrorApi(err);

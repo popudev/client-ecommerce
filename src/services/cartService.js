@@ -58,7 +58,7 @@ export const changeQuantityToCart = async (data) => {
   try {
     loading.run();
     const accessToken = getAccessToken();
-    await httpRequest.post(`/cart`, data, {
+    await httpRequest.patch(`/cart`, data, {
       headers: {
         token: `Bearer ${accessToken}`,
       },

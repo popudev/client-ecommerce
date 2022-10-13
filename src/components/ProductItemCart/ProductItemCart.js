@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
-
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { product1 } from '~/assets/images';
@@ -14,20 +12,21 @@ import Button from '../Button';
 
 import styles from './ProductItemCart.module.scss';
 
+import classNames from 'classnames/bind';
+
 const cx = classNames.bind(styles);
 
-function ProductItemCart({ data, handleDelete, handleChange, mobile }) {
+function ProductItemCart({ data, handleDelete, mobile }) {
   const [quantity, setQuantity] = useState(data.quantity);
   const totalPrice = quantity * data.product.sale;
 
   const handlePlusQuantity = async () => {
     const isSuccess = await changeQuantityToCart({
       productId: data.product._id,
-      quantity: 1,
+      quantity: quantity + 1,
     });
     if (isSuccess) {
       setQuantity((prev) => prev + 1);
-      handleChange();
     }
   };
 
@@ -40,12 +39,11 @@ function ProductItemCart({ data, handleDelete, handleChange, mobile }) {
 
     const isSuccess = await changeQuantityToCart({
       productId: data.product._id,
-      quantity: -1,
+      quantity: quantity - 1,
     });
 
     if (isSuccess) {
       setQuantity((prev) => prev - 1);
-      handleChange();
     }
   };
 
@@ -57,9 +55,13 @@ function ProductItemCart({ data, handleDelete, handleChange, mobile }) {
     }
   };
 
-  const handleBlurQuantity = (e) => {
+  const handleBlurQuantity = async (e) => {
     const number = Number.parseInt(e.target.value);
     if (!number) setQuantity(1);
+    await changeQuantityToCart({
+      productId: data.product._id,
+      quantity: number || 1,
+    });
   };
 
   const handleClickDelete = async () => {

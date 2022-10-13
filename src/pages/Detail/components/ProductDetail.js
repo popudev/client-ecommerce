@@ -1,9 +1,10 @@
 import { useState } from 'react';
-
-import classNames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
 
 import { bannerDetail, product1 } from '~/assets/images';
-import { formatMoney } from '~/config';
+import config, { formatMoney } from '~/config';
+import useCheckOutState from '~/hooks/useCheckOutState';
+import { updateTotalPriceDiscountProducts } from '~/reducers/actions/checkOutAction';
 import { addProductToCart } from '~/services/cartService';
 
 import Button from '~/components/Button';
@@ -13,10 +14,14 @@ import Slider from '~/components/Slider';
 
 import styles from '../Detail.module.scss';
 
+import classNames from 'classnames/bind';
+
 const cx = classNames.bind(styles);
 
 const ProductDetail = ({ info }) => {
   const [quantity, setQuantity] = useState(1);
+  const { checkOutDispatch } = useCheckOutState();
+  const navigator = useNavigate();
 
   const handleOnchange = (quantity) => {
     setQuantity(quantity);
@@ -28,6 +33,20 @@ const ProductDetail = ({ info }) => {
       quantity: quantity,
     });
   };
+
+  const handleBuyNow = () => {
+    const totalPrice = info?.sale * quantity;
+    checkOutDispatch(
+      updateTotalPriceDiscountProducts(totalPrice, 0, [
+        {
+          product: info,
+          quantity: quantity,
+        },
+      ]),
+    );
+    navigator(config.routes.checkout.address.href);
+  };
+
   return (
     <div className={cx('product_info')}>
       <div className={cx('banner')}>
@@ -35,7 +54,10 @@ const ProductDetail = ({ info }) => {
       </div>
       <div className={cx('images')}>
         <div className={cx('slide_images')}>
-          <Slider data={[{ image: product1 }, { image: product1 }, { image: product1 }]} mainColor />
+          <Slider
+            data={[{ image: product1 }, { image: product1 }, { image: product1 }]}
+            mainColor
+          />
         </div>
       </div>
       <div className={cx('info')}>
@@ -52,10 +74,15 @@ const ProductDetail = ({ info }) => {
           </div>
         </div>
         <div className={cx('actions')}>
-          <Button onClick={handleAddToCart} outline large leftIcon={<i className="fa-solid fa-cart-plus"></i>}>
+          <Button
+            onClick={handleAddToCart}
+            outline
+            large
+            leftIcon={<i className="fa-solid fa-cart-plus"></i>}
+          >
             ADD TO CART
           </Button>
-          <Button primary large>
+          <Button primary large onClick={handleBuyNow}>
             BUY NOW
           </Button>
         </div>

@@ -76,3 +76,19 @@
     }
   }
 }
+
+.empty {
+  @include flex(center, center);
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: $fourth-color;
+  margin-bottom: 20px;
+
+  & > * {
+    margin-bottom: 20px;
+  }
+
+  i {
+    font-size: 50px;
+  }
+}

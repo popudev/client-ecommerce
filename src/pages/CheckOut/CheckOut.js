@@ -50,10 +50,8 @@ const routes = [
 
 function CheckOut() {
   console.log('re-render checkout');
-
-  const { state, dispatch } = useCheckOutState();
-  console.log('state: ', state);
-  const { products, totalPrice, discount, shipping, total } = state;
+  const { checkOutState, checkOutDispatch } = useCheckOutState();
+  const { products, totalPrice, discount, shipping, total } = checkOutState;
 
   const { pathname } = useLocation();
   const navigator = useNavigate();
@@ -64,9 +62,9 @@ function CheckOut() {
 
   useEffect(() => {
     return () => {
-      dispatch(resetState());
+      checkOutDispatch(resetState());
     };
-  }, [dispatch]);
+  }, [checkOutDispatch]);
 
   return (
     <div className={cx('wrapper', 'main', 'container')}>

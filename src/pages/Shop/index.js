@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import classNames from 'classnames/bind';
-
 import { banner } from '~/assets/images';
 import { useFilterState } from '~/hooks';
 import { getProductList } from '~/services/productService';
@@ -14,11 +12,13 @@ import { ProductList } from '~/components/Product';
 
 import styles from './Shop.module.scss';
 
+import classNames from 'classnames/bind';
+
 const cx = classNames.bind(styles);
 
 function Shop() {
   console.log('re-render shop');
-  const [filterState, dispatch] = useFilterState();
+  const { filterState, filterDispatch } = useFilterState();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -42,16 +42,16 @@ function Shop() {
 
   const handlePageChange = useCallback(
     (currentPage) => {
-      dispatch({
+      filterDispatch({
         type: 'change_page',
         payload: currentPage,
       });
     },
-    [dispatch],
+    [filterDispatch],
   );
 
   const clearTitle = () => {
-    dispatch({
+    filterDispatch({
       type: 'clear_title',
     });
   };
@@ -69,7 +69,7 @@ function Shop() {
       <div className={cx('wrapper', 'main', 'container')}>
         <Banner image={banner} />
         <div className={cx('content')}>
-          <Filter filterState={filterState} dispatch={dispatch} onToggle={onToggle} />
+          <Filter filterState={filterState} dispatch={filterDispatch} onToggle={onToggle} />
           <div className={cx('context')}>
             {filterState.title && (
               <div className={cx('search_result_title')}>
@@ -89,7 +89,11 @@ function Shop() {
                   <i className="fa-solid fa-arrow-up-wide-short"></i>
                 </button>
               </div>
-              <FilterSort filterState={filterState} dispatch={dispatch} onToggle={onToggleSort} />
+              <FilterSort
+                filterState={filterState}
+                dispatch={filterDispatch}
+                onToggle={onToggleSort}
+              />
               {loading && <PaginationMini.Loading />}
               {!loading && (
                 <PaginationMini
@@ -101,7 +105,15 @@ function Shop() {
               )}
             </div>
             <div className={cx('products')}>
-              <ProductList col={4} mdCol={3} smCol={2} gap={10} smGap={10} data={payload} loading={loading} />
+              <ProductList
+                col={4}
+                mdCol={3}
+                smCol={2}
+                gap={10}
+                smGap={10}
+                data={payload}
+                loading={loading}
+              />
             </div>
             <Pagination
               initialPage={pagination?.page}

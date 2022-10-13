@@ -1,24 +1,24 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
-
 import useRecoverState from '~/hooks/useRecoverState';
-import { verifyCodeViaEmail } from '~/services/authenService';
+import { confirmCodeViaEmail } from '~/services/authenService';
 
 import Button from '~/components/Button';
 import { Form, FormInput } from '~/components/Form';
 
 import styles from './Code.module.scss';
 
+import classNames from 'classnames/bind';
+
 const cx = classNames.bind(styles);
 
 function Recover() {
-  const { state, dispatch } = useRecoverState();
+  const { recoverState, recoverDispatch } = useRecoverState();
   const submitRef = useRef({});
   const navigator = useNavigate();
 
-  const { accountFound } = state;
+  const { accountFound } = recoverState;
 
   const initialValues = {
     code: '',
@@ -40,14 +40,16 @@ function Recover() {
       code: +values.code,
       email: accountFound?.email,
     };
-    verifyCodeViaEmail(data, dispatch, navigator);
+    confirmCodeViaEmail(data, recoverDispatch, navigator);
   };
 
   return (
     <>
       <h1 className={cx('header')}>Enter security code</h1>
 
-      <p className={cx('desc')}>Please check your emails for a message with your code. Your code is 6 numbers long.</p>
+      <p className={cx('desc')}>
+        Please check your emails for a message with your code. Your code is 6 numbers long.
+      </p>
 
       <div className={cx('content')}>
         <Form

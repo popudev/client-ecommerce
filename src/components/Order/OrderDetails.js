@@ -16,7 +16,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 function OrderDetails({ data, actions = false, onCancel = () => {} }) {
-  const { dispatch } = useCheckOutState();
+  const { checkOutDispatch } = useCheckOutState();
   const navigator = useNavigate();
   const handleCancel = async () => {
     const result = await notification.setTitle(
@@ -31,7 +31,7 @@ function OrderDetails({ data, actions = false, onCancel = () => {} }) {
   };
 
   const handleOrderAgain = () => {
-    dispatch(updateTotalPriceDiscountProducts(data.totalPrice, 0, data.products));
+    checkOutDispatch(updateTotalPriceDiscountProducts(data.totalPrice, 0, data.products));
     navigator(config.routes.checkout.address.href);
   };
 

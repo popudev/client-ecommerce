@@ -5,6 +5,10 @@ import checkOutReducer, { initialState } from '~/reducers/checkOutReducer';
 export const CheckOutContext = createContext();
 
 export default function CheckOutProvider({ children }) {
-  const [state, dispatch] = useReducer(checkOutReducer, initialState);
-  return <CheckOutContext.Provider value={{ state, dispatch }}>{children}</CheckOutContext.Provider>;
+  const [checkOutState, checkOutDispatch] = useReducer(checkOutReducer, initialState);
+  return (
+    <CheckOutContext.Provider value={{ checkOutState, checkOutDispatch }}>
+      {children}
+    </CheckOutContext.Provider>
+  );
 }

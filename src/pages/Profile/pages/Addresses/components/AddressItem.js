@@ -1,10 +1,10 @@
-import classNames from 'classnames/bind';
-
 import { deleteAddress, updateAddressDefault } from '~/services/addressService';
 
 import Button from '~/components/Button';
 
-import styles from './Addresses.module.scss';
+import styles from '../Addresses.module.scss';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 

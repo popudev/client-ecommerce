@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
-
 import { avatarDefault } from '~/assets/images';
 import useRecoverState from '~/hooks/useRecoverState';
 import { sendCodeViaEmail } from '~/services/authenService';
@@ -12,12 +10,14 @@ import CheckBox from '~/components/CheckBox';
 
 import styles from './Intiate.module.scss';
 
+import classNames from 'classnames/bind';
+
 const cx = classNames.bind(styles);
 
 function Intiate() {
-  const { state } = useRecoverState();
+  const { recoverState } = useRecoverState();
   const navigator = useNavigate();
-  const { accountFound } = state;
+  const { accountFound } = recoverState;
 
   const handleNotYou = () => {
     navigator('/forgotten', { replace: true });
