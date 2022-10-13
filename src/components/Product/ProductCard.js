@@ -1,16 +1,16 @@
 import { useRef, useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import { product1 } from '~/assets/images';
 import config, { formatMoney } from '~/config';
 import { addProductToCart } from '~/services/cartService';
 
 import Button from '~/components/Button';
 import ControlQuantity from '~/components/ControlQuantity';
 import Skeleton from '~/components/Skeleton';
+
+import ProductImage from '../ProductImage';
 
 import styles from './ProductCard.module.scss';
 
@@ -38,14 +38,10 @@ function ProductCard({ data }) {
     <div className={cx('wrapper')}>
       <div ref={imgRef} className={cx('image')}>
         <Link to={`${config.routes.detail}/${data._id}`}>
-          <LazyLoadImage
-            alt={''}
+          <ProductImage
             afterLoad={() => {
               imgRef.current?.classList.add(cx('doneload'));
             }}
-            width={'100%'}
-            src={product1} // use normal <img> attributes as props
-            effect="blur"
           />
         </Link>
 

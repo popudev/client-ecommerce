@@ -25,6 +25,15 @@
       width: 30px;
       height: 30px;
     }
+
+    &.disable {
+      cursor: unset;
+      opacity: 0.5;
+    }
+
+    &.disable:hover {
+      background-color: $fourth-color;
+    }
   }
 
   .number {
@@ -99,6 +108,11 @@
 
       &:hover {
         opacity: 0.5;
+      }
+
+      &.disable {
+        opacity: 0.5;
+        cursor: unset;
       }
     }
   }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthenState } from '~/hooks';
@@ -72,6 +72,14 @@ function Login() {
     if (type === 'facebook') loginFacebook(response, authenDispatch, navigator);
   };
 
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (authenState.register?.username) {
+      inputRef?.current?.focus();
+    }
+  }, [authenState.register?.username]);
+
   return (
     <Helmet title={'Login'}>
       <div className={cx('wrapper')}>
@@ -94,6 +102,7 @@ function Login() {
             errorMess={errorUsername}
           />
           <FormInput
+            inputRef={inputRef}
             border
             type="password"
             name="password"

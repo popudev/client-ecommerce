@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { bannerDetail, product1 } from '~/assets/images';
+import { bannerDetail, product1, product2, product3 } from '~/assets/images';
 import config, { formatMoney } from '~/config';
 import useCheckOutState from '~/hooks/useCheckOutState';
 import { updateTotalPriceDiscountProducts } from '~/reducers/actions/checkOutAction';
@@ -55,7 +55,7 @@ const ProductDetail = ({ info }) => {
       <div className={cx('images')}>
         <div className={cx('slide_images')}>
           <Slider
-            data={[{ image: product1 }, { image: product1 }, { image: product1 }]}
+            data={[{ image: product1 }, { image: product2 }, { image: product3 }]}
             mainColor
           />
         </div>
@@ -64,13 +64,13 @@ const ProductDetail = ({ info }) => {
         <h1 className={cx('title')}>{info?.title}</h1>
         <p className={cx('description')}>{info.description}</p>
         <div className={cx('prices')}>
-          <span className={cx('price')}>{formatMoney(info.sale)}</span>
-          <span className={cx('sale')}>{formatMoney(info.price)}</span>
+          <span className={cx('price')}>{formatMoney(info.price)}</span>
+          <span className={cx('sale')}>{formatMoney(info.sale)}</span>
         </div>
         <div className={cx('quantity')}>
           <span>Quantity:</span>
           <div className={cx('control')}>
-            <ControlQuantity outline onChange={handleOnchange} />
+            <ControlQuantity outline onQuantityChange={handleOnchange} />
           </div>
         </div>
         <div className={cx('actions')}>

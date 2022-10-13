@@ -1,9 +1,12 @@
-import { useState, memo } from 'react';
+import { memo, useState } from 'react';
 
-import styles from './Pagination.module.scss';
-import classNames from 'classnames/bind';
 import { useDidUpdate } from '~/hooks';
+
 import InputPage from './InputPage';
+import styles from './Pagination.module.scss';
+
+import classNames from 'classnames/bind';
+
 const cx = classNames.bind(styles);
 
 function Pagination(props) {
@@ -65,7 +68,8 @@ function Pagination(props) {
         continue;
       }
 
-      const adjustedRightSide = selected === 0 && pageRangeDisplayed > 1 ? rightSide - 1 : rightSide;
+      const adjustedRightSide =
+        selected === 0 && pageRangeDisplayed > 1 ? rightSide - 1 : rightSide;
 
       if (index >= selected - leftSide && index <= selected + adjustedRightSide) {
         pagesBreaking.push({
@@ -157,7 +161,7 @@ function Pagination(props) {
   return (
     <div className={cx('wrapper')}>
       <button
-        className={cx('control-left')}
+        className={cx('control-left', { disable: selected === 0 })}
         onClick={(e) => {
           handlePreviousPage(e);
         }}
@@ -190,7 +194,7 @@ function Pagination(props) {
         })}
       </ul>
       <button
-        className={cx('control-right')}
+        className={cx('control-right', { disable: selected === pageCount - 1 })}
         onClick={(e) => {
           handleNextPage(e);
         }}

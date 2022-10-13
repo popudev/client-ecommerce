@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import { product1 } from '~/assets/images';
 import config, { formatMoney } from '~/config';
 import { changeQuantityToCart, deleteProductToCart } from '~/services/cartService';
 
 import Button from '../Button';
+import ProductImage from '../ProductImage';
 
 import styles from './ProductItemCart.module.scss';
 
@@ -73,12 +72,7 @@ function ProductItemCart({ data, handleDelete, mobile }) {
     <tr className={cx('wrapper')}>
       <td className={cx('image')}>
         <Link to={`${config.routes.detail}/${data.product._id}`}>
-          <LazyLoadImage
-            alt={''}
-            width={'100%'}
-            src={product1} // use normal <img> attributes as props
-            effect="blur"
-          />
+          <ProductImage />
         </Link>
       </td>
 

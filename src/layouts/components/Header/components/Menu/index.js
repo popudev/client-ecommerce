@@ -6,6 +6,7 @@ import config from '~/config';
 import { useAuthenState } from '~/hooks';
 import { logoutUser } from '~/services/authenService';
 
+import Avatar from '~/components/Avatar';
 import Popper from '~/components/Popper';
 import Tippy from '~/components/Tippy';
 
@@ -159,11 +160,12 @@ function Menu() {
             renderForMobile={false}
             render={renderMenuUser}
           >
-            <Link to={item.path}>
+            {/* <Link to={item.path}>
               <div className={cx('avatar')}>
                 <img src={currentUser?.avatar || avatarDefault} alt="" />
               </div>
-            </Link>
+            </Link> */}
+            <Avatar className={cx('avatar')} avatar={currentUser?.avatar} />
           </Tippy>
         ) : (
           <Link to={item.path} key={item.id} onClick={menuToggle}>

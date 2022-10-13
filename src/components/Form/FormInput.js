@@ -15,6 +15,7 @@ function FormInput(props) {
     type,
     name,
     label,
+    inputRef = { current: null },
     className,
     errorMess,
     setValueForm,
@@ -53,14 +54,14 @@ function FormInput(props) {
   }, [errorValidation]);
 
   const handleOnChange = (e) => {
-    const inputValue = e.target.value.trim();
+    const inputValue = e.target.value;
     setValue(inputValue);
-    setValueForm(inputValue);
+    setValueForm(inputValue.trim());
     if (error) setError('');
   };
 
   const handleOnBlur = (e) => {
-    const inputValue = e.target.value.trim();
+    const inputValue = e.target.value;
     const error = validate(inputValue);
     setError(error);
   };
@@ -83,6 +84,7 @@ function FormInput(props) {
     <div className={classes}>
       {label && <label htmlFor={name}>{label}</label>}
       <Input
+        inputRef={inputRef}
         id={name}
         type={type}
         name={name}

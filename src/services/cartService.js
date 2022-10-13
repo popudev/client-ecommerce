@@ -4,7 +4,6 @@ import httpRequest from '~/utils/httpRequest';
 import { getAccessToken } from '~/utils/localStorage';
 
 import { loading } from '~/components/Loading/core';
-import { notification } from '~/components/Notification/core';
 
 export const addProductToCart = async (data) => {
   try {

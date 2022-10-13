@@ -1,8 +1,8 @@
-import classNames from 'classnames/bind';
-
 import Skeleton from '~/components/Skeleton';
 
 import styles from './Pagination.module.scss';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +17,7 @@ function PaginationMini(props) {
       </span>
       <div className={cx('control-mini')}>
         <button
+          className={cx({ disable: page === 1 })}
           onClick={() => {
             prevPage.current();
           }}
@@ -24,6 +25,7 @@ function PaginationMini(props) {
           {'<'}
         </button>
         <button
+          className={cx({ disable: page === pageCount })}
           onClick={() => {
             nextPage.current();
           }}

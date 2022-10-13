@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import config from '~/config';
-import { useDidUpdate } from '~/hooks';
 import useCheckOutState from '~/hooks/useCheckOutState';
 import { updateShipping } from '~/reducers/actions/checkOutAction';
 import { addOrder } from '~/services/orderService';
