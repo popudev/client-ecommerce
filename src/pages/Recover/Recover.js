@@ -3,6 +3,8 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import useRecoverState from '~/hooks/useRecoverState';
 
+import Helmet from '~/components/Helmet';
+
 import Code from './pages/Code';
 import Intiate from './pages/Initiate/Intiate';
 import Password from './pages/Password';
@@ -40,14 +42,16 @@ function Recover() {
   return !accountFound ? (
     <></>
   ) : (
-    <div className={cx('wrapper')}>
-      <Routes>
-        {routes.map((item) => {
-          const Component = item.component;
-          return <Route key={item.path} path={item.path} element={<Component />} />;
-        })}
-      </Routes>
-    </div>
+    <Helmet title="recover">
+      <div className={cx('wrapper')}>
+        <Routes>
+          {routes.map((item) => {
+            const Component = item.component;
+            return <Route key={item.path} path={item.path} element={<Component />} />;
+          })}
+        </Routes>
+      </div>
+    </Helmet>
   );
 }
 

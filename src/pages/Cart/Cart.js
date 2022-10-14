@@ -73,8 +73,14 @@ function Cart() {
     }
   };
 
+  const handleApplyCoupon = () => {
+    if (false) {
+      setDiscount(0);
+    }
+  };
+
   return (
-    <Helmet title="cart">
+    <Helmet title="Cart">
       <div className={cx('wrapper', 'main', 'container')}>
         <Banner image={banner} />
         {items.length ? (
@@ -114,7 +120,9 @@ function Cart() {
                   <label htmlFor="coupon">Have coupon ?</label>
                   <Form initialValues={initialValues}>
                     <FormInput placeholder="Enter coupon..." name="coupon" />
-                    <Button primary>Apply</Button>
+                    <Button primary onClick={handleApplyCoupon}>
+                      Apply
+                    </Button>
                   </Form>
                 </div>
 

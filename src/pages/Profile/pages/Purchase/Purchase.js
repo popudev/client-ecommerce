@@ -2,6 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 
 import config from '~/config';
 
+import Helmet from '~/components/Helmet';
+
 import Main from './pages/Main';
 import Order from './pages/Order';
 import styles from './Purchase.module.scss';
@@ -25,14 +27,16 @@ const routes = [
 
 function Purchase() {
   return (
-    <div className={cx('wrapper')}>
-      <Routes>
-        {routes.map((item) => {
-          const Component = item.component;
-          return <Route key={item.path} path={item.path} element={<Component />} />;
-        })}
-      </Routes>
-    </div>
+    <Helmet title="purchase">
+      <div className={cx('wrapper')}>
+        <Routes>
+          {routes.map((item) => {
+            const Component = item.component;
+            return <Route key={item.path} path={item.path} element={<Component />} />;
+          })}
+        </Routes>
+      </div>
+    </Helmet>
   );
 }
 

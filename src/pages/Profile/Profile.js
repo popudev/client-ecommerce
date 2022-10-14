@@ -5,6 +5,7 @@ import config from '~/config';
 import { useAuthenState } from '~/hooks';
 
 import Avatar from '~/components/Avatar';
+import Helmet from '~/components/Helmet';
 
 import Account from './pages/Account';
 import Addresses from './pages/Addresses';
@@ -99,7 +100,9 @@ function Profile() {
       </div>
     </div>
   ) : (
-    <div className={cx('wrapper', 'container', 'main')}></div>
+    <Helmet title="profile">
+      <div className={cx('wrapper', 'container', 'main')}></div>
+    </Helmet>
   );
 }
 

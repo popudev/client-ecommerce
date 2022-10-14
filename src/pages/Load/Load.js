@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import Helmet from '~/components/Helmet';
 import { loading } from '~/components/Loading/core';
 
 function Load() {
@@ -10,7 +11,11 @@ function Load() {
       loading.done();
     };
   });
-  return <div className="container"></div>;
+  return (
+    <Helmet title="loading">
+      <div className="container"></div>
+    </Helmet>
+  );
 }
 
 export default Load;

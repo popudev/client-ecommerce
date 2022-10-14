@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import classNames from 'classnames/bind';
-
 import { fakeCategoryCard, fakeSlider } from '~/assets/data';
 import { getProductList, getProductsRandom } from '~/services/productService';
 
@@ -14,6 +12,8 @@ import Section, { SectionBody, SectionTitle } from '~/components/Section';
 import Slider from '~/components/Slider';
 
 import styles from './Home.module.scss';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
@@ -50,7 +50,7 @@ function Home() {
   }, []);
 
   return (
-    <Helmet title={'Home'}>
+    <Helmet title={'home'}>
       <div className={cx('wrapper', 'main', 'container')}>
         {/* slider */}
         <div className={cx('slider')}>

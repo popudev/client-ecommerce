@@ -6,6 +6,7 @@ import { getUserByEmailOrPhone } from '~/services/userService';
 
 import Button from '~/components/Button';
 import { Form, FormInput } from '~/components/Form';
+import Helmet from '~/components/Helmet';
 
 import styles from './Forgotten.module.scss';
 
@@ -37,36 +38,38 @@ function Forgotten() {
   };
 
   return (
-    <div className={cx('wrapper')}>
-      <h1 className={cx('header')}>Find Your Account</h1>
-      <p className={cx('desc')}>
-        Please enter your email address or mobile number to search for your account.
-      </p>
-      <Form
-        className={cx('form_find_account')}
-        initialValues={initialValues}
-        validateSchema={validateSchema}
-        onSubmit={handleSubmit}
-      >
-        <FormInput
-          border
-          type="text"
-          name="search"
-          className={cx('form_input')}
-          placeholder="Email address or mobile number"
-          errorMess={error}
-        />
+    <Helmet title="forgotten">
+      <div className={cx('wrapper')}>
+        <h1 className={cx('header')}>Find Your Account</h1>
+        <p className={cx('desc')}>
+          Please enter your email address or mobile number to search for your account.
+        </p>
+        <Form
+          className={cx('form_find_account')}
+          initialValues={initialValues}
+          validateSchema={validateSchema}
+          onSubmit={handleSubmit}
+        >
+          <FormInput
+            border
+            type="text"
+            name="search"
+            className={cx('form_input')}
+            placeholder="Email address or mobile number"
+            errorMess={error}
+          />
 
-        <div className={cx('actions')}>
-          <Button type="button" text to="/login">
-            Cancel
-          </Button>
-          <Button type="submit" primary>
-            Search
-          </Button>
-        </div>
-      </Form>
-    </div>
+          <div className={cx('actions')}>
+            <Button type="button" text to="/login">
+              Cancel
+            </Button>
+            <Button type="submit" primary>
+              Search
+            </Button>
+          </div>
+        </Form>
+      </div>
+    </Helmet>
   );
 }
 

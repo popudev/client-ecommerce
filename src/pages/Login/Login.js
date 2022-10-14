@@ -81,7 +81,7 @@ function Login() {
   }, [authenState.register?.username]);
 
   return (
-    <Helmet title={'Login'}>
+    <Helmet title={'login'}>
       <div className={cx('wrapper')}>
         <Link to="/" className={cx('btn_home')}>
           <i className="fa-solid fa-square-xmark"></i>
