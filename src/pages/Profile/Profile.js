@@ -5,6 +5,7 @@ import config from '~/config';
 import { useAuthenState } from '~/hooks';
 
 import Avatar from '~/components/Avatar';
+import Button from '~/components/Button';
 import Helmet from '~/components/Helmet';
 
 import Account from './pages/Account';
@@ -101,7 +102,12 @@ function Profile() {
     </div>
   ) : (
     <Helmet title="profile">
-      <div className={cx('wrapper', 'container', 'main')}></div>
+      <div className={cx('wrapper', 'container', 'main', 'empty')}>
+        <h1>Please Login</h1>
+        <Button primary to={config.routes.login}>
+          Login
+        </Button>
+      </div>
     </Helmet>
   );
 }
