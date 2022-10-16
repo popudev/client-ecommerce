@@ -2,7 +2,7 @@
 
 .wrapper {
   @include flex(flex-start, space-between);
-  padding-top: 40px;
+  padding: 40px 0;
 
   @include tablet {
     flex-direction: column;
@@ -85,7 +85,6 @@
   // min-height: 100vh;
   background-color: $fourth-color;
   padding: 20px;
-  margin-bottom: 20px;
   width: 40%;
   @include flex(flex-end, flex-start);
   flex-direction: column;
