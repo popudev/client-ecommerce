@@ -13,11 +13,21 @@
       margin-bottom: 20px;
     }
   }
+
+  @include tablet {
+    @include flex(center, center);
+    flex-direction: column;
+  }
 }
 
 .sidebar {
   width: 25%;
   max-width: 300px;
+
+  @include tablet {
+    width: 100%;
+    max-width: unset;
+  }
 
   @include flex(center, flex-start);
   flex-direction: column;
@@ -55,13 +65,24 @@
   flex-direction: column;
   width: 100%;
 
+  @include tablet {
+    flex-direction: row;
+  }
+
+  @include mobile {
+    flex-direction: column;
+  }
+
   .navigate__item {
     @include flex(center, flex-start);
     font-size: 20px;
     padding: 15px 30px;
     width: 100%;
     transition: all 0.1s ease;
-    // background-color: #fff;
+
+    @include tablet {
+      padding: 10px 20px;
+    }
 
     .navigate__icon {
       width: 30px;
@@ -88,8 +109,13 @@
 
 .content {
   flex: 1;
-  padding-top: 20px;
+  padding: 20px 0;
   margin-left: 60px;
+  width: 100%;
   // min-height: 100vh;
   background-color: $main-color;
+
+  @include tablet {
+    margin: 0;
+  }
 }

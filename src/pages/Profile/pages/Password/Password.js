@@ -1,5 +1,8 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import config from '~/config';
+import { useAuthenState } from '~/hooks';
 import { changePasswordUser } from '~/services/userService';
 
 import Button from '~/components/Button';
@@ -34,6 +37,12 @@ const validateSchema = {
 };
 
 function Password() {
+  const {
+    authenState: {
+      login: { currentUser },
+    },
+  } = useAuthenState();
+  const navigator = useNavigate();
   const [errorCurrentPassword, setErrorCurrentPassword] = useState({});
   const [errorNewPassword, setErrorNewPassword] = useState({});
   const cleanRef = useRef({});
@@ -46,6 +55,13 @@ function Password() {
       else setErrorNewPassword({ ...res });
     }
   };
+
+  console.log('currentUser: ', currentUser);
+  useEffect(() => {
+    if (currentUser?.provider !== 'local') {
+      navigator(config.routes.profile.account.href);
+    }
+  }, [currentUser?.provider, navigator]);
 
   return (
     <Helmet title="password">

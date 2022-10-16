@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom';
 
-import config from '~/config';
 import { useDidUpdate } from '~/hooks';
 
 import overplay from '../OverPlay/core/overplay';
@@ -13,7 +12,7 @@ function ScrollToTop() {
     // }
 
     document.documentElement.scrollTop = 0;
-    overplay.disable();
+    // overplay.disable();
   }, [pathname]);
 
   return <></>;

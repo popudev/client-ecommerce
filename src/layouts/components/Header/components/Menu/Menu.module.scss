@@ -122,6 +122,10 @@
   // }
 }
 
+.avatar_mobile .avatar {
+  cursor: unset;
+}
+
 .tippy_wrapper_avatar {
   @include tablet {
     display: none;

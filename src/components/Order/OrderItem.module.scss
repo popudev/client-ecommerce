@@ -36,4 +36,21 @@
       }
     }
   }
+
+  .actions {
+    @include mobile {
+      @include flex(center, center);
+      flex-direction: column;
+      button {
+        margin: 0;
+        flex: 1;
+        width: 100%;
+        font-size: 14px;
+      }
+
+      button + button {
+        margin-top: 5px;
+      }
+    }
+  }
 }

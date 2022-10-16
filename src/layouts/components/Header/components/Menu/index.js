@@ -186,11 +186,11 @@ function Menu() {
       <div className={cx('content')} ref={menuRef}>
         <div className={cx('avatar_mobile')}>
           {currentUser && (
-            <Link to={config.routes.profile.account.href}>
+            <div>
               <div className={cx('avatar')}>
                 <img src={currentUser?.avatar || avatarDefault} alt="" />
               </div>
-            </Link>
+            </div>
           )}
 
           <span>{currentUser?.username || currentUser?.fullname}</span>
@@ -212,8 +212,11 @@ function Menu() {
               {menuUser.map((item, index) => {
                 if (item.disable || index === 0 || item.title === 'Admin')
                   return <Fragment key={item.id} />;
+
+                let Component = Link;
+                if (item.title === 'Logout') Component = 'div';
                 return (
-                  <Link
+                  <Component
                     to={item.path}
                     key={item.id}
                     onClick={() => {
@@ -226,7 +229,7 @@ function Menu() {
                       <div className={cx('item__logo')}>{item.icon}</div>
                       <p className={cx('item__title')}>{item.title}</p>
                     </div>
-                  </Link>
+                  </Component>
                 );
               })}
             </div>

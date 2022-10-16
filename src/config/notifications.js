@@ -5,6 +5,7 @@ const notifications = {
 
   auth: {
     unauth: 'Please login !!!',
+    notVerified: '',
   },
 
   cart: {

@@ -10,9 +10,20 @@
   }
   .status {
     span {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
       text-transform: uppercase;
       font-weight: 500;
       color: #fff;
+    }
+  }
+  .action {
+    @include mobile {
+      margin-right: 15px;
     }
   }
 }

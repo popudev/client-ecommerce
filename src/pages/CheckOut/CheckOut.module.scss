@@ -3,16 +3,25 @@
 .wrapper {
   @include flex(flex-start, space-between);
   padding-top: 40px;
+
+  @include tablet {
+    flex-direction: column;
+  }
 }
 
 .header {
   flex: 1;
   padding: 0 50px;
+
+  @include tablet {
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 20px;
+  }
 }
 
 .content {
   margin-top: 80px;
-  height: 100vh;
 }
 .steps {
   @include flex(center, center);
@@ -81,6 +90,16 @@
   @include flex(flex-end, flex-start);
   flex-direction: column;
 
+  @include tablet {
+    width: 100%;
+  }
+
+  @include mobile {
+    h4 {
+      font-size: 20px;
+    }
+  }
+
   h2 {
     width: 100%;
     margin-bottom: 20px;
@@ -131,6 +150,10 @@
     width: 200px;
     padding: 0 10px;
     border: none;
+
+    @include mobile {
+      width: 100%;
+    }
   }
 
   button {

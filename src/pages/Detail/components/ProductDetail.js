@@ -3,14 +3,17 @@ import { useNavigate } from 'react-router-dom';
 
 import { bannerDetail, product1, product2, product3 } from '~/assets/images';
 import config, { formatMoney } from '~/config';
+import { useAuthenState } from '~/hooks';
 import useCheckOutState from '~/hooks/useCheckOutState';
 import { updateTotalPriceDiscountProducts } from '~/reducers/actions/checkOutAction';
 import { addProductToCart } from '~/services/cartService';
 
 import Button from '~/components/Button';
 import ControlQuantity from '~/components/ControlQuantity';
+import { notification } from '~/components/Notification/core';
 import Skeleton from '~/components/Skeleton';
 import Slider from '~/components/Slider';
+import { toast } from '~/components/Toast/core';
 
 import styles from '../Detail.module.scss';
 
@@ -21,6 +24,11 @@ const cx = classNames.bind(styles);
 const ProductDetail = ({ info }) => {
   const [quantity, setQuantity] = useState(1);
   const { checkOutDispatch } = useCheckOutState();
+  const {
+    authenState: {
+      login: { currentUser },
+    },
+  } = useAuthenState();
   const navigator = useNavigate();
 
   const handleOnchange = (quantity) => {
@@ -28,6 +36,10 @@ const ProductDetail = ({ info }) => {
   };
 
   const handleAddToCart = () => {
+    if (!currentUser) {
+      toast.error(config.notifications.auth.unauth);
+      return;
+    }
     addProductToCart({
       productId: info._id,
       quantity: quantity,
@@ -35,6 +47,21 @@ const ProductDetail = ({ info }) => {
   };
 
   const handleBuyNow = () => {
+    if (!currentUser) {
+      toast.error(config.notifications.auth.unauth);
+      return;
+    } else if (!currentUser?.verify) {
+      notification
+        .setTitle(
+          ['Account not verified', 'Please open profile > account > verify email'],
+          notification.type.error,
+        )
+        .then(() => {
+          navigator(config.routes.profile.account.href);
+        });
+      return;
+    }
+
     const totalPrice = info?.sale * quantity;
     checkOutDispatch(
       updateTotalPriceDiscountProducts(totalPrice, 0, [

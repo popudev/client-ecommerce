@@ -36,6 +36,7 @@ function Order() {
     <div className={cx('order_wrapper')}>
       <div className={cx('actions_status')}>
         <Button
+          className={cx('action')}
           to={config.routes.profile.purchase.href}
           leftIcon={<i className="fa-solid fa-chevron-left"></i>}
           outline

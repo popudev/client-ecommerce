@@ -3,6 +3,10 @@
 .wrapper {
   h1 {
     margin-bottom: 40px;
+    @include mobile {
+      font-size: 30px;
+      text-align: center;
+    }
   }
 }
 
@@ -41,4 +45,13 @@
   padding-top: 20px;
   text-align: end;
   width: 100%;
+
+  @include mobile {
+    @include flex(flex-end, center);
+    flex-direction: column;
+    & > * {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
 }

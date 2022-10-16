@@ -8,6 +8,12 @@
   max-width: 400px;
   min-width: 300px;
   border: 1px solid #fff;
+
+  @include mobile {
+    margin: 0 10px;
+    min-width: 80vw;
+    padding: 20px;
+  }
 }
 
 .content {

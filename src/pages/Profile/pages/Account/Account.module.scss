@@ -3,11 +3,19 @@
 .wrapper {
   .title {
     margin-bottom: 20px;
+    @include tablet {
+      margin-bottom: 40px;
+      text-align: center;
+    }
   }
 }
 
 .content {
   @include flex(center, space-between);
+
+  @include mobile {
+    flex-direction: column;
+  }
 }
 
 .form {
@@ -26,6 +34,10 @@
   & input {
     min-width: 360px;
     color: #fff;
+
+    @include tablet {
+      min-width: 300px;
+    }
   }
 
   .btn_verify {
@@ -55,6 +67,10 @@
   @include flex(center, center);
   flex-direction: column;
   border-left: 1px solid $third-color;
+
+  @include mobile {
+    border: none;
+  }
 
   .avatar__image {
     width: 200px;

@@ -46,8 +46,8 @@ function OrderItem({ data, onCancel = () => {} }) {
         Status: <span>{data?.status?.title}</span>
       </div>
       <div className={cx('products')}>
-        {data?.products?.map((product) => {
-          return <ProductItemCheckOut key={product?._id} border data={product} />;
+        {data?.products?.map((product, index) => {
+          return <ProductItemCheckOut key={product?._id + index} border data={product} />;
         })}
       </div>
 

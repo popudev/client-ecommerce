@@ -26,7 +26,7 @@
   @include flex(center, space-between);
 
   @include mobile {
-    @include flex(flex-start, space-between);
+    @include flex(center, space-between);
 
     flex-direction: column;
 
@@ -51,6 +51,10 @@
       & .calc_coupon {
         margin: 0;
       }
+    }
+
+    @include mobile {
+      @include flex(center, space-between);
     }
   }
 

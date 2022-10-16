@@ -1,14 +1,27 @@
 const overplay = {
+  queue: [],
+
+  config: (setVisible) => {
+    overplay.setVisible = setVisible;
+  },
+
   toggle: () => {
-    // setVisible((prev) => !prev);
+    console.log('toggle');
+    overplay.setVisible((prev) => !prev);
   },
 
   active: () => {
-    // setVisible(true);
+    console.log('active');
+
+    overplay.queue.push(1);
+    overplay.setVisible(true);
   },
 
   disable: () => {
-    // setVisible(false);
+    console.log('disable');
+
+    overplay.queue.pop();
+    if (!overplay.length) overplay.setVisible(false);
   },
 };
 

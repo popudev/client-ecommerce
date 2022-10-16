@@ -11,6 +11,16 @@
     button {
       flex: 1;
     }
+
+    @include mobile {
+      button {
+        margin: 0;
+        font-size: 15px;
+        padding: 10px 5px;
+        min-width: unset;
+      }
+      margin: 0;
+    }
   }
   .orders {
     margin-top: 20px;

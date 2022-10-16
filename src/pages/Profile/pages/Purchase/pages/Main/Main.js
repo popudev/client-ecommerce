@@ -50,6 +50,7 @@ function Main() {
 
   const handleFilter = (option) => {
     setStatusFilter(option);
+    setPageCurrent(1);
   };
 
   const handlePageChange = (page) => {

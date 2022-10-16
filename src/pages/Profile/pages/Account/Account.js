@@ -93,8 +93,6 @@ function Account() {
             </Form>
           </div>
 
-          <span className={cx('border')}></span>
-
           <div className={cx('avatar')}>
             <Avatar className={cx('avatar__image')} avatar={randomUrl} />
             <Button outline className={cx('btn_random')} onClick={handleRandomAvatar}>
