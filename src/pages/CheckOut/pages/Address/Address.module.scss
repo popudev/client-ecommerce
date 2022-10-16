@@ -19,7 +19,7 @@
   color: #fff;
 
   .info {
-    padding-right: 10px;
+    padding-right: 20px;
   }
 
   &.active {
@@ -69,6 +69,10 @@
   border: 1px solid #fff;
   padding: 20px;
   min-width: 600px;
+
+  @include tablet {
+    min-width: unset;
+  }
 
   .address_list {
     margin-top: 20px;

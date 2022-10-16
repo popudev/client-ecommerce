@@ -9,9 +9,7 @@ import { resetState } from '~/reducers/actions/checkOutAction';
 import Button from '~/components/Button';
 import { Form, FormInput } from '~/components/Form';
 import Helmet from '~/components/Helmet';
-import { notification } from '~/components/Notification/core';
 import ProductItemCheckOut from '~/components/ProductItemCheckOut';
-import { toast } from '~/components/Toast/core';
 
 import styles from './CheckOut.module.scss';
 import Address from './pages/Address';

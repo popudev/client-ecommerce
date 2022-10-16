@@ -91,11 +91,14 @@
 
     input[type='text'] {
       width: 340px;
+      @include mobile {
+        width: 100%;
+      }
     }
+  }
 
-    .action {
-      margin-top: 20px;
-    }
+  .action {
+    margin-top: 20px;
   }
 }
 
