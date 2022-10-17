@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useRecoverState from '~/hooks/useRecoverState';
@@ -14,6 +14,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 function Recover() {
+  const [error, setError] = useState({});
   const { recoverState, recoverDispatch } = useRecoverState();
   const submitRef = useRef({});
   const navigator = useNavigate();
@@ -35,12 +36,15 @@ function Recover() {
     navigator('/login', { replace: true });
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const data = {
       code: +values.code,
       email: accountFound?.email,
     };
-    confirmCodeViaEmail(data, recoverDispatch, navigator);
+    const res = await confirmCodeViaEmail(data, recoverDispatch, navigator);
+    if (res.error) {
+      setError({ ...res });
+    }
   };
 
   return (
@@ -59,7 +63,7 @@ function Recover() {
           onSubmit={handleSubmit}
           submitRef={submitRef}
         >
-          <FormInput border type="text" name="code" />
+          <FormInput border type="text" name="code" errorMess={error} />
         </Form>
 
         <div>

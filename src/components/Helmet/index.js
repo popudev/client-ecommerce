@@ -2,7 +2,7 @@ import { PropTypes } from 'prop-types';
 
 function Helmet(props) {
   document.title = props.title.toUpperCase() + ' - POPU';
-  return <div>{props.children}</div>;
+  return <>{props.children}</>;
 }
 
 Helmet.propTypes = {

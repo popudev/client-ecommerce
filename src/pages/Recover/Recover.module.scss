@@ -15,5 +15,6 @@
     height: 100vh;
     border-radius: unset;
     @include flex(center, center);
+    max-width: unset;
   }
 }
