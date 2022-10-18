@@ -59,9 +59,11 @@ function Profile() {
   const { authenState } = useAuthenState();
   const { login } = authenState;
   const { currentUser } = login;
+  console.log('currentUser: ', currentUser);
   const { pathname } = useLocation();
 
   if (currentUser?.provider === 'local') menuNavigate[1].disable = false;
+  else menuNavigate[1].disable = true;
 
   return currentUser ? (
     <div className={cx('wrapper', 'container', 'main')}>
