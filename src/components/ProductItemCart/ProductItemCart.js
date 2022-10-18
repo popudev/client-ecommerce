@@ -72,7 +72,7 @@ function ProductItemCart({ data, handleDelete, mobile }) {
     <tr className={cx('wrapper')}>
       <td className={cx('image')}>
         <Link to={`${config.routes.detail}/${data.product._id}`}>
-          <ProductImage />
+          <ProductImage src={data.product.images} />
         </Link>
       </td>
 

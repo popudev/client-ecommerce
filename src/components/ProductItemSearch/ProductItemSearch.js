@@ -22,7 +22,7 @@ function ProductItemSearch({ info }) {
       }}
     >
       <div className={cx('image')}>
-        <ProductImage />
+        <ProductImage src={info.images} />
       </div>
       <div className={cx('content')}>
         <div className={cx('title')}>{info.title}</div>

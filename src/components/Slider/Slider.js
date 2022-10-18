@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import classNames from 'classnames/bind';
 import { PropTypes } from 'prop-types';
 
+import { productDefault } from '~/assets/images';
+
 import styles from './Slider.module.scss';
+
+import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
@@ -35,13 +38,17 @@ function Slider(props) {
     }
   }, [nextSlide, timeOut, auto]);
 
+  const handleError = (e) => {
+    e.target.src = productDefault;
+  };
+
   const renderImage = () => {
     return data.map((e, i) => {
       return isLink ? (
         <div key={i} className={cx('item', { active: i === activeSlide })}>
           <Link to={isLink}>
             <div className={cx('item-image')}>
-              <img src={e.image} alt="slide" />
+              <img src={e.image || productDefault} alt="slide" onError={handleError} />
             </div>
           </Link>
         </div>

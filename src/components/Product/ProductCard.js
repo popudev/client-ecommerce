@@ -39,6 +39,7 @@ function ProductCard({ data }) {
       <div ref={imgRef} className={cx('image')}>
         <Link to={`${config.routes.detail}/${data._id}`}>
           <ProductImage
+            src={data.images}
             afterLoad={() => {
               imgRef.current?.classList.add(cx('doneload'));
             }}

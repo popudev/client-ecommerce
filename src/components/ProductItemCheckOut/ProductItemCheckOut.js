@@ -12,7 +12,7 @@ function ProductItemCheckOut({ data, border = false }) {
   return (
     <div className={cx('wrapper', { border })}>
       <div className={cx('image')}>
-        <ProductImage />
+        <ProductImage src={data?.product?.images} />
       </div>
       <div className={cx('info')}>
         <h4 className={cx('info_title')}>{data?.product?.title}</h4>

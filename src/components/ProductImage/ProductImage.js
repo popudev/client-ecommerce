@@ -1,6 +1,6 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import { productDefault } from '~/assets/images';
+import productImg, { productDefault } from '~/assets/images';
 
 import styles from './ProductImage.module.scss';
 
@@ -8,10 +8,14 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-function ProductImage({ imgSrc, className, ...propsOther }) {
+function ProductImage({ src, className, ...propsOther }) {
+  console.log('src: ', src);
   const handleError = (e) => {
     e.target.src = productDefault;
   };
+
+  let imgSrc = null;
+  if (productImg[`product${src}`]) imgSrc = productImg[`product${src}`][0];
 
   return (
     <div className={cx('wrapper', className)}>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { bannerDetail, product1, product2, product3 } from '~/assets/images';
+import productImg, { bannerDetail, product1, product2, product3 } from '~/assets/images';
 import config, { formatMoney } from '~/config';
 import { useAuthenState } from '~/hooks';
 import useCheckOutState from '~/hooks/useCheckOutState';
@@ -82,7 +82,9 @@ const ProductDetail = ({ info }) => {
       <div className={cx('images')}>
         <div className={cx('slide_images')}>
           <Slider
-            data={[{ image: product1 }, { image: product2 }, { image: product3 }]}
+            data={productImg[`product${info.images}`].map((item) => {
+              return { image: item };
+            })}
             mainColor
           />
         </div>
