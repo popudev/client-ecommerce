@@ -1,13 +1,14 @@
 # Khởi tạo dự án
 
 ```sh
-npm install
+yarn install
 ```
 
 # Thiếp lập biến môi trường cho dự án
 
 1. Tạo file .env lấy mẫu từ .env.example
 2. Điền giá trị cho các biến
+
 ```env
 REACT_APP_API_URL= đường dẫn đến server
 
@@ -23,7 +24,9 @@ REACT_APP_GOOGLE_CLIENT_SECRET=
 REACT_APP_FACEBOOK_APP_ID=
 REACT_APP_FACEBOOK_APP_SECRET=
 ```
+
 # Khởi chạy dự án
+
 ```sh
-npm start
+yarn start
 ```
